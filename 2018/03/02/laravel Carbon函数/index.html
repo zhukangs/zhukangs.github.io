@@ -1,0 +1,429 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>laravel Carbon函数 | Promise</title><meta name="description" content="laravel Carbon函数 快速切换前后日期 &lt;?php use Carbon\Carbon;  $now &#x3D; Carbon::now(); echo $now;                               &#x2F;&#x2F; 2015-03-26 00:36:47 $today &#x3D; Carbon::today(); echo $today;"><meta name="keywords" content="carbon"><meta name="author" content="Promise"><meta name="copyright" content="Promise"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="laravel Carbon函数"><meta name="twitter:description" content="laravel Carbon函数 快速切换前后日期 &lt;?php use Carbon\Carbon;  $now &#x3D; Carbon::now(); echo $now;                               &#x2F;&#x2F; 2015-03-26 00:36:47 $today &#x3D; Carbon::today(); echo $today;"><meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="og:type" content="article"><meta property="og:title" content="laravel Carbon函数"><meta property="og:url" content="https://zhukangs.github.io/2018/03/02/laravel%20Carbon%E5%87%BD%E6%95%B0/"><meta property="og:site_name" content="Promise"><meta property="og:description" content="laravel Carbon函数 快速切换前后日期 &lt;?php use Carbon\Carbon;  $now &#x3D; Carbon::now(); echo $now;                               &#x2F;&#x2F; 2015-03-26 00:36:47 $today &#x3D; Carbon::today(); echo $today;"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2018-03-02T15:18:43.000Z"><meta property="article:modified_time" content="2020-05-28T08:06:58.010Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhukangs.github.io/2018/03/02/laravel%20Carbon%E5%87%BD%E6%95%B0/"><link rel="prev" title="laravel中发送ajax请求" href="https://zhukangs.github.io/2018/03/05/laravel%E4%B8%AD%E5%8F%91%E9%80%81ajax%E8%AF%B7%E6%B1%82/"><link rel="next" title="laravel中间件" href="https://zhukangs.github.io/2018/02/27/laravel%E4%B8%AD%E9%97%B4%E4%BB%B6/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wx_avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">65</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Promise</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">laravel Carbon函数</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2018-03-02 23:18:43"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2018-03-02</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-05-28 16:06:58"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-05-28</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Laravel/">Laravel</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">2.2k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 12 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p><strong>laravel Carbon函数</strong></p>
+<p>快速切换前后日期</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+$now = Carbon::now();
+echo $now;                               // 2015-03-26 00:36:47
+$today = Carbon::today();
+echo $today;                             // 2015-03-26 00:00:00
+$tomorrow = Carbon::tomorrow(&apos;Europe/London&apos;);
+echo $tomorrow;                          // 2015-03-27 00:00:00
+$yesterday = Carbon::yesterday();
+echo $yesterday;                         // 2015-03-25 00:00:00</code></pre><p>建立特定日期的时间</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+$timezone = &apos;Asia/Taipei&apos;;
+
+// 從「年月日」建立
+Carbon::createFromDate($year, $month, $day, $timezone);
+
+// 從「時分秒」建立
+Carbon::createFromTime($hour, $minute, $second, $timezone);
+
+// 從完整的「年月日時分秒」建立
+Carbon::create($year, $month, $day, $hour, $minute, $second, $timezone);
+
+// 從指定的格式建立
+Carbon::createFromFormat($format, $time, $tz);
+echo Carbon::createFromFormat(&apos;Y-m-d H&apos;, &apos;1975-05-21 22&apos;)-&gt;toDateTimeString(); // 1975-05-21 22:00:00
+
+// 從時間戳記建立
+echo Carbon::createFromTimeStamp(-1)-&gt;toDateTimeString();                        // 1969-12-31 18:59:59
+echo Carbon::createFromTimeStamp(-1, &apos;Europe/London&apos;)-&gt;toDateTimeString();       // 1970-01-01 00:59:59
+echo Carbon::createFromTimeStampUTC(-1)-&gt;toDateTimeString();  </code></pre><p>转换日期</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+// 透過文字移動日期
+$knownDate = Carbon::create(2001, 5, 21, 12);          // create testing date
+Carbon::setTestNow($knownDate);                        // set the mock
+echo new Carbon(&apos;tomorrow&apos;);                           // 2001-05-22 00:00:00  ... notice the time !
+echo new Carbon(&apos;yesterday&apos;);                          // 2001-05-20 00:00:00
+echo new Carbon(&apos;next wednesday&apos;);                     // 2001-05-23 00:00:00
+echo new Carbon(&apos;last friday&apos;);                        // 2001-05-18 00:00:00
+echo new Carbon(&apos;this thursday&apos;);                      // 2001-05-24 00:00:00</code></pre><p>取得日期资料</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+$dt = Carbon::parse(&apos;2012-9-5 23:26:11.123789&apos;);
+
+// 取的指定時間資料的資訊（整數）
+var_dump($dt-&gt;year);                                         // int(2012)
+var_dump($dt-&gt;month);                                        // int(9)
+var_dump($dt-&gt;day);                                          // int(5)
+var_dump($dt-&gt;hour);                                         // int(23)
+var_dump($dt-&gt;minute);                                       // int(26)
+var_dump($dt-&gt;second);                                       // int(11)
+var_dump($dt-&gt;micro);                                        // int(123789)
+var_dump($dt-&gt;dayOfWeek);                                    // int(3)
+var_dump($dt-&gt;dayOfYear);                                    // int(248)
+var_dump($dt-&gt;weekOfMonth);                                  // int(1)
+var_dump($dt-&gt;weekOfYear);                                   // int(36)
+var_dump($dt-&gt;daysInMonth);                                  // int(30)
+var_dump($dt-&gt;timestamp);                                    // int(1346901971)
+var_dump(Carbon::createFromDate(1975, 5, 21)-&gt;age);          // int(39) calculated vs now in the same tz
+var_dump($dt-&gt;quarter);                                      // int(3)季度
+
+// 回傳與 UTC 差異的秒數
+var_dump(Carbon::createFromTimestampUTC(0)-&gt;offset);         // int(0)
+var_dump(Carbon::createFromTimestamp(0)-&gt;offset);            // int(-18000)
+
+// 回傳與 UTC 差異的時數
+var_dump(Carbon::createFromTimestamp(0)-&gt;offsetHours);       // int(-5)
+
+// 找出當天日否有日光節約時間
+var_dump(Carbon::createFromDate(2012, 1, 1)-&gt;dst);           // bool(false)
+var_dump(Carbon::createFromDate(2012, 9, 1)-&gt;dst);           // bool(true)
+
+// 判斷指定的的時區是否與預設的時區相同
+var_dump(Carbon::now()-&gt;local);                              // bool(true)
+var_dump(Carbon::now(&apos;America/Vancouver&apos;)-&gt;local);           // bool(false)
+
+// 判斷是否為 UTC 的時區時間
+var_dump(Carbon::now()-&gt;utc);                                // bool(false)
+var_dump(Carbon::now(&apos;Europe/London&apos;)-&gt;utc);                 // bool(true)
+var_dump(Carbon::createFromTimestampUTC(0)-&gt;utc);            // bool(true)
+
+// 取得時區實例
+echo get_class(Carbon::now()-&gt;timezone);                     // DateTimeZone
+echo get_class(Carbon::now()-&gt;tz);                           // DateTimeZone
+
+// 取得時區實例的名稱
+echo Carbon::now()-&gt;timezoneName;                            // America/Toronto
+echo Carbon::now()-&gt;tzName;                                  // America/Toronto</code></pre><p>设定时间资料</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+$dt = Carbon::now();
+
+$dt-&gt;year = 1975;
+$dt-&gt;month = 13;             // 年份會強制 +1，且月份變為 1 月
+$dt-&gt;month = 5;
+$dt-&gt;day = 21;
+$dt-&gt;hour = 22;
+$dt-&gt;minute = 32;
+$dt-&gt;second = 5;
+
+$dt-&gt;timestamp = 169957925;  // 這個設定不會變更時區
+
+// 透過字串或是 DateTimeZone 實例去設定時區
+$dt-&gt;timezone = new DateTimeZone(&apos;Europe/London&apos;);
+$dt-&gt;timezone = &apos;Europe/London&apos;;
+$dt-&gt;tz = &apos;Europe/London&apos;;
+
+// 鏈結設定方式
+$dt-&gt;year(1975)-&gt;month(5)-&gt;day(21)-&gt;hour(22)-&gt;minute(32)-&gt;second(5)-&gt;toDateTimeString();
+$dt-&gt;setDate(1975, 5, 21)-&gt;setTime(22, 32, 5)-&gt;toDateTimeString();
+$dt-&gt;setDateTime(1975, 5, 21, 22, 32, 5)-&gt;toDateTimeString();
+
+$dt-&gt;timestamp(169957925)-&gt;timezone(&apos;Europe/London&apos;);
+
+$dt-&gt;tz(&apos;America/Toronto&apos;)-&gt;setTimezone(&apos;America/Vancouver&apos;);</code></pre><p>格式化时间资料</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+$dt = Carbon::create(1975, 12, 25, 14, 15, 16);
+
+var_dump($dt-&gt;toDateTimeString() == $dt);          // bool(true) =&gt; uses __toString()
+echo $dt-&gt;toDateString();                          // 1975-12-25
+echo $dt-&gt;toFormattedDateString();                 // Dec 25, 1975
+echo $dt-&gt;toTimeString();                          // 14:15:16
+echo $dt-&gt;toDateTimeString();                      // 1975-12-25 14:15:16
+echo $dt-&gt;toDayDateTimeString();                   // Thu, Dec 25, 1975 2:15 PM
+
+// 仍可以使用 format() 函式
+echo $dt-&gt;format(&apos;l jS \\of F Y h:i:s A&apos;);         // Thursday 25th of December 1975 02:15:16 PM
+
+// 常用的時間格式
+echo $dt-&gt;toAtomString();      // in 1 Jahr
+echo $dt-&gt;toCookieString();    // Thursday, 25-Dec-1975 14:15:16 EST
+echo $dt-&gt;toIso8601String();   // 1975-12-25T14:15:16-0500
+echo $dt-&gt;toRfc822String();    // Thu, 25 Dec 75 14:15:16 -0500
+echo $dt-&gt;toRfc850String();    // Thursday, 25-Dec-75 14:15:16 EST
+echo $dt-&gt;toRfc1036String();   // Thu, 25 Dec 75 14:15:16 -0500
+echo $dt-&gt;toRfc1123String();   // Thu, 25 Dec 1975 14:15:16 -0500
+echo $dt-&gt;toRfc2822String();   // Thu, 25 Dec 1975 14:15:16 -0500
+echo $dt-&gt;toRfc3339String();   // 1975-12-25T14:15:16-05:00
+echo $dt-&gt;toRssString();       // Thu, 25 Dec 1975 14:15:16 -0500
+echo $dt-&gt;toW3cString();       // 1975-12-25T14:15:16-05:00</code></pre><p>比较时间差值</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+echo Carbon::now()-&gt;tzName;                        // America/Toronto
+$first = Carbon::create(2012, 9, 5, 23, 26, 11);
+$second = Carbon::create(2012, 9, 5, 20, 26, 11, &apos;America/Vancouver&apos;);
+
+echo $first-&gt;toDateTimeString();                   // 2012-09-05 23:26:11
+echo $first-&gt;tzName;                               // America/Toronto
+echo $second-&gt;toDateTimeString();                  // 2012-09-05 20:26:11
+echo $second-&gt;tzName;                              // America/Vancouver
+
+// 大於、等於、小於
+var_dump($first-&gt;eq($second));                     // bool(true)
+var_dump($first-&gt;ne($second));                     // bool(false)
+var_dump($first-&gt;gt($second));                     // bool(false)
+var_dump($first-&gt;gte($second));                    // bool(true)
+var_dump($first-&gt;lt($second));                     // bool(false)
+var_dump($first-&gt;lte($second));                    // bool(true)
+
+$first-&gt;setDateTime(2012, 1, 1, 0, 0, 0);
+$second-&gt;setDateTime(2012, 1, 1, 0, 0, 0);         // Remember tz is &apos;America/Vancouver&apos;
+
+var_dump($first-&gt;eq($second));                     // bool(false)
+var_dump($first-&gt;ne($second));                     // bool(true)
+var_dump($first-&gt;gt($second));                     // bool(false)
+var_dump($first-&gt;gte($second));                    // bool(false)
+var_dump($first-&gt;lt($second));                     // bool(true)
+var_dump($first-&gt;lte($second));                    // bool(true)
+
+
+
+// 時間區間比較
+$first = Carbon::create(2012, 9, 5, 1);
+$second = Carbon::create(2012, 9, 5, 5);
+var_dump(Carbon::create(2012, 9, 5, 3)-&gt;between($first, $second));          // bool(true)
+var_dump(Carbon::create(2012, 9, 5, 5)-&gt;between($first, $second));          // bool(true)
+var_dump(Carbon::create(2012, 9, 5, 5)-&gt;between($first, $second, false));   // bool(false)
+
+
+// 時間大小比較
+$dt1 = Carbon::create(2012, 1, 1, 0, 0, 0);
+$dt2 = Carbon::create(2014, 1, 30, 0, 0, 0);
+echo $dt1-&gt;min($dt2);                              // 2012-01-01 00:00:00
+
+$dt1 = Carbon::create(2012, 1, 1, 0, 0, 0);
+$dt2 = Carbon::create(2014, 1, 30, 0, 0, 0);
+echo $dt1-&gt;max($dt2);                              // 2014-01-30 00:00:00
+
+// now is the default param
+$dt1 = Carbon::create(2000, 1, 1, 0, 0, 0);
+echo $dt1-&gt;max();
+
+
+// 時間差異運算
+echo Carbon::now(&apos;America/Vancouver&apos;)-&gt;diffInSeconds(Carbon::now(&apos;Europe/London&apos;)); // 0
+
+$dtOttawa = Carbon::createFromDate(2000, 1, 1, &apos;America/Toronto&apos;);
+$dtVancouver = Carbon::createFromDate(2000, 1, 1, &apos;America/Vancouver&apos;);
+echo $dtOttawa-&gt;diffInHours($dtVancouver);                             // 3
+
+echo $dtOttawa-&gt;diffInHours($dtVancouver, false);                      // 3
+echo $dtVancouver-&gt;diffInHours($dtOttawa, false);                      // -3
+
+$dt = Carbon::create(2012, 1, 31, 0);
+echo $dt-&gt;diffInDays($dt-&gt;copy()-&gt;addMonth());                         // 31
+echo $dt-&gt;diffInDays($dt-&gt;copy()-&gt;subMonth(), false);                  // -31
+
+$dt = Carbon::create(2012, 4, 30, 0);
+echo $dt-&gt;diffInDays($dt-&gt;copy()-&gt;addMonth());                         // 30
+echo $dt-&gt;diffInDays($dt-&gt;copy()-&gt;addWeek());                          // 7
+
+$dt = Carbon::create(2012, 1, 1, 0);
+echo $dt-&gt;diffInMinutes($dt-&gt;copy()-&gt;addSeconds(59));                  // 0
+echo $dt-&gt;diffInMinutes($dt-&gt;copy()-&gt;addSeconds(60));                  // 1
+echo $dt-&gt;diffInMinutes($dt-&gt;copy()-&gt;addSeconds(119));                 // 1
+echo $dt-&gt;diffInMinutes($dt-&gt;copy()-&gt;addSeconds(120));                 // 2
+
+echo $dt-&gt;addSeconds(120)-&gt;secondsSinceMidnight();                     // 120</code></pre><p>时间状态</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+$dt = Carbon::now();
+
+$dt-&gt;isWeekday();
+$dt-&gt;isWeekend();
+$dt-&gt;isYesterday();
+$dt-&gt;isToday();
+$dt-&gt;isTomorrow();
+$dt-&gt;isFuture();
+$dt-&gt;isPast();
+$dt-&gt;isLeapYear();
+$dt-&gt;isSameDay(Carbon::now());
+$born = Carbon::createFromDate(1987, 4, 23);
+$noCake = Carbon::createFromDate(2014, 9, 26);
+$yesCake = Carbon::createFromDate(2014, 4, 23);
+var_dump($born-&gt;isBirthday($noCake));              // bool(false)  
+var_dump($born-&gt;isBirthday($yesCake));             // bool(true)</code></pre><p>时间运算</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+$dt = Carbon::create(2012, 1, 31, 0);
+
+echo $dt-&gt;toDateTimeString();            // 2012-01-31 00:00:00
+
+echo $dt-&gt;addYears(5);                   // 2017-01-31 00:00:00
+echo $dt-&gt;addYear();                     // 2018-01-31 00:00:00
+echo $dt-&gt;subYear();                     // 2017-01-31 00:00:00
+echo $dt-&gt;subYears(5);                   // 2012-01-31 00:00:00
+
+echo $dt-&gt;addMonths(60);                 // 2017-01-31 00:00:00
+echo $dt-&gt;addMonth();                    // 2017-03-03 00:00:00 equivalent of $dt-&gt;month($dt-&gt;month + 1); so it wraps
+echo $dt-&gt;subMonth();                    // 2017-02-03 00:00:00
+echo $dt-&gt;subMonths(60);                 // 2012-02-03 00:00:00
+
+echo $dt-&gt;addDays(29);                   // 2012-03-03 00:00:00
+echo $dt-&gt;addDay();                      // 2012-03-04 00:00:00
+echo $dt-&gt;subDay();                      // 2012-03-03 00:00:00
+echo $dt-&gt;subDays(29);                   // 2012-02-03 00:00:00
+
+echo $dt-&gt;addWeekdays(4);                // 2012-02-09 00:00:00
+echo $dt-&gt;addWeekday();                  // 2012-02-10 00:00:00
+echo $dt-&gt;subWeekday();                  // 2012-02-09 00:00:00
+echo $dt-&gt;subWeekdays(4);                // 2012-02-03 00:00:00
+
+echo $dt-&gt;addWeeks(3);                   // 2012-02-24 00:00:00
+echo $dt-&gt;addWeek();                     // 2012-03-02 00:00:00
+echo $dt-&gt;subWeek();                     // 2012-02-24 00:00:00
+echo $dt-&gt;subWeeks(3);                   // 2012-02-03 00:00:00
+
+echo $dt-&gt;addHours(24);                  // 2012-02-04 00:00:00
+echo $dt-&gt;addHour();                     // 2012-02-04 01:00:00
+echo $dt-&gt;subHour();                     // 2012-02-04 00:00:00
+echo $dt-&gt;subHours(24);                  // 2012-02-03 00:00:00
+
+echo $dt-&gt;addMinutes(61);                // 2012-02-03 01:01:00
+echo $dt-&gt;addMinute();                   // 2012-02-03 01:02:00
+echo $dt-&gt;subMinute();                   // 2012-02-03 01:01:00
+echo $dt-&gt;subMinutes(61);                // 2012-02-03 00:00:00
+
+echo $dt-&gt;addSeconds(61);                // 2012-02-03 00:01:01
+echo $dt-&gt;addSecond();                   // 2012-02-03 00:01:02
+echo $dt-&gt;subSecond();                   // 2012-02-03 00:01:01
+echo $dt-&gt;subSeconds(61);                // 2012-02-03 00:00:00</code></pre><p>人类阅读时间格式</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+// 通常會用在留言的時間顯示
+// 該時間會比較與現在的時間的差異
+echo Carbon::now()-&gt;subDays(5)-&gt;diffForHumans();               // 5 days ago
+
+echo Carbon::now()-&gt;diffForHumans(Carbon::now()-&gt;subYear());   // 1 year after
+
+$dt = Carbon::createFromDate(2011, 8, 1);
+
+echo $dt-&gt;diffForHumans($dt-&gt;copy()-&gt;addMonth());              // 1 month before
+echo $dt-&gt;diffForHumans($dt-&gt;copy()-&gt;subMonth());              // 1 month after
+
+echo Carbon::now()-&gt;addSeconds(5)-&gt;diffForHumans();            // 5 seconds from now
+
+echo Carbon::now()-&gt;subDays(24)-&gt;diffForHumans();              // 3 weeks ago
+echo Carbon::now()-&gt;subDays(24)-&gt;diffForHumans(null, true);    // 3 weeks</code></pre><p>时间常数</p>
+<pre><code>&lt;?php
+use Carbon\Carbon;
+
+var_dump(Carbon::SUNDAY);                          // int(0)
+var_dump(Carbon::MONDAY);                          // int(1)
+var_dump(Carbon::TUESDAY);                         // int(2)
+var_dump(Carbon::WEDNESDAY);                       // int(3)
+var_dump(Carbon::THURSDAY);                        // int(4)
+var_dump(Carbon::FRIDAY);                          // int(5)
+var_dump(Carbon::SATURDAY);                        // int(6)
+
+var_dump(Carbon::YEARS_PER_CENTURY);               // int(100)
+var_dump(Carbon::YEARS_PER_DECADE);                // int(10)
+var_dump(Carbon::MONTHS_PER_YEAR);                 // int(12)
+var_dump(Carbon::WEEKS_PER_YEAR);                  // int(52)
+var_dump(Carbon::DAYS_PER_WEEK);                   // int(7)
+var_dump(Carbon::HOURS_PER_DAY);                   // int(24)
+var_dump(Carbon::MINUTES_PER_HOUR);                // int(60)
+var_dump(Carbon::SECONDS_PER_MINUTE);              // int(60)</code></pre><p>参考资料</p>
+<p><a href="https://blog.csdn.net/lbwo001/article/details/53063867" target="_blank" rel="noopener">https://blog.csdn.net/lbwo001/article/details/53063867</a></p>
+<ul>
+<li>Carbon - A simple PHP API extension for DateTime.</li>
+<li>Carbon - docs</li>
+</ul>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Promise</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhukangs.github.io/2018/03/02/laravel%20Carbon%E5%87%BD%E6%95%B0/">https://zhukangs.github.io/2018/03/02/laravel%20Carbon%E5%87%BD%E6%95%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/carbon/">carbon</a></div><div class="post_share"><div class="social-share" data-image="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/04-promise.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wechatpay.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/alpay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2018/03/05/laravel%E4%B8%AD%E5%8F%91%E9%80%81ajax%E8%AF%B7%E6%B1%82/"><img class="prev_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">laravel中发送ajax请求</div></div></a></div><div class="next-post pull_right"><a href="/2018/02/27/laravel%E4%B8%AD%E9%97%B4%E4%BB%B6/"><img class="next_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">laravel中间件</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2020 By Promise</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.zam9.com" target="_blank" rel="noopener">blog</a>!</div><div class="icp"><a><img class="icp-icon" src="/img/icp.png"/><span>鄂ICP备17031002号-2</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>

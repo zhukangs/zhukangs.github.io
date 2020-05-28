@@ -1,0 +1,174 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Supervisor 配置   每次都会踩好多坑 | Promise</title><meta name="description" content="基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！ Supervisor（http:&#x2F;&#x2F;supervisord.org&#x2F;）是用Python开发的一个client&#x2F;server服务，是Linux&#x2F;Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervis"><meta name="keywords" content="队列"><meta name="author" content="Promise"><meta name="copyright" content="Promise"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Supervisor 配置   每次都会踩好多坑"><meta name="twitter:description" content="基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！ Supervisor（http:&#x2F;&#x2F;supervisord.org&#x2F;）是用Python开发的一个client&#x2F;server服务，是Linux&#x2F;Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervis"><meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Supervisor 配置   每次都会踩好多坑"><meta property="og:url" content="https://zhukangs.github.io/2018/03/26/Supervisor%20%E9%85%8D%E7%BD%AE%20%20%20%E6%AF%8F%E6%AC%A1%E9%83%BD%E4%BC%9A%E8%B8%A9%E5%A5%BD%E5%A4%9A%E5%9D%91/"><meta property="og:site_name" content="Promise"><meta property="og:description" content="基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！ Supervisor（http:&#x2F;&#x2F;supervisord.org&#x2F;）是用Python开发的一个client&#x2F;server服务，是Linux&#x2F;Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervis"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2018-03-26T06:29:09.000Z"><meta property="article:modified_time" content="2020-05-28T08:06:59.543Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhukangs.github.io/2018/03/26/Supervisor%20%E9%85%8D%E7%BD%AE%20%20%20%E6%AF%8F%E6%AC%A1%E9%83%BD%E4%BC%9A%E8%B8%A9%E5%A5%BD%E5%A4%9A%E5%9D%91/"><link rel="prev" title="模型观察者触发邮件通知" href="https://zhukangs.github.io/2018/04/02/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%E8%80%85%E8%A7%A6%E5%8F%91%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5/"><link rel="next" title="本地Homestead安装" href="https://zhukangs.github.io/2018/03/20/%E6%9C%AC%E5%9C%B0Homestead%E5%AE%89%E8%A3%85/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wx_avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">65</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Promise</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Supervisor 配置   每次都会踩好多坑</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2018-03-26 14:29:09"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2018-03-26</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-05-28 16:06:59"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-05-28</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Laravel/">Laravel</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">858</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 3 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p>基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！</p>
+<p>Supervisor（<a href="http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。" target="_blank" rel="noopener">http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。</a></p>
+<p>既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor</p>
+<p>1.安装</p>
+<pre><code>先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor
+
+# yum install python-setuptools
+# easy_install supervisor</code></pre><p>2.配置文件</p>
+<pre><code>生成配置文件，并建立相应目录，管理 supervisor 启动进程
+
+# echo_supervisord_conf &gt; /etc/supervisord.conf
+# mkdir -p /etc/supervisor/conf.d/
+1
+2
+编辑 /etc/supervisord.conf，修改 [include] 区块内容：
+
+[include]
+files = /etc/supervisor/conf.d/*.conf
+1
+2
+这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件</code></pre><p>3.自动启动</p>
+<pre><code>在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs
+# wget -O /usr/lib/systemd/system/supervisord.service  https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs
+将 supervisord 服务设为自启动
+
+# systemctl enable supervisord.service
+输入 supervisorctl 命令可以进入 supervisor 控制台</code></pre><p>4.设置 Laravel 队列</p>
+<pre><code>[program:laravel-worker]
+process_name=%(program_name)s_%(process_num)02d
+command=/usr/local/php/bin/php /data/wwwroot/app.com/artisan queue:work database --sleep=3 --tries=3 --daemon
+autostart=true
+autorestart=true
+user=www
+numprocs=8
+redirect_stderr=true
+stdout_logfile=/data/wwwroot/app.com/storage/logs/queue.log
+
+//注意：检查你的php所在目录和项目所在目录  是否对应
+
+这里开启了 8 个 queue:work 进程，并监视他们，如果失败的话，自动重启；在项目的 storage/logs/queue.log 记录日志。
+
+启动 supervisor 服务：
+
+# supervisord
+1
+至此， supervisor 安装及 Laravel 队列设置完毕
+
+如果以后配置文件有修改，或者新增，进入 supervisor 控制台，执行下面的命令
+
+# supervisorctl
+supervisorctl&gt; reread
+supervisorctl&gt; update
+supervisorctl&gt; start laravel-worker:*</code></pre><p>5.遇到的一些坑</p>
+<pre><code>1.unix:///tmp/supervisor.sock no such file问题
+重新生成配置文件 echo_supervisord_conf&gt; /etc/supervisord.conf
+按上面步骤修改配置
+supervisord -c/etc/supervisord.conf
+还有一种说法是将supervisord.conf中的/tmp  该为/var下，具体请看https://blog.csdn.net/qq_28885149/article/details/79364685
+
+2.laravel-worker-ui:laravel-worker-ui_00   FATAL     can&apos;t find command &apos;/usr/local/php/bin/php&apos;
+检查supervisord.conf中的php目录是否正确
+
+3.在使用命令supervisorctl start all启动控制进程时，遇到如下错误
+unix:///tmp/supervisor.sock no such file
+出现上述错误的原因是supervisord并未启动，只要在命令行中使用命令supervisord启动supervisord即可。</code></pre><p>一些相关命令：</p>
+<pre><code>【启动supervisord】  supervisord  建议supervisord -c/etc/supervisord.conf
+【停止supervisord】  supervisorctl shutdown
+【重新加载配置文件】  supervisorctl reload
+【进程管理】
+1. 启动supervisord管理的所有进程
+supervisorctl start all
+2. 停止supervisord管理的所有进程
+supervisorctl stop all
+3. 启动supervisord管理的某一个特定进程
+supervisorctl start program-name // program-name为[program:xx]中的xx
+4.  停止supervisord管理的某一个特定进程 
+supervisorctl stop program-name  // program-name为[program:xx]中的xx
+5.  重启所有进程或所有进程
+supervisorctl restart all  // 重启所有
+supervisorctl reatart program-name // 重启某一进程，program-name为[program:xx]中的xx
+6. 查看supervisord当前管理的所有进程的状态
+supervisorctl status</code></pre></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Promise</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhukangs.github.io/2018/03/26/Supervisor%20%E9%85%8D%E7%BD%AE%20%20%20%E6%AF%8F%E6%AC%A1%E9%83%BD%E4%BC%9A%E8%B8%A9%E5%A5%BD%E5%A4%9A%E5%9D%91/">https://zhukangs.github.io/2018/03/26/Supervisor%20%E9%85%8D%E7%BD%AE%20%20%20%E6%AF%8F%E6%AC%A1%E9%83%BD%E4%BC%9A%E8%B8%A9%E5%A5%BD%E5%A4%9A%E5%9D%91/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%98%9F%E5%88%97/">队列</a></div><div class="post_share"><div class="social-share" data-image="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/04-promise.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wechatpay.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/alpay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2018/04/02/%E6%A8%A1%E5%9E%8B%E8%A7%82%E5%AF%9F%E8%80%85%E8%A7%A6%E5%8F%91%E9%82%AE%E4%BB%B6%E9%80%9A%E7%9F%A5/"><img class="prev_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">模型观察者触发邮件通知</div></div></a></div><div class="next-post pull_right"><a href="/2018/03/20/%E6%9C%AC%E5%9C%B0Homestead%E5%AE%89%E8%A3%85/"><img class="next_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">本地Homestead安装</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2020 By Promise</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.zam9.com" target="_blank" rel="noopener">blog</a>!</div><div class="icp"><a><img class="icp-icon" src="/img/icp.png"/><span>鄂ICP备17031002号-2</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>

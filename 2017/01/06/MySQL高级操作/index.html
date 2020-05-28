@@ -1,0 +1,132 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MySQL高级操作 | Promise</title><meta name="description" content="MySQL高级命令 增加内容：（基础命令） 1.      表后增加主键alter table 表名 add primary key(字段); 在所有字段之后增加primary key选项：primary key(字段信息) 直接在需要当做主键的字段之后，增加primary key属性来确定主键 2.      删除主键alter table 表名 drop primary key; 3."><meta name="keywords" content="mysql"><meta name="author" content="Promise"><meta name="copyright" content="Promise"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="MySQL高级操作"><meta name="twitter:description" content="MySQL高级命令 增加内容：（基础命令） 1.      表后增加主键alter table 表名 add primary key(字段); 在所有字段之后增加primary key选项：primary key(字段信息) 直接在需要当做主键的字段之后，增加primary key属性来确定主键 2.      删除主键alter table 表名 drop primary key; 3."><meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="og:type" content="article"><meta property="og:title" content="MySQL高级操作"><meta property="og:url" content="https://zhukangs.github.io/2017/01/06/MySQL%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/"><meta property="og:site_name" content="Promise"><meta property="og:description" content="MySQL高级命令 增加内容：（基础命令） 1.      表后增加主键alter table 表名 add primary key(字段); 在所有字段之后增加primary key选项：primary key(字段信息) 直接在需要当做主键的字段之后，增加primary key属性来确定主键 2.      删除主键alter table 表名 drop primary key; 3."><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2017-01-06T12:09:18.000Z"><meta property="article:modified_time" content="2020-05-28T08:06:58.199Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhukangs.github.io/2017/01/06/MySQL%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/"><link rel="prev" title="常用正则表达式⚖" href="https://zhukangs.github.io/2017/01/25/%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E2%9A%96/"><link rel="next" title="Linux学习归纳" href="https://zhukangs.github.io/2016/07/03/Linux%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wx_avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">65</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Promise</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">MySQL高级操作</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2017-01-06 20:09:18"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2017-01-06</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-05-28 16:06:58"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-05-28</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/MySQL/">MySQL</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">944</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 3 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p><strong>MySQL高级命令</strong></p>
+<p>增加内容：（基础命令）</p>
+<pre><code>1.      表后增加主键alter table 表名 add primary key(字段);
+在所有字段之后增加primary key选项：primary key(字段信息)
+直接在需要当做主键的字段之后，增加primary key属性来确定主键
+2.      删除主键alter table 表名 drop primary key;
+3.      自动增长在字段之后增加一个属性auto_increment
+4.      修改自动增长 alter table 表名auto_increment = 值;
+5.      删除自动增长 如：alter table 表名 modify id int
+6.      查看自增长初始变量 show variables like &apos;auto_increment%&apos;;
+7.      添加唯一键（与主键基本一样）alter table 表名add unique key(字段列表);
+8.      删除唯一键 alter table 表名drop unique key;  - - 错误的 唯一键可以有多个
+alter table 表名drop index 唯一键名字;</code></pre><p>高级数据操作：</p>
+<pre><code>1.      多数据插入 insert into 表名 [(字段列表)] values(值列表), (值列表)…;
+2.      主键冲突更新insert into 表名 [(字段列表)] values(值列表) on duplicate key update字段 = 新值;
+3.      主键冲突替换replace into [(字段列表)] values(值列表);  干掉原来的数据，重新插入进去 与insert有点像 比insert效率低
+4.      蠕虫复制insert into 表名 [(字段列表)] select  */字段列表 from 表; 测试表的压力
+5.      更新数据update表名 set 字段名 = 新值 [where 判断条件] limit 数量;（没有where是全表更新）
+6.       删除数据delete from 表名 [where 条件] [limit 数量];
+7.          重置自增长truncate 表名; ---&gt; 相当于drop ---&gt; 再create
+8.       查询数据 select  [select的选项 ]  字段列表   from 数据源   where条件   group by分组  having条件 order by排序   limit限制;
+Select选项：默认all   字段列表：字段名 [as] 别名  from数据源：from (select 字段列表 from 表)  as 别名;  聚合函数：group_concat()为了将分组中指定的字段进行合并（字符串拼接）
+9.      分组排序group by 字段 [asc|desc]，字段 [asc|desc]
+10.      回溯统计group by 字段 [asc|desc] withrollup;
+11.      联合查询select 语句        默认：distinct     union [union 选项]
+select 语句;
+         规则1、 在联合查询中，如果要使用order by，那么对应的select语句必须使用括号括起来
+         规则2、 orderby在联合查询中若要生效，必须配合使用limit：而limit后面必须跟对应的限制数量（通常可以使用一个较大的值：大于对应表的记录数的值）
+12.      连接查询 cross join:表1 cross join 表2;  
+inner join : 表1 [inner] join 表2  on匹配条件; 不带条件就是交叉查询（避免）
+outer join：主表 left join 从表 on 连接条件;  -- 外连接必须有on条件
+外连接的特点：
+    1、外连接中主表数据记录一定会保存：连接之后不会出现记录数少于主表的情况（但内连接可能少）
+    2、左连接和右连接其实可以互相转换，但是数据对应的位置（表顺序）会改变。
+13.     标量子查询 select * from 数据源 where 条件判断 =/&lt;&gt; (select 字段名 from 数据源 where 条件判断); //注意，括号中标量子查询得到的结果只有一个值
+14.     列子查询 主查询where 条件in  (列子查询);
+15.         行子查询 主查询where 条件[（构造一个行元素）] = (行子查询);
+    行元素：行元素对应的就是多个字段，把多个字段“合起来”作为一个元素参与运算，把这种情况称之为行元素。
+16.     表子查询 select 字段列表 from (表子查询) as 别名 [where] [group by] [having][order by] [limit];
+17.     exists子查询 where exists(查询语句)； 查询返回的结果只有0或者1，1代表成立，0代表不成立</code></pre></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Promise</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhukangs.github.io/2017/01/06/MySQL%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/">https://zhukangs.github.io/2017/01/06/MySQL%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/mysql/">mysql</a></div><div class="post_share"><div class="social-share" data-image="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/04-promise.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wechatpay.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/alpay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2017/01/25/%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E2%9A%96/"><img class="prev_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">常用正则表达式⚖</div></div></a></div><div class="next-post pull_right"><a href="/2016/07/03/Linux%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/"><img class="next_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Linux学习归纳</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> Recommend</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2016/05/11/MySQL基础操作/" title="MySQL基础操作"><img class="relatedPosts_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2016-05-11</div><div class="relatedPosts_title">MySQL基础操作</div></div></a></div><div class="relatedPosts_item"><a href="/2019/03/09/性能优化之MySQL优化🚴‍♂️/" title="性能优化之MySQL优化🚴‍♂️"><img class="relatedPosts_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-03-09</div><div class="relatedPosts_title">性能优化之MySQL优化🚴‍♂️</div></div></a></div></div><div class="clear_both"></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2020 By Promise</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.zam9.com" target="_blank" rel="noopener">blog</a>!</div><div class="icp"><a><img class="icp-icon" src="/img/icp.png"/><span>鄂ICP备17031002号-2</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>

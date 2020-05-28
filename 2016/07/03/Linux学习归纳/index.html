@@ -1,0 +1,329 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux学习归纳 | Promise</title><meta name="description" content="Linux学习归纳 系统中常用Shell指令 ①指令单独存在  ② 指令带选项 ③ 指令带选项带参数  ls指令：显示当前目录的所有文件 相关选项： -l ：list缩写，代表以列表形式显示所有文件 -a ：all缩写，代表显示所有文件（包括隐藏文件） ① ls指令 ② ls指令 -l，这个指令还可以进一步简写为ll ③ ls指令 -a ④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件"><meta name="keywords" content="linux"><meta name="author" content="Promise"><meta name="copyright" content="Promise"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Linux学习归纳"><meta name="twitter:description" content="Linux学习归纳 系统中常用Shell指令 ①指令单独存在  ② 指令带选项 ③ 指令带选项带参数  ls指令：显示当前目录的所有文件 相关选项： -l ：list缩写，代表以列表形式显示所有文件 -a ：all缩写，代表显示所有文件（包括隐藏文件） ① ls指令 ② ls指令 -l，这个指令还可以进一步简写为ll ③ ls指令 -a ④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件"><meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Linux学习归纳"><meta property="og:url" content="https://zhukangs.github.io/2016/07/03/Linux%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/"><meta property="og:site_name" content="Promise"><meta property="og:description" content="Linux学习归纳 系统中常用Shell指令 ①指令单独存在  ② 指令带选项 ③ 指令带选项带参数  ls指令：显示当前目录的所有文件 相关选项： -l ：list缩写，代表以列表形式显示所有文件 -a ：all缩写，代表显示所有文件（包括隐藏文件） ① ls指令 ② ls指令 -l，这个指令还可以进一步简写为ll ③ ls指令 -a ④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2016-07-03T08:36:38.000Z"><meta property="article:modified_time" content="2020-05-28T08:06:58.498Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhukangs.github.io/2016/07/03/Linux%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/"><link rel="prev" title="MySQL高级操作" href="https://zhukangs.github.io/2017/01/06/MySQL%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/"><link rel="next" title="检测火狐浏览器是否安装了FlashPlayer插件" href="https://zhukangs.github.io/2016/06/22/%E6%A3%80%E6%B5%8B%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E4%BA%86FlashPlayer%E6%8F%92%E4%BB%B6/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wx_avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">65</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Promise</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Linux学习归纳</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2016-07-03 16:36:38"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2016-07-03</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-05-28 16:06:58"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-05-28</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Linux/">Linux</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">2.3k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 7 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p><strong>Linux学习归纳</strong></p>
+<p>系统中常用Shell指令</p>
+<pre><code>①指令单独存在  ② 指令带选项 ③ 指令带选项带参数
+
+ls指令：显示当前目录的所有文件
+相关选项：
+-l ：list缩写，代表以列表形式显示所有文件
+-a ：all缩写，代表显示所有文件（包括隐藏文件）
+① ls指令
+② ls指令 -l，这个指令还可以进一步简写为ll
+③ ls指令 -a
+④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件）
+Ls –l /var/www *.php
+列出当前目录下，以.php结尾的文件  ls  –al *.php
+pwd指令：显示当前工作目录
+cd指令：跳转到指定目录
+① cd + 路径：跳转到指定的目录
+② cd .. ：跳转到上一级目录
+③ cd + ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root
+clear ：清屏指令
+logout ：退出指令
+普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。
+Ctrl + Alt + F1 ：切换到图形界面
+Ctrl + Alt + F2~F6 ：切换到字符界面
+shutdown ：关机指令
+相关选项：
+① shutdown  -h  分钟数：多少分钟后关机（真实关机）
+② shutdown  -r  分钟数：多少分钟后重启
+③ shutdown  -k  分钟数：多少分钟后关机（只发出警告，不关机）
+④ shutdown  -c ：取消关机，也可以使用快捷键Ctrl + C
+但是特别注意：shutdown指令只能是超级管理员使用，使用su  root切换超级管理员
+halt指令：立即关机
+reboot指令：立即重启</code></pre><p>VI编辑器的基本操作</p>
+<pre><code>① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件
+② vi + filename ：打开文件并将光标置于最后一行
+③ vi +n filename ：打开文件并将光标置于第n行
+④ vi +/string filename  ：打开文件并高亮显示string关键词
+提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。
+⑤ vi filename1 filename2 ：同时打开多个文件
+提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。
+
+普及小知识：Linux自动补全（非常重要）
+当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母+Tab按键就可以实现自动补全。</code></pre><p>VI编辑器的命令模式与末行模式</p>
+<pre><code>命令模式：
+① yy ：复制当前行
+   nyy ：从当前行开始复制n行，例如：复制3行内容，3yy
+② p ：粘贴
+③ dd ：删除当前行
+   ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。
+④ u ：撤销，相当于Windows中的Ctrl + Z
+⑤ d$：删除光标所在位置到行末的所有内容。
+⑥ $：把光标移动到行末。
+⑦ ^：把光标移动到行首。
+
+末行模式：
+:set nu ：显示行号
+:set nonu ：取消行号
+/关键词：高亮显示所有关键词
+:noh ：取消所有关键词高亮
+num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面
+:w ：保存文件
+:q ：退出
+:wq ：保存并退出
+
+特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。
+:w! ：强制保存
+:q! ：强制退出
+:wq! ：强制保存并退出
+:n : 将光标放到指定的行</code></pre><p>Linux系统软件的安装与卸载</p>
+<pre><code>1.查询已安装的Linux软件：
+    1、rpm -qa
+    2、选项说明：
+    3、-q ：query缩写，代表查询
+    4、-a ：all缩写，代表查询所有已安装的软件
+
+2、管道命令
+基本语法：
+rpm  -qa | grep  vim
+管道命令操作符是：”|”。
+作用：将“|”左边命令的结果信息作为下一个命令的输入信息
+文本搜索命令：grep
+
+3、卸载已安装的软件
+基本语法：
+rpm  -e  软件名称
+如：rpm –e vim-common
+
+4、安装Linux软件（rpm包）
+①装载系统镜像1（DVD1）
+②选择已连接，启动光驱
+③到/media目录下寻找DVD光驱中的内容
+④安装rpm软件包，要用到的知识点：
+rpm  -ivh  软件名称：安装软件
+-i ：install缩写，安装
+-vh ：显示安装进度
+
+5、返回上级目录后，单击小b重启计算机
+
+6、更改超级管理员root密码
+基本语法：
+passwd  用户名名称 ：重置密码
+
+7、设置密码后，重启操作系统</code></pre><p>与组相关的Shell指令</p>
+<pre><code>① groupadd 组名：添加组
+相关选项：
+-g ：添加组时，指定组id
+② groupmod 组名
+相关选项：
+-n ：修改组名称
+-g ：修改组id
+
+③ groupdel 组名
+VIM使用小技巧：在末行模式下
+使用:0代表跳转到第1行
+使用:$代表调整到最后1行
+tail指令：在不打开文件的前提下，查看文件的内容
+tail -n 显示最后几行（纯数字） 文件名称
+
+④添加或删除组成员（针对附属组）
+gpasswd  [选项]  组名
+相关选项：
+-a user_name ：添加用户到附属组中
+-d user_name ：从附属组中删除用户</code></pre><p>与用户的相关的Shell指令</p>
+<pre><code>① useradd指令：添加用户
+相关选项：
+-g group_name ：代表添加用户时指定用户的所属组
+-d  home_dir  -m：添加用户时指定用户的家，如果不指定默认/home/用户名
+
+② usermod 指令：修改用户信息
+相关选项：
+-c comment ：修改用户的备注信息
+-l login_name ：修改用户的名称
+-d home_dir ：修改用户的家
+-g group_name ：修改用户的所属组
+
+③ userdel 指令：删除用户
+相关选项：
+-r ：删除用户时同时删除用户的家
+
+④设置用户口令（密码）
+基本语法：passwd [选项] 用户
+相关选项：
+-S ：Status缩写，查看用户口令状态
+特别说明：如果一个用户没有密码，也会显示密码已被锁定。
+-l ：lock缩写，代表锁定用户，不能登录操作系统
+-u ：unlock缩写，代表解锁用户
+-d ：del缩写，代表删除用户密码
+
+⑤用户的相关指令
+ su指令：切换用户
+特别说明：如果从普通用户切换到超级管理员，需要密码
+如果从超级管理员切换到普通用户，不需要密码
+ newgrp：切换所属组
+ whoami：我是谁
+
+⑥查看用户信息
+id ：查看的内容比较多，查看用户信息
+groups ：查看的内容比较少，只能查看用户的所属组
+
+⑦设置与查看用户资料信息
+ chfn [用户名称] ：更改用户的资料信息
+ finger [用户名称] ：查看用户的资料信息
+安装finger需要依赖的软件
+
+⑧批量添加用户
+ 1.编辑用户文件
+vim user.txt
+2. 编辑用户密码（明文）
+vim pass.txt
+3. 使用newusers指令到user.txt中的用户信息到/etc/passwd文件中
+4. 使用pwunconv指令把/etc/shadow文件中的密码都倒回到/etc/passwd文件中
+5. 使用chpasswd指令把pass.txt文件中的密码导入/etc/passwd文件中
+6. 使用pwconv指令把加密后的密码存储在/etc/shadow文件中</code></pre><p>目录管理</p>
+<pre><code>① mkdir ：创建目录
+相关选项：
+-p ：递归创建
+-m ：创建目录时指定目录权限
+
+② rmdir ：删除目录
+相关参数：
+-p ：递归删除</code></pre><p>文件相关</p>
+<pre><code>① touch指令：创建文件
+ouch指令与vim指令创建文件有何区别呢？
+vim指令打开文件，但是如果文件不存在，则自动创建该文件
+touch指令只能创建文件而没有打开功能
+
+② rm指令删除文件
+相关选项：
+-r ：递归删除（主要用于删除文件夹）
+-f ：关闭删除确认
+
+④文件统计
+基本语法：
+wc  [选项]  &lt;文件列表&gt;
+相关选项：
+-c ：统计文件的字节数
+-l ：lines缩写，统计文件的行数
+-w ：word缩写，统计文件的单词数
+
+⑤grep搜索匹配行
+基本语法：
+grep  [选项]  &lt;字符串&gt;  &lt;源文件&gt;
+相关选项：
+-n ：显示匹配的行号
+-c ：统计一共有多少行
+-i ：ignore缩写，代表匹配时忽略大小写
+
+⑥显示文件内容
+1. cat指令：正序显示文件内容
+2. tac指令：倒序显示文件内容
+
+⑦更改文件的权限
+1. 更改文件的权限
+chmod  -R（递归修改） 777
+2. 更改文件的拥有者
+chown  -R（递归修改） root
+3. 更改文件的所属组
+chgrp  -R（递归修改） itcast
+
+⑧创建链接文件
+软链接创建步骤：
+ln  [-s]  &lt;源文件或目录&gt;  &lt;链接文件或目录&gt;
+
+⑨复制与移动文件或文件夹
+1. cp  [选项]   &lt;源文件路径&gt;   &lt;目标文件路径&gt;
+相关选项：
+-v : 显示进度条
+-R : 递归复制
+-p : 复制时保持文件的原有属性
+-vRp ：递归复制，保存文件的原有属性，显示进度条
+还可以复制文件时更改文件名称
+2. mv指令：剪切或移动
+相关指令：
+-v ：移动时显示进度条
+3. mv指令：文件或文件夹重命名
+基本语法：
+mv  旧文件名 新文件名</code></pre></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Promise</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhukangs.github.io/2016/07/03/Linux%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/">https://zhukangs.github.io/2016/07/03/Linux%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/linux/">linux</a></div><div class="post_share"><div class="social-share" data-image="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/04-promise.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wechatpay.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/alpay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2017/01/06/MySQL%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C/"><img class="prev_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">MySQL高级操作</div></div></a></div><div class="next-post pull_right"><a href="/2016/06/22/%E6%A3%80%E6%B5%8B%E7%81%AB%E7%8B%90%E6%B5%8F%E8%A7%88%E5%99%A8%E6%98%AF%E5%90%A6%E5%AE%89%E8%A3%85%E4%BA%86FlashPlayer%E6%8F%92%E4%BB%B6/"><img class="next_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">检测火狐浏览器是否安装了FlashPlayer插件</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> Recommend</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2018/09/06/Linux环境搭建/" title="Linux环境搭建"><img class="relatedPosts_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2018-09-06</div><div class="relatedPosts_title">Linux环境搭建</div></div></a></div></div><div class="clear_both"></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2020 By Promise</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.zam9.com" target="_blank" rel="noopener">blog</a>!</div><div class="icp"><a><img class="icp-icon" src="/img/icp.png"/><span>鄂ICP备17031002号-2</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>

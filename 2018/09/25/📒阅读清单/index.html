@@ -1,0 +1,434 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>📒阅读清单 | Promise</title><meta name="description" content="本周阅读清单（2019&#x2F;03&#x2F;04—2019&#x2F;03&#x2F;10） 轻松部署 Laravel 应用 | 《1. 宝塔面板》  Laravel5.5+passport 放弃 dingo 开发 API 实战，让 API 开发更省心  上线清单 —— 20 个 Laravel 应用性能优化项  深入 Composer autoload  composer autoload 自动加载性能优化指南  JSON W"><meta name="keywords" content="阅读"><meta name="author" content="Promise"><meta name="copyright" content="Promise"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="📒阅读清单"><meta name="twitter:description" content="本周阅读清单（2019&#x2F;03&#x2F;04—2019&#x2F;03&#x2F;10） 轻松部署 Laravel 应用 | 《1. 宝塔面板》  Laravel5.5+passport 放弃 dingo 开发 API 实战，让 API 开发更省心  上线清单 —— 20 个 Laravel 应用性能优化项  深入 Composer autoload  composer autoload 自动加载性能优化指南  JSON W"><meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="og:type" content="article"><meta property="og:title" content="📒阅读清单"><meta property="og:url" content="https://zhukangs.github.io/2018/09/25/%F0%9F%93%92%E9%98%85%E8%AF%BB%E6%B8%85%E5%8D%95/"><meta property="og:site_name" content="Promise"><meta property="og:description" content="本周阅读清单（2019&#x2F;03&#x2F;04—2019&#x2F;03&#x2F;10） 轻松部署 Laravel 应用 | 《1. 宝塔面板》  Laravel5.5+passport 放弃 dingo 开发 API 实战，让 API 开发更省心  上线清单 —— 20 个 Laravel 应用性能优化项  深入 Composer autoload  composer autoload 自动加载性能优化指南  JSON W"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2018-09-25T08:11:13.000Z"><meta property="article:modified_time" content="2020-05-28T08:06:57.965Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhukangs.github.io/2018/09/25/%F0%9F%93%92%E9%98%85%E8%AF%BB%E6%B8%85%E5%8D%95/"><link rel="prev" title="再次安装Homestead" href="https://zhukangs.github.io/2018/09/29/%E5%86%8D%E6%AC%A1%E5%AE%89%E8%A3%85Homestead/"><link rel="next" title="Linux环境搭建" href="https://zhukangs.github.io/2018/09/06/Linux%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wx_avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">65</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-03-04—2019-03-10）"><span class="toc-number">1.</span> <span class="toc-text">本周阅读清单（2019&#x2F;03&#x2F;04—2019&#x2F;03&#x2F;10）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-02-25—2019-03-03）"><span class="toc-number">2.</span> <span class="toc-text">本周阅读清单（2019&#x2F;02&#x2F;25—2019&#x2F;03&#x2F;03）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-02-18—2019-02-24）"><span class="toc-number">3.</span> <span class="toc-text">本周阅读清单（2019&#x2F;02&#x2F;18—2019&#x2F;02&#x2F;24）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-02-12—2019-02-17）"><span class="toc-number">4.</span> <span class="toc-text">本周阅读清单（2019&#x2F;02&#x2F;12—2019&#x2F;02&#x2F;17）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-01-28—2019-02-01）"><span class="toc-number">5.</span> <span class="toc-text">本周阅读清单（2019&#x2F;01&#x2F;28—2019&#x2F;02&#x2F;01）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-01-21—2019-01-27）"><span class="toc-number">6.</span> <span class="toc-text">本周阅读清单（2019&#x2F;01&#x2F;21—2019&#x2F;01&#x2F;27）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-01-14—2019-01-20）"><span class="toc-number">7.</span> <span class="toc-text">本周阅读清单（2019&#x2F;01&#x2F;14—2019&#x2F;01&#x2F;20）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-01-07—2019-01-13）"><span class="toc-number">8.</span> <span class="toc-text">本周阅读清单（2019&#x2F;01&#x2F;07—2019&#x2F;01&#x2F;13）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2019-01-02—2019-01-06）"><span class="toc-number">9.</span> <span class="toc-text">本周阅读清单（2019&#x2F;01&#x2F;02—2019&#x2F;01&#x2F;06）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-12-24—2018-12-30）"><span class="toc-number">10.</span> <span class="toc-text">本周阅读清单（2018&#x2F;12&#x2F;24—2018&#x2F;12&#x2F;30）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-12-17—2018-12-23）"><span class="toc-number">11.</span> <span class="toc-text">本周阅读清单（2018&#x2F;12&#x2F;17—2018&#x2F;12&#x2F;23）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-12-03—2018-12-09）"><span class="toc-number">12.</span> <span class="toc-text">本周阅读清单（2018&#x2F;12&#x2F;03—2018&#x2F;12&#x2F;09）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-11-19—2018-11-25）"><span class="toc-number">13.</span> <span class="toc-text">本周阅读清单（2018&#x2F;11&#x2F;19—2018&#x2F;11&#x2F;25）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-11-12—2018-11-18）"><span class="toc-number">14.</span> <span class="toc-text">本周阅读清单（2018&#x2F;11&#x2F;12—2018&#x2F;11&#x2F;18）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-11-05—2018-11-11）"><span class="toc-number">15.</span> <span class="toc-text">本周阅读清单（2018&#x2F;11&#x2F;05—2018&#x2F;11&#x2F;11）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-10-29—2018-11-04）"><span class="toc-number">16.</span> <span class="toc-text">本周阅读清单（2018&#x2F;10&#x2F;29—2018&#x2F;11&#x2F;04）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-10-22—2018-10-28）"><span class="toc-number">17.</span> <span class="toc-text">本周阅读清单（2018&#x2F;10&#x2F;22—2018&#x2F;10&#x2F;28）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-10-15—2018-10-21）"><span class="toc-number">18.</span> <span class="toc-text">本周阅读清单（2018&#x2F;10&#x2F;15—2018&#x2F;10&#x2F;21）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-10-08—2018-10-14）"><span class="toc-number">19.</span> <span class="toc-text">本周阅读清单（2018&#x2F;10&#x2F;08—2018&#x2F;10&#x2F;14）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#本周阅读清单（2018-9-25—-2018-9-30）"><span class="toc-number">20.</span> <span class="toc-text">本周阅读清单（2018&#x2F;9&#x2F;25—-2018&#x2F;9&#x2F;30）</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Promise</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">📒阅读清单</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2018-09-25 16:11:13"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2018-09-25</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-05-28 16:06:57"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-05-28</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E9%98%85%E8%AF%BB/">阅读</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">2k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 7 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p><img src="https://lccdn.phphub.org/uploads/images/201806/12/1/GbSiQu10WD.jpeg?imageView2/2/w/1240/h/0" alt=""></p>
+<h3 id="本周阅读清单（2019-03-04—2019-03-10）"><a href="#本周阅读清单（2019-03-04—2019-03-10）" class="headerlink" title="本周阅读清单（2019/03/04—2019/03/10）"></a>本周阅读清单（2019/03/04—2019/03/10）</h3><ol>
+<li><p><a href="https://learnku.com/articles/24917" target="_blank">轻松部署 Laravel 应用 | 《1. 宝塔面板》</a></p>
+</li>
+<li><p><a href="https://learnku.com/articles/6035/laravel55-developing-api-combat" target="_blank">Laravel5.5+passport 放弃 dingo 开发 API 实战，让 API 开发更省心</a></p>
+</li>
+<li><p><a href="https://learnku.com/laravel/t/24559" target="_blank">上线清单 —— 20 个 Laravel 应用性能优化项</a></p>
+</li>
+<li><p><a href="https://learnku.com/laravel/t/1002/deep-composer-autoload" target="_blank">深入 Composer autoload</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/zhouyuqi1/article/details/81098650" target="_blank">composer autoload 自动加载性能优化指南</a></p>
+</li>
+<li><p><a href="http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html" target="_blank">JSON Web Token 入门教程</a></p>
+</li>
+<li><p><a href="https://learnku.com/articles/25020" target="_blank">MySQL 规范</a></p>
+</li>
+<li><p><a href="https://learnku.com/articles/25116" target="_blank">MySQL 规范 (数据库表设计规范)</a></p>
+</li>
+<li><p><a href="https://learnku.com/articles/24795" target="_blank">深入 Nginx 之配置篇</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2019-02-25—2019-03-03）"><a href="#本周阅读清单（2019-02-25—2019-03-03）" class="headerlink" title="本周阅读清单（2019/02/25—2019/03/03）"></a>本周阅读清单（2019/02/25—2019/03/03）</h3><ol>
+<li><p><a href="https://learnku.com/laravel/c/php-jobs" target="_blank">面试最让你手足无措的一个问题：你的系统如何支撑高并发？</a></p>
+</li>
+<li><p><a href="https://learnku.com/articles/24509" target="_blank">一步步像 cms 一样安装 Laravel 项目</a></p>
+</li>
+<li><p><a href="https://learnku.com/laravel/t/22586" target="_blank">使用 Laravel Passport 处理 API 认证</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000012836882" target="_blank">Jquery ajax, Axios, Fetch区别之我见</a></p>
+</li>
+<li><p><a href="https://github.com/camsong/blog/issues/2" target="_blank">传统 Ajax 已死，Fetch 永生</a></p>
+</li>
+<li><p><a href="https://juejin.im/entry/5ad6e5cd6fb9a028cc61c136" target="_blank">MySQL优化原理</a></p>
+</li>
+<li><p><a href="https://learnku.com/articles/10126/the-configuration-and-use-of-elasticsearch-for-full-text-search" target="_blank">Elasticsearch 的配置与使用，为了全文搜索</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2019-02-18—2019-02-24）"><a href="#本周阅读清单（2019-02-18—2019-02-24）" class="headerlink" title="本周阅读清单（2019/02/18—2019/02/24）"></a>本周阅读清单（2019/02/18—2019/02/24）</h3><ol>
+<li><p><a href="https://learnku.com/docs/the-laravel-way/5.6/Tao-3-1/2928" target="_blank">Composer 自动加载原理  — 《Laravel之道》</a></p>
+</li>
+<li><p><a href="https://learnku.com/docs/the-laravel-way/5.6/Tao-3-2/2929" target="_blank">Laravel 服务容器粗浅认知</a></p>
+</li>
+<li><p><a href="https://learnku.com/docs/the-laravel-way/5.6/Tao-3-3/2930" target="_blank">Laravel 服务容器的初始化</a></p>
+</li>
+<li><p><a href="https://learnku.com/docs/the-laravel-way/5.6/Tao-3-3/2931" target="_blank">Laravel 服务容器之 bind</a></p>
+</li>
+<li><p><a href="https://learnku.com/docs/the-laravel-way/5.6/Tao-3-4/2932" target="_blank">Laravel 服务容器之 make</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2019-02-12—2019-02-17）"><a href="#本周阅读清单（2019-02-12—2019-02-17）" class="headerlink" title="本周阅读清单（2019/02/12—2019/02/17）"></a>本周阅读清单（2019/02/12—2019/02/17）</h3><ol>
+<li><p><a href="https://learnku.com/articles/23694" target="_blank">PHP-FPM 与 Nginx 的通信机制总结</a></p>
+</li>
+<li><p><a href="https://learnku.com/docs/laravel-core-concept/5.5" target="_blank">深入 Laravel 核心</a> 【<a href="https://github.com/cxp1539/laravel-core-learn】" target="_blank" rel="noopener">https://github.com/cxp1539/laravel-core-learn】</a></p>
+</li>
+<li><p><a href="https://learnku.com/articles/14159/the-way-to-use-the-php-array" target="_blank">PHP 数组使用之道</a></p>
+</li>
+<li><p><a href="https://learnku.com/laravel/t/13394/how-to-become-a-modernized-back-end-developer-in-2018" target="_blank">2018年，如何成为现代化的后端开发者</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000011433064" target="_blank">fetch，终于认识你</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2019-01-28—2019-02-01）"><a href="#本周阅读清单（2019-01-28—2019-02-01）" class="headerlink" title="本周阅读清单（2019/01/28—2019/02/01）"></a>本周阅读清单（2019/01/28—2019/02/01）</h3><ol>
+<li><p><a href="https://learnku.com/laravel/t/2442/we-have-not-used-aurora-push-jpush-now-released-a-new-version-of-the-v350" target="_blank">大家有没有用过极光推送 JPush ，现在发布新版本了 v3.5.0</a></p>
+</li>
+<li><p><a href="https://learnku.com/laravel/t/3057/the-core-concept-of-laravel" target="_blank">Laravel 的核心概念</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/hguisu/article/details/7377520" target="_blank">深入理解php底层：php生命周期</a></p>
+</li>
+<li><p><a href="https://learnku.com/laravel/t/5736/focus-on-alipay-and-wechat-payments-sdk" target="_blank">可能是我用过的最优雅的「 Alipay 和 WeChat 的支付 SDK」了</a></p>
+</li>
+<li><p><a href="https://learnku.com/laravel/t/3094/some-practical-laravel-tips" target="_blank">一些实用的 Laravel 小技巧</a></p>
+</li>
+<li><p><a href="https://learnku.com/laravel/t/4267/my-new-work-tiicle-a-programmer-to-share-programming-knowledge-and-collaboration-platform" target="_blank">Tiicle 一个程序员分享编程知识和协作的平台</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2019-01-21—2019-01-27）"><a href="#本周阅读清单（2019-01-21—2019-01-27）" class="headerlink" title="本周阅读清单（2019/01/21—2019/01/27）"></a>本周阅读清单（2019/01/21—2019/01/27）</h3><ol>
+<li><p><a href="https://laravel-china.org/topics/22639" target="_blank">分享 10 个你可能不知道的 Laravel Eloquent 小技巧</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22678" target="_blank">我是 Laravel 开发员，不是 PHP 开发员</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22813" target="_blank">Lumen 使用 Guzzle 替代 curl</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22742" target="_blank">简单的介绍 Eloquent 模型生命周期</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/index.php/articles/18107" target="_blank">Laravel 避免 Trying to get property of non-object 错误的六种方法 [新增第六种 data_get]</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22363" target="_blank">在面试前必须要知道的 Redis 面试内容</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22817" target="_blank">Laravel 浏览器跨域</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/21812" target="_blank">优雅的 Oss Flysystem 扩展</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22868" target="_blank"> Laravel+easywechat 开发微信公众号</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2019-01-14—2019-01-20）"><a href="#本周阅读清单（2019-01-14—2019-01-20）" class="headerlink" title="本周阅读清单（2019/01/14—2019/01/20）"></a>本周阅读清单（2019/01/14—2019/01/20）</h3><ol>
+<li><p><a href="https://laravel-china.org/topics/22165" target="_blank">Laravel 5.7 最佳实践和开发技巧分享</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/topics/22060" target="_blank">在 Laravel 应用中构建 GraphQL API</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22068" target="_blank"> Git 的奇技淫巧</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/13162/laravel-integrated-swoole-tutorial" target="_blank">Laravel 集成 Swoole 教程</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22321" target="_blank">配置 Supervisor 管理 Laravel 队列</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/20638" target="_blank">分享一些好用的资源（扩展、接口、网站）</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22351" target="_blank">知名开源框架 ThinkPHP 出现严重漏洞必需立即进行修复</a></p>
+</li>
+<li><p><a href="https://paper.seebug.org/787/" target="_blank">ThinkPHP5 核心类 Request 远程代码漏洞分析</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/docs/the-laravel-way/5.6/Tao-2-1/2926" target="_blank">PhpStorm Xdebug 断点调试工具的安装</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22379" target="_blank">有哪些鲜为人知，但是很有意思的网站？</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2019-01-07—2019-01-13）"><a href="#本周阅读清单（2019-01-07—2019-01-13）" class="headerlink" title="本周阅读清单（2019/01/07—2019/01/13）"></a>本周阅读清单（2019/01/07—2019/01/13）</h3><ol>
+<li><p><a href="https://laravel-china.org/articles/20311" target="_blank">Laravel5.5 使用 Elasticsearch 做引擎，scout 全文搜索</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/22046" target="_blank">如何优雅的去处理 API 数据格式</a></p>
+</li>
+<li><p><a href="https://blog.csdn.net/qq_19701185/article/details/55051126" target="_blank">阿里巴巴JAVA编程规范之MYSQL规约</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/15618/transactions-implementation-of-nested-transaction-for-laravel" target="_blank">Laravel 之嵌套事务 transactions 实现</a></p>
+</li>
+<li><p><a href="https://www.phpcomposer.com/5-features-to-know-about-composer-php/" target="_blank">PHP 开发者该知道的 5 个 Composer 小技巧</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/topics/15077/what-is-the-n1-problem-and-how-to-solve-the-n1-problem-in-laravel" target="_blank">什么是 N+1 问题，以及如何解决 Laravel 的 N+1 问题？</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/52fhy/tag/swoole/" target="_blank">Swoole笔记</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/20049" target="_blank">Web 安全开发规范手册 V1.0</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/topics/22245" target="_blank">Swoole 是 PHP 中的 Node.js?</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2019-01-02—2019-01-06）"><a href="#本周阅读清单（2019-01-02—2019-01-06）" class="headerlink" title="本周阅读清单（2019/01/02—2019/01/06）"></a>本周阅读清单（2019/01/02—2019/01/06）</h3><ol>
+<li><p><a href="https://laravel-china.org/articles/18865" target="_blank">经验 - Git rerere 和 bisect</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/21832#b95fb1" target="_blank">Git 基本使用文档</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/wikis/15903" target="_blank">Laravel 的自定义函数 helpers.php 文件存放位置</a></p>
+</li>
+<li><p><a href="https://zh.wikipedia.org/wiki/%E8%B7%A8%E7%AB%99%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0" target="_blank">跨站请求伪造</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/6657/model-events-and-observer-in-laravel" target="_blank">Laravel 中的模型事件与 Observer</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/21886" target="_blank">Lumen 微服务生成 Swagger 文档</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/21930" target="_blank">Laravel5.5 升级到 5.7 问题及解决方法</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/21951" target="_blank">PHP 使用 jwt 用户身份认证</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-12-24—2018-12-30）"><a href="#本周阅读清单（2018-12-24—2018-12-30）" class="headerlink" title="本周阅读清单（2018/12/24—2018/12/30）"></a>本周阅读清单（2018/12/24—2018/12/30）</h3><ol>
+<li><p><a href="https://laravel-china.org/articles/21555" target="_blank">模型关联给我们带来了哪些便利</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/21372#reply75704" target="_blank">如何更快的找到自己所需的模型关联类型？</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/21644" target="_blank">一些常用的模型属性</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/20712" target="_blank">Laravel 中的 Event 和事件的概念</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19454" target="_blank">使用 postman 调试 jwt 开发的接口</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19333" target="_blank">初识 swoole【上】</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/20183" target="_blank">初识 swoole【下】</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19448" target="_blank">实战 swoole【聊天室】</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-12-17—2018-12-23）"><a href="#本周阅读清单（2018-12-17—2018-12-23）" class="headerlink" title="本周阅读清单（2018/12/17—2018/12/23）"></a>本周阅读清单（2018/12/17—2018/12/23）</h3><ol>
+<li><p><a href="https://laravel-china.org/articles/20183" target="_blank">Laravel 中优雅的验证日期需要大于今天</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/12926/this-is-what-you-want-at-someones-function" target="_blank">这是你想要的 @ 某人的功能</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/6267/laravel-document-read-encryption" target="_blank">Laravel 文档阅读：加密</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/6268/laravel-document-read-hash" target="_blank">Laravel 文档阅读：哈希</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/6258/laravel-document-read-authorization" target="_blank">Laravel 文档阅读：授权</a></p>
+</li>
+<li><p><a href="https://tech.meituan.com/mysql_index.html" target="_blank">MySQL索引原理及慢查询优化</a></p>
+</li>
+<li><p><a href="https://dev.mysql.com/doc/refman/5.7/en/order-by-optimization.html" target="_blank">按优化顺序  mysql</a></p>
+</li>
+<li><p>Homestead安装Swoole<br>【<a href="http://www.yuzhiwei.com.cn/archives/240.html】" target="_blank" rel="noopener">http://www.yuzhiwei.com.cn/archives/240.html】</a><br>【<a href="https://blog.csdn.net/u010071211/article/details/81082608】" target="_blank" rel="noopener">https://blog.csdn.net/u010071211/article/details/81082608】</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-12-03—2018-12-09）"><a href="#本周阅读清单（2018-12-03—2018-12-09）" class="headerlink" title="本周阅读清单（2018/12/03—2018/12/09）"></a>本周阅读清单（2018/12/03—2018/12/09）</h3><ol>
+<li><p><a href="https://laravel-china.org/docs/laravel/5.5/passport/1309" target="_blank">Laravel 的 API 认证系统 Passport</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/12762/eighteen-best-practices-of-laravel" target="_blank">Laravel 的十八个最佳实践</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/4630/wake-up-and-smell-the-coffee-maintenance-of-large-php-applications-is-not-simple" target="_blank">面对现实吧！维护大型 PHP 应用程序不简单！</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/12926/this-is-what-you-want-at-someones-function" target="_blank">这是你想要的 @ 某人的功能</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-11-19—2018-11-25）"><a href="#本周阅读清单（2018-11-19—2018-11-25）" class="headerlink" title="本周阅读清单（2018/11/19—2018/11/25）"></a>本周阅读清单（2018/11/19—2018/11/25）</h3><ol>
+<li><p><a href="https://laravel-china.org/topics/2755/laravel-easy-to-use-querylist-to-collect-web-pages" target="_blank">Laravel 使用 QueryList 轻松采集网页</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/18588" target="_blank">多字段登录解决方案</a></p>
+</li>
+<li><p><a href="https://laravelacademy.org/post/7691.html" target="_blank">快速入门 —— 使用 Laradock 搭建基于 Docker 的 PHP 开发环境</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/6175/using-docker-and-laradock-for-php-development" target="_blank">使用 Docker 和 Laradock 进行 PHP 开发</a></p>
+</li>
+<li><p><a href="https://laravel.com/docs/5.4/homestead" target="_blank">Laravel Homestead</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19876" target="_blank">Laravel Eloquent 提示和技巧</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-11-12—2018-11-18）"><a href="#本周阅读清单（2018-11-12—2018-11-18）" class="headerlink" title="本周阅读清单（2018/11/12—2018/11/18）"></a>本周阅读清单（2018/11/12—2018/11/18）</h3><ol>
+<li><p><a href="https://laravel-china.org/topics/2777/laravel-53-multi-user-login#cd8992" target="_blank">Laravl多用户表登录</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19453" target="_blank">Laravel5.5+dingo+JWT 开发后台 API</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/62b0c4d75e59" target="_blank">laravel5.5 dingo/api+jwt-auth</a></p>
+</li>
+<li><p><a href="https://github.com/tymondesigns/jwt-auth/issues/1316" target="_blank">任何指南如何在Laravel 5.5上使用？tymondesigns/ jwt-auth</a></p>
+</li>
+<li><p><a href="https://moell.cn/article/37" target="_blank">Laravel 使用 JWT (Json Web Token) 做 API 认证之tymon/jwt-auth 1.0.0-beta.1实践</a></p>
+</li>
+<li><p><a href="https://www.jianshu.com/p/9e95a5f8ac4a" target="_blank">Laravel 5.5 使用 Jwt-Auth 实现 API 用户认证以及无痛刷新访问令牌</a></p>
+</li>
+<li><p><a href="https://zgxxx.github.io/2018/11/08/20181108/#more8" target="_blank">使用postman调试jwt开发的接口</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19427" target="_blank">laravel5.5 支付—— 支付宝</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/18637" target="_blank">Laravel Redis 广播 实例</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/wikis/15962" target="_blank">如何在 Laravel 中获取当前 URL （N 种方法）</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19477" target="_blank">Laravel-permission 中文翻译</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-11-05—2018-11-11）"><a href="#本周阅读清单（2018-11-05—2018-11-11）" class="headerlink" title="本周阅读清单（2018/11/05—2018/11/11）"></a>本周阅读清单（2018/11/05—2018/11/11）</h3><ol>
+<li><p><a href="https://laravel-china.org/articles/5173/i-dropped-the-laravel-env-function-pit-again" target="_blank">我又掉 Laravel env 函数坑里了</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19195" target="_blank">【看完就懂】Laravel 服务容器，IoC,DI</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19246" target="_blank">Laravel5.7 跨域解决</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/19452" target="_blank">打造 Laravel 优美架构 谈可维护性与弹性设计</a></p>
+</li>
+<li><p><a href="https://oomusou.io/laravel/architecture/" target="_blank">Laravel 的中大型專案架構</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-10-29—2018-11-04）"><a href="#本周阅读清单（2018-10-29—2018-11-04）" class="headerlink" title="本周阅读清单（2018/10/29—2018/11/04）"></a>本周阅读清单（2018/10/29—2018/11/04）</h3><ol>
+<li><p><a href="https://laravel-china.org/articles/15786/using-laravel-to-develop-mysql-database-backup-plan-task" target="_blank">使用 Laravel 制定 MySQL 数据库备份计划任务</a></p>
+</li>
+<li><p><a href="https://www.ihewro.com/archives/354/" target="_blank">typecho博客实现pjax</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/16260/yes-thats-the-6-basic-principles-that-object-oriented-programming-design-patterns-need-to-follow" target="_blank">没错，这就是面向对象编程（设计模式）需要遵循的 6 个基本原则</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/topics/9365/teach-you-to-write-modern-php-code-without-using-a-framework" target="_blank">教你在不使用框架的情况下也能写出现代化 PHP 代码</a></p>
+</li>
+<li><p><a href="https://juejin.im/post/5b29d2c4e51d4558b80b1d8c" target="_blank">跟着动画来学习TCP三次握手和四次挥手</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/13864/remember-never-use-utf8mb4-encoding-in-mysql" target="_blank">记住，永远不要在 MySQL 中使用 “utf8mb4” 编码</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/18697" target="_blank">Laravel Cron 定时任务 “跳坑” 点</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/wikis/15963" target="_blank">如何在 Laravel 的模型监听器中判断某个字段是否被修改？</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/16833/composer-package-for-mainland-resident-identity-card-hong-kong-macao-and-taiwan-resident-residence-card-verification-access-to-basic-information-and-generation-of-fake-data" target="_blank">大陆居民身份证、港澳台居民居住证 Composer 包：验证、获取基本信息以及生成假数据</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/5333/modular-development-of-php-based-on-composer" target="_blank">基于 Composer 的 PHP 模块化开发</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-10-22—2018-10-28）"><a href="#本周阅读清单（2018-10-22—2018-10-28）" class="headerlink" title="本周阅读清单（2018/10/22—2018/10/28）"></a>本周阅读清单（2018/10/22—2018/10/28）</h3><ol>
+<li><p><a href="https://laravel-china.org/articles/12449/form-validation-of-polymorphic-relationships-in-laravel" target="_blank">Laravel 中多态关系的表单验证</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/2020/ten-laravel-5-program-optimization-techniques" target="_blank">十个 Laravel 5 程序优化技巧</a></p>
+</li>
+<li><p><a href="https://juejin.im/post/5b99d4bce51d450e7a24b66e" target="_blank">互联网公司面试必问的Redis题目</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/18555" target="_blank">给一个时间，获取这个月的结束的日期。比如 输入’2018-08-04’ 输出’2018-08-31’</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/18782" target="_blank">让子弹飞~利用 OPcache 扩展提升 PHP7 性能 | Laravel 篇 </a></p>
+</li>
+<li><p><a href="https://laravel.com/docs/5.5/frontend" target="_blank">laravel  之  JavaScript和CSS脚手架 </a></p>
+</li>
+<li><p><a href="https://xiaoxingping.top/blog/8/laravel-Eloquent-ORM-jie-xi" target="_blank">laravel Eloquent ORM解析  </a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-10-15—2018-10-21）"><a href="#本周阅读清单（2018-10-15—2018-10-21）" class="headerlink" title="本周阅读清单（2018/10/15—2018/10/21）"></a>本周阅读清单（2018/10/15—2018/10/21）</h3><ol>
+<li><p><a href="https://laravel-china.org/wikis/16069" target="_blank">如何让你的Laravel API永远返回JSON格式的响应？</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/16663" target="_blank">使用 Laravel 5.5+ 更好的来实现 404 响应</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/17358" target="_blank">通过 Laravel 消息通知使用 EasySms 短信服务，让你的代码更简洁</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/17457" target="_blank">服务端和 Web 端分离架构下使用 passport 进行前后台用户各自的认证</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/10885/full-use-of-jwt" target="_blank">JWT 完整使用详解</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/17883" target="_blank">JWT 超详细分析</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/topics/9991/20-laravel-eloquent-necessary-practical-skills" target="_blank">20 个 Laravel Eloquent 必备的实用技巧</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-10-08—2018-10-14）"><a href="#本周阅读清单（2018-10-08—2018-10-14）" class="headerlink" title="本周阅读清单（2018/10/08—2018/10/14）"></a>本周阅读清单（2018/10/08—2018/10/14）</h3><ol>
+<li><p><a href="https://www.zybuluo.com/phper/note/50231" target="_blank">php中fastcgi和php-fpm是什么东西</a></p>
+</li>
+<li><p><a href="https://oomusou.io/laravel/service/" target="_blank">如何使用 Service 模式?</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/18045" target="_blank">Laravel 使用腾讯云 cos 存储对象</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/18046" target="_blank">Laravel 使用七牛 存储对象</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/wikis/16199" target="_blank">Laravel 中如何从数据库中获取随机的数据？</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/wikis/16722" target="_blank">如何从 phpcomposer 的 Composer 镜像迁移到 Laravel China 维护的镜像？</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/18022" target="_blank">深入理解 Laravel 中.env 文件读取</a></p>
+</li>
+</ol>
+<h3 id="本周阅读清单（2018-9-25—-2018-9-30）"><a href="#本周阅读清单（2018-9-25—-2018-9-30）" class="headerlink" title="本周阅读清单（2018/9/25—-2018/9/30）"></a>本周阅读清单（2018/9/25—-2018/9/30）</h3><ol>
+<li><p><a href="https://laravel-china.org/docs/laravel/5.5/passport/1309" target="_blank">Laravel 的 API 认证系统 Passport</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/14159/the-way-to-use-the-php-array" target="_blank">PHP数组使用之道</a></p>
+</li>
+<li><p><a href="http://blog.phpzendo.com/?p=209" target="_blank">PHP 合并数组运算符 + 与 array_merge 函数</a></p>
+</li>
+<li><p><a href="http://www.laruence.com/2018/07/31/3207.html" target="_blank">令人困惑的strtotime</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/14644/complete-guide-to-the-php-file-system" target="_blank">PHP 文件系统完全指南</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/articles/14077/laravel-service-container-and-provider" target="_blank">Laravel 服务容器和提供器</a></p>
+</li>
+<li><p><a href="https://laravel-china.org/topics/17638" target="_blank">Laravel 服务容器、服务提供器、契约实例讲解</a></p>
+</li>
+<li><p><a href="https://www.cnblogs.com/zy1987/p/3784753.html" target="_blank">编译型语言、解释型语言、静态类型语言、动态类型语言概念与区别</a></p>
+</li>
+<li><p><a href="https://juejin.im/post/5b67b50a6fb9a04fda4e3902" target="_blank">巧用 PHP 数组函数</a></p>
+</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Promise</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhukangs.github.io/2018/09/25/%F0%9F%93%92%E9%98%85%E8%AF%BB%E6%B8%85%E5%8D%95/">https://zhukangs.github.io/2018/09/25/%F0%9F%93%92%E9%98%85%E8%AF%BB%E6%B8%85%E5%8D%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%98%85%E8%AF%BB/">阅读</a></div><div class="post_share"><div class="social-share" data-image="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/04-promise.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wechatpay.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/alpay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2018/09/29/%E5%86%8D%E6%AC%A1%E5%AE%89%E8%A3%85Homestead/"><img class="prev_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">再次安装Homestead</div></div></a></div><div class="next-post pull_right"><a href="/2018/09/06/Linux%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/"><img class="next_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">Linux环境搭建</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2020 By Promise</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.zam9.com" target="_blank" rel="noopener">blog</a>!</div><div class="icp"><a><img class="icp-icon" src="/img/icp.png"/><span>鄂ICP备17031002号-2</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="Table of Contents" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>

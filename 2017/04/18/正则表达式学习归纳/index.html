@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>正则表达式学习归纳 | Promise</title><meta name="description" content="正则表达式学习归纳 1、正则表达式 正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。 模式：使用一种特殊符号来实现字符串的匹配 2、创建正则对象 ①隐式创建 var 正则对象 &#x3D; &#x2F;正则表达式&#x2F;匹配模式; ②直接实例化 var 正则对象 &#x3D; new RegExp(‘正则表达式"><meta name="keywords" content="正则"><meta name="author" content="Promise"><meta name="copyright" content="Promise"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="正则表达式学习归纳"><meta name="twitter:description" content="正则表达式学习归纳 1、正则表达式 正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。 模式：使用一种特殊符号来实现字符串的匹配 2、创建正则对象 ①隐式创建 var 正则对象 &#x3D; &#x2F;正则表达式&#x2F;匹配模式; ②直接实例化 var 正则对象 &#x3D; new RegExp(‘正则表达式"><meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="og:type" content="article"><meta property="og:title" content="正则表达式学习归纳"><meta property="og:url" content="https://zhukangs.github.io/2017/04/18/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/"><meta property="og:site_name" content="Promise"><meta property="og:description" content="正则表达式学习归纳 1、正则表达式 正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。 模式：使用一种特殊符号来实现字符串的匹配 2、创建正则对象 ①隐式创建 var 正则对象 &#x3D; &#x2F;正则表达式&#x2F;匹配模式; ②直接实例化 var 正则对象 &#x3D; new RegExp(‘正则表达式"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2017-04-18T12:33:45.000Z"><meta property="article:modified_time" content="2020-05-28T08:00:38.898Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhukangs.github.io/2017/04/18/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/"><link rel="prev" title="Laravel之验证码" href="https://zhukangs.github.io/2017/10/19/Laravel%E4%B9%8B%E9%AA%8C%E8%AF%81%E7%A0%81/"><link rel="next" title="mysqldump 导出数据库各参数详细说明" href="https://zhukangs.github.io/2017/03/21/mysqldump%20%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%84%E5%8F%82%E6%95%B0%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wx_avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">65</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Promise</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">正则表达式学习归纳</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2017-04-18 20:33:45"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2017-04-18</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-05-28 16:00:38"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-05-28</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/PHP/">PHP</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">1.7k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 5 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p><strong>正则表达式学习归纳</strong></p>
+<p>1、正则表达式</p>
+<p>正则表达式(regular expression)描述了一种字符串匹配的模式，可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。</p>
+<p>模式：使用一种特殊符号来实现字符串的匹配</p>
+<p>2、创建正则对象</p>
+<pre><code>①隐式创建
+var 正则对象 = /正则表达式/匹配模式;
+②直接实例化
+var 正则对象 = new RegExp(‘正则表达式’, ‘匹配模式’);
+两者之间的功能是完全一致的，都是为了获得正则对象。但是两者之间的区别主要在于语法的不同。</code></pre><p>3、匹配模式</p>
+<pre><code>基本语法：   var  reg = /正则表达式/匹配模式;
+在正则表达式中，匹配模式常用的有两种形式：
+g ：global缩写，代表全局匹配，匹配出所有满足条件的结果
+i ：ignore缩写，代表忽略大小写，匹配时，会自动忽略字符串的大小写</code></pre><p>4、与正则表达式相关的几个方法</p>
+<pre><code>① RegExp类下的方法(reg.test或reg.exec)
+test(str) ：判断字符串中是否具有指定模式的子串，返回结果是一个布尔类型的值
+exec(str) ：返回字符串中指定模式的子串，一次只能获取一个与之匹配的结果
+② String类下的方法(str.方法(reg))
+search(reg) ：与indexOf非常类似，返回指定模式的子串在字符串首次出现的位置
+match(reg) ：以数组的形式返回指定模式的字符串，可以返回所有匹配的结果
+replace(reg,’替换后的字符’) ：把指定模式的子串进行替换操作
+split(reg) ：以指定模式分割字符串，返回结果为数组</code></pre><p>5、几个重要概念</p>
+<p>1.子表达式：在正则表达式中，通过一对圆括号括起来的内容，我们就称之为“子表达式”。如：var reg = /\d(\d)\d/gi;</p>
+<p>2.捕获：在正则表达式中，子表达式匹配到相应的内容时，系统会自动捕获这个行为，然后将子表达式匹配到的内容放入系统的缓存区中。我们把这个过程就称之为“捕获”。</p>
+<p>3.反向引用：在正则表达式中，我们可以使用\n（n&gt;0，正整数，代表系统中的缓冲区编号）来获取缓冲区中的内容，我们把这个过程就称之为“反向引用”。</p>
+<p>6、编写正则表达式三步走</p>
+<pre><code>1.匹配符（查什么）
+匹配符：字符匹配符用于匹配某个或某些字符
+在正则表达式中，通过一对中括号括起来的内容，我们就称之为“字符簇”。字符簇代表的是一个范围，但是匹配时，只能匹配某个固定的结果。
+[a-z] ：匹配字符a到字符z之间的任一字符
+[A-Z] ：匹配字符A到字符Z之间的任一字符
+[0-9] ：匹配数字0到9之间的任一数字
+[0-9a-z] ：匹配数字0到9或字符a到字符z之间的任一字符
+[0-9a-zA-Z] ：匹配数字0到9或字符a到字符z或字符A到字符Z之间的任一字符
+[abcd] ：匹配字符a或字符b或字符c或字符d
+[1234] ：匹配数字1或数字2或数字3或数字4
+在字符簇中，通过一个^脱字节来表示取反的含义。
+[^a-z] ：匹配除字符a到字符z以外的任一字符
+[^0-9] ：匹配除数字0到9以外的任一字符
+[^abcd] ：匹配除a、b、c、d以外的任一字符
+几个比较特殊的匹配符:
+\d ：匹配一个数字字符，还可以使用[0-9]
+\D ：匹配一个非数字字符，还可以使用[^0-9]
+\w ：匹配包括下划线的任何单词字符，还可以使用[0-9a-zA-Z_]
+\W ：匹配任何非单词字符，还可以使用[^\w]
+\s ：匹配任何空白字符，space缩写
+\S ：匹配任何非空白字符，还可以使用[^\s]
+.(我是一个点号)  ：匹配除 &quot;\n&quot; 之外的任何单个字符
+[\u4e00-\u9fa5] ：匹配中文字符中的任一字符
+
+2.限定符（查多少）
+限定符可以指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。
+* ：匹配前面的子表达式零次或多次，0到多，{0,}
++ ：匹配前面的子表达式一次或多次，1到多，{1,}
+? ：匹配前面的子表达式零次或一次，0或1，{0,1}
+{n} ：匹配确定的 n 次
+{n,} ：至少匹配n 次
+{n,m} ：最少匹配 n 次且最多匹配 m 次
+  //特别说明：
+贪婪匹配
+在正则表达式中，默认情况下，能匹配多的就不匹配少的，我们把这种匹配模式就称之为“贪婪匹配。所有的正则表达式，默认情况下采用的都是贪婪匹配原则。
+非贪婪匹配
+在限定符的后面添加一个问号？，那我们的贪婪匹配原则就会转化为非贪婪匹配原则，优先匹配少的。
+
+3.定位符（从哪查）
+定位符可以将一个正则表达式固定在一行的开始或结束。也可以创建只在单词内或只在单词的开始或结尾处出现的正则表达式。
+^ ：匹配输入字符串的开始位置
+$ ：匹配输入字符串的结束位置
+\b ：匹配一个单词边界
+\B ：匹配非单词边界</code></pre><p>7、几个需要注意的点</p>
+<pre><code>1.转义符
+
+在正则表达式中，我们可以使用反斜杠\对某些特殊字符进行转义操作。需要转义的字符：
+点号.
+小括号()
+中括号[]
+左斜杠/
+右斜杠\
+选择匹配符|
+
+2.选择匹配符：在正则表达式中，我们可以通过一个竖线|代表选择匹配符。可以理解成“或”。
+
+3.特殊用法：
+(?=) ：正向预查；
+(?!) ：负向预查；
+特别说明：在正则表达式中，如果子表达式遇到了exec就会产生上面的结果。其返回结果是一个数组。
+第一组元素，索引为0的数据hellophp，代表正则匹配到的结果;索引为1的数据php，代表是第一个子表达式匹配到的结果
+第二组元素，索引为0的数据hellojavascript，代表正则表达式匹配到的结果;索引为1的数据javascript，代表是第一个子表达式匹配到的结果
+如何解决以上问题呢？答：可以使用(?:)的形式，让正则表达式中的子表达式只输出内容，但不捕获。
+ (?:)：输出内容但不捕获（要用到的知识点：子表达式与exec方法）</code></pre></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Promise</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhukangs.github.io/2017/04/18/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/">https://zhukangs.github.io/2017/04/18/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E5%AD%A6%E4%B9%A0%E5%BD%92%E7%BA%B3/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%AD%A3%E5%88%99/">正则</a></div><div class="post_share"><div class="social-share" data-image="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/04-promise.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wechatpay.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/alpay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2017/10/19/Laravel%E4%B9%8B%E9%AA%8C%E8%AF%81%E7%A0%81/"><img class="prev_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">Laravel之验证码</div></div></a></div><div class="next-post pull_right"><a href="/2017/03/21/mysqldump%20%E5%AF%BC%E5%87%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E5%90%84%E5%8F%82%E6%95%B0%E8%AF%A6%E7%BB%86%E8%AF%B4%E6%98%8E/"><img class="next_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">mysqldump 导出数据库各参数详细说明</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> Recommend</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2017/01/25/常用正则表达式⚖/" title="常用正则表达式⚖"><img class="relatedPosts_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2017-01-25</div><div class="relatedPosts_title">常用正则表达式⚖</div></div></a></div></div><div class="clear_both"></div></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2020 By Promise</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.zam9.com" target="_blank" rel="noopener">blog</a>!</div><div class="icp"><a><img class="icp-icon" src="/img/icp.png"/><span>鄂ICP备17031002号-2</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>

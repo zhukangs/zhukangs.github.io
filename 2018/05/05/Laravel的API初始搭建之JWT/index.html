@@ -1,0 +1,200 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Laravel的API初始搭建之JWT | Promise</title><meta name="description" content="写接口好写，但麻烦的是起步，需要做一些安全的措施，下面就记录一下Laravel的初始API搭建步骤！！！ 1、安装laravel（5.5） 对于 LTS 版本，例如 Laravel 5.1，提供两年的错误修复和三年的安全修复。这些版本提供最长时间的支持和维护。对于一般版本，则只是提供六个月的错误修复和为期一年的安全修复。 composer create-project --prefer-dist"><meta name="keywords" content="DingoAPI,JWT"><meta name="author" content="Promise"><meta name="copyright" content="Promise"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Laravel的API初始搭建之JWT"><meta name="twitter:description" content="写接口好写，但麻烦的是起步，需要做一些安全的措施，下面就记录一下Laravel的初始API搭建步骤！！！ 1、安装laravel（5.5） 对于 LTS 版本，例如 Laravel 5.1，提供两年的错误修复和三年的安全修复。这些版本提供最长时间的支持和维护。对于一般版本，则只是提供六个月的错误修复和为期一年的安全修复。 composer create-project --prefer-dist"><meta name="twitter:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="og:type" content="article"><meta property="og:title" content="Laravel的API初始搭建之JWT"><meta property="og:url" content="https://zhukangs.github.io/2018/05/05/Laravel%E7%9A%84API%E5%88%9D%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B9%8BJWT/"><meta property="og:site_name" content="Promise"><meta property="og:description" content="写接口好写，但麻烦的是起步，需要做一些安全的措施，下面就记录一下Laravel的初始API搭建步骤！！！ 1、安装laravel（5.5） 对于 LTS 版本，例如 Laravel 5.1，提供两年的错误修复和三年的安全修复。这些版本提供最长时间的支持和维护。对于一般版本，则只是提供六个月的错误修复和为期一年的安全修复。 composer create-project --prefer-dist"><meta property="og:image" content="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg"><meta property="article:published_time" content="2018-05-05T15:04:15.000Z"><meta property="article:modified_time" content="2020-05-28T08:06:58.859Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="https://zhukangs.github.io/2018/05/05/Laravel%E7%9A%84API%E5%88%9D%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B9%8BJWT/"><link rel="prev" title="第三方登录之Github" href="https://zhukangs.github.io/2018/05/19/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95%E4%B9%8BGithub/"><link rel="next" title="vagrant安装之旅" href="https://zhukangs.github.io/2018/04/25/vagrant%E5%AE%89%E8%A3%85%E4%B9%8B%E6%97%85/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"message_prev":"Press","message_next":"to bookmark this page"},"chs_to_cht":"Traditional Chinese Activated Manually","cht_to_chs":"Simplified Chinese Activated Manually","day_to_night":"Dark Mode Activated Manually","night_to_day":"Light Mode Activated Manually","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: false  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><meta name="generator" content="Hexo 4.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wx_avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">65</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">53</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Promise</a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> 其他</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/musics/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li><li><a class="site-page" href="/photos/"><i class="fa-fw fa fa-photo"></i><span> 照片</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Laravel的API初始搭建之JWT</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2018-05-05 23:04:15"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2018-05-05</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-05-28 16:06:58"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-05-28</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Laravel/">Laravel</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">1.9k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 8 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><p><strong>写接口好写，但麻烦的是起步，需要做一些安全的措施，下面就记录一下Laravel的初始API搭建步骤！！！</strong></p>
+<p>1、安装laravel（5.5）</p>
+<p>对于 LTS 版本，例如 Laravel 5.1，提供两年的错误修复和三年的安全修复。这些版本提供最长时间的支持和维护。对于一般版本，则只是提供六个月的错误修复和为期一年的安全修复。</p>
+<pre><code>composer create-project --prefer-dist laravel/laravel blog &quot;5.5.*&quot;</code></pre><p>2、安装DingoAPI（参考文档）</p>
+<p>dingo/api 是一个 Lumen 和 Laravel 都可用的 RestFul 工具包，帮助我们快速的开始构建 RestFul Api。更多的功能，还需要仔细阅读 DingoApi 的 文档 来深入的学习和理解。</p>
+<pre><code>1、Laravel 5.5 的适配版本为dingo/api:v2.0.0-alpha2，所以我们需要安装这个 tag
+composer require dingo/api:2.0.0-alpha2
+
+2、会报错：You requirements could not be resolved to an installable set of packages
+原因：dingo 的文档中有说明，现在这个包还处在开发阶段，没有一个稳定的 release 版本，dingo/api 依赖的 dingo/blueprint 与 phpunit 都依赖了 phpdocumentor/reflection-docblock 但是依赖的版本不同，导致出现了冲突。但是我们发现 dingo/blueprint 的开发版本 dev-master 解决了冲突，可以正常安装；
+解决：修改一下 composer.json
+&quot;config&quot;: {
+        &quot;preferred-install&quot;: &quot;dist&quot;,
+        &quot;sort-packages&quot;: true,
+        &quot;optimize-autoloader&quot;: true
+    },
+    &quot;minimum-stability&quot; : &quot;dev&quot;,
+    &quot;prefer-stable&quot; : true
+minimum-stability&quot; : &quot;dev&quot; ——设定的最低稳定性的版本为 dev 也就是可以依赖开发版本的扩展包；
+&quot;prefer-stable&quot; : true —— Composer 优先使用更稳定的包版本。
+
+3、 dingo 的配置文件 publish 出来：
+php artisan vendor:publish
+
+4、在.env中增加如下代码：
+API_STANDARDS_TREE=prs
+API_SUBTYPE=laraapi
+API_PREFIX=api
+API_VERSION=v1
+API_DEBUG=true
+注释：
+prs：未对外发布的，提供给公司 app，单页应用，桌面应用等（x,vnd）
+API_SUBTYPE 一般情况下是我们项目的简称，我们的项目叫laraapi
+Accept: application/&lt;API_STANDARDS_TREE&gt;.&lt;API_SUBTYPE&gt;.v1+json（使用 Accept 头来指定我们需要访问的 API 版）</code></pre><p>3、测试</p>
+<pre><code>1、路由文件（api.php）：
+&lt;?php
+use Illuminate\Http\Request;
+$api = app(&apos;Dingo\Api\Routing\Router&apos;);
+
+$api-&gt;version(&apos;v1&apos;, function($api) {
+    $api-&gt;get(&apos;version&apos;, function() {
+        return response(&apos;this is version v1&apos;);
+    });
+});
+
+2、在postman中请求会返回this is version v1（默认v1）
+    http://jwt.test/api/version</code></pre><p>4、节流处理防止攻击</p>
+<pre><code>增加调用频率限制
+1、routes/api.php
+$api-&gt;version(&apos;v1&apos;, [
+    &apos;namespace&apos; =&gt; &apos;App\Http\Controllers\Api&apos;,
+], function($api) {
+
+    $api-&gt;group([
+        &apos;middleware&apos; =&gt; &apos;api.throttle&apos;,
+        &apos;limit&apos; =&gt; config(&apos;api.rate_limits.sign.limit&apos;),//总分钟下总多少次
+        &apos;expires&apos; =&gt; config(&apos;api.rate_limits.sign.expires&apos;),//总分钟数
+    ], function($api) {
+        // 用户注册
+        $api-&gt;post(&apos;users&apos;, &apos;UsersController@store&apos;)
+            -&gt;name(&apos;api.users.store&apos;);
+    });
+});
+
+2、写成配置，可以更方便的控制调用频率（config/api.php）：
+/*
+     * 接口频率限制
+     */
+    &apos;rate_limits&apos; =&gt; [
+        // 访问频率限制，次数/分钟
+        &apos;access&apos; =&gt; [
+            &apos;expires&apos; =&gt; env(&apos;RATE_LIMITS_EXPIRES&apos;, 1),
+            &apos;limit&apos;  =&gt; env(&apos;RATE_LIMITS&apos;, 60),
+        ],
+        // 登录相关，次数/分钟
+        &apos;sign&apos; =&gt; [
+            &apos;expires&apos; =&gt; env(&apos;SIGN_RATE_LIMITS_EXPIRES&apos;, 1),
+            &apos;limit&apos;  =&gt; env(&apos;SIGN_RATE_LIMITS&apos;, 10),
+        ],
+    ],
+增加了两种限制，一种登录相关的，一分钟可以调用10次，一种是访问相关的，一分钟调用60次。</code></pre><p>5、登录 API 获取 JWT 令牌（参考文档）</p>
+<div markdown="1" class="alert alert-info">
+JWT 是 JSON Web Token 的缩写，是一个非常轻巧的规范，这个规范允许我们使用 JWT 在用户和服务器之间传递安全可靠的信息。JWT 由头部（header）、载荷（payload）与签名（signature）组成。
+
+<p>JWT 最后是通过 Base64 编码的，也就是说，它可以被翻译回原来的样子来的。所以不要在 JWT 中存放一些敏感信息。</p>
+<p>Token 验证</p>
+<p>有了 token 之后该如何验证 token 的有效性，并得到 token 对应的用户呢？其实原理很简单，DingoApi 为我们准备好了 api.auth 这个中间件</p>
+<ul>
+<li>获取客户端提交的 token</li>
+<li>检测 token 中的签名 signature 是否正确</li>
+<li>判断 payload 数据中的 exp，是否已经过期</li>
+<li>根据 payload 数据中的 sub，取数据库中验证用户是否存在</li>
+<li>上述检测不正确，则抛出相应异常</div>
+
+
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line">1、安装 jwt-auth</span><br><span class="line">composer require tymon&#x2F;jwt-auth:1.0.0-rc.2</span><br><span class="line"></span><br><span class="line">2、需要设置一下 JWT 的 secret，这个 secret 很重要，用于最后的签名，更换这个secret 会导致之前生成的所有 token 无效。</span><br><span class="line">php artisan jwt:secret （可以看到在 .env 文件中，增加了一行 JWT_SECRET）</span><br><span class="line"></span><br><span class="line">3、修改 config&#x2F;auth.php，将 api guard 的 driver 改为 jwt</span><br><span class="line">&#39;guards&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;web&#39; &#x3D;&gt; [</span><br><span class="line">        &#39;driver&#39; &#x3D;&gt; &#39;session&#39;,</span><br><span class="line">        &#39;provider&#39; &#x3D;&gt; &#39;users&#39;,</span><br><span class="line">    ],</span><br><span class="line"></span><br><span class="line">    &#39;api&#39; &#x3D;&gt; [</span><br><span class="line">        &#39;driver&#39; &#x3D;&gt; &#39;jwt&#39;,</span><br><span class="line">        &#39;provider&#39; &#x3D;&gt; &#39;users&#39;,</span><br><span class="line">    ],</span><br><span class="line">],</span><br><span class="line"></span><br><span class="line">4、修改 config&#x2F;api.php，auth 中增加 JWT 相关的配置</span><br><span class="line">&#39;auth&#39; &#x3D;&gt; [</span><br><span class="line">    &#39;jwt&#39; &#x3D;&gt; &#39;Dingo\Api\Auth\Provider\JWT&#39;,</span><br><span class="line">],</span><br><span class="line"></span><br><span class="line">5、user(app\Models\User.php) 模型需要继承 Tymon\JWTAuth\Contracts\JWTSubject 接口，并实现接口的两个方法 getJWTIdentifier() 和 getJWTCustomClaims()。</span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">namespace App\Models;</span><br><span class="line"></span><br><span class="line">use Tymon\JWTAuth\Contracts\JWTSubject;</span><br><span class="line">use Illuminate\Notifications\Notifiable;</span><br><span class="line">use Illuminate\Foundation\Auth\User as Authenticatable;</span><br><span class="line">use Auth;</span><br><span class="line"></span><br><span class="line">class User extends Authenticatable implements JWTSubject</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">.</span><br><span class="line">    &#x2F;&#x2F; Rest omitted for brevity</span><br><span class="line"></span><br><span class="line">    public function getJWTIdentifier()</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;getKey();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function getJWTCustomClaims()</span><br><span class="line">    &#123;</span><br><span class="line">        return [];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">6、测试</span><br><span class="line">php artisan tinker 做如下测试：</span><br><span class="line">$user &#x3D; App\Models\User::first();</span><br><span class="line">Auth::guard(&#39;api&#39;)-&gt;fromUser($user);</span><br></pre></td></tr></table></figure>
+
+<p>6、用户登录测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1、增加路由</span><br><span class="line">&#x2F;&#x2F; 登录</span><br><span class="line">$api-&gt;post(&#39;authorizations&#39;, &#39;AuthorizationsController@store&#39;)</span><br><span class="line">    -&gt;name(&#39;api.authorizations.store&#39;);</span><br><span class="line">    </span><br><span class="line">2、创建登录的 request</span><br><span class="line">php artisan make:request Api&#x2F;AuthorizationRequest</span><br><span class="line">public function rules()</span><br><span class="line">    &#123;</span><br><span class="line">        return [</span><br><span class="line">            &#39;username&#39; &#x3D;&gt; &#39;required|string&#39;,</span><br><span class="line">            &#39;password&#39; &#x3D;&gt; &#39;required|string|min:6&#39;,</span><br><span class="line">        ];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">3、app&#x2F;Http&#x2F;Controllers&#x2F;Api&#x2F;AuthorizationsController.php</span><br><span class="line">public function store(AuthorizationRequest $request)</span><br><span class="line">    &#123;</span><br><span class="line">        $credentials[&#39;username&#39;] &#x3D; $request-&gt;username;</span><br><span class="line">        $credentials[&#39;password&#39;] &#x3D; $request-&gt;password;</span><br><span class="line"></span><br><span class="line">        if (!$token &#x3D; \Auth::guard(&#39;api&#39;)-&gt;attempt($credentials)) &#123;</span><br><span class="line">            return $this-&gt;response-&gt;errorUnauthorized(&#39;用户名或密码错误&#39;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return $this-&gt;response-&gt;array([</span><br><span class="line">            &#39;access_token&#39; &#x3D;&gt; $token,</span><br><span class="line">            &#39;token_type&#39; &#x3D;&gt; &#39;Bearer&#39;,</span><br><span class="line">            &#39;expires_in&#39; &#x3D;&gt; \Auth::guard(&#39;api&#39;)-&gt;factory()-&gt;getTTL() * 60</span><br><span class="line">        ])-&gt;setStatusCode(201);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"> 4、创建app\Http\Controllers\Api\Controller.php</span><br><span class="line"> &lt;?php</span><br><span class="line">namespace App\Http\Controllers\Api;</span><br><span class="line"></span><br><span class="line">use Illuminate\Http\Request;</span><br><span class="line">use Dingo\Api\Routing\Helpers;&#x2F;&#x2F;重点</span><br><span class="line">use App\Http\Controllers\Controller as BaseController;</span><br><span class="line"></span><br><span class="line">class Controller extends BaseController</span><br><span class="line">&#123;</span><br><span class="line">    use Helpers;&#x2F;&#x2F;重点目的</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>7、刷新/删除 token</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1、首先增加路由routes&#x2F;api.php</span><br><span class="line">&#x2F;&#x2F; 刷新token</span><br><span class="line">$api-&gt;put(&#39;authorizations&#x2F;current&#39;, &#39;AuthorizationsController@update&#39;)</span><br><span class="line">    -&gt;name(&#39;api.authorizations.update&#39;);</span><br><span class="line">&#x2F;&#x2F; 删除token</span><br><span class="line">$api-&gt;delete(&#39;authorizations&#x2F;current&#39;, &#39;AuthorizationsController@destroy&#39;)</span><br><span class="line">    -&gt;name(&#39;api.authorizations.destroy&#39;);</span><br><span class="line">    </span><br><span class="line">2、app&#x2F;Http&#x2F;Controllers&#x2F;Api&#x2F;AuthorizationsController.php</span><br><span class="line">public function update()</span><br><span class="line">&#123;</span><br><span class="line">    $token &#x3D; Auth::guard(&#39;api&#39;)-&gt;refresh();</span><br><span class="line">    return $this-&gt;respondWithToken($token);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public function destroy()</span><br><span class="line">&#123;</span><br><span class="line">    Auth::guard(&#39;api&#39;)-&gt;logout();</span><br><span class="line">    return $this-&gt;response-&gt;noContent();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">protected function respondWithToken($token)</span><br><span class="line">    &#123;</span><br><span class="line">        return $this-&gt;response-&gt;array([</span><br><span class="line">            &#39;access_token&#39; &#x3D;&gt; $token,</span><br><span class="line">            &#39;token_type&#39; &#x3D;&gt; &#39;Bearer&#39;,</span><br><span class="line">            &#39;expires_in&#39; &#x3D;&gt; Auth::guard(&#39;api&#39;)-&gt;factory()-&gt;getTTL() * 60</span><br><span class="line">        ]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>8、其他</p>
+<p>artisan 获取 token</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1、增加一个Artisan 命令</span><br><span class="line">php artisan make:command GenerateToken</span><br><span class="line"></span><br><span class="line">2、修改文件app&#x2F;Console&#x2F;Commands&#x2F;GenerateToken.php</span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">namespace App\Console\Commands;</span><br><span class="line"></span><br><span class="line">use App\Models\User;</span><br><span class="line">use Illuminate\Console\Command;</span><br><span class="line"></span><br><span class="line">class GenerateToken extends Command</span><br><span class="line">&#123;</span><br><span class="line">    protected $signature &#x3D; &#39;laraapi:generate-token&#39;;</span><br><span class="line"></span><br><span class="line">    protected $description &#x3D; &#39;快速为用户生成 token&#39;;</span><br><span class="line"></span><br><span class="line">    public function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        parent::__construct();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function handle()</span><br><span class="line">    &#123;</span><br><span class="line">        $userId &#x3D; $this-&gt;ask(&#39;输入用户 id&#39;);</span><br><span class="line">        $user &#x3D; User::find($userId);</span><br><span class="line">        if (!$user) &#123;</span><br><span class="line">            return $this-&gt;error(&#39;用户不存在&#39;);</span><br><span class="line">        &#125;</span><br><span class="line">        &#x2F;&#x2F; 一年以后过期</span><br><span class="line">        $ttl &#x3D; 365*24*60;</span><br><span class="line">        $this-&gt;info(\Auth::guard(&#39;api&#39;)-&gt;setTTL($ttl)-&gt;fromUser($user));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">Promise</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://zhukangs.github.io/2018/05/05/Laravel%E7%9A%84API%E5%88%9D%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B9%8BJWT/">https://zhukangs.github.io/2018/05/05/Laravel%E7%9A%84API%E5%88%9D%E5%A7%8B%E6%90%AD%E5%BB%BA%E4%B9%8BJWT/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/DingoAPI/">DingoAPI</a><a class="post-meta__tags" href="/tags/JWT/">JWT</a></div><div class="post_share"><div class="social-share" data-image="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/04-promise.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/wechatpay.jpg" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/alpay.jpg" alt="支付寶"/><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2018/05/19/%E7%AC%AC%E4%B8%89%E6%96%B9%E7%99%BB%E5%BD%95%E4%B9%8BGithub/"><img class="prev_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">第三方登录之Github</div></div></a></div><div class="next-post pull_right"><a href="/2018/04/25/vagrant%E5%AE%89%E8%A3%85%E4%B9%8B%E6%97%85/"><img class="next_cover" src="https://i.loli.net/2020/05/01/gkihqEjXxJ5UZ1C.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">vagrant安装之旅</div></div></a></div></nav></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2016 - 2020 By Promise</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.zam9.com" target="_blank" rel="noopener">blog</a>!</div><div class="icp"><a><img class="icp-icon" src="/img/icp.png"/><span>鄂ICP备17031002号-2</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="/js/third-party/piao.js"></script><script src="/js/third-party/activate-power-mode.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="/js/third-party/click_heart.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>
