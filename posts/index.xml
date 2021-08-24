@@ -1,0 +1,296 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Posts on Promise</title>
+		<link>https://zhukangs.github.io/posts/</link>
+		<description>Recent content in Posts on Promise</description>
+		<generator>Hugo -- gohugo.io</generator>
+		<language>zh-hans</language>
+		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+		<lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate>
+		<atom:link href="https://zhukangs.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>Elasticsearch 在 Laravel 中的使用</title>
+			<link>https://zhukangs.github.io/posts/20210823-laravel-es/</link>
+			<pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
+			
+			<guid>https://zhukangs.github.io/posts/20210823-laravel-es/</guid>
+			<description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&amp;gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&amp;gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&amp;gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
+			<content type="html"><![CDATA[<h3 id="本文目标">本文目标</h3>
+<ul>
+<li>学会在 <code>Laravel</code> 中安装 <code>Elasticsearch</code>。</li>
+<li>创建索引。</li>
+<li>简单查询。</li>
+</ul>
+<h3 id="安装-composer-包">安装 <code>composer</code> 包</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require elasticsearch/elasticsearch <span class="s1">&#39;~7.0&#39;</span>
+</code></pre></div><h3 id="配置-configdatabasephp">配置 <code>config/database.php</code></h3>
+<pre><code class="language-dotenv" data-lang="dotenv"># Elasticsearch Config Info
+'elasticsearch' =&gt; [
+    // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组
+    'hosts' =&gt; explode(',', env('ES_HOSTS')),
+    'username' =&gt; env('ES_USERNAME'),
+    'password' =&gt; env('ES_PASSWORD'),
+],
+</code></pre><h3 id="初始化-elasticsearch-对象">初始化 <code>Elasticsearch</code> 对象</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 注册一个名为 es 的单例
+</span><span class="c1"></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 从配置文件读取 Elasticsearch 服务器列表
+</span><span class="c1"></span>    <span class="nv">$builder</span> <span class="o">=</span> <span class="nx">ESClientBuilder</span><span class="o">::</span><span class="na">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setHosts</span><span class="p">(</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.hosts&#39;</span><span class="p">))</span>
+        <span class="o">-&gt;</span><span class="na">setBasicAuthentication</span><span class="p">(</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.username&#39;</span><span class="p">),</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.password&#39;</span><span class="p">));</span>
+    <span class="c1">// 如果是开发环境
+</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">environment</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;local&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试
+</span><span class="c1"></span>        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">setLogger</span><span class="p">(</span><span class="nx">app</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">driver</span><span class="p">());</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
+<span class="p">});</span>
+</code></pre></div><h3 id="创建索引">创建索引</h3>
+<pre><code>curl -XPUT -u name:pwd http://ip:9200/user_behavior?pretty
+</code></pre><h3 id="创建索引结构">创建索引结构</h3>
+<pre><code>curl -H'Content-Type: application/json'  -XPUT -u name:pwd http://ip:9200/user_behavior/_mapping/?pretty -d'{
+  &quot;properties&quot;: {
+    &quot;open_id&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;store&quot;:true }, 
+    &quot;imp_date&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;store&quot;:true }, 
+    &quot;first_login&quot;: { &quot;type&quot;: &quot;text&quot;,&quot;store&quot;:true }
+    }
+  }
+}'
+</code></pre><h3 id="测试写入数据">测试写入数据</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">app</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">index</span><span class="p">([</span><span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_behavior&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;open_id&#39;</span><span class="o">=&gt;</span><span class="nx">md5</span><span class="p">(</span><span class="nx">time</span><span class="p">()),</span><span class="s1">&#39;imp_date&#39;</span><span class="o">=&gt;</span><span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Ymd&#39;</span><span class="p">),</span><span class="s1">&#39;first_login&#39;</span><span class="o">=&gt;</span><span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Ymd&#39;</span><span class="p">)]])</span>
+</code></pre></div><h3 id="查询数据">查询数据</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$params</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_behavior&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;_source&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;imp_date&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                    <span class="s1">&#39;bool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                        <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                            <span class="s1">&#39;range&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                                <span class="s1">&#39;imp_date&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;gte&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;20210120&#39;</span><span class="p">,</span> <span class="s1">&#39;lte&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;20210430&#39;</span><span class="p">]</span>
+                            <span class="p">]</span>
+                        <span class="p">]</span>
+                    <span class="p">]</span>
+                <span class="p">],</span>
+                <span class="s1">&#39;size&#39;</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span>
+                <span class="c1">//&#39;collapse&#39; =&gt; [&#39;field&#39; =&gt; &#39;open_id&#39;],
+</span><span class="c1"></span>                <span class="s1">&#39;aggs&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                    <span class="cm">/*&#39;my_count&#39;=&gt;[
+</span><span class="cm">                        &#39;value_count&#39;=&gt;[&#39;field&#39; =&gt; &#39;open_id&#39;]
+</span><span class="cm">                    ],*/</span>
+                    <span class="s1">&#39;distinct_open_id&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+                        <span class="s1">&#39;cardinality&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;open_id&#39;</span><span class="p">]</span>
+                    <span class="p">]</span>
+                <span class="p">]</span>
+            <span class="p">],</span>
+        <span class="p">];</span>
+
+
+<span class="nv">$results</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
+<span class="nv">$results</span><span class="p">[</span><span class="s1">&#39;aggregations&#39;</span><span class="p">][</span><span class="s1">&#39;distinct_open_id&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">];</span>
+</code></pre></div><p>另外可参考文章：https://blog.junphp.com/details/325.jsp</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Homestead(ubuntu)&#43;Laravel 使用 RabbitMQ</title>
+			<link>https://zhukangs.github.io/posts/20210121-laravel-rabbitmq/</link>
+			<pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
+			
+			<guid>https://zhukangs.github.io/posts/20210121-laravel-rabbitmq/</guid>
+			<description>安装 erlang erlang 是 RabbitMQ 的依赖。首先执行
+sudo apt-get update 然后执行
+sudo apt-get install erlang 安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：
+Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt; 然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。
+安装 RabbitMq sudo apt-get install rabbitmq-server 安装完毕后，查看 RabbitMQ 状态：
+sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop  # 重启RabbitMQ： service rabbitmq-server restart  配置 RabbitMQ 执行命令，启动 RabbitMQ 插件</description>
+			<content type="html"><![CDATA[<h3 id="安装-erlang">安装 erlang</h3>
+<p><code>erlang</code> 是 <code>RabbitMQ</code> 的依赖。首先执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get update
+</code></pre></div><p>然后执行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get install erlang
+</code></pre></div><p>安装完毕后，输入 <code>erl</code> 查看 <code>erlang</code> 版本，出现如下提示则表示安装成功：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">Erlang/OTP <span class="m">20</span> <span class="o">[</span>erts-9.2<span class="o">]</span> <span class="o">[</span>source<span class="o">]</span> <span class="o">[</span>64-bit<span class="o">]</span> <span class="o">[</span>smp:1:1<span class="o">]</span> <span class="o">[</span>ds:1:1:10<span class="o">]</span> <span class="o">[</span>async-threads:10<span class="o">]</span> <span class="o">[</span>kernel-poll:false<span class="o">]</span>
+    
+Eshell V9.2  <span class="o">(</span>abort with ^G<span class="o">)</span>
+1&gt;
+</code></pre></div><p>然后退出 <code>erlang</code> 命令行：按下 ctrl+c，然后输入 a 即可。</p>
+<h3 id="安装-rabbitmq">安装 RabbitMq</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get install rabbitmq-server
+</code></pre></div><p>安装完毕后，查看 RabbitMQ 状态：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmqctl status
+    
+<span class="c1"># 附：</span>
+<span class="c1"># 启动RabbitMQ： service rabbitmq-server start</span>
+<span class="c1"># 停止RabbitMQ： service rabbitmq-server stop </span>
+<span class="c1"># 重启RabbitMQ： service rabbitmq-server restart </span>
+</code></pre></div><h3 id="配置-rabbitmq">配置 RabbitMQ</h3>
+<p>执行命令，启动 <code>RabbitMQ</code> 插件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmq-plugins <span class="nb">enable</span> rabbitmq_management
+</code></pre></div><p>添加用户 <code>RabbitMQ</code>，格式：rabbitmqctl add_user 用户名 密码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">rabbitmqctl add_user admin admin
+</code></pre></div><p>给予用户管理员权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmqctl set_user_tags admin administrator
+</code></pre></div><p>为用户设置读写权限</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmqctl set_permissions -p / admin <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span>
+</code></pre></div><p>打开 <code>RabbitMQ</code> 后台</p>
+<pre><code>浏览器中输入：http:// 服务器 ip+:15672, 例如我的是：192.168.10.10:15672/
+</code></pre><p>15672 端口默认是关闭的，因此需要打开</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">1. sudo apt-get install iptables
+2. sudo iptables -I INPUT -p tcp --dport <span class="m">15672</span> -j ACCEPT
+</code></pre></div><h3 id="运行环境ubuntu安装-amqp-扩展">运行环境（ubuntu）安装 amqp 扩展</h3>
+<p>这些扩展是运行必须，可以类比为 mongodb,redis 扩展。分别执行以下指令</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get -y install gcc make autoconf libc-dev pkg-config
+sudo apt-get -y install libssl-dev
+sudo apt-get -y install librabbitmq-dev
+</code></pre></div><p>在这里安装可能会遇到一些小问题，遇事不决就执行：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get update
+//时间可能会需要很久，我执行等它运行的时候大概花了一个小时
+sudo apt-get upgrade
+</code></pre></div><p>以上的扩展安装完成后执行指令安装 <code>amqp</code> 扩展：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo pecl install amqp
+</code></pre></div><p>安装过程中会提示</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="m">28</span> <span class="nb">source</span> files, building
+running: phpize
+Configuring <span class="k">for</span>:
+PHP Api Version:         <span class="m">20170718</span>
+Zend Module Api No:      <span class="m">20170718</span>
+Zend Extension Api No:   <span class="m">320170718</span>
+Set the path to librabbitmq install prefix <span class="o">[</span>autodetect<span class="o">]</span> :
+</code></pre></div><p>回车即可，等待安装完成：</p>
+<p><code>You should add &quot;extension=amqp.so&quot; to php.ini</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo -s
+<span class="nb">echo</span> <span class="nv">extension</span><span class="o">=</span>amqp.so &gt;&gt; /etc/php/7.2/cli/php.ini
+<span class="nb">echo</span> <span class="nv">extension</span><span class="o">=</span>amqp.so &gt;&gt; /etc/php/7.2/fpm/php.ini
+sudo service php7.2-fpm restart
+</code></pre></div><p>然后执行 <code>php -m</code> 查看扩展是否安装完成</p>
+<h3 id="laravel-项目中使用">Laravel 项目中使用</h3>
+<p>添加 <code>RabbitMQ</code></p>
+<table>
+<thead>
+<tr>
+<th>Package Version</th>
+<th>Laravel Version</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>6.0</td>
+<td>5.5</td>
+</tr>
+<tr>
+<td>7.0</td>
+<td>5.6</td>
+</tr>
+<tr>
+<td>7.1</td>
+<td>5.7</td>
+</tr>
+<tr>
+<td>7.2</td>
+<td>5.8</td>
+</tr>
+<tr>
+<td>8.0</td>
+<td>5.9</td>
+</tr>
+<tr>
+<td>9</td>
+<td>6</td>
+</tr>
+<tr>
+<td>10</td>
+<td>6.7</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require vladimir-yuldashev/laravel-queue-rabbitmq ^7.1
+</code></pre></div><p>在 <code>app/config/queue.php</code> 文件中，<code>connections</code> 数组中添加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;rabbitmq&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="s1">&#39;driver&#39;</span>                <span class="o">=&gt;</span> <span class="s1">&#39;rabbitmq&#39;</span><span class="p">,</span>
+ 
+    <span class="s1">&#39;host&#39;</span>                  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_HOST&#39;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;port&#39;</span>                  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_PORT&#39;</span><span class="p">,</span> <span class="mi">5672</span><span class="p">),</span>
+ 
+    <span class="s1">&#39;vhost&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_VHOST&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;login&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_LOGIN&#39;</span><span class="p">,</span> <span class="s1">&#39;guest&#39;</span><span class="p">),</span>
+    <span class="s1">&#39;password&#39;</span>              <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_PASSWORD&#39;</span><span class="p">,</span> <span class="s1">&#39;guest&#39;</span><span class="p">),</span>
+ 
+    <span class="s1">&#39;queue&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE&#39;</span><span class="p">),</span> <span class="c1">// name of the default queue,
+</span><span class="c1"></span> 
+    <span class="s1">&#39;exchange_declare&#39;</span>      <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_DECLARE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// create the exchange if not exists
+</span><span class="c1"></span>    <span class="s1">&#39;queue_declare_bind&#39;</span>    <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_DECLARE_BIND&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// create the queue if not exists and bind to the exchange
+</span><span class="c1"></span> 
+    <span class="s1">&#39;queue_params&#39;</span>          <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;passive&#39;</span>           <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_PASSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+        <span class="s1">&#39;durable&#39;</span>           <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_DURABLE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span>
+        <span class="s1">&#39;exclusive&#39;</span>         <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_EXCLUSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+        <span class="s1">&#39;auto_delete&#39;</span>       <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_AUTODELETE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+    <span class="p">],</span>
+ 
+    <span class="s1">&#39;exchange_params&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;name&#39;</span>        <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_NAME&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">),</span>
+        <span class="s1">&#39;type&#39;</span>        <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;direct&#39;</span><span class="p">),</span> <span class="c1">// more info at http://www.rabbitmq.com/tutorials/amqp-concepts.html
+</span><span class="c1"></span>        <span class="s1">&#39;passive&#39;</span>     <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_PASSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+        <span class="s1">&#39;durable&#39;</span>     <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_DURABLE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// the exchange will survive server restarts
+</span><span class="c1"></span>        <span class="s1">&#39;auto_delete&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_AUTODELETE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+    <span class="p">],</span>
+ 
+<span class="p">],</span>
+</code></pre></div><p>在 <code>.env</code> 中添加</p>
+<pre><code class="language-dotenv" data-lang="dotenv">QUEUE_CONNECTION=rabbitmq #修改一下
+RABBITMQ_HOST = 127.0.0.1   #要连接得主机名
+RABBITMQ_PORT = 5672  #端口
+RABBITMQ_VHOST = / 
+RABBITMQ_LOGIN = admin #mq登录名
+RABBITMQ_PASSWORD = admin  #mq登陆密码
+RABBITMQ_QUEUE = test  #mq连接得测试名
+</code></pre><p>其他和正常跑队列区别不大</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan queue:restart
+php artisan queue:work
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>Homestead 安装 Swoole 扩展</title>
+			<link>https://zhukangs.github.io/posts/20200828-homestead-swoole/</link>
+			<pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+			
+			<guid>https://zhukangs.github.io/posts/20200828-homestead-swoole/</guid>
+			<description>配置镜像源 配置好 ubuntu 的国内镜像源并更新
+安装 dev 查看 php 版本，并安装对应 php 版本的 dev
+sudo apt install php7.2-dev 配置 pecl sudo pecl channel-update pecl.php.net sudo pear clear-cache sudo pear update-channels sudo pear upgrade 安装 swoole 扩展 安装 php 的 swoole 扩展
+sudo pecl install swoole 修改 php.ini 在 php.ini 中增加 extension=swoole.so
+php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
+# 在php.ini的尾部增加如下代码 extension=swoole.so 重启 php # 在php.ini的尾部增加如下代码 extension=swoole.so 查看是否成功安装 查看 php 是否成功安装 swoole 模块</description>
+			<content type="html"><![CDATA[<h3 id="配置镜像源">配置镜像源</h3>
+<p>配置好 <code>ubuntu</code> 的国内镜像源并更新</p>
+<h3 id="安装-dev">安装 <code>dev</code></h3>
+<p>查看 <code>php</code> 版本，并安装对应 <code>php</code> 版本的 <code>dev</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt install php7.2-dev
+</code></pre></div><h3 id="配置-pecl">配置 <code>pecl</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo pecl channel-update pecl.php.net
+sudo pear clear-cache
+sudo pear update-channels
+sudo pear upgrade
+</code></pre></div><h3 id="安装-swoole-扩展">安装 <code>swoole</code> 扩展</h3>
+<p>安装 <code>php</code> 的 <code>swoole</code> 扩展</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo pecl install swoole
+</code></pre></div><h3 id="修改-phpini">修改 <code>php.ini</code></h3>
+<p>在 <code>php.ini</code> 中增加 <code>extension=swoole.so</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php -i <span class="p">|</span> grep php.ini
+</code></pre></div><p><code>vim</code>  <code>/etc/php/7.2/cli/php.ini</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-sh" data-lang="sh"><span class="c1"># 在php.ini的尾部增加如下代码</span>
+<span class="nv">extension</span><span class="o">=</span>swoole.so
+</code></pre></div><h3 id="重启-php">重启 <code>php</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 在php.ini的尾部增加如下代码</span>
+<span class="nv">extension</span><span class="o">=</span>swoole.so
+</code></pre></div><h4 id="查看是否成功安装">查看是否成功安装</h4>
+<p>查看 <code>php</code> 是否成功安装 <code>swoole</code> 模块</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php -m <span class="p">|</span> grep swoole
+</code></pre></div>]]></content>
+		</item>
+		
+	</channel>
+</rss>

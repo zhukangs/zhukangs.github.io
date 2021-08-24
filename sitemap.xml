@@ -2,8 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://hugo.zkilm.cn/</loc>
+    <loc>https://zhukangs.github.io/about/</loc>
+    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://hugo.zkilm.cn/tags/</loc>
+    <loc>https://zhukangs.github.io/tags/elasticsearch/</loc>
+    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/posts/20210823-laravel-es/</loc>
+    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/tags/laravel/</loc>
+    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/posts/</loc>
+    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/</loc>
+    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/tags/</loc>
+    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/posts/20210121-laravel-rabbitmq/</loc>
+    <lastmod>2021-01-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/tags/rabbitmq/</loc>
+    <lastmod>2021-01-21T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/tags/homestead/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/posts/20200828-homestead-swoole/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://zhukangs.github.io/tags/swoole/</loc>
+    <lastmod>2020-08-28T00:00:00+00:00</lastmod>
   </url>
 </urlset>

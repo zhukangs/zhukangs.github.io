@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Homestead on Promise</title>
+    <link>https://zhukangs.github.io/tags/homestead/</link>
+    <description>Recent content in Homestead on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://zhukangs.github.io/tags/homestead/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homestead 安装 Swoole 扩展</title>
+      <link>https://zhukangs.github.io/posts/20200828-homestead-swoole/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://zhukangs.github.io/posts/20200828-homestead-swoole/</guid>
+      <description>配置镜像源 配置好 ubuntu 的国内镜像源并更新
+安装 dev 查看 php 版本，并安装对应 php 版本的 dev
+sudo apt install php7.2-dev 配置 pecl sudo pecl channel-update pecl.php.net sudo pear clear-cache sudo pear update-channels sudo pear upgrade 安装 swoole 扩展 安装 php 的 swoole 扩展
+sudo pecl install swoole 修改 php.ini 在 php.ini 中增加 extension=swoole.so
+php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
+# 在php.ini的尾部增加如下代码 extension=swoole.so 重启 php # 在php.ini的尾部增加如下代码 extension=swoole.so 查看是否成功安装 查看 php 是否成功安装 swoole 模块</description>
+    </item>
+    
+  </channel>
+</rss>
