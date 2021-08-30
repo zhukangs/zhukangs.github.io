@@ -1,20 +1,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 	<channel>
 		<title>Posts on Promise</title>
-		<link>https://zhukangs.github.io/posts/</link>
+		<link>http://hugo.zkilm.cn/posts/</link>
 		<description>Recent content in Posts on Promise</description>
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-hans</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
 		<lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate>
-		<atom:link href="https://zhukangs.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+		<atom:link href="http://hugo.zkilm.cn/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
 			<title>Elasticsearch 在 Laravel 中的使用</title>
-			<link>https://zhukangs.github.io/posts/20210823-laravel-es/</link>
+			<link>http://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
 			<pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
 			
-			<guid>https://zhukangs.github.io/posts/20210823-laravel-es/</guid>
+			<guid>http://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
 			<description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&amp;gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&amp;gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&amp;gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
 			<content type="html"><![CDATA[<h3 id="本文目标">本文目标</h3>
 <ul>
@@ -95,10 +95,10 @@
 		
 		<item>
 			<title>Homestead(ubuntu)&#43;Laravel 使用 RabbitMQ</title>
-			<link>https://zhukangs.github.io/posts/20210121-laravel-rabbitmq/</link>
+			<link>http://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</link>
 			<pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
 			
-			<guid>https://zhukangs.github.io/posts/20210121-laravel-rabbitmq/</guid>
+			<guid>http://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</guid>
 			<description>安装 erlang erlang 是 RabbitMQ 的依赖。首先执行
 sudo apt-get update 然后执行
 sudo apt-get install erlang 安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：
@@ -254,10 +254,10 @@ php artisan queue:work
 		
 		<item>
 			<title>Homestead 安装 Swoole 扩展</title>
-			<link>https://zhukangs.github.io/posts/20200828-homestead-swoole/</link>
+			<link>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</link>
 			<pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://zhukangs.github.io/posts/20200828-homestead-swoole/</guid>
+			<guid>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</guid>
 			<description>配置镜像源 配置好 ubuntu 的国内镜像源并更新
 安装 dev 查看 php 版本，并安装对应 php 版本的 dev
 sudo apt install php7.2-dev 配置 pecl sudo pecl channel-update pecl.php.net sudo pear clear-cache sudo pear update-channels sudo pear upgrade 安装 swoole 扩展 安装 php 的 swoole 扩展
@@ -294,10 +294,10 @@ sudo pear upgrade
 		
 		<item>
 			<title>微信扫码 - 关注公众号后网站自动登录</title>
-			<link>https://zhukangs.github.io/posts/20210824-wx-scan/</link>
+			<link>http://hugo.zkilm.cn/posts/20210824-wx-scan/</link>
 			<pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
 			
-			<guid>https://zhukangs.github.io/posts/20210824-wx-scan/</guid>
+			<guid>http://hugo.zkilm.cn/posts/20210824-wx-scan/</guid>
 			<description>**大概流程是：**点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。
 大家可以体验一下 「这种登录方式」
 前期准备

@@ -2,46 +2,46 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://zhukangs.github.io/about/</loc>
+    <loc>http://hugo.zkilm.cn/about/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/tags/elasticsearch/</loc>
+    <loc>http://hugo.zkilm.cn/tags/elasticsearch/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/posts/20210823-laravel-es/</loc>
+    <loc>http://hugo.zkilm.cn/posts/20210823-laravel-es/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/tags/laravel/</loc>
+    <loc>http://hugo.zkilm.cn/tags/laravel/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/posts/</loc>
+    <loc>http://hugo.zkilm.cn/posts/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/</loc>
+    <loc>http://hugo.zkilm.cn/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/tags/</loc>
+    <loc>http://hugo.zkilm.cn/tags/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/posts/20210121-laravel-rabbitmq/</loc>
+    <loc>http://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</loc>
     <lastmod>2021-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/tags/rabbitmq/</loc>
+    <loc>http://hugo.zkilm.cn/tags/rabbitmq/</loc>
     <lastmod>2021-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/tags/homestead/</loc>
+    <loc>http://hugo.zkilm.cn/tags/homestead/</loc>
     <lastmod>2020-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/posts/20200828-homestead-swoole/</loc>
+    <loc>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</loc>
     <lastmod>2020-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/tags/swoole/</loc>
+    <loc>http://hugo.zkilm.cn/tags/swoole/</loc>
     <lastmod>2020-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/tags/wechat/</loc>
+    <loc>http://hugo.zkilm.cn/tags/wechat/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://zhukangs.github.io/posts/20210824-wx-scan/</loc>
+    <loc>http://hugo.zkilm.cn/posts/20210824-wx-scan/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url>
 </urlset>

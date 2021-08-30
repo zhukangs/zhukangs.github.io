@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Homestead on Promise</title>
-    <link>https://zhukangs.github.io/tags/homestead/</link>
+    <link>http://hugo.zkilm.cn/tags/homestead/</link>
     <description>Recent content in Homestead on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://zhukangs.github.io/tags/homestead/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/homestead/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Homestead 安装 Swoole 扩展</title>
-      <link>https://zhukangs.github.io/posts/20200828-homestead-swoole/</link>
+      <link>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://zhukangs.github.io/posts/20200828-homestead-swoole/</guid>
+      <guid>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</guid>
       <description>配置镜像源 配置好 ubuntu 的国内镜像源并更新
 安装 dev 查看 php 版本，并安装对应 php 版本的 dev
 sudo apt install php7.2-dev 配置 pecl sudo pecl channel-update pecl.php.net sudo pear clear-cache sudo pear update-channels sudo pear upgrade 安装 swoole 扩展 安装 php 的 swoole 扩展

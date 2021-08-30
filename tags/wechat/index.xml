@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>WeChat on Promise</title>
-    <link>https://zhukangs.github.io/tags/wechat/</link>
+    <link>http://hugo.zkilm.cn/tags/wechat/</link>
     <description>Recent content in WeChat on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://zhukangs.github.io/tags/wechat/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/wechat/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>微信扫码 - 关注公众号后网站自动登录</title>
-      <link>https://zhukangs.github.io/posts/20210824-wx-scan/</link>
+      <link>http://hugo.zkilm.cn/posts/20210824-wx-scan/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://zhukangs.github.io/posts/20210824-wx-scan/</guid>
+      <guid>http://hugo.zkilm.cn/posts/20210824-wx-scan/</guid>
       <description>**大概流程是：**点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。
 大家可以体验一下 「这种登录方式」
 前期准备
