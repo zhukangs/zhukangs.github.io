@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Laravel解决跨域请求🏃‍">
+<meta itemprop="description" content="今天公司前端突然说请求跨域了，那么就解决下咯！
+创建中间件 首先创建一个中间件
+php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
+&lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&gt;header(&#39;Access-Control-Allow-Origin&#39;, &#39;*&#39;); $response-&gt;header(&#39;Access-Control-Allow-Headers&#39;, &#39;Origin, Content-Type, Cookie, Accept&#39;); $response-&gt;header(&#39;Access-Control-Allow-Methods&#39;, &#39;GET, POST, PATCH, PUT, OPTIONS&#39;); $response-&gt;header(&#39;Access-Control-Allow-Credentials&#39;, &#39;true&#39;); //ession共享的需求才用到  return $response; } } 注册中间件 添加到全局中间件 Kernel."><meta itemprop="datePublished" content="2019-07-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-07-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="94">
+<meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Laravel解决跨域请求🏃‍" />
+<meta property="og:description" content="今天公司前端突然说请求跨域了，那么就解决下咯！
+创建中间件 首先创建一个中间件
+php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
+&lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&gt;header(&#39;Access-Control-Allow-Origin&#39;, &#39;*&#39;); $response-&gt;header(&#39;Access-Control-Allow-Headers&#39;, &#39;Origin, Content-Type, Cookie, Accept&#39;); $response-&gt;header(&#39;Access-Control-Allow-Methods&#39;, &#39;GET, POST, PATCH, PUT, OPTIONS&#39;); $response-&gt;header(&#39;Access-Control-Allow-Credentials&#39;, &#39;true&#39;); //ession共享的需求才用到  return $response; } } 注册中间件 添加到全局中间件 Kernel." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://hugo.zkilm.cn/posts/20190725-cross-request/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-07-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-07-25T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Laravel解决跨域请求🏃‍"/>
+<meta name="twitter:description" content="今天公司前端突然说请求跨域了，那么就解决下咯！
+创建中间件 首先创建一个中间件
+php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
+&lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&gt;header(&#39;Access-Control-Allow-Origin&#39;, &#39;*&#39;); $response-&gt;header(&#39;Access-Control-Allow-Headers&#39;, &#39;Origin, Content-Type, Cookie, Accept&#39;); $response-&gt;header(&#39;Access-Control-Allow-Methods&#39;, &#39;GET, POST, PATCH, PUT, OPTIONS&#39;); $response-&gt;header(&#39;Access-Control-Allow-Credentials&#39;, &#39;true&#39;); //ession共享的需求才用到  return $response; } } 注册中间件 添加到全局中间件 Kernel."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Laravel解决跨域请求🏃‍</title>
+	<link rel="stylesheet" href="http://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="http://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="http://hugo.zkilm.cn/posts/">文章</a>
+				<a href="http://hugo.zkilm.cn/tags/">标签</a>
+				<a href="http://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="http://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="http://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="http://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>Jul 25, 2019</span></div>
+				<h1>Laravel解决跨域请求🏃‍</h1>
+			</header>
+			<div class="content">
+				<p>今天公司前端突然说请求跨域了，那么就解决下咯！</p>
+<h3 id="创建中间件">创建中间件<a href="#创建中间件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>首先创建一个中间件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:middleware EnableCrossRequestMiddleware
+</code></pre></div><h3 id="编写中间件">编写中间件<a href="#编写中间件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>然后在中间件 <code>EnableCrossRequestMiddleware.php</code> 编写</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+    
+<span class="k">namespace</span> <span class="nx">App\Http\Middleware</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Closure</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">EnableCrossRequestMiddleware</span>
+<span class="p">{</span>
+    <span class="sd">/**
+</span><span class="sd">     * Handle an incoming request.
+</span><span class="sd">     *
+</span><span class="sd">     * @param  \Illuminate\Http\Request  $request
+</span><span class="sd">     * @param  \Closure  $next
+</span><span class="sd">     * @return mixed
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nx">Closure</span> <span class="nv">$next</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Headers&#39;</span><span class="p">,</span> <span class="s1">&#39;Origin, Content-Type, Cookie, Accept&#39;</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Methods&#39;</span><span class="p">,</span> <span class="s1">&#39;GET, POST, PATCH, PUT, OPTIONS&#39;</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Credentials&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">);</span>  <span class="c1">//ession共享的需求才用到
+</span><span class="c1"></span>        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="注册中间件">注册中间件<a href="#注册中间件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>添加到全局中间件 <code>Kernel.php</code> 组中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="nv">$middleware</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+    <span class="nx">\App\Http\Middleware\EnableCrossRequestMiddleware</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+<span class="p">];</span>
+</code></pre></div><p>可能碰到的问题（ios不识别*）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Headers&#39;</span><span class="p">,</span> <span class="s1">&#39;Origin, Content-Type, Cookie, X-CSRF-TOKEN, Accept, Authorization, token&#39;</span><span class="p">);</span><span class="c1">// 开放哪些自定义头(ios 不识别*)
+</span></code></pre></div><p>或者选择 laravel-cors  <a href="https://github.com/barryvdh/laravel-cors">https://github.com/barryvdh/laravel-cors</a></p>
+<p>参考：<a href="http://www.ptbird.cn/laravel-cors-to-cors-laravel-app.html">http://www.ptbird.cn/laravel-cors-to-cors-laravel-app.html</a></p>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://hugo.zkilm.cn/tags/laravel">Laravel</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>94 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-07-25 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#创建中间件">创建中间件</a></li>
+        <li><a href="#编写中间件">编写中间件</a></li>
+        <li><a href="#注册中间件">注册中间件</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="http://hugo.zkilm.cn/posts/20190826-try-gitbook/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>GitBook初试🍺</span>
+			</a>
+			<a class="prev-post" href="http://hugo.zkilm.cn/posts/20190610-wechat-h5/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>微信的H5分享（基于 Laravel-Wechat）😶</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2018 - 2021 <a href="http://hugo.zkilm.cn">Promise</a> &#183; <a href="http://www.beian.miit.gov.cn/">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="http://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+<script src="https://readmore.openwrite.cn/js/readmore.js" type="text/javascript"></script>
+<script>
+    const btw = new BTWPlugin();
+    btw.init({
+        id: 'articles',
+        blogId: '15881-1622044386133-596',
+        name: '脑子进煎鱼了',
+        qrcode: 'https://image.eddycjy.com/7074be90379a121746146bc4229819f8.jpg',
+        keyword: '666',
+    });
+</script>
+
+
+	<script src="http://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+</body>
+
+</html>

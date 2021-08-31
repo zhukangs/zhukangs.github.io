@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Cos on Promise</title>
+    <link>http://hugo.zkilm.cn/tags/cos/</link>
+    <description>Recent content in Cos on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 06 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/cos/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>腾讯云存储的简单使用</title>
+      <link>http://hugo.zkilm.cn/posts/20180806-tengcent-cos/</link>
+      <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/posts/20180806-tengcent-cos/</guid>
+      <description>导语 将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。
+对象存储 COS 简介
+ 对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。
+ 文档地址：https://cloud.tencent.com/document/product/436/11365
+上传前准备 快速入门流程图：
+在注册完并创建好存储桶后，需要拿到相关配置信息，APPID，SecretId，SecretKey（密钥管理），在存储桶下创建一个test文件夹，本次测试图片全部上传到该文件夹下，当然你也可以不创建，存储桶检测到没有该文件夹，会自动创建。本次记录只是走到了上传对象 。
+测试过程 1、composer腾讯云COS对象存储 V5包
+composer require freyo/flysystem-qcloud-cos-v5 2、在config/app.php的providers下添加
+Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php中的disks里下添加
+&amp;#39;disks&amp;#39;=&amp;gt;[ // ...  &amp;#39;cosv5&amp;#39; =&amp;gt; [ &amp;#39;driver&amp;#39; =&amp;gt; &amp;#39;cosv5&amp;#39;, &amp;#39;region&amp;#39; =&amp;gt; env(&amp;#39;COSV5_REGION&amp;#39;, &amp;#39;ap-guangzhou&amp;#39;), &amp;#39;credentials&amp;#39; =&amp;gt; [ &amp;#39;appId&amp;#39; =&amp;gt; env(&amp;#39;COSV5_APP_ID&amp;#39;), &amp;#39;secretId&amp;#39; =&amp;gt; env(&amp;#39;COSV5_SECRET_ID&amp;#39;), &amp;#39;secretKey&amp;#39; =&amp;gt; env(&amp;#39;COSV5_SECRET_KEY&amp;#39;), ], &amp;#39;timeout&amp;#39; =&amp;gt; env(&amp;#39;COSV5_TIMEOUT&amp;#39;, 60), &amp;#39;connect_timeout&amp;#39; =&amp;gt; env(&amp;#39;COSV5_CONNECT_TIMEOUT&amp;#39;, 60), &amp;#39;bucket&amp;#39; =&amp;gt; env(&amp;#39;COSV5_BUCKET&amp;#39;), &amp;#39;cdn&amp;#39; =&amp;gt; env(&amp;#39;COSV5_CDN&amp;#39;), &amp;#39;scheme&amp;#39; =&amp;gt; env(&amp;#39;COSV5_SCHEME&amp;#39;, &amp;#39;https&amp;#39;), ], ], 4、在.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -54,11 +54,38 @@
     </item>
     
     <item>
-      <title>WeChat</title>
+      <title>Wechat</title>
       <link>http://hugo.zkilm.cn/tags/wechat/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
       <guid>http://hugo.zkilm.cn/tags/wechat/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GitBook</title>
+      <link>http://hugo.zkilm.cn/tags/gitbook/</link>
+      <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/tags/gitbook/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>PhpOffice</title>
+      <link>http://hugo.zkilm.cn/tags/phpoffice/</link>
+      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/tags/phpoffice/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Cos</title>
+      <link>http://hugo.zkilm.cn/tags/cos/</link>
+      <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/tags/cos/</guid>
       <description></description>
     </item>
     

@@ -10,13 +10,14 @@
 		<atom:link href="http://hugo.zkilm.cn/posts/index.xml" rel="self" type="application/rss+xml" />
 		
 		<item>
-			<title>Elasticsearch 在 Laravel 中的使用</title>
+			<title>Elasticsearch 在 Laravel 中的使用👍</title>
 			<link>http://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
 			<pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
 			
 			<guid>http://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
 			<description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&amp;gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&amp;gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&amp;gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
-			<content type="html"><![CDATA[<h3 id="本文目标">本文目标</h3>
+			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg" alt="简单生活，热爱一切！"></p>
+<h3 id="本文目标">本文目标</h3>
 <ul>
 <li>学会在 <code>Laravel</code> 中安装 <code>Elasticsearch</code>。</li>
 <li>创建索引。</li>
@@ -89,7 +90,7 @@
 
 <span class="nv">$results</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
 <span class="nv">$results</span><span class="p">[</span><span class="s1">&#39;aggregations&#39;</span><span class="p">][</span><span class="s1">&#39;distinct_open_id&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">];</span>
-</code></pre></div><p>另外可参考文章：https://blog.junphp.com/details/325.jsp</p>
+</code></pre></div><p>另外可参考文章：<a href="https://blog.junphp.com/details/325.jsp">https://blog.junphp.com/details/325.jsp</a></p>
 ]]></content>
 		</item>
 		
@@ -298,27 +299,28 @@ sudo pear upgrade
 			<pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
 			
 			<guid>http://hugo.zkilm.cn/posts/20210824-wx-scan/</guid>
-			<description>**大概流程是：**点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。
+			<description>大概流程是：点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。
 大家可以体验一下 「这种登录方式」
-前期准备
- 服务号（或者微信测试账号） EasyWeChat 扩展包  简单的解释一下扫描这个带参二维码有什么不同：
- 扫描二维码，如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值（自定义值）关注事件推送给开发者。 扫描二维码，如果用户已经关注公众号，在用户扫描后会自动进入会话，微信也会将带场景值（自定义值）扫码事件推送给开发者。  看到这里相信你已经明白了，梳理一下：
+前期准备  服务号（或者微信测试账号） EasyWeChat 扩展包  理解 简单的解释一下扫描这个带参二维码有什么不同：
+ 扫描二维码，如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值（自定义值）关注事件推送给开发者。 扫描二维码，如果用户已经关注公众号，在用户扫描后会自动进入会话，微信也会将带场景值（自定义值）扫码事件推送给开发者。  梳理 看到这里相信你已经明白了，梳理一下：
  生成二维码的时候你自定义一个参数到二维码中，顺便把这个参数传到前端页面中。 前端页面根据这个参数轮询用户登录状态（也可使用 socket）。 用户扫码关注后会推送一个关注事件到服务端，也会把自定义参数带入到事件中。 根据 openid 创建用户后，然后在 Redis 中存储 Key 为场景值（自定义参数） Value 为用户创建后的 id。 前端轮询方法中如果在 Redis 中获取到 Id 后，Auth 登陆，页面再重载一下，流程完毕。  还有一种是用于有账号的用户，先账号密码登录，再扫码（使用过）：
  生成带login参数的临时二维码的时候，将二维码的ticket更新到数据库该用户下，默认状态为未使用 用户扫码，微信会推送一个扫码事件，也会把自定义参数login带到事件中，改变二维码状态为已使用 前端进到扫码页面的同时就开始轮询扫描结果接口，状态为已使用则扫码登录成功 未关注的用户，会先根据openid获取用户信息并写入数据库，关注过的则数据库有数据，做相关更新操作。  最后送个自己💪
  全世界就一个独一无二的你，请一定：真诚做人，努力做事！你想要的，岁月都会给你。
  </description>
-			<content type="html"><![CDATA[<p>**大概流程是：**点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。</p>
+			<content type="html"><![CDATA[<p>大概流程是：点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。</p>
 <p>大家可以体验一下 <a href="http://90sheji.com">「这种登录方式」</a></p>
-<p><strong>前期准备</strong></p>
+<h3 id="前期准备">前期准备</h3>
 <ul>
 <li>服务号（或者微信测试账号）</li>
 <li>EasyWeChat 扩展包</li>
 </ul>
+<h3 id="理解">理解</h3>
 <p><strong>简单的解释一下扫描这个带参二维码有什么不同：</strong></p>
 <ul>
 <li>扫描二维码，如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值（自定义值）关注事件推送给开发者。</li>
 <li>扫描二维码，如果用户已经关注公众号，在用户扫描后会自动进入会话，微信也会将带场景值（自定义值）扫码事件推送给开发者。</li>
 </ul>
+<h3 id="梳理">梳理</h3>
 <p><strong>看到这里相信你已经明白了，梳理一下：</strong></p>
 <ul>
 <li>生成二维码的时候你自定义一个参数到二维码中，顺便把这个参数传到前端页面中。</li>
@@ -338,6 +340,1225 @@ sudo pear upgrade
 <blockquote>
 <p>全世界就一个独一无二的你，请一定：真诚做人，努力做事！你想要的，岁月都会给你。</p>
 </blockquote>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Laravel的微信公众号模板消息推送📨</title>
+			<link>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
+			<pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+			
+			<guid>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
+			<description>安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.7.*&amp;#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
+# Laravel &amp;lt; 5.8 composer require &amp;#34;overtrue/laravel-wechat:~4.0&amp;#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
+ 创建数据表  php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54.</description>
+			<content type="html"><![CDATA[<h3 id="安装一个纯净的laravel框架">安装一个纯净的laravel框架</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer create-project --prefer-dist laravel/laravel blog <span class="s2">&#34;5.7.*&#34;</span>
+</code></pre></div><h3 id="安装微信扩展包easywechat">安装微信扩展包EasyWeChat</h3>
+<p>安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># Laravel &lt; 5.8</span>
+composer require <span class="s2">&#34;overtrue/laravel-wechat:~4.0&#34;</span>
+</code></pre></div><h3 id="管理多公众号">管理多公众号</h3>
+<p>Laravel 使用 EasyWechat 管理多公众号</p>
+<ol>
+<li>创建数据表</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:model Wechat -m
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$table</span><span class="o">-&gt;</span><span class="na">increments</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">);</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;aid&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;wechat_app_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span> <span class="c1">//微信公众号设置参数
+</span><span class="c1"></span><span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;wechat_secret&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;wechat_token&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;wechat_aes_key&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;pay_mch_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>  <span class="c1">//微信支付设置参数
+</span><span class="c1"></span><span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;pay_api_key&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;pay_cert_path&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;pay_key_path&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;op_app_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>  <span class="c1">//微信开放平台设置参数
+</span><span class="c1"></span><span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;op_secret&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;op_token&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;op_aes_key&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;work_corp_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>  <span class="c1">//微信企业号设置参数
+</span><span class="c1"></span><span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;work_agent_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">string</span><span class="p">(</span><span class="s1">&#39;work_secret&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">nullable</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamps</span><span class="p">();</span>
+</code></pre></div><ol start="2">
+<li>在 <code>App\Handlers</code> 创建一个辅助函数 <code>WechatConfigHandler.php</code> 文件，代码如下：</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="sd">/**
+</span><span class="sd">* Created by PhpStorm.
+</span><span class="sd">* User: zhukang.
+</span><span class="sd">* Date: 2019/11/9.
+</span><span class="sd">* Time: 11:54.
+</span><span class="sd">*/</span>
+<span class="k">namespace</span> <span class="nx">App\Handlers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Models\Wechat</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">EasyWeChat\Factory</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">WechatConfigHandler</span>
+<span class="p">{</span>
+   <span class="c1">//[1-1]微信公众号设置
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">app_config</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$wechat</span> <span class="o">=</span> <span class="nx">Wechat</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="nv">$account</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$wechat</span><span class="p">)</span> <span class="k">return</span> <span class="nv">$config</span> <span class="o">=</span> <span class="p">[];</span>
+       
+       <span class="nv">$config</span> <span class="o">=</span> <span class="p">[</span>
+           <span class="s1">&#39;app_id&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">wechat_app_id</span><span class="p">,</span>      <span class="c1">// AppID
+</span><span class="c1"></span>           <span class="s1">&#39;secret&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">wechat_secret</span><span class="p">,</span>      <span class="c1">// AppSecret
+</span><span class="c1"></span>           <span class="s1">&#39;token&#39;</span>   <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">wechat_token</span><span class="p">,</span>       <span class="c1">// Token
+</span><span class="c1"></span>           <span class="s1">&#39;aes_key&#39;</span> <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">wechat_aes_key</span><span class="p">,</span>     <span class="c1">// EncodingAESKey，兼容与安全模式下请一定要填写！！！
+</span><span class="c1"></span>           <span class="s1">&#39;response_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;log&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+               <span class="s1">&#39;level&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+               <span class="s1">&#39;file&#39;</span> <span class="o">=&gt;</span> <span class="nx">storage_path</span><span class="p">(</span><span class="s1">&#39;logs/wechat.log&#39;</span><span class="p">),</span>  <span class="c1">//这个必须要有，要不调试有问题，你都会找不到原因
+</span><span class="c1"></span>           <span class="p">],</span>
+       <span class="p">];</span>
+       <span class="k">return</span> <span class="nv">$config</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1">//[1-2]生成微信公众号相关
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">app</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$app</span> <span class="o">=</span> <span class="nx">Factory</span><span class="o">::</span><span class="na">officialAccount</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app_config</span><span class="p">(</span><span class="nv">$account</span><span class="p">));</span>
+       <span class="k">return</span> <span class="nv">$app</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1">//[2-1]微信支付设置
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">pay_config</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$wechat</span> <span class="o">=</span> <span class="nx">Wechat</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;aid&#39;</span><span class="p">,</span><span class="nv">$account</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$wechat</span><span class="p">)</span> <span class="k">return</span> <span class="nv">$config</span> <span class="o">=</span> <span class="p">[];</span>
+       
+       <span class="nv">$config</span> <span class="o">=</span> <span class="p">[</span>
+           <span class="s1">&#39;app_id&#39;</span>      <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">wechat_app_id</span><span class="p">,</span>      <span class="c1">// AppID
+</span><span class="c1"></span>           <span class="s1">&#39;secret&#39;</span>      <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">wechat_secret</span><span class="p">,</span>      <span class="c1">// AppSecret
+</span><span class="c1"></span>           <span class="s1">&#39;mch_id&#39;</span>      <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">pay_mch_id</span><span class="p">,</span>
+           <span class="s1">&#39;key&#39;</span>         <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">pay_api_key</span><span class="p">,</span>   <span class="c1">// API 密钥
+</span><span class="c1"></span>           <span class="c1">// 如需使用敏感接口（如退款、发送红包等）需要配置 API 证书路径(登录商户平台下载 API 证书)
+</span><span class="c1"></span>           <span class="s1">&#39;cert_path&#39;</span>   <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">pay_api_key</span><span class="p">,</span> <span class="c1">// XXX: 绝对路径！！！！
+</span><span class="c1"></span>           <span class="s1">&#39;key_path&#39;</span>    <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">pay_api_key</span><span class="p">,</span>      <span class="c1">// XXX: 绝对路径！！！！
+</span><span class="c1"></span>           <span class="s1">&#39;notify_url&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;默认的订单回调地址&#39;</span><span class="p">,</span>     <span class="c1">// 你也可以在下单时单独设置来想覆盖它
+</span><span class="c1"></span>       <span class="p">];</span>
+       <span class="k">return</span> <span class="nv">$config</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1">//[2-2]生成微信支付相关
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">pay</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$pay</span> <span class="o">=</span> <span class="nx">Factory</span><span class="o">::</span><span class="na">payment</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pay_config</span><span class="p">(</span><span class="nv">$account</span><span class="p">));</span>
+       <span class="k">return</span> <span class="nv">$pay</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1">//[3-1]微信小程序设置
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">mini_config</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$wechat</span> <span class="o">=</span> <span class="nx">Wechat</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;aid&#39;</span><span class="p">,</span><span class="nv">$account</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$wechat</span><span class="p">)</span> <span class="k">return</span> <span class="nv">$config</span> <span class="o">=</span> <span class="p">[];</span>
+       <span class="nv">$config</span> <span class="o">=</span> <span class="p">[</span>
+           <span class="s1">&#39;app_id&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">wechat_app_id</span><span class="p">,</span>         <span class="c1">// AppID
+</span><span class="c1"></span>           <span class="s1">&#39;secret&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">wechat_secret</span><span class="p">,</span>     <span class="c1">// AppSecret
+</span><span class="c1"></span>           <span class="s1">&#39;response_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
+       <span class="p">];</span>
+       <span class="k">return</span> <span class="nv">$config</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1">//[3-2]微信小程序相关
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">miniProgram</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$miniProgram</span> <span class="o">=</span> <span class="nx">Factory</span><span class="o">::</span><span class="na">miniProgram</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">mini_config</span><span class="p">(</span><span class="nv">$account</span><span class="p">));</span>
+       <span class="k">return</span> <span class="nv">$miniProgram</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1">//[4-1]微信开放平台设置参数
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">opconfig</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$wechat</span> <span class="o">=</span> <span class="nx">Wechat</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;aid&#39;</span><span class="p">,</span><span class="nv">$account</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$wechat</span><span class="p">)</span> <span class="k">return</span> <span class="nv">$config</span> <span class="o">=</span> <span class="p">[];</span>
+       <span class="nv">$config</span> <span class="o">=</span> <span class="p">[</span>
+           <span class="s1">&#39;app_id&#39;</span>   <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">op_app_id</span><span class="p">,</span>
+           <span class="s1">&#39;secret&#39;</span>   <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">op_secret</span><span class="p">,</span>
+           <span class="s1">&#39;token&#39;</span>    <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">op_token</span><span class="p">,</span>
+           <span class="s1">&#39;aes_key&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">op_aes_key</span>
+       <span class="p">];</span>
+       <span class="k">return</span> <span class="nv">$config</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1">//[4-2]微信开放平台相关
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">openPlatform</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$openPlatform</span> <span class="o">=</span> <span class="nx">Factory</span><span class="o">::</span><span class="na">openPlatform</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">opconfig</span><span class="p">(</span><span class="nv">$account</span><span class="p">));</span>
+       <span class="k">return</span> <span class="nv">$openPlatform</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="c1">//[5-1]微信企业号设置参数
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">workconfig</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$wechat</span> <span class="o">=</span> <span class="nx">Wechat</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;aid&#39;</span><span class="p">,</span><span class="nv">$account</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+       <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$wechat</span><span class="p">)</span> <span class="k">return</span> <span class="nv">$config</span> <span class="o">=</span> <span class="p">[];</span>
+       <span class="nv">$config</span> <span class="o">=</span> <span class="p">[</span>
+           <span class="s1">&#39;corp_id&#39;</span>   <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">work_corp_id</span><span class="p">,</span>
+           <span class="s1">&#39;agent_id&#39;</span>   <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">work_agent_id</span><span class="p">,</span>
+           <span class="s1">&#39;secret&#39;</span>    <span class="o">=&gt;</span> <span class="nv">$wechat</span><span class="o">-&gt;</span><span class="na">work_secret</span><span class="p">,</span>
+
+           <span class="s1">&#39;response_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;array&#39;</span><span class="p">,</span>
+       <span class="p">];</span>
+       <span class="k">return</span> <span class="nv">$config</span><span class="p">;</span>
+
+   <span class="p">}</span>
+
+   <span class="c1">//[5-2]微信企业号相关
+</span><span class="c1"></span>   <span class="k">public</span> <span class="k">function</span> <span class="nf">work</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$work</span> <span class="o">=</span> <span class="nx">Factory</span><span class="o">::</span><span class="na">work</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">workconfig</span><span class="p">(</span><span class="nv">$account</span><span class="p">));</span>
+       <span class="k">return</span> <span class="nv">$work</span><span class="p">;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ol start="3">
+<li>创建一个微信控制器，进行微信公众平台对接</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:controller WechatController
+</code></pre></div><p>代码如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+       
+<span class="k">namespace</span> <span class="nx">App\Http\Controllers\Api</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Handlers\WechatConfigHandler</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Http\Controllers\Controller</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Models\SubscribeReplay</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Models\Wechat</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Models\WechatKeyword</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Models\WechatRule</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Models\WechatUser</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">EasyWeChat\Factory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Log</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">WeChatController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+<span class="p">{</span>
+
+   <span class="cm">/*public function serve()
+</span><span class="cm">   {
+</span><span class="cm">       $app=app(&#39;wechat.official_account&#39;);
+</span><span class="cm">       return $app-&gt;server-&gt;serve();
+</span><span class="cm">   }*/</span>
+
+   <span class="k">protected</span> <span class="nv">$wechat</span><span class="p">;</span>
+   <span class="k">protected</span> <span class="nv">$app</span><span class="p">;</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">WechatConfigHandler</span> <span class="nv">$wechat</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wechat</span> <span class="o">=</span> <span class="nv">$wechat</span><span class="p">;</span>
+   <span class="p">}</span>
+   <span class="sd">/**
+</span><span class="sd">    * 处理微信的请求消息
+</span><span class="sd">    * @return string
+</span><span class="sd">    */</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="nf">serve</span><span class="p">(</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wechat</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">(</span><span class="nv">$account</span><span class="p">);</span>
+
+       <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">server</span><span class="o">-&gt;</span><span class="na">push</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nv">$message</span><span class="p">)</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$account</span><span class="p">)</span> <span class="p">{</span>
+           <span class="k">switch</span> <span class="p">(</span><span class="nv">$message</span><span class="p">[</span><span class="s1">&#39;MsgType&#39;</span><span class="p">])</span> <span class="p">{</span>
+               <span class="k">case</span> <span class="s1">&#39;event&#39;</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">event</span><span class="p">(</span><span class="nv">$message</span><span class="p">,</span><span class="nv">$account</span><span class="p">);</span>
+                   <span class="k">break</span><span class="p">;</span>
+               <span class="k">case</span> <span class="s1">&#39;text&#39;</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="s1">&#39;收到文字消息&#39;</span><span class="p">;</span>
+                   <span class="k">break</span><span class="p">;</span>
+               <span class="k">case</span> <span class="s1">&#39;image&#39;</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="s1">&#39;收到图片消息&#39;</span><span class="p">;</span>
+                   <span class="k">break</span><span class="p">;</span>
+               <span class="k">case</span> <span class="s1">&#39;voice&#39;</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="s1">&#39;收到语音消息&#39;</span><span class="p">;</span>
+                   <span class="k">break</span><span class="p">;</span>
+               <span class="k">case</span> <span class="s1">&#39;video&#39;</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="s1">&#39;收到视频消息&#39;</span><span class="p">;</span>
+                   <span class="k">break</span><span class="p">;</span>
+               <span class="k">case</span> <span class="s1">&#39;location&#39;</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="s1">&#39;收到坐标消息&#39;</span><span class="p">;</span>
+                   <span class="k">break</span><span class="p">;</span>
+               <span class="k">case</span> <span class="s1">&#39;link&#39;</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="s1">&#39;收到链接消息&#39;</span><span class="p">;</span>
+                   <span class="k">break</span><span class="p">;</span>
+               <span class="k">case</span> <span class="s1">&#39;file&#39;</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="s1">&#39;收到文件消息&#39;</span><span class="p">;</span>
+               <span class="c1">// ... 其它消息
+</span><span class="c1"></span>               <span class="k">default</span><span class="o">:</span>
+                   <span class="k">return</span> <span class="s1">&#39;收到其它消息&#39;</span><span class="p">;</span>
+                   <span class="k">break</span><span class="p">;</span>
+           <span class="p">}</span>
+       <span class="p">});</span>
+
+       <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">server</span><span class="o">-&gt;</span><span class="na">serve</span><span class="p">();</span>
+   <span class="p">}</span>
+
+   <span class="cm">/*
+</span><span class="cm">    *事件
+</span><span class="cm">    */</span>
+   <span class="k">protected</span> <span class="k">function</span> <span class="nf">event</span><span class="p">(</span><span class="nv">$message</span><span class="p">,</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="k">switch</span> <span class="p">(</span><span class="nv">$message</span><span class="p">[</span><span class="s1">&#39;Event&#39;</span><span class="p">])</span> <span class="p">{</span>
+           <span class="c1">//关注事件
+</span><span class="c1"></span>           <span class="k">case</span> <span class="s1">&#39;subscribe&#39;</span><span class="o">:</span>
+               <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">welcome</span><span class="p">(</span><span class="nv">$message</span><span class="p">[</span><span class="s1">&#39;FromUserName&#39;</span><span class="p">],</span><span class="nv">$account</span><span class="p">);</span>
+               <span class="k">break</span><span class="p">;</span>
+           <span class="k">case</span> <span class="s1">&#39;unsubscribe&#39;</span><span class="o">:</span>
+               <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unsubscribe</span><span class="p">(</span><span class="nv">$message</span><span class="p">[</span><span class="s1">&#39;FromUserName&#39;</span><span class="p">]);</span>
+               <span class="k">break</span><span class="p">;</span>
+       <span class="p">}</span>
+       <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">EventKey</span><span class="p">(</span><span class="nv">$message</span><span class="p">[</span><span class="s1">&#39;EventKey&#39;</span><span class="p">]);</span>
+   <span class="p">}</span>
+
+   <span class="cm">/*
+</span><span class="cm">    *关注事件回复
+</span><span class="cm">    */</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="nf">welcome</span><span class="p">(</span><span class="nv">$FromUserName</span><span class="p">,</span><span class="nv">$account</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="nv">$FromUserName</span><span class="o">.</span><span class="s1">&#39;&lt;关注&gt;&#39;</span><span class="p">);</span>
+       <span class="nv">$rule</span><span class="o">=</span><span class="nx">WechatRule</span><span class="o">::</span><span class="na">where</span><span class="p">([</span><span class="s1">&#39;wechat_id&#39;</span><span class="o">=&gt;</span><span class="nv">$account</span><span class="p">,</span><span class="s1">&#39;event&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;subscribe&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+       <span class="nv">$reply_content</span><span class="o">=</span><span class="p">(</span><span class="nx">WechatKeyword</span><span class="o">::</span><span class="na">where</span><span class="p">([</span><span class="s1">&#39;wechat_id&#39;</span><span class="o">=&gt;</span><span class="nv">$account</span><span class="p">,</span><span class="s1">&#39;keyword&#39;</span><span class="o">=&gt;</span><span class="nv">$rule</span><span class="o">-&gt;</span><span class="na">keyword</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">reply_content</span><span class="p">;</span>
+       <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">user</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nv">$FromUserName</span><span class="p">);</span>
+       <span class="nv">$is_exist</span><span class="o">=</span><span class="nx">WechatUser</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;openid&#39;</span><span class="p">,</span><span class="nv">$FromUserName</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+       <span class="k">if</span><span class="p">(</span><span class="nv">$is_exist</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">){</span>
+           <span class="nx">WechatUser</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+       <span class="p">}</span><span class="k">elseif</span> <span class="p">(</span><span class="nv">$is_exist</span><span class="o">-&gt;</span><span class="na">subscribe</span> <span class="o">==</span> <span class="mi">2</span><span class="p">){</span>
+           <span class="nv">$is_exist</span><span class="o">-&gt;</span><span class="na">subscribe</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+           <span class="nv">$is_exist</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+       <span class="p">}</span>
+
+       <span class="nv">$replayTemp</span><span class="o">=</span><span class="nx">str_replace</span><span class="p">(</span><span class="s1">&#39;[toUserName]&#39;</span><span class="p">,</span><span class="nv">$user</span><span class="p">[</span><span class="s1">&#39;nickname&#39;</span><span class="p">],</span><span class="nv">$reply_content</span><span class="p">[</span><span class="s1">&#39;content&#39;</span><span class="p">]);</span>
+       <span class="k">return</span> <span class="nv">$replayTemp</span><span class="p">;</span>
+   <span class="p">}</span>
+
+   <span class="cm">/*
+</span><span class="cm">   *取消关注事件回复
+</span><span class="cm">   */</span>
+   <span class="k">public</span> <span class="k">function</span> <span class="nf">unsubscribe</span><span class="p">(</span><span class="nv">$FromUserName</span><span class="p">)</span>
+   <span class="p">{</span>
+       <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="nv">$FromUserName</span><span class="o">.</span><span class="s1">&#39;&lt;取消关注&gt;&#39;</span><span class="p">);</span>
+       <span class="nx">WechatUser</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;openid&#39;</span><span class="p">,</span><span class="nv">$FromUserName</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">([</span><span class="s1">&#39;subscribe&#39;</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">]);</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ol start="4">
+<li>中间键<code> Middleware</code> 文件夹里 <code>VerifyCsrfToken.php</code> 修改路由忽略</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="nv">$except</span> <span class="o">=</span> <span class="p">[</span>
+   <span class="s1">&#39;wechat/*&#39;</span>
+<span class="p">];</span> 
+</code></pre></div><ol start="5">
+<li>然后在使用的时候，可以这样写</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$app</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wechat</span><span class="o">-&gt;</span><span class="na">app</span><span class="p">(</span><span class="nv">$account</span><span class="p">);</span>  <span class="c1">//公众号
+</span><span class="c1"></span><span class="nv">$app</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wechat</span><span class="o">-&gt;</span><span class="na">pay</span><span class="p">(</span><span class="nv">$account</span><span class="p">);</span>  <span class="c1">//微信支付
+</span><span class="c1"></span><span class="nv">$app</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wechat</span><span class="o">-&gt;</span><span class="na">miniProgram</span><span class="p">(</span><span class="nv">$account</span><span class="p">);</span>  <span class="c1">//微信小程序
+</span><span class="c1"></span><span class="nv">$app</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">wechat</span><span class="o">-&gt;</span><span class="na">work</span><span class="p">(</span><span class="nv">$account</span><span class="p">);</span>  <span class="c1">//企业号应用
+</span></code></pre></div><ol start="6">
+<li>其他</li>
+</ol>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//微信公众平台开发者选项里要设置为：
+</span><span class="c1">//http://www.xxx.com/wechat/1
+</span><span class="c1"></span>
+<span class="c1">//配置路由(web.php):
+</span><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">any</span><span class="p">(</span><span class="s1">&#39;/wechat/{account}&#39;</span><span class="p">,</span> <span class="s1">&#39;Api\WeChatController@serve&#39;</span><span class="p">);</span>       
+</code></pre></div><h3 id="测试平台">测试平台</h3>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/wxgzhpz.jpg" alt="测试平台"></p>
+<h3 id="增加消息模板">增加消息模板</h3>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/mbxxsz.jpg" alt="增加消息模板"></p>
+<h3 id="新建模板消息控制器">新建模板消息控制器</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:controller Api/WechatTemplateMsgController
+</code></pre></div><p>代码如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+    
+<span class="k">namespace</span> <span class="nx">App\Http\Controllers\Api</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\Models\WechatUser</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Log</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">WechatTemplateMsgController</span> <span class="k">extends</span> <span class="nx">ApiController</span>
+<span class="p">{</span>
+    <span class="c1">//发送模板消息
+</span><span class="c1"></span>    <span class="k">public</span> <span class="k">function</span> <span class="nf">sendTemplateMsg</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$users</span><span class="o">=</span><span class="nx">WechatUser</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;subscribe&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;subscribe&#39;</span><span class="p">,</span><span class="s1">&#39;openid&#39;</span><span class="p">,</span><span class="s1">&#39;nickname&#39;</span><span class="p">,</span><span class="s1">&#39;sex&#39;</span><span class="p">,</span><span class="s1">&#39;city&#39;</span><span class="p">,</span><span class="s1">&#39;province&#39;</span><span class="p">,</span><span class="s1">&#39;country&#39;</span><span class="p">,</span><span class="s1">&#39;subscribe_time&#39;</span><span class="p">]);</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$users</span> <span class="k">as</span> <span class="nv">$user</span><span class="p">){</span>
+            <span class="nv">$msg_content_data</span><span class="o">=</span><span class="p">[</span>
+                <span class="s1">&#39;first&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;这是一条测试推送😄&#39;</span><span class="p">,</span>  <span class="c1">// 不需要指定颜色
+</span><span class="c1"></span>                <span class="s1">&#39;nickname&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">nickname</span><span class="p">,</span> <span class="s1">&#39;#F00&#39;</span><span class="p">],</span> <span class="c1">// 指定为红色
+</span><span class="c1"></span>                <span class="s1">&#39;sex&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">sex</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">?</span> <span class="s1">&#39;男&#39;</span> <span class="o">:</span> <span class="s1">&#39;女&#39;</span><span class="p">,</span> <span class="c1">// 与第二`种一样
+</span><span class="c1"></span>                <span class="s1">&#39;city&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">city</span><span class="p">,</span> <span class="c1">// 与第一种一样
+</span><span class="c1"></span>                <span class="s1">&#39;province&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">province</span><span class="p">,</span> <span class="c1">// 与第一种一样
+</span><span class="c1"></span>                <span class="s1">&#39;country&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">country</span><span class="p">,</span> <span class="c1">// 与第一种一样
+</span><span class="c1"></span>                <span class="s1">&#39;subscribe_time&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span> <span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">,</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">subscribe_time</span><span class="p">),</span><span class="s1">&#39;#F00&#39;</span><span class="p">],</span> <span class="c1">// 与第一种一样
+</span><span class="c1"></span>            <span class="p">];</span>
+            <span class="nv">$msg_content</span><span class="o">=</span><span class="p">[</span>
+                <span class="s1">&#39;touser&#39;</span> <span class="o">=&gt;</span> <span class="nv">$user</span><span class="o">-&gt;</span><span class="na">openid</span><span class="p">,</span>
+                <span class="s1">&#39;template_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Cn27K9GkTx0O0xxxxxxxxxxxxxxQl-OmA&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;url&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;https://www.xxxxx.com&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="nv">$msg_content_data</span><span class="p">,</span>
+            <span class="p">];</span>
+            <span class="nv">$res</span><span class="o">=</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">template_message</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$msg_content</span><span class="p">);</span>
+            <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">([</span><span class="s1">&#39;template_message&#39;</span><span class="o">=&gt;</span><span class="nv">$res</span><span class="p">]);</span>
+            <span class="k">if</span><span class="p">(</span><span class="nv">$res</span><span class="p">[</span><span class="s1">&#39;errcode&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">selfMessage</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="nv">$res</span><span class="p">[</span><span class="s1">&#39;errcode&#39;</span><span class="p">],</span> <span class="nv">$res</span><span class="p">[</span><span class="s1">&#39;errmsg&#39;</span><span class="p">]);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">selfMessage</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="mi">1010</span><span class="p">,</span> <span class="s1">&#39;模板消息发送成功！&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h4 id="路由apiphp">路由(api.php)</h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//发送模板消息
+</span><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;wechat/send_template_msg&#39;</span><span class="p">,</span> <span class="s1">&#39;WechatTemplateMsgController@sendTemplateMsg&#39;</span><span class="p">);</span>
+</code></pre></div><h4 id="测试">测试</h4>
+<p>Postman调用发送模板消息接口：
+<img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/postman_mb.jpg" alt="Postman调用发送模板消息接口"></p>
+<p>效果图：
+<img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/mbxgt.jpg" alt="效果图"></p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>GitBook初试🍺</title>
+			<link>http://hugo.zkilm.cn/posts/20190826-try-gitbook/</link>
+			<pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+			
+			<guid>http://hugo.zkilm.cn/posts/20190826-try-gitbook/</guid>
+			<description>完成后的成果预览地址：https://zkbook.zam9.com/
+ 安装 npm install gitbook-cli -g 报错：
+npm WARN checkPermissions Missing write access to /usr/lib/node_modules 原因：安装全局的包，没有权限
+解决办法：在安装命令前加上 sudo ,输入用户的登陆密码，提升权限进行安装。
+sudo npm install gitbook-cli -g 初始化 新建一个文件夹，如 gitbook ，cd 到 gitbook ，然后：
+gitbook init - README.md: 书的介绍文字，如前言、简介，在章节中也可做为章节的简介。 - SUMMARY.md: 定制书籍的章节结构和顺序。 开始编写你的目录及文件 如你可以在 gitbook 下新建一个 part01 目录与 README.md 和 SUMMARY.md 同级，然后在该目录下新建 md 文件即可。
+SUMMARY.md 文件作为书籍的目录结构:
+#Summary - [Introduction](README.md) - Part I - [登录流程介绍](part01/login.md) - [test01](part01/test01.md) - [test02 参考](part01/test02.md) - [概览](part01/test.md) - [Test](part01/Test.</description>
+			<content type="html"><![CDATA[<blockquote>
+<p>完成后的成果预览地址：https://zkbook.zam9.com/</p>
+</blockquote>
+<h3 id="安装">安装</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">npm install gitbook-cli -g
+</code></pre></div><p>报错：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">npm WARN checkPermissions Missing write access to /usr/lib/node_modules
+</code></pre></div><p>原因：安装全局的包，没有权限</p>
+<p>解决办法：在安装命令前加上 sudo ,输入用户的登陆密码，提升权限进行安装。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo npm install gitbook-cli -g
+</code></pre></div><h3 id="初始化">初始化</h3>
+<p>新建一个文件夹，如 gitbook ，cd 到 gitbook ，然后：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">gitbook init
+</code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">- README.md: 书的介绍文字，如前言、简介，在章节中也可做为章节的简介。
+- SUMMARY.md: 定制书籍的章节结构和顺序。
+</code></pre></div><h3 id="开始编写你的目录及文件">开始编写你的目录及文件</h3>
+<p>如你可以在 gitbook 下新建一个 part01 目录与 README.md 和 SUMMARY.md 同级，然后在该目录下新建 md 文件即可。</p>
+<p>SUMMARY.md  文件作为书籍的目录结构:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#Summary</span>
+    
+- <span class="o">[</span>Introduction<span class="o">](</span>README.md<span class="o">)</span>
+- Part I
+    - <span class="o">[</span>登录流程介绍<span class="o">](</span>part01/login.md<span class="o">)</span>
+    - <span class="o">[</span>test01<span class="o">](</span>part01/test01.md<span class="o">)</span>
+    - <span class="o">[</span>test02 参考<span class="o">](</span>part01/test02.md<span class="o">)</span>
+        - <span class="o">[</span>概览<span class="o">](</span>part01/test.md<span class="o">)</span>
+        - <span class="o">[</span>Test<span class="o">](</span>part01/Test.md<span class="o">)</span>
+        - <span class="o">[</span>Test<span class="o">](</span>part01/Test.md<span class="o">)</span>
+        - <span class="o">[</span>Test<span class="o">](</span>part01/Test.md<span class="o">)</span>
+- Part II
+    - <span class="o">[</span>Test<span class="o">](</span>part01/Test.md<span class="o">)</span>
+    - <span class="o">[</span>Test<span class="o">](</span>part01/Test.md<span class="o">)</span>
+    - <span class="o">[</span>Test<span class="o">](</span>part01/Test.md<span class="o">)</span>
+</code></pre></div><h3 id="预览">预览</h3>
+<ul>
+<li>执行命令 gitbook serve ，gitbook 会启动一个 4000 端口用于预览。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">gitbook serve
+</code></pre></div><ul>
+<li>第二种预览方式，运行 gitbook build 命令后会在书籍的文件夹中生成一个 _book 文件夹, 里面的内容即为生成的 html 文件. 我们可以使用下面命令来生成网页而不开启服务器。</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">gitbook build
+</code></pre></div><h3 id="关于生成静态html侧边栏无法点击问题">关于生成静态HTML侧边栏无法点击问题</h3>
+<p>百度到的结果是：从 3.0.0 版起, gitbook build 生成的 website 就不支持 local 打开了, 必需要 webserver 开启;实在要完全静态的, 就安装 2.6.7 版吧。使用2.6.7版本，会自动安装并生成，左侧目录可点击，Firefox、Chrome暂无任何问题</p>
+<p>解决办法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1">#生成对应版本的，本地无此版本会自动下载</span>
+gitbook build --gitbook<span class="o">=</span>2.6.7   
+</code></pre></div><p>但是又碰到如下报错：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">Error loading version latest: Error: Cannot find module <span class="s1">&#39;internal/util/types&#39;</span>
+</code></pre></div><p>解决：将 node 版本降低</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># 1.安装node管理 n</span>
+sudo npm install -g n 
+
+<span class="c1"># 2. 降低版本，更新npm</span>
+sudo n <span class="m">6</span>
+sudo npm install npm -g
+
+<span class="c1"># 3.此时运行gitbook2.6.7的命令即可。</span>
+gitbook build --gitbook<span class="o">=</span>2.6.7
+
+<span class="c1"># 4. 待转换完成后，将npm版本（例如9.10.0）切回来即可,以免影响其他模块</span>
+sudo n 8.16.1
+</code></pre></div><h3 id="关于侧边栏折叠问题和底部打赏功能">关于侧边栏折叠问题和底部打赏功能</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">如果有多个目录，Gitbook 在浏览器上打开时，默认所有的目录都会打开，当目录比较多时，全部显示不利于阅读。
+
+可以使用插件配置目录折叠，使得打开浏览器时这些目录默认是关闭的。
+
+在执行 gitbook init 主目录下增加 book.json 文件做定制化配置
+</code></pre></div><p>配置目录折叠功能如下：</p>
+<pre><code class="language-smartyconfig" data-lang="smartyconfig">{
+  &quot;plugins&quot;:[
+    &quot;expandable-chapters&quot;,
+    &quot;donate&quot;
+  ],
+  &quot;pluginsConfig&quot;: {
+    &quot;donate&quot;: {
+      &quot;wechat&quot;: &quot;https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/123444.png&quot;,
+      &quot;alipay&quot;: &quot;https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/images/662.png&quot;,
+      &quot;title&quot;: &quot;&quot;,
+      &quot;button&quot;: &quot;Donate&quot;,
+      &quot;alipayText&quot;: &quot;支付宝捐赠&quot;,
+      &quot;wechatText&quot;: &quot;微信捐赠&quot;
+    }
+  }
+}
+</code></pre><p>然后：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">gitbook install
+</code></pre></div><p>GitBook插件地址：<a href="https://plugins.gitbook.com/">https://plugins.gitbook.com/</a></p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>Laravel解决跨域请求🏃‍</title>
+			<link>http://hugo.zkilm.cn/posts/20190725-cross-request/</link>
+			<pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
+			
+			<guid>http://hugo.zkilm.cn/posts/20190725-cross-request/</guid>
+			<description>今天公司前端突然说请求跨域了，那么就解决下咯！
+创建中间件 首先创建一个中间件
+php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
+&amp;lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Origin&amp;#39;, &amp;#39;*&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Headers&amp;#39;, &amp;#39;Origin, Content-Type, Cookie, Accept&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Methods&amp;#39;, &amp;#39;GET, POST, PATCH, PUT, OPTIONS&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Credentials&amp;#39;, &amp;#39;true&amp;#39;); //ession共享的需求才用到  return $response; } } 注册中间件 添加到全局中间件 Kernel.</description>
+			<content type="html"><![CDATA[<p>今天公司前端突然说请求跨域了，那么就解决下咯！</p>
+<h3 id="创建中间件">创建中间件</h3>
+<p>首先创建一个中间件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:middleware EnableCrossRequestMiddleware
+</code></pre></div><h3 id="编写中间件">编写中间件</h3>
+<p>然后在中间件 <code>EnableCrossRequestMiddleware.php</code> 编写</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+    
+<span class="k">namespace</span> <span class="nx">App\Http\Middleware</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Closure</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">EnableCrossRequestMiddleware</span>
+<span class="p">{</span>
+    <span class="sd">/**
+</span><span class="sd">     * Handle an incoming request.
+</span><span class="sd">     *
+</span><span class="sd">     * @param  \Illuminate\Http\Request  $request
+</span><span class="sd">     * @param  \Closure  $next
+</span><span class="sd">     * @return mixed
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nx">Closure</span> <span class="nv">$next</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$response</span> <span class="o">=</span> <span class="nv">$next</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Origin&#39;</span><span class="p">,</span> <span class="s1">&#39;*&#39;</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Headers&#39;</span><span class="p">,</span> <span class="s1">&#39;Origin, Content-Type, Cookie, Accept&#39;</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Methods&#39;</span><span class="p">,</span> <span class="s1">&#39;GET, POST, PATCH, PUT, OPTIONS&#39;</span><span class="p">);</span>
+        <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Credentials&#39;</span><span class="p">,</span> <span class="s1">&#39;true&#39;</span><span class="p">);</span>  <span class="c1">//ession共享的需求才用到
+</span><span class="c1"></span>        <span class="k">return</span> <span class="nv">$response</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="注册中间件">注册中间件</h3>
+<p>添加到全局中间件 <code>Kernel.php</code> 组中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">protected</span> <span class="nv">$middleware</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+    <span class="nx">\App\Http\Middleware\EnableCrossRequestMiddleware</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+<span class="p">];</span>
+</code></pre></div><p>可能碰到的问题（ios不识别*）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">header</span><span class="p">(</span><span class="s1">&#39;Access-Control-Allow-Headers&#39;</span><span class="p">,</span> <span class="s1">&#39;Origin, Content-Type, Cookie, X-CSRF-TOKEN, Accept, Authorization, token&#39;</span><span class="p">);</span><span class="c1">// 开放哪些自定义头(ios 不识别*)
+</span></code></pre></div><p>或者选择 laravel-cors  <a href="https://github.com/barryvdh/laravel-cors">https://github.com/barryvdh/laravel-cors</a></p>
+<p>参考：<a href="http://www.ptbird.cn/laravel-cors-to-cors-laravel-app.html">http://www.ptbird.cn/laravel-cors-to-cors-laravel-app.html</a></p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>微信的H5分享（基于 Laravel-Wechat）😶</title>
+			<link>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</link>
+			<pubDate>Mon, 10 Jun 2019 00:00:00 +0000</pubDate>
+			
+			<guid>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</guid>
+			<description>一、缘由 什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：
+但是，现在需求是，分享后为下面这样：
+没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。
+二、基本流程 1.设置JS接口安全域名
+进入微信公众号平台 —&amp;gt; 公众号设置 —&amp;gt; 功能设置 —&amp;gt; JS接口安全域名（`test.zks.design`） 设置的时候，微信有教你如何去设置，将下载的文件（MP_verify_acUZIwvhxMREbXNt.txt）放在项目的根目录就可以了。 2.配置一个基础 url 用于获取 jssdk 的 config 内容
+使用的 url 是 http://test.zks.design/jssdkconfig
+3.H5 静态页面存放在 public/h5/ 文件夹下
+因此在访问 H5 的时候，需要访问域名 `http://test.zks.design/h5/xxxx/` 因为 H5 主要是分享，而不是域名访问，因此这个域名没什么问题。 H5 均直接写静态页面，并不使用 laravel 的 blade 模板去写H5。 4.通过 ajax 获取 config 配置
+在需要调用分享的页面上，进行 config 配置的时候，首先通过 ajax 将基本参数传送给服务端url（`http://test.zks.design/jssdkconfig`）。 一些需要的参数可能如下： 可以参照 EasyWechat 的文档 https://www.easywechat.com/docs/4.1/basic-services/jssdk 其中建议 $app-&amp;gt;jssdk-&amp;gt;setUrl($url) 设置当前URL 一定是自己前端的页面的 url。 5.将获取到的 config 直接放在 js 中</description>
+			<content type="html"><![CDATA[<h3 id="一缘由">一、缘由</h3>
+<p>什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：</p>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/h5_before.png" alt="Before"></p>
+<p>但是，现在需求是，分享后为下面这样：</p>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/h5_after.png" alt="After"></p>
+<p>没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。</p>
+<h3 id="二基本流程">二、基本流程</h3>
+<p><strong>1.设置JS接口安全域名</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">进入微信公众号平台 —&gt; 公众号设置 —&gt;  功能设置 —&gt;  JS接口安全域名（`test.zks.design`）
+
+设置的时候，微信有教你如何去设置，将下载的文件（MP_verify_acUZIwvhxMREbXNt.txt）放在项目的根目录就可以了。
+</code></pre></div><p><strong>2.配置一个基础 url 用于获取 jssdk 的 config 内容</strong></p>
+<p>使用的 url 是 <code>http://test.zks.design/jssdkconfig</code></p>
+<p><strong>3.H5 静态页面存放在 public/h5/ 文件夹下</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">因此在访问 H5 的时候，需要访问域名 `http://test.zks.design/h5/xxxx/`
+
+因为 H5 主要是分享，而不是域名访问，因此这个域名没什么问题。
+
+H5 均直接写静态页面，并不使用 laravel 的 blade 模板去写H5。
+</code></pre></div><p><strong>4.通过 ajax 获取 config 配置</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">在需要调用分享的页面上，进行 config 配置的时候，首先通过 ajax 将基本参数传送给服务端url（`http://test.zks.design/jssdkconfig`）。
+
+一些需要的参数可能如下：
+
+可以参照 EasyWechat 的文档 https://www.easywechat.com/docs/4.1/basic-services/jssdk
+
+其中建议 $app-&gt;jssdk-&gt;setUrl($url) 设置当前URL 一定是自己前端的页面的 url。
+</code></pre></div><p><strong>5.将获取到的 config 直接放在 js 中</strong></p>
+<p>在H5页面引入js文件，否则 wx.config 之类无法使用：http://res.wx.qq.com/open/js/jweixin-1.4.0.js</p>
+<h3 id="三实现">三、实现</h3>
+<p><strong>1、安装并配置 laravel-wechat</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require <span class="s2">&#34;overtrue/laravel-wechat:~4.0&#34;</span>
+</code></pre></div><p>并发布配置文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan vendor:publish --provider<span class="o">=</span><span class="s2">&#34;Overtrue\LaravelWeChat\ServiceProvider&#34;</span>
+</code></pre></div><p><strong>2.实现服务器 token 验证逻辑(只是分享的话，这步可以选择省略)</strong></p>
+<p>要实现服务器 token 验证，除了填写微信公众号的配置之外，还需要配置 config/wechat.php。先在服务器代码填写token和EncodingAESKey（token自己随便填），然后再在公众号服务器配置处点击提交（注意两处token保持一致）</p>
+<p>之后是需要对 <code>http://test.zks.design/wechat </code>进行编码完成验证。（这里不涉及消息，消息也在这里面转发或处理即可）。</p>
+<p>路由我是直接配置如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 微信方面的路由
+</span><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">namespace</span><span class="p">(</span><span class="s2">&#34;Wechat&#34;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="k">function</span><span class="p">(){</span>
+    <span class="nx">Route</span><span class="o">::</span><span class="na">any</span><span class="p">(</span><span class="s1">&#39;/wechat&#39;</span><span class="p">,</span><span class="s1">&#39;WechatController@index&#39;</span><span class="p">);</span>
+    <span class="nx">Route</span><span class="o">::</span><span class="na">any</span><span class="p">(</span><span class="s1">&#39;/jssdkconfig&#39;</span><span class="p">,</span><span class="s1">&#39;WechatController@getJSSDKConfig&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div><p>Wechat控制器：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:controller Wechat/WechatController
+</code></pre></div><p>其中 index 函数如下：</p>
+<p>非常简单，这个完成之后，就能够实现微信公众号的 token 认证 （注意，需要对 config/wechat 配置和公众号的相关参数匹配正确才行 ）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">// token认证及信息传输
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(){</span>
+    <span class="nx">Log</span><span class="o">::</span><span class="na">info</span><span class="p">(</span><span class="s1">&#39;request arrived.&#39;</span><span class="p">);</span>
+    <span class="nv">$app</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;wechat.official_account&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">server</span><span class="o">-&gt;</span><span class="na">serve</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div><p><strong>3.实现 jssdkConfig 信息获取的逻辑</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 获取jssdk配置
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">getJSSDKConfig</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">){</span>
+    <span class="c1">// dump(explode(&#39;,&#39;,$request-&gt;get(&#39;apis&#39;)));
+</span><span class="c1"></span>    <span class="nv">$arr</span> <span class="o">=</span> <span class="nx">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;apis&#39;</span><span class="p">));</span>
+    <span class="nv">$debug</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;debug&#39;</span><span class="p">)</span> <span class="o">===</span><span class="s1">&#39;true&#39;</span> <span class="o">?</span> <span class="k">true</span> <span class="o">:</span> <span class="k">false</span><span class="p">;</span>
+    <span class="nv">$json</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;json&#39;</span><span class="p">)</span> <span class="o">===</span><span class="s1">&#39;true&#39;</span> <span class="o">?</span> <span class="k">true</span> <span class="o">:</span> <span class="k">false</span><span class="p">;</span>
+    <span class="nv">$url</span> <span class="o">=</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">);</span>
+    <span class="c1">//dump($request-&gt;get(&#39;url&#39;));
+</span><span class="c1"></span>    <span class="c1">// check
+</span><span class="c1"></span>    <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nv">$url</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s1">&#39;status&#39;</span><span class="o">=&gt;</span><span class="k">false</span><span class="p">,</span><span class="s1">&#39;msg&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;params error&#39;</span><span class="p">,</span><span class="s1">&#39;data&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;&#39;</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="nv">$app</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;wechat.official_account&#39;</span><span class="p">);</span>
+    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">jssdk</span><span class="o">-&gt;</span><span class="na">setUrl</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+    <span class="nv">$config</span> <span class="o">=</span> <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">jssdk</span><span class="o">-&gt;</span><span class="na">buildConfig</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span><span class="nv">$debug</span><span class="p">,</span><span class="nv">$json</span><span class="p">,</span><span class="nv">$url</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nx">response</span><span class="p">(</span><span class="nv">$config</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>为了方便起见，我直接使用了 GET 的请求方式。</p>
+<p>同时主要的参数有下面几个：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">- apis： 需要使用的接口列表 传入格式为 &#34;onMenuShareTimeline,onMenuShareAppMessage&#34; 这样的字符串，方便分割成数组
+- debug：传入的是字符的 true 或者 false
+- json：传入的是字符的 true 或者 false （表示生成的数据格式，可以参考 easyWechat 的文档）
+- url：需要加密的 url （传入的时候必须将 &amp; 进行替换，否则会造成 config 失败 
+</code></pre></div><p><strong>4.js 获取 config 数据</strong></p>
+<p>在 H5 中直接使用 config 的时候，可以直接在 js 中通过 ajax 请求 url 获取config内容。</p>
+<p>比如下面我使用的例子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&#34;text/javascript&#34;</span><span class="o">&gt;</span>
+<span class="kd">function</span> <span class="nx">getjssdkconfig</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">shareLinkUlr</span> <span class="o">=</span> <span class="nx">location</span><span class="p">.</span><span class="nx">href</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s2">&#34;#&#34;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="c1">// 获取当前的url 去掉 # 之后的部分
+</span><span class="c1"></span>        <span class="nx">shareLinkUlr</span> <span class="o">=</span> <span class="nx">shareLinkUlr</span><span class="p">.</span><span class="nx">replace</span><span class="p">(</span><span class="sr">/\&amp;/g</span><span class="p">,</span> <span class="s1">&#39;%26&#39;</span><span class="p">);</span> <span class="c1">// 将 &amp; 替换成 %26
+</span><span class="c1"></span>
+        <span class="kd">var</span> <span class="nx">apis</span><span class="o">=</span><span class="s2">&#34;onMenuShareTimeline,onMenuShareAppMessage&#34;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">debug</span><span class="o">=</span><span class="kc">false</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">json</span><span class="o">=</span><span class="kc">false</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">link</span><span class="o">=</span><span class="nx">shareLinkUlr</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="s2">&#34;apis=&#34;</span><span class="o">+</span><span class="nx">apis</span><span class="o">+</span><span class="s2">&#34;&amp;debug=&#34;</span><span class="o">+</span><span class="nx">debug</span><span class="o">+</span><span class="s2">&#34;&amp;json=&#34;</span><span class="o">+</span><span class="nx">json</span><span class="o">+</span><span class="s2">&#34;&amp;url=&#34;</span><span class="o">+</span><span class="nx">link</span><span class="p">;</span> <span class="c1">// 拼接 get 参数
+</span><span class="c1"></span>        <span class="nx">$</span><span class="p">.</span><span class="nx">ajax</span><span class="p">({</span>
+            <span class="nx">type</span><span class="o">:</span><span class="s1">&#39;get&#39;</span><span class="p">,</span>
+            <span class="nx">url</span><span class="o">:</span><span class="s1">&#39;http://test-api.zam9.com/api/jssdkconfig?&#39;</span><span class="o">+</span><span class="nx">data</span><span class="p">,</span>
+            <span class="nx">success</span><span class="o">:</span><span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">configJsSDKAndDoSomething</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">});</span>
+    <span class="p">}</span>
+
+    <span class="kd">function</span> <span class="nx">configJsSDKAndDoSomething</span><span class="p">(</span><span class="nx">config</span><span class="p">){</span>
+        <span class="nx">wx</span><span class="p">.</span><span class="nx">config</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+        <span class="nx">wx</span><span class="p">.</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// 其他的一些操作
+</span><span class="c1"></span>            <span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;林和成35週年幸運大轉輪&#39;</span><span class="p">,</span> <span class="c1">// 分享标题
+</span><span class="c1"></span>                <span class="nx">link</span><span class="o">:</span> <span class="s1">&#39;http://test.zam9.com&#39;</span><span class="p">,</span> <span class="c1">// 分享链接，记得使用绝对路径，不能用document.URL
+</span><span class="c1"></span>                <span class="nx">imgUrl</span><span class="o">:</span> <span class="s1">&#39;http://test.zam9.com/images/ettason-share.jpg&#39;</span><span class="p">,</span> <span class="c1">// 分享图标
+</span><span class="c1"></span>                <span class="nx">desc</span><span class="o">:</span> <span class="s1">&#39;2019 Ettason 35th Anniversary Lucky Draw for WeChat&#39;</span><span class="p">,</span> <span class="c1">// 分享描述
+</span><span class="c1"></span>                <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;分享成功！&#39;</span><span class="p">);</span>
+                    <span class="c1">// 用户确认分享后执行的回调函数
+</span><span class="c1"></span>                <span class="p">},</span>
+                <span class="nx">cancel</span><span class="o">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;取消分享！&#39;</span><span class="p">);</span>
+                    <span class="c1">// 用户取消分享后执行的回调函数
+</span><span class="c1"></span>                <span class="p">}</span>
+            <span class="p">};</span>
+            <span class="nx">wx</span><span class="p">.</span><span class="nx">onMenuShareTimeline</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span> <span class="c1">// 分享到朋友圈
+</span><span class="c1"></span>            <span class="nx">wx</span><span class="p">.</span><span class="nx">onMenuShareAppMessage</span><span class="p">(</span><span class="nx">options</span><span class="p">);</span> <span class="c1">// 分享给朋友
+</span><span class="c1"></span>        <span class="p">});</span>
+        <span class="cm">/*wx.error(function(error){
+</span><span class="cm">            console.log(error);
+</span><span class="cm">        });*/</span>
+    <span class="p">}</span>
+
+    <span class="c1">// 页面加载完之后进行操作
+</span><span class="c1"></span>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+        <span class="c1">// 注意这里的参数
+</span><span class="c1"></span>        <span class="c1">// apis 使用的参数是 字符串的拼接 这个是和 php 的方法中的处理相对应的
+</span><span class="c1"></span>        <span class="nx">getjssdkconfig</span><span class="p">();</span>
+    <span class="p">});</span>
+
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div><h3 id="四关键的几点">四、关键的几点</h3>
+<p><strong>1、JSON.parse()</strong></p>
+<p>在拿到返回的 json 数据之后，需要 JSON.parse()，否则是不正确的 js 对象，报 config:fail 错误</p>
+<p><strong>2、分享出去的链接点击之后配置失败</strong></p>
+<p>这个主要是因为分享出去之后，由于微信加了几个参数，导致存在问题。</p>
+<p>网上存在解决方案就是 将 &amp; 进行替换：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="nv">shareLinkUlr</span> <span class="o">=</span> shareLinkUlr.replace<span class="o">(</span>/<span class="se">\&amp;</span>/g, <span class="s1">&#39;%26&#39;</span><span class="o">)</span><span class="p">;</span> // 将 <span class="p">&amp;</span> 替换成 %26 
+</code></pre></div><p><strong>3.jsapiList为空并不影响分享功能，只要config为ok即可。</strong></p>
+<h3 id="五总结">五、总结</h3>
+<p>其实就是后端给个接口，返回微信配置提供给前端就完事了。😜</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>PHPOffice之Excel🍜</title>
+			<link>http://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</link>
+			<pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
+			
+			<guid>http://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</guid>
+			<description>导语  简单的数据导入导出其实 Maatwebsite/Laravel-Excel 和 box/spout 就够了，听说spout在大量数据下效率较Laravel-Excel 快。这次因为要根据Excel模板导出，在这两个包没找到怎么引入模板的方法，虽然可以设置，但是过于麻烦，就放弃了。最终选择了 PHPOffice/PhpSpreadsheet 。
+  PhpSpreadsheet是一个用纯PHP编写的库，它提供了一组类，允许您读取和写入不同的电子表格文件格式，如Excel和LibreOffice Calc。
+ PhpSpreadsheet文档传送门
+安装 composer require phpoffice/phpspreadsheet 使用 &amp;lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use App\Models\TreasureLog; use Carbon\Carbon; use Illuminate\Support\Facades\Auth; use PhpOffice\PhpSpreadsheet\Spreadsheet; use PhpOffice\PhpSpreadsheet\Writer\Xlsx; //可以生成多种格式类 use PhpOffice\PhpSpreadsheet\IOFactory; use PhpOffice\PhpSpreadsheet\Style\Alignment; use PhpOffice\PhpSpreadsheet\Style\Border; class TestController extends Controller{ . . public function excelExport() { $rows=TreasureLog::select(&amp;#39;id&amp;#39;,&amp;#39;user_id&amp;#39;,&amp;#39;product_id&amp;#39;,&amp;#39;product_name&amp;#39;,&amp;#39;type&amp;#39;,&amp;#39;coin_type&amp;#39;)-&amp;gt;limit(100)-&amp;gt;get()-&amp;gt;toArray(); //通过工厂模式创建内容  $spreadsheet = IOFactory::load(public_path().&amp;#39;/phpoffice/biser.xlsx&amp;#39;); $worksheet = $spreadsheet-&amp;gt;getActiveSheet(); $worksheet-&amp;gt;setCellValue(&amp;#39;B8&amp;#39;,rand(100000,999999)); $worksheet-&amp;gt;setCellValue(&amp;#39;B9&amp;#39;,Carbon::now()); $worksheet-&amp;gt;setCellValue(&amp;#39;B10&amp;#39;,Auth::user()-&amp;gt;name); $num=12; foreach ($rows as $row){ $num++; $worksheet-&amp;gt;setCellValue(&amp;#39;A&amp;#39;.</description>
+			<content type="html"><![CDATA[<h3 id="导语">导语</h3>
+<blockquote>
+<p>简单的数据导入导出其实 <a href="https://github.com/Maatwebsite">Maatwebsite/Laravel-Excel</a> 和 <a href="https://github.com/box">box/spout</a> 就够了，听说<code>spout</code>在大量数据下效率较<code>Laravel-Excel</code> 快。这次因为要根据<code>Excel</code>模板导出，在这两个包没找到怎么引入模板的方法，虽然可以设置，但是过于麻烦，就放弃了。最终选择了 <code>PHPOffice/PhpSpreadsheet</code> 。</p>
+</blockquote>
+<blockquote>
+<p><a href="https://github.com/PHPOffice/PhpSpreadsheet">PhpSpreadsheet</a>是一个用纯PHP编写的库，它提供了一组类，允许您读取和写入不同的电子表格文件格式，如Excel和LibreOffice Calc。</p>
+</blockquote>
+<p><a href="https://phpoffice.github.io/PhpSpreadsheet/master/PhpOffice.html">PhpSpreadsheet文档传送门</a></p>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/excel_template.jpg" alt="Excel模板效果图"></p>
+<h3 id="安装">安装</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require phpoffice/phpspreadsheet
+</code></pre></div><h3 id="使用">使用</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+    
+<span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\Models\TreasureLog</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Illuminate\Support\Facades\Auth</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PhpOffice\PhpSpreadsheet\Spreadsheet</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PhpOffice\PhpSpreadsheet\Writer\Xlsx</span><span class="p">;</span>
+<span class="c1">//可以生成多种格式类
+</span><span class="c1"></span><span class="k">use</span> <span class="nx">PhpOffice\PhpSpreadsheet\IOFactory</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PhpOffice\PhpSpreadsheet\Style\Alignment</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">PhpOffice\PhpSpreadsheet\Style\Border</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">TestController</span> <span class="k">extends</span> <span class="nx">Controller</span><span class="p">{</span>
+        <span class="o">.</span>
+        <span class="o">.</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">excelExport</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$rows</span><span class="o">=</span><span class="nx">TreasureLog</span><span class="o">::</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;user_id&#39;</span><span class="p">,</span><span class="s1">&#39;product_id&#39;</span><span class="p">,</span><span class="s1">&#39;product_name&#39;</span><span class="p">,</span><span class="s1">&#39;type&#39;</span><span class="p">,</span><span class="s1">&#39;coin_type&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+        <span class="c1">//通过工厂模式创建内容
+</span><span class="c1"></span>        <span class="nv">$spreadsheet</span> <span class="o">=</span> <span class="nx">IOFactory</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="nx">public_path</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/phpoffice/biser.xlsx&#39;</span><span class="p">);</span>
+        <span class="nv">$worksheet</span> <span class="o">=</span> <span class="nv">$spreadsheet</span><span class="o">-&gt;</span><span class="na">getActiveSheet</span><span class="p">();</span>
+        <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;B8&#39;</span><span class="p">,</span><span class="nx">rand</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span><span class="mi">999999</span><span class="p">));</span>
+        <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;B9&#39;</span><span class="p">,</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">());</span>
+        <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;B10&#39;</span><span class="p">,</span><span class="nx">Auth</span><span class="o">::</span><span class="na">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">);</span>
+        <span class="nv">$num</span><span class="o">=</span><span class="mi">12</span><span class="p">;</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$rows</span> <span class="k">as</span> <span class="nv">$row</span><span class="p">){</span>
+            <span class="nv">$num</span><span class="o">++</span><span class="p">;</span>
+            <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">,</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]);</span>
+            <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">,</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;user_id&#39;</span><span class="p">]);</span>
+            <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">,</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;product_id&#39;</span><span class="p">]);</span>
+            <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">,</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;product_name&#39;</span><span class="p">]);</span>
+            <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">,</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">]);</span>
+            <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">setCellValue</span><span class="p">(</span><span class="s1">&#39;J&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">,</span><span class="nv">$row</span><span class="p">[</span><span class="s1">&#39;coin_type&#39;</span><span class="p">]);</span>
+            <span class="k">if</span><span class="p">(</span><span class="nv">$num</span><span class="o">&gt;</span><span class="mi">25</span><span class="p">){</span>
+                <span class="nv">$styleArray</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="s1">&#39;borders&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                        <span class="s1">&#39;outline&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                            <span class="s1">&#39;borderStyle&#39;</span> <span class="o">=&gt;</span> <span class="nx">Border</span><span class="o">::</span><span class="na">BORDER_THIN</span><span class="p">,</span>
+                            <span class="s1">&#39;color&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;argb&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;00000000&#39;</span><span class="p">],</span>                        <span class="p">],</span>
+                    <span class="p">],</span>
+                    <span class="s1">&#39;alignment&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                        <span class="s1">&#39;horizontal&#39;</span> <span class="o">=&gt;</span> <span class="nx">Alignment</span><span class="o">::</span><span class="na">HORIZONTAL_CENTER</span><span class="p">,</span>
+                    <span class="p">],</span>
+                <span class="p">];</span>
+                <span class="nv">$styleArray_</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="s1">&#39;borders&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                        <span class="s1">&#39;outline&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+                            <span class="s1">&#39;borderStyle&#39;</span> <span class="o">=&gt;</span> <span class="nx">Border</span><span class="o">::</span><span class="na">BORDER_THIN</span><span class="p">,</span>
+                            <span class="s1">&#39;color&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;argb&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;00000000&#39;</span><span class="p">],</span>                        <span class="p">],</span>
+                    <span class="p">],</span>
+                <span class="p">];</span>
+                <span class="c1">//设置超出部分样式
+</span><span class="c1"></span>                <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">mergeCells</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="o">.</span><span class="s1">&#39;:C&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getStyle</span><span class="p">(</span><span class="s1">&#39;B&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">applyFromArray</span><span class="p">(</span><span class="nv">$styleArray</span><span class="p">);</span>
+                <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">mergeCells</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="o">.</span><span class="s1">&#39;:E&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getStyle</span><span class="p">(</span><span class="s1">&#39;D&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">applyFromArray</span><span class="p">(</span><span class="nv">$styleArray</span><span class="p">);</span>
+                <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">mergeCells</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="o">.</span><span class="s1">&#39;:G&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getStyle</span><span class="p">(</span><span class="s1">&#39;F&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">applyFromArray</span><span class="p">(</span><span class="nv">$styleArray</span><span class="p">);</span>
+                <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">mergeCells</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="o">.</span><span class="s1">&#39;:I&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">getStyle</span><span class="p">(</span><span class="s1">&#39;H&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">applyFromArray</span><span class="p">(</span><span class="nv">$styleArray</span><span class="p">);</span>
+                <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">getStyle</span><span class="p">(</span><span class="s1">&#39;J&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">applyFromArray</span><span class="p">(</span><span class="nv">$styleArray_</span><span class="p">);</span>
+                <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">getRowDimension</span><span class="p">(</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setRowHeight</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+                <span class="nv">$worksheet</span><span class="o">-&gt;</span><span class="na">getStyle</span><span class="p">(</span><span class="s1">&#39;A&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="o">.</span><span class="s1">&#39;:J&#39;</span><span class="o">.</span><span class="nv">$num</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">applyFromArray</span><span class="p">(</span><span class="nv">$styleArray_</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">,</span> <span class="nx">time</span><span class="p">())</span><span class="o">.</span><span class="nx">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span><span class="o">.</span> <span class="s2">&#34;.xlsx&#34;</span><span class="p">;</span>
+        <span class="c1">//第一种保存方式
+</span><span class="c1"></span>       <span class="cm">/* $writer = new Xlsx($spreadsheet);//写入类型对象
+</span><span class="cm">        $filename=public_path().&#39;/phpoffice/&#39;.$filename;//文件路径
+</span><span class="cm">        $writer-&gt;save($filename);//写入*/</span>
+
+        <span class="c1">//第二种直接页面上显示下载
+</span><span class="c1"></span>        <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet&#39;</span><span class="p">);</span>
+        <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Content-Disposition: attachment;filename=&#34;&#39;</span><span class="o">.</span><span class="nv">$filename</span> <span class="o">.</span> <span class="s1">&#39;.xlsx&#34;&#39;</span><span class="p">);</span>
+        <span class="nx">header</span><span class="p">(</span><span class="s1">&#39;Cache-Control: max-age=0&#39;</span><span class="p">);</span>
+        <span class="c1">//注意createWriter($spreadsheet, &#39;Xls&#39;) 第二个参数首字母必须大写
+</span><span class="c1"></span>        <span class="nv">$writer</span> <span class="o">=</span> <span class="nx">IOFactory</span><span class="o">::</span><span class="na">createWriter</span><span class="p">(</span><span class="nv">$spreadsheet</span><span class="p">,</span> <span class="s1">&#39;Xlsx&#39;</span><span class="p">);</span>
+        <span class="nv">$writer</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="s1">&#39;php://output&#39;</span><span class="p">);</span>
+
+<span class="c1">//        return response(json_encode([&#39;status&#39;=&gt;1,&#39;msg&#39;=&gt;&#39;导出成功&#39;,&#39;data&#39;=&gt;$rows]));//ajax
+</span><span class="c1"></span>    <span class="p">}</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="效果">效果</h3>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/excel_result.jpg" alt="完成效果图"></p>
+<h3 id="结束语">结束语</h3>
+<blockquote>
+<p>摆脱悲观，拥抱满溢而出的希望，朝着梦想，准备出发。🍀</p>
+</blockquote>
+<p>参考：</p>
+<p><a href="http://www.heibaiketang.com/blog/show/69.html">http://www.heibaiketang.com/blog/show/69.html</a></p>
+<p><a href="https://blog.csdn.net/gc258_2767_qq/article/details/81003656">https://blog.csdn.net/gc258_2767_qq/article/details/81003656</a></p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>使用LaravelS</title>
+			<link>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</link>
+			<pubDate>Fri, 28 Dec 2018 00:00:00 +0000</pubDate>
+			
+			<guid>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</guid>
+			<description>Laravels 介绍  LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。 在使用laravels之前，必须先装上swoole的扩展。
+ swoole文档：https://wiki.swoole.com/wiki/index/prid-1
+laraves文档：https://github.com/hhxsv5/laravel-s
+环境：在VMware虚拟机中自己搭的环境，Centos7，PHP7.2.12，Nginx1.14.2，MySQL 5.5.60。
+安装 Swoole 扩展 1、直接 pecl install swoole ,会报错，因为装有php老版本的依赖，所以要装新的
+yum install -y php72w-mysqlnd php72w-fpm php70w-pecl-redis php72w-common php72w-pdo php72w php72w-gd php72w-gd php72w-cli php72w-mbstring php72w-devel 因为我是PHP7.2，如果你是PHP7.0,将上面的php72替换为php70即可。
+2、如果报错：
+PHP Parse error: syntax error, unexpected //&amp;#39;new&amp;#39; (T_NEW) in /usr/share/pear/PEAR/Frontend.php on //line 91 解决方案：
+安装PECL //php版本 &amp;gt; 7 wget http://pear.php.net/go-pear.phar php go-pear.phar //php版本 &amp;lt; 7 yum install php-pear 3、安装swoole包
+1.pecl install swoole 2.WARNING:channel &amp;#34;pecl.php.net&amp;#34; has updated its protocols,use &amp;#34;pecl channel-update pecl.</description>
+			<content type="html"><![CDATA[<h3 id="laravels-介绍">Laravels 介绍</h3>
+<blockquote>
+<p>LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。
+在使用laravels之前，必须先装上swoole的扩展。</p>
+</blockquote>
+<p>swoole文档：<a href="https://wiki.swoole.com/wiki/index/prid-1">https://wiki.swoole.com/wiki/index/prid-1</a></p>
+<p>laraves文档：<a href="https://github.com/hhxsv5/laravel-s">https://github.com/hhxsv5/laravel-s</a></p>
+<p>环境：在VMware虚拟机中自己搭的环境，Centos7，PHP7.2.12，Nginx1.14.2，MySQL 5.5.60。</p>
+<h3 id="安装-swoole-扩展">安装 Swoole 扩展</h3>
+<p>1、直接 <code>pecl install swoole</code> ,会报错，因为装有php老版本的依赖，所以要装新的</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yum install -y php72w-mysqlnd php72w-fpm php70w-pecl-redis php72w-common php72w-pdo php72w php72w-gd php72w-gd php72w-cli php72w-mbstring php72w-devel
+</code></pre></div><p>因为我是PHP7.2，如果你是PHP7.0,将上面的php72替换为php70即可。</p>
+<p>2、如果报错：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">PHP Parse error:  syntax error, unexpected //<span class="s1">&#39;new&#39;</span> <span class="o">(</span>T_NEW<span class="o">)</span> in /usr/share/pear/PEAR/Frontend.php on //line <span class="m">91</span>
+</code></pre></div><p>解决方案：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">安装PECL
+//php版本 &gt; <span class="m">7</span>
+wget http://pear.php.net/go-pear.phar
+php go-pear.phar
+
+//php版本 &lt; <span class="m">7</span>
+yum install php-pear
+</code></pre></div><p>3、安装swoole包</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">1.pecl install swoole
+2.WARNING:channel <span class="s2">&#34;pecl.php.net&#34;</span> has updated its protocols,use <span class="s2">&#34;pecl channel-update pecl.php.net&#34;</span> to update.
+需要更新：pecl channel-update pecl.php.net
+3.查找下php.ini的位置：php -i <span class="p">|</span>grep php.ini
+4.然后在php.ini中增加：extension<span class="o">=</span>swoole.so
+5.重启下php：systemctl restart php
+6.查看下是否已经成功加载了swoole:php -m <span class="p">|</span> grep swoole
+</code></pre></div><p>如果还没装上，推荐参考：<a href="https://www.cnblogs.com/phpwechat/p/8417331.html">https://www.cnblogs.com/phpwechat/p/8417331.html</a></p>
+<h3 id="使用laravels">使用LaravelS</h3>
+<p>1、安装 <code>laravels</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require <span class="s2">&#34;hhxsv5/laravel-s:~3.3&#34;</span> -vvv
+</code></pre></div><p>2、注册 <code>Service Provider</code>, 位于 <code>config/app.php</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="c1">//...
+</span><span class="c1"></span>    <span class="nx">Hhxsv5\LaravelS\Illuminate\LaravelSServiceProvider</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+<span class="p">],</span>
+</code></pre></div><p>3、发布配置和二进制文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan laravels publish
+</code></pre></div><p>4、修改配置 <code>config/laravels.php</code>：监听的IP、端口等。</p>
+<p>5、配置 <code>web.confg</code> 文件，我的是这样</p>
+<pre><code class="language-apacheconfig" data-lang="apacheconfig">map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+upstream laravels {
+    # 通过 IP:Port 连接
+    server 127.0.0.1:5200 weight=5 max_fails=3 fail_timeout=30s;
+    # 通过 UnixSocket Stream 连接，小诀窍：将socket文件放在/dev/shm目录下，可获得更好的性能
+    #server unix:/xxxpath/laravel-s-test/storage/laravels.sock weight=5 max_fails=3 fail_timeout=30s;
+    #server 192.168.1.1:5200 weight=3 max_fails=3 fail_timeout=30s;
+    #server 192.168.1.2:5200 backup;
+    keepalive 16;
+}
+server {
+    listen 80;
+    # 别忘了绑Host哟
+    server_name laras.test;
+    root /var/www/laras/public;
+    #access_log /yyypath/log/nginx/$server_name.access.log  main;
+    autoindex off;
+    index index.html index.htm;
+    # Nginx处理静态资源(建议开启gzip)，LaravelS处理动态资源。
+    location / {
+        index  index.php index.html index.htm;
+        try_files $uri $uri/ /index.php?$query_string;
+        if (!-e $request_filename){  
+            rewrite ^/(.*) /index.php last;  
+        } 
+    }
+    location ~ \.php$ {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+    
+    location ~* ^.+\.(jpg|jpeg|gif|png|bmp)$ {  
+        access_log off;  
+        root /var/www/laras/public;  
+        expires 30d;  
+        break; }
+    # 当请求PHP文件时直接响应404，防止暴露public/*.php
+    #location ~* \.php$ {
+    #    return 404;
+    #}
+    # Http和WebSocket共存，Nginx通过location区分
+    # !!! WebSocket连接时路径为/ws
+    # Javascript: var ws = new WebSocket(&quot;ws://laravels.com/ws&quot;);
+    location =/ws {
+        proxy_http_version 1.1;
+        # proxy_connect_timeout 60s;
+        # proxy_send_timeout 60s;
+        # proxy_read_timeout：如果60秒内被代理的服务器没有响应数据给Nginx，那么Nginx会关闭当前连接；同时，Swoole的心跳设置也会影响连接的关闭
+        # proxy_read_timeout 60s;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-PORT $remote_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header Scheme $scheme;
+        proxy_set_header Server-Protocol $server_protocol;
+        proxy_set_header Server-Name $server_name;
+        proxy_set_header Server-Addr $server_addr;
+        proxy_set_header Server-Port $server_port;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_pass http://laravels;
+    }
+    location @laravels {
+        proxy_http_version 1.1;
+        # proxy_connect_timeout 60s;
+        # proxy_send_timeout 60s;
+        # proxy_read_timeout 60s;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-PORT $remote_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header Scheme $scheme;
+        proxy_set_header Server-Protocol $server_protocol;
+        proxy_set_header Server-Name $server_name;
+        proxy_set_header Server-Addr $server_addr;
+        proxy_set_header Server-Port $server_port;
+        proxy_set_header Connection &quot;&quot;;
+        proxy_pass http://laravels;
+    }
+}
+</code></pre><p>6、毫秒级定时任务 <code>App\Jobs\Timer\TestCronJob</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//如laravels文档 我的是这样 仅用于测试
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">client_send</span><span class="p">(</span><span class="s1">&#39;123456789&#39;</span><span class="p">);</span>
+    <span class="nx">Test</span><span class="o">::</span><span class="na">create</span><span class="p">([</span><span class="s1">&#39;num&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;66&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="c1">//namespace App\Services\WebSocketClientService
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">client_send</span><span class="p">(</span><span class="nv">$msg</span><span class="p">,</span><span class="nv">$url</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="nv">$port</span><span class="o">=</span><span class="mi">5200</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocketClientService</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nv">$port</span><span class="p">);</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">();</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$msg</span><span class="p">);</span>
+         <span class="cm">/*$data = @$client-&gt;recv();
+</span><span class="cm">        \Log::info($data);*/</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div><p>7、启用 <code>WebSocket</code> 服务器 <code>App\Services\WebSocketService</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">如 laravels 文档 
+https://github.com/hhxsv5/laravel-s/blob/master/README-CN.md#%E5%90%AF%E7%94%A8websocket%E6%9C%8D%E5%8A%A1%E5%99%A8
+</code></pre></div><p>8、视图页面开启 <code>websocket</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">&#34;ws://&#34;</span><span class="o">+</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span><span class="o">+</span><span class="s2">&#34;/ws?c=&#34;</span><span class="o">+</span><span class="s2">&#34;{{ csrf_token() }}&#34;</span><span class="p">);</span>
+    <span class="c1">//成功连接websoc的时候
+</span><span class="c1"></span>    <span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ws onopen&#39;</span><span class="p">);</span>
+<span class="c1">//        ws.send(&#39;client msg&#39;);
+</span><span class="c1"></span>    <span class="p">};</span>
+    <span class="c1">//连接错误的时候
+</span><span class="c1"></span>    <span class="nx">ws</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ws onerror&#39;</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div><p>9、开启服务
+重启 <code>nginx</code> 和 <code>php</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">systemctl  restart nginx
+systemctl   restart  php-fpm
+</code></pre></div><p>开启 <code>laravels</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php  bin/laravels  starts
+</code></pre></div>]]></content>
+		</item>
+		
+		<item>
+			<title>再次安装 Homestead</title>
+			<link>http://hugo.zkilm.cn/posts/20180929-reinstall-homestead/</link>
+			<pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+			
+			<guid>http://hugo.zkilm.cn/posts/20180929-reinstall-homestead/</guid>
+			<description>Homestead 的安装记录
+下载并安装 VirtualBox https://pan.baidu.com/s/1v_DiOlOOKZ3TWEjxAo1chw 提密码：xlcx 之后按照提示操作一步一步进行安装即可。 参考：我的安装位置 D:\VirtualBox ubuntu的iso文件下载：http://releases.ubuntu.com/18.04/ 参考：ubuntu-18.04.1-live-server-amd64.iso 2018-07-25 23:39 812M服务器安装64位PC（AMD64）计算机图像（标准下载） 建议重启电脑 下载并安装Vagrant 链接：https://pan.baidu.com/s/1zoB04XJmeY1lmhpnLVpnKw 提取码：lej9 然后一步一步按照默认安装即可。 参考：我的安装位置 D:\vagrant 建议重启电脑 安装和使用 Homestead 1、下载 Homestead 虚拟机盒子：
+链接：https://pan.baidu.com/s/1fnyCkBC_IrPXjkI2Tw7Zng 提取码：jpci 参考：我的存放位置位置 D:\vagrant\下 2、在解压目录中 lc-homestead-6.1.1-2018090400 运行以下命令导入 Box：
+vagrant box add metadata.json 3、下载 Homestead 管理脚本：
+git clone https://git.coding.net/summerblue/homestead.git Homestead 参考：我的存放位置 D:\
+4、下载完成之后我们使用命令行进入 Homestead 目录，再使用 Git 检出我们需要的 Homestead 版本：
+git checkout v7.8.0 来自 laravel-china 教程：为了保证后续讲解的流畅性，请注意版本的一致性，这里我们使用 v7.8.0
+5、接下来需要初始化 Homestead：
+bash init.sh #（在Homestead下执行） 会在 Homestead 下多出三个文件：Homestead.yaml ，after.</description>
+			<content type="html"><![CDATA[<p><code>Homestead</code> 的安装记录</p>
+<h3 id="下载并安装-virtualbox">下载并安装 VirtualBox</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">https://pan.baidu.com/s/1v_DiOlOOKZ3TWEjxAo1chw  提密码：xlcx
+之后按照提示操作一步一步进行安装即可。
+参考：我的安装位置  D:\VirtualBox
+
+ubuntu的iso文件下载：http://releases.ubuntu.com/18.04/
+参考：ubuntu-18.04.1-live-server-amd64.iso  2018-07-25 23:39 812M服务器安装64位PC（AMD64）计算机图像（标准下载）
+
+建议重启电脑
+</code></pre></div><h3 id="下载并安装vagrant">下载并安装Vagrant</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">链接：https://pan.baidu.com/s/1zoB04XJmeY1lmhpnLVpnKw 提取码：lej9
+然后一步一步按照默认安装即可。
+参考：我的安装位置  D:\vagrant
+
+建议重启电脑
+</code></pre></div><h3 id="安装和使用-homestead">安装和使用 Homestead</h3>
+<p>1、下载 <code>Homestead</code> 虚拟机盒子：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">链接：https://pan.baidu.com/s/1fnyCkBC_IrPXjkI2Tw7Zng 提取码：jpci
+参考：我的存放位置位置  D:\vagrant\下
+</code></pre></div><p>2、在解压目录中 <code>lc-homestead-6.1.1-2018090400</code> 运行以下命令导入 <code>Box</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vagrant box add metadata.json
+</code></pre></div><p>3、下载 <code>Homestead</code> 管理脚本：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git clone https://git.coding.net/summerblue/homestead.git Homestead
+</code></pre></div><p>参考：我的存放位置  D:\</p>
+<p>4、下载完成之后我们使用命令行进入 <code>Homestead</code> 目录，再使用 <code>Git</code> 检出我们需要的 <code>Homestead</code> 版本：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">git checkout v7.8.0
+</code></pre></div><p>来自 <code>laravel-china</code> 教程：为了保证后续讲解的流畅性，请注意版本的一致性，这里我们使用 <code>v7.8.0</code></p>
+<p>5、接下来需要初始化 <code>Homestead</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">bash init.sh  <span class="c1">#（在Homestead下执行）</span>
+</code></pre></div><p>会在 <code>Homestead</code> 下多出三个文件：<code>Homestead.yaml</code>  ，<code>after.sh</code>   ，<code>aliases</code></p>
+<h3 id="ssh-秘钥登录配置">SSH 秘钥登录配置</h3>
+<p>Homestead.yaml 配置文件下的authorize: ~/.ssh/id_rsa.pub（SSH 秘钥登录配置）</p>
+<p>1、先使用以下命令来检查主机上是否已经生成过 <code>SSH Key</code>：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ls -al ~/.ssh
+</code></pre></div><p>2、如果存在 <code>id_rsa</code> 和 <code>id_rsa.pub</code> 的话，请跳过以下生成 <code>SSH</code> 的步骤继续阅读剩下内容。
+否则使用以下方法来生成 <code>SSH Key</code>，请将 <code>your_email@example.com</code> 替换为你的邮箱：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">ssh-keygen -t rsa -C <span class="s2">&#34;your_email@example.com&#34;</span>
+</code></pre></div><p>注意：全部默认 <code>Enter</code> 即可</p>
+<p>3、检查是否生成：<code>ls -al ~/.ssh</code>，会发现多出一下两个文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">SSH 秘钥的两个文件：
+id_rsa —— SSH 秘钥的 私钥 <span class="o">(</span>Private Key<span class="o">)</span>
+id_rsa.pub —— SSH 秘钥的 公钥 <span class="o">(</span>Public Key<span class="o">)</span>
+</code></pre></div><h3 id="homesteadyaml-配置文件">Homestead.yaml 配置文件</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">//参考：我是这样配置的</span><span class="w">
+</span><span class="w">    </span>---<span class="w">
+</span><span class="w">    </span><span class="nt">ip</span><span class="p">:</span><span class="w"> </span><span class="s2">&#34;192.168.10.10&#34;</span><span class="w">
+</span><span class="w">    </span><span class="nt">memory</span><span class="p">:</span><span class="w"> </span><span class="m">2048</span><span class="w">
+</span><span class="w">    </span><span class="nt">cpus</span><span class="p">:</span><span class="w"> </span><span class="m">1</span><span class="w">
+</span><span class="w">    </span><span class="nt">provider</span><span class="p">:</span><span class="w"> </span><span class="l">virtualbox</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="nt">authorize</span><span class="p">:</span><span class="w"> </span><span class="l">~/.ssh/id_rsa.pub</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="nt">keys</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="l">~/.ssh/id_rsa</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="nt">folders</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">map</span><span class="p">:</span><span class="w"> </span><span class="l">E:/code/homestead  //本机存放代码位置</span><span class="w">
+</span><span class="w">          </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l">/home/vagrant/code  //虚拟机存放代码位置</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="nt">sites</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">map</span><span class="p">:</span><span class="w"> </span><span class="l">laravel.test   //项目访问域名，记得hosts文件的添加</span><span class="w">
+</span><span class="w">          </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l">/home/vagrant/code/laravel/public  //虚拟机项目访问入口文件</span><span class="w">
+</span><span class="w">        </span>- <span class="nt">map</span><span class="p">:</span><span class="w"> </span><span class="l">xxx   </span><span class="w">
+</span><span class="w">          </span><span class="nt">to</span><span class="p">:</span><span class="w"> </span><span class="l">/home/vagrant/code/xxx  </span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="nt">databases</span><span class="p">:</span><span class="w">
+</span><span class="w">        </span>- <span class="l">laravel   //第一个项目数据库名</span><span class="w">
+</span><span class="w">        </span>- <span class="l">xxx   //此项目数据库名</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="c"># blackfire:</span><span class="w">
+</span><span class="w">    </span><span class="c">#     - id: foo</span><span class="w">
+</span><span class="w">    </span><span class="c">#       token: bar</span><span class="w">
+</span><span class="w">    </span><span class="c">#       client-id: foo</span><span class="w">
+</span><span class="w">    </span><span class="c">#       client-token: bar</span><span class="w">
+</span><span class="w">    
+</span><span class="w">    </span><span class="c"># ports:</span><span class="w">
+</span><span class="w">    </span><span class="c">#     - send: 50000</span><span class="w">
+</span><span class="w">    </span><span class="c">#       to: 5000</span><span class="w">
+</span><span class="w">    </span><span class="c">#     - send: 7777</span><span class="w">
+</span><span class="w">    </span><span class="c">#       to: 777</span><span class="w">
+</span><span class="w">    </span><span class="c">#       protocol: udp</span><span class="w">
+</span></code></pre></div><h3 id="需要注意">需要注意：</h3>
+<p>需要注意（均在本地的Homestead下操作）</p>
+<p>1、在我们每次对 <code>Homestead.yaml</code> 文件进行了更改之后，都需要运行下面命令来使其更改生效：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vagrant provision <span class="o">&amp;&amp;</span> vagrant reload
+</code></pre></div><p>2、数据库相关</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">默认账户：homestead  密码：secret
+连上虚拟机：mysql -u homestead -p    进入数据库
+</code></pre></div><p>3、当 <code>vagrant up</code> 出现 <code>Vagrant could not detect VirtualBox!</code> 是可能的问题是：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">VBOX_INSTALL_PATH或VBOX_MSI_INSTALL_PATH环境变量。
+</code></pre></div><p>我是直接重启电脑就好了~~~</p>
+<p>4、<code>vagrant</code> 相关命令：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vagrant init	<span class="c1">#初始化 vagrant</span>
+vagrant up	    <span class="c1">#启动 vagrant</span>
+vagrant halt	<span class="c1">#关闭 vagrant</span>
+vagrant ssh	    <span class="c1">#通过SSH登录vagrant（需要先启动 vagrant）</span>
+vagrant provision	<span class="c1">#重新应用更改 vagrant 配置</span>
+vagrant destroy	    <span class="c1">#删除 vagrant</span>
+</code></pre></div><p>5、异常退出后，<code>vagrant up</code> 报错：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">vagrant haltThere was an error <span class="k">while</span> executing <span class="sb">`</span>VBoxManage<span class="sb">`</span>, a CLI used by Vagrant <span class="k">for</span> controlling VirtualBox. The <span class="nb">command</span> and std err is shown below.
+</code></pre></div><p>解决：重启电脑或者在任务管理器结束所有 <code>VirtualBox</code> 相关进程</p>
+]]></content>
+		</item>
+		
+		<item>
+			<title>腾讯云存储的简单使用</title>
+			<link>http://hugo.zkilm.cn/posts/20180806-tengcent-cos/</link>
+			<pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
+			
+			<guid>http://hugo.zkilm.cn/posts/20180806-tengcent-cos/</guid>
+			<description>导语 将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。
+对象存储 COS 简介
+ 对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。
+ 文档地址：https://cloud.tencent.com/document/product/436/11365
+上传前准备 快速入门流程图：
+在注册完并创建好存储桶后，需要拿到相关配置信息，APPID，SecretId，SecretKey（密钥管理），在存储桶下创建一个test文件夹，本次测试图片全部上传到该文件夹下，当然你也可以不创建，存储桶检测到没有该文件夹，会自动创建。本次记录只是走到了上传对象 。
+测试过程 1、composer腾讯云COS对象存储 V5包
+composer require freyo/flysystem-qcloud-cos-v5 2、在config/app.php的providers下添加
+Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php中的disks里下添加
+&amp;#39;disks&amp;#39;=&amp;gt;[ // ...  &amp;#39;cosv5&amp;#39; =&amp;gt; [ &amp;#39;driver&amp;#39; =&amp;gt; &amp;#39;cosv5&amp;#39;, &amp;#39;region&amp;#39; =&amp;gt; env(&amp;#39;COSV5_REGION&amp;#39;, &amp;#39;ap-guangzhou&amp;#39;), &amp;#39;credentials&amp;#39; =&amp;gt; [ &amp;#39;appId&amp;#39; =&amp;gt; env(&amp;#39;COSV5_APP_ID&amp;#39;), &amp;#39;secretId&amp;#39; =&amp;gt; env(&amp;#39;COSV5_SECRET_ID&amp;#39;), &amp;#39;secretKey&amp;#39; =&amp;gt; env(&amp;#39;COSV5_SECRET_KEY&amp;#39;), ], &amp;#39;timeout&amp;#39; =&amp;gt; env(&amp;#39;COSV5_TIMEOUT&amp;#39;, 60), &amp;#39;connect_timeout&amp;#39; =&amp;gt; env(&amp;#39;COSV5_CONNECT_TIMEOUT&amp;#39;, 60), &amp;#39;bucket&amp;#39; =&amp;gt; env(&amp;#39;COSV5_BUCKET&amp;#39;), &amp;#39;cdn&amp;#39; =&amp;gt; env(&amp;#39;COSV5_CDN&amp;#39;), &amp;#39;scheme&amp;#39; =&amp;gt; env(&amp;#39;COSV5_SCHEME&amp;#39;, &amp;#39;https&amp;#39;), ], ], 4、在.</description>
+			<content type="html"><![CDATA[<h3 id="导语">导语</h3>
+<p>将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。</p>
+<p>对象存储 COS 简介</p>
+<blockquote>
+<p>对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。</p>
+</blockquote>
+<p>文档地址：<a href="https://cloud.tencent.com/document/product/436/11365">https://cloud.tencent.com/document/product/436/11365</a></p>
+<h3 id="上传前准备">上传前准备</h3>
+<p>快速入门流程图：</p>
+<p><img src="https://mc.qcloudimg.com/static/img/520720197375cee1cc86ad0ebc38ffe2/image.png" alt="效果图"></p>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_1.jpg" alt="效果图"></p>
+<p>在注册完并创建好存储桶后，需要拿到相关配置信息，<code>APPID</code>，<code>SecretId</code>，<code>SecretKey</code>（密钥管理），在存储桶下创建一个test文件夹，本次测试图片全部上传到该文件夹下，当然你也可以不创建，存储桶检测到没有该文件夹，会自动创建。本次记录只是走到了上传对象 。</p>
+<h3 id="测试过程">测试过程</h3>
+<p>1、<code>composer</code>腾讯云COS对象存储 V5包</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require freyo/flysystem-qcloud-cos-v5
+</code></pre></div><p>2、在<code>config/app.php</code>的<code>providers</code>下添加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Freyo\Flysystem\QcloudCOSv5\ServiceProvider</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</code></pre></div><p>3、在<code>app/filesystems.php</code>中的<code>disks</code>里下添加</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;disks&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+    <span class="c1">// ...
+</span><span class="c1"></span>    <span class="s1">&#39;cosv5&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+          <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;cosv5&#39;</span><span class="p">,</span>
+          <span class="s1">&#39;region&#39;</span>          <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_REGION&#39;</span><span class="p">,</span> <span class="s1">&#39;ap-guangzhou&#39;</span><span class="p">),</span>
+          <span class="s1">&#39;credentials&#39;</span>     <span class="o">=&gt;</span> <span class="p">[</span>
+              <span class="s1">&#39;appId&#39;</span>     <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_APP_ID&#39;</span><span class="p">),</span>
+              <span class="s1">&#39;secretId&#39;</span>  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_SECRET_ID&#39;</span><span class="p">),</span>
+              <span class="s1">&#39;secretKey&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_SECRET_KEY&#39;</span><span class="p">),</span>
+          <span class="p">],</span>
+          <span class="s1">&#39;timeout&#39;</span>         <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_TIMEOUT&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+          <span class="s1">&#39;connect_timeout&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_CONNECT_TIMEOUT&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+          <span class="s1">&#39;bucket&#39;</span>          <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_BUCKET&#39;</span><span class="p">),</span>
+          <span class="s1">&#39;cdn&#39;</span>             <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_CDN&#39;</span><span class="p">),</span>
+          <span class="s1">&#39;scheme&#39;</span>          <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;COSV5_SCHEME&#39;</span><span class="p">,</span> <span class="s1">&#39;https&#39;</span><span class="p">),</span>
+    <span class="p">],</span>
+<span class="p">],</span>
+</code></pre></div><p>4、在<code>.env</code>中添加相关配置数据</p>
+<pre><code class="language-dotenv" data-lang="dotenv"># cosv5
+FILESYSTEM_DRIVER=cosv5    //或在app/filesystems.php修改'default' =&gt; 'cosv5',
+COSV5_REGION=ap-guangzhou
+COSV5_APP_ID=125600****
+COSV5_SECRET_ID=AKIDPFwZahxVA60j**********JTO8lDTHiaL
+COSV5_SECRET_KEY=kT7MVUKsJYeZ********CTcaMzazEH8q
+COSV5_TIMEOUT=60
+COSV5_CONNECT_TIMEOUT=60
+COSV5_BUCKET=test1-1256003521
+COSV5_CDN=https://test1-1256003521.cos.ap-guangzhou.myqcloud.com
+COSV5_SCHEME=https
+</code></pre><p>5、相关路由</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//腾讯云存储测试
+</span><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/cos&#39;</span><span class="p">,</span> <span class="s1">&#39;TestController@cos&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;cos&#39;</span><span class="p">);</span>
+<span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/cos/put&#39;</span><span class="p">,</span> <span class="s1">&#39;TestController@filePut&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;cos.put&#39;</span><span class="p">);</span>
+</code></pre></div><p>6、<code>TestController</code>中编写如下代码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+<span class="cm">/*
+</span><span class="cm"> * 腾讯云存储表单页
+</span><span class="cm"> * */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">cos</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$imgs</span><span class="o">=</span><span class="nx">CosImage</span><span class="o">::</span><span class="na">latest</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+    <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;cos.cos&#39;</span><span class="p">,</span><span class="nx">compact</span><span class="p">(</span><span class="s1">&#39;imgs&#39;</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="cm">/*
+</span><span class="cm"> * 将接收到的图片资源传到腾讯云COS
+</span><span class="cm"> * */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">filePut</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$fileContents</span><span class="o">=</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">file</span><span class="p">(</span><span class="s1">&#39;file&#39;</span><span class="p">);</span>
+    <span class="nv">$path</span><span class="o">=</span><span class="nx">Storage</span><span class="o">::</span><span class="na">disk</span><span class="p">(</span><span class="s1">&#39;cosv5&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="nv">$fileContents</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$path</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="nv">$result</span><span class="o">=</span><span class="nx">CosImage</span><span class="o">::</span><span class="na">create</span><span class="p">([</span><span class="s1">&#39;url_img&#39;</span><span class="o">=&gt;</span><span class="nv">$path</span><span class="p">]);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$result</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="nx">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span><span class="s1">&#39;上传成功&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="结果">结果</h3>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_3.jpg" alt="效果图"></p>
+<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_2.jpg" alt="效果图"></p>
+<p><strong>只是做了简单的对象上传，后面的包括下载对象，上传对象，删除存储桶等并没有做！！！</strong></p>
 ]]></content>
 		</item>
 		

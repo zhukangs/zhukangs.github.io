@@ -5,11 +5,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<meta itemprop="name" content="Elasticsearch 在 Laravel 中的使用">
+<meta itemprop="name" content="Elasticsearch 在 Laravel 中的使用👍">
 <meta itemprop="description" content="本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &#39;~7.0&#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&gt;app-&gt;singleton(&#39;es&#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&gt;setHosts(config(&#39;database.elasticsearch.hosts&#39;)) -&gt;setBasicAuthentication(config(&#39;database.elasticsearch.username&#39;),config(&#39;database.elasticsearch.password&#39;)); // 如果是开发环境  if (app()-&gt;environment() === &#39;local&#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&gt;setLogger(app(&#39;log&#39;)-&gt;driver()); } return $builder-&gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?"><meta itemprop="datePublished" content="2021-08-23T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-08-23T00:00:00+00:00" />
 <meta itemprop="wordCount" content="177">
-<meta itemprop="keywords" content="Elasticsearch,Laravel," /><meta property="og:title" content="Elasticsearch 在 Laravel 中的使用" />
+<meta itemprop="keywords" content="Elasticsearch,Laravel," /><meta property="og:title" content="Elasticsearch 在 Laravel 中的使用👍" />
 <meta property="og:description" content="本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &#39;~7.0&#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&gt;app-&gt;singleton(&#39;es&#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&gt;setHosts(config(&#39;database.elasticsearch.hosts&#39;)) -&gt;setBasicAuthentication(config(&#39;database.elasticsearch.username&#39;),config(&#39;database.elasticsearch.password&#39;)); // 如果是开发环境  if (app()-&gt;environment() === &#39;local&#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&gt;setLogger(app(&#39;log&#39;)-&gt;driver()); } return $builder-&gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://hugo.zkilm.cn/posts/20210823-laravel-es/" /><meta property="article:section" content="posts" />
@@ -17,7 +17,7 @@
 <meta property="article:modified_time" content="2021-08-23T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Elasticsearch 在 Laravel 中的使用"/>
+<meta name="twitter:title" content="Elasticsearch 在 Laravel 中的使用👍"/>
 <meta name="twitter:description" content="本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &#39;~7.0&#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&gt;app-&gt;singleton(&#39;es&#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&gt;setHosts(config(&#39;database.elasticsearch.hosts&#39;)) -&gt;setBasicAuthentication(config(&#39;database.elasticsearch.username&#39;),config(&#39;database.elasticsearch.password&#39;)); // 如果是开发环境  if (app()-&gt;environment() === &#39;local&#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&gt;setLogger(app(&#39;log&#39;)-&gt;driver()); } return $builder-&gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?"/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -27,7 +27,7 @@
 	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
 	<link rel="shortcut icon" href="/favicon.ico">
 
-	<title>Elasticsearch 在 Laravel 中的使用</title>
+	<title>Elasticsearch 在 Laravel 中的使用👍</title>
 	<link rel="stylesheet" href="http://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
 	
 </head>
@@ -66,10 +66,11 @@
 		<article class="thin">
 			<header class="post-header">
 				<div class="post-meta"><span>Aug 23, 2021</span></div>
-				<h1>Elasticsearch 在 Laravel 中的使用</h1>
+				<h1>Elasticsearch 在 Laravel 中的使用👍</h1>
 			</header>
 			<div class="content">
-				<h3 id="本文目标">本文目标<a href="#本文目标" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+				<p><img src="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg" alt="简单生活，热爱一切！"></p>
+<h3 id="本文目标">本文目标<a href="#本文目标" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>学会在 <code>Laravel</code> 中安装 <code>Elasticsearch</code>。</li>
 <li>创建索引。</li>
@@ -142,12 +143,12 @@
 
 <span class="nv">$results</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
 <span class="nv">$results</span><span class="p">[</span><span class="s1">&#39;aggregations&#39;</span><span class="p">][</span><span class="s1">&#39;distinct_open_id&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">];</span>
-</code></pre></div><p>另外可参考文章：https://blog.junphp.com/details/325.jsp</p>
+</code></pre></div><p>另外可参考文章：<a href="https://blog.junphp.com/details/325.jsp">https://blog.junphp.com/details/325.jsp</a></p>
 
 			</div>
 			<hr class="post-end">
 			<footer class="post-info">
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>promise</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="http://hugo.zkilm.cn/tags/elasticsearch">Elasticsearch</a></span><span class="tag"><a href="http://hugo.zkilm.cn/tags/laravel">Laravel</a></span>
 				</p>

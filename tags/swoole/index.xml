@@ -22,5 +22,23 @@ php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
 # 在php.ini的尾部增加如下代码 extension=swoole.so 重启 php # 在php.ini的尾部增加如下代码 extension=swoole.so 查看是否成功安装 查看 php 是否成功安装 swoole 模块</description>
     </item>
     
+    <item>
+      <title>使用LaravelS</title>
+      <link>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</link>
+      <pubDate>Fri, 28 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</guid>
+      <description>Laravels 介绍  LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。 在使用laravels之前，必须先装上swoole的扩展。
+ swoole文档：https://wiki.swoole.com/wiki/index/prid-1
+laraves文档：https://github.com/hhxsv5/laravel-s
+环境：在VMware虚拟机中自己搭的环境，Centos7，PHP7.2.12，Nginx1.14.2，MySQL 5.5.60。
+安装 Swoole 扩展 1、直接 pecl install swoole ,会报错，因为装有php老版本的依赖，所以要装新的
+yum install -y php72w-mysqlnd php72w-fpm php70w-pecl-redis php72w-common php72w-pdo php72w php72w-gd php72w-gd php72w-cli php72w-mbstring php72w-devel 因为我是PHP7.2，如果你是PHP7.0,将上面的php72替换为php70即可。
+2、如果报错：
+PHP Parse error: syntax error, unexpected //&amp;#39;new&amp;#39; (T_NEW) in /usr/share/pear/PEAR/Frontend.php on //line 91 解决方案：
+安装PECL //php版本 &amp;gt; 7 wget http://pear.php.net/go-pear.phar php go-pear.phar //php版本 &amp;lt; 7 yum install php-pear 3、安装swoole包
+1.pecl install swoole 2.WARNING:channel &amp;#34;pecl.php.net&amp;#34; has updated its protocols,use &amp;#34;pecl channel-update pecl.</description>
+    </item>
+    
   </channel>
 </rss>

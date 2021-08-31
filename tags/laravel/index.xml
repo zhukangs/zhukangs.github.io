@@ -9,7 +9,7 @@
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
     <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Elasticsearch 在 Laravel 中的使用</title>
+      <title>Elasticsearch 在 Laravel 中的使用👍</title>
       <link>http://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
       <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
       
@@ -29,6 +29,64 @@ sudo apt-get install erlang 安装完毕后，输入 erl 查看 erlang 版本，
 Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt; 然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。
 安装 RabbitMq sudo apt-get install rabbitmq-server 安装完毕后，查看 RabbitMQ 状态：
 sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop  # 重启RabbitMQ： service rabbitmq-server restart  配置 RabbitMQ 执行命令，启动 RabbitMQ 插件</description>
+    </item>
+    
+    <item>
+      <title>Laravel的微信公众号模板消息推送📨</title>
+      <link>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
+      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
+      <description>安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.7.*&amp;#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
+# Laravel &amp;lt; 5.8 composer require &amp;#34;overtrue/laravel-wechat:~4.0&amp;#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
+ 创建数据表  php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54.</description>
+    </item>
+    
+    <item>
+      <title>Laravel解决跨域请求🏃‍</title>
+      <link>http://hugo.zkilm.cn/posts/20190725-cross-request/</link>
+      <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/posts/20190725-cross-request/</guid>
+      <description>今天公司前端突然说请求跨域了，那么就解决下咯！
+创建中间件 首先创建一个中间件
+php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
+&amp;lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Origin&amp;#39;, &amp;#39;*&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Headers&amp;#39;, &amp;#39;Origin, Content-Type, Cookie, Accept&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Methods&amp;#39;, &amp;#39;GET, POST, PATCH, PUT, OPTIONS&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Credentials&amp;#39;, &amp;#39;true&amp;#39;); //ession共享的需求才用到  return $response; } } 注册中间件 添加到全局中间件 Kernel.</description>
+    </item>
+    
+    <item>
+      <title>微信的H5分享（基于 Laravel-Wechat）😶</title>
+      <link>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</link>
+      <pubDate>Mon, 10 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</guid>
+      <description>一、缘由 什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：
+但是，现在需求是，分享后为下面这样：
+没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。
+二、基本流程 1.设置JS接口安全域名
+进入微信公众号平台 —&amp;gt; 公众号设置 —&amp;gt; 功能设置 —&amp;gt; JS接口安全域名（`test.zks.design`） 设置的时候，微信有教你如何去设置，将下载的文件（MP_verify_acUZIwvhxMREbXNt.txt）放在项目的根目录就可以了。 2.配置一个基础 url 用于获取 jssdk 的 config 内容
+使用的 url 是 http://test.zks.design/jssdkconfig
+3.H5 静态页面存放在 public/h5/ 文件夹下
+因此在访问 H5 的时候，需要访问域名 `http://test.zks.design/h5/xxxx/` 因为 H5 主要是分享，而不是域名访问，因此这个域名没什么问题。 H5 均直接写静态页面，并不使用 laravel 的 blade 模板去写H5。 4.通过 ajax 获取 config 配置
+在需要调用分享的页面上，进行 config 配置的时候，首先通过 ajax 将基本参数传送给服务端url（`http://test.zks.design/jssdkconfig`）。 一些需要的参数可能如下： 可以参照 EasyWechat 的文档 https://www.easywechat.com/docs/4.1/basic-services/jssdk 其中建议 $app-&amp;gt;jssdk-&amp;gt;setUrl($url) 设置当前URL 一定是自己前端的页面的 url。 5.将获取到的 config 直接放在 js 中</description>
+    </item>
+    
+    <item>
+      <title>使用LaravelS</title>
+      <link>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</link>
+      <pubDate>Fri, 28 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</guid>
+      <description>Laravels 介绍  LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。 在使用laravels之前，必须先装上swoole的扩展。
+ swoole文档：https://wiki.swoole.com/wiki/index/prid-1
+laraves文档：https://github.com/hhxsv5/laravel-s
+环境：在VMware虚拟机中自己搭的环境，Centos7，PHP7.2.12，Nginx1.14.2，MySQL 5.5.60。
+安装 Swoole 扩展 1、直接 pecl install swoole ,会报错，因为装有php老版本的依赖，所以要装新的
+yum install -y php72w-mysqlnd php72w-fpm php70w-pecl-redis php72w-common php72w-pdo php72w php72w-gd php72w-gd php72w-cli php72w-mbstring php72w-devel 因为我是PHP7.2，如果你是PHP7.0,将上面的php72替换为php70即可。
+2、如果报错：
+PHP Parse error: syntax error, unexpected //&amp;#39;new&amp;#39; (T_NEW) in /usr/share/pear/PEAR/Frontend.php on //line 91 解决方案：
+安装PECL //php版本 &amp;gt; 7 wget http://pear.php.net/go-pear.phar php go-pear.phar //php版本 &amp;lt; 7 yum install php-pear 3、安装swoole包
+1.pecl install swoole 2.WARNING:channel &amp;#34;pecl.php.net&amp;#34; has updated its protocols,use &amp;#34;pecl channel-update pecl.</description>
     </item>
     
   </channel>

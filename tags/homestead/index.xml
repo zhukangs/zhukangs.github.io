@@ -22,5 +22,22 @@ php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
 # 在php.ini的尾部增加如下代码 extension=swoole.so 重启 php # 在php.ini的尾部增加如下代码 extension=swoole.so 查看是否成功安装 查看 php 是否成功安装 swoole 模块</description>
     </item>
     
+    <item>
+      <title>再次安装 Homestead</title>
+      <link>http://hugo.zkilm.cn/posts/20180929-reinstall-homestead/</link>
+      <pubDate>Sat, 29 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/posts/20180929-reinstall-homestead/</guid>
+      <description>Homestead 的安装记录
+下载并安装 VirtualBox https://pan.baidu.com/s/1v_DiOlOOKZ3TWEjxAo1chw 提密码：xlcx 之后按照提示操作一步一步进行安装即可。 参考：我的安装位置 D:\VirtualBox ubuntu的iso文件下载：http://releases.ubuntu.com/18.04/ 参考：ubuntu-18.04.1-live-server-amd64.iso 2018-07-25 23:39 812M服务器安装64位PC（AMD64）计算机图像（标准下载） 建议重启电脑 下载并安装Vagrant 链接：https://pan.baidu.com/s/1zoB04XJmeY1lmhpnLVpnKw 提取码：lej9 然后一步一步按照默认安装即可。 参考：我的安装位置 D:\vagrant 建议重启电脑 安装和使用 Homestead 1、下载 Homestead 虚拟机盒子：
+链接：https://pan.baidu.com/s/1fnyCkBC_IrPXjkI2Tw7Zng 提取码：jpci 参考：我的存放位置位置 D:\vagrant\下 2、在解压目录中 lc-homestead-6.1.1-2018090400 运行以下命令导入 Box：
+vagrant box add metadata.json 3、下载 Homestead 管理脚本：
+git clone https://git.coding.net/summerblue/homestead.git Homestead 参考：我的存放位置 D:\
+4、下载完成之后我们使用命令行进入 Homestead 目录，再使用 Git 检出我们需要的 Homestead 版本：
+git checkout v7.8.0 来自 laravel-china 教程：为了保证后续讲解的流畅性，请注意版本的一致性，这里我们使用 v7.8.0
+5、接下来需要初始化 Homestead：
+bash init.sh #（在Homestead下执行） 会在 Homestead 下多出三个文件：Homestead.yaml ，after.</description>
+    </item>
+    
   </channel>
 </rss>

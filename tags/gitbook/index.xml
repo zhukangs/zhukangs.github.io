@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>GitBook on Promise</title>
+    <link>http://hugo.zkilm.cn/tags/gitbook/</link>
+    <description>Recent content in GitBook on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 26 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/gitbook/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GitBook初试🍺</title>
+      <link>http://hugo.zkilm.cn/posts/20190826-try-gitbook/</link>
+      <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://hugo.zkilm.cn/posts/20190826-try-gitbook/</guid>
+      <description>完成后的成果预览地址：https://zkbook.zam9.com/
+ 安装 npm install gitbook-cli -g 报错：
+npm WARN checkPermissions Missing write access to /usr/lib/node_modules 原因：安装全局的包，没有权限
+解决办法：在安装命令前加上 sudo ,输入用户的登陆密码，提升权限进行安装。
+sudo npm install gitbook-cli -g 初始化 新建一个文件夹，如 gitbook ，cd 到 gitbook ，然后：
+gitbook init - README.md: 书的介绍文字，如前言、简介，在章节中也可做为章节的简介。 - SUMMARY.md: 定制书籍的章节结构和顺序。 开始编写你的目录及文件 如你可以在 gitbook 下新建一个 part01 目录与 README.md 和 SUMMARY.md 同级，然后在该目录下新建 md 文件即可。
+SUMMARY.md 文件作为书籍的目录结构:
+#Summary - [Introduction](README.md) - Part I - [登录流程介绍](part01/login.md) - [test01](part01/test01.md) - [test02 参考](part01/test02.md) - [概览](part01/test.md) - [Test](part01/Test.</description>
+    </item>
+    
+  </channel>
+</rss>
