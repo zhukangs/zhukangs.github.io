@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Swoole on Promise</title>
-    <link>http://hugo.zkilm.cn/tags/swoole/</link>
+    <link>https://hugo.zkilm.cn/tags/swoole/</link>
     <description>Recent content in Swoole on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/swoole/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/swoole/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Homestead 安装 Swoole 扩展</title>
-      <link>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</link>
+      <link>https://hugo.zkilm.cn/posts/20200828-homestead-swoole/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20200828-homestead-swoole/</guid>
       <description>配置镜像源 配置好 ubuntu 的国内镜像源并更新
 安装 dev 查看 php 版本，并安装对应 php 版本的 dev
 sudo apt install php7.2-dev 配置 pecl sudo pecl channel-update pecl.php.net sudo pear clear-cache sudo pear update-channels sudo pear upgrade 安装 swoole 扩展 安装 php 的 swoole 扩展
@@ -24,10 +24,10 @@ php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
     
     <item>
       <title>使用LaravelS</title>
-      <link>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</link>
+      <link>https://hugo.zkilm.cn/posts/20181228-laravel-swoole/</link>
       <pubDate>Fri, 28 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20181228-laravel-swoole/</guid>
       <description>Laravels 介绍  LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。 在使用laravels之前，必须先装上swoole的扩展。
  swoole文档：https://wiki.swoole.com/wiki/index/prid-1
 laraves文档：https://github.com/hhxsv5/laravel-s

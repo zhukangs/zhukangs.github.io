@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Laravel on Promise</title>
-    <link>http://hugo.zkilm.cn/tags/laravel/</link>
+    <link>https://hugo.zkilm.cn/tags/laravel/</link>
     <description>Recent content in Laravel on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elasticsearch 在 Laravel 中的使用👍</title>
-      <link>http://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
+      <link>https://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
       <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
       <description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&amp;gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&amp;gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&amp;gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
     </item>
     
     <item>
       <title>Homestead(ubuntu)&#43;Laravel 使用 RabbitMQ</title>
-      <link>http://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</link>
+      <link>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</link>
       <pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</guid>
       <description>安装 erlang erlang 是 RabbitMQ 的依赖。首先执行
 sudo apt-get update 然后执行
 sudo apt-get install erlang 安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：
@@ -33,10 +33,10 @@ sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server sta
     
     <item>
       <title>Laravel的微信公众号模板消息推送📨</title>
-      <link>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
+      <link>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
       <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
       <description>安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.7.*&amp;#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
 # Laravel &amp;lt; 5.8 composer require &amp;#34;overtrue/laravel-wechat:~4.0&amp;#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
  创建数据表  php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54.</description>
@@ -44,10 +44,10 @@ sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server sta
     
     <item>
       <title>Laravel解决跨域请求🏃‍</title>
-      <link>http://hugo.zkilm.cn/posts/20190725-cross-request/</link>
+      <link>https://hugo.zkilm.cn/posts/20190725-cross-request/</link>
       <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20190725-cross-request/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20190725-cross-request/</guid>
       <description>今天公司前端突然说请求跨域了，那么就解决下咯！
 创建中间件 首先创建一个中间件
 php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
@@ -56,10 +56,10 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
     
     <item>
       <title>微信的H5分享（基于 Laravel-Wechat）😶</title>
-      <link>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</link>
+      <link>https://hugo.zkilm.cn/posts/20190610-wechat-h5/</link>
       <pubDate>Mon, 10 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20190610-wechat-h5/</guid>
       <description>一、缘由 什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：
 但是，现在需求是，分享后为下面这样：
 没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。
@@ -73,10 +73,10 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
     
     <item>
       <title>使用LaravelS</title>
-      <link>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</link>
+      <link>https://hugo.zkilm.cn/posts/20181228-laravel-swoole/</link>
       <pubDate>Fri, 28 Dec 2018 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20181228-laravel-swoole/</guid>
       <description>Laravels 介绍  LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。 在使用laravels之前，必须先装上swoole的扩展。
  swoole文档：https://wiki.swoole.com/wiki/index/prid-1
 laraves文档：https://github.com/hhxsv5/laravel-s

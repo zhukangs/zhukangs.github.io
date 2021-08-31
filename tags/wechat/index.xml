@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wechat on Promise</title>
-    <link>http://hugo.zkilm.cn/tags/wechat/</link>
+    <link>https://hugo.zkilm.cn/tags/wechat/</link>
     <description>Recent content in Wechat on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/wechat/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/wechat/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>微信扫码 - 关注公众号后网站自动登录</title>
-      <link>http://hugo.zkilm.cn/posts/20210824-wx-scan/</link>
+      <link>https://hugo.zkilm.cn/posts/20210824-wx-scan/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20210824-wx-scan/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20210824-wx-scan/</guid>
       <description>大概流程是：点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。
 大家可以体验一下 「这种登录方式」
 前期准备  服务号（或者微信测试账号） EasyWeChat 扩展包  理解 简单的解释一下扫描这个带参二维码有什么不同：
@@ -26,10 +26,10 @@
     
     <item>
       <title>Laravel的微信公众号模板消息推送📨</title>
-      <link>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
+      <link>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
       <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
       <description>安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.7.*&amp;#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
 # Laravel &amp;lt; 5.8 composer require &amp;#34;overtrue/laravel-wechat:~4.0&amp;#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
  创建数据表  php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54.</description>
@@ -37,10 +37,10 @@
     
     <item>
       <title>微信的H5分享（基于 Laravel-Wechat）😶</title>
-      <link>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</link>
+      <link>https://hugo.zkilm.cn/posts/20190610-wechat-h5/</link>
       <pubDate>Mon, 10 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20190610-wechat-h5/</guid>
       <description>一、缘由 什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：
 但是，现在需求是，分享后为下面这样：
 没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。

@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Promise</title>
-    <link>http://hugo.zkilm.cn/</link>
+    <link>https://hugo.zkilm.cn/</link>
     <description>Recent content on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About</title>
-      <link>http://hugo.zkilm.cn/about/</link>
+      <link>https://hugo.zkilm.cn/about/</link>
       <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/about/</guid>
+      <guid>https://hugo.zkilm.cn/about/</guid>
       <description>朱康 男 90 后
 WEB开发者，喜欢折腾，热爱LARAVEL，重度代码洁癖患者。 综合技能    名称 熟悉程度     PHP ★★★★☆   CSS ★★★☆☆   JAVASCRIPT ★★★☆☆   LINUX ★★★☆☆   MySQL ★★★☆☆   MARKDOWN ★★★☆☆   GOLANG ★★☆☆☆   PYTHON ★★☆☆☆    联系方式：  Github：https://github.com/zhukangs 邮箱：zhukang074@gmail.com  </description>
     </item>
     
     <item>
       <title>Elasticsearch 在 Laravel 中的使用👍</title>
-      <link>http://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
+      <link>https://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
       <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
       <description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&amp;gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&amp;gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&amp;gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
     </item>
     
     <item>
       <title>Homestead(ubuntu)&#43;Laravel 使用 RabbitMQ</title>
-      <link>http://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</link>
+      <link>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</link>
       <pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</guid>
       <description>安装 erlang erlang 是 RabbitMQ 的依赖。首先执行
 sudo apt-get update 然后执行
 sudo apt-get install erlang 安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：
@@ -43,10 +43,10 @@ sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server sta
     
     <item>
       <title>Homestead 安装 Swoole 扩展</title>
-      <link>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</link>
+      <link>https://hugo.zkilm.cn/posts/20200828-homestead-swoole/</link>
       <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20200828-homestead-swoole/</guid>
       <description>配置镜像源 配置好 ubuntu 的国内镜像源并更新
 安装 dev 查看 php 版本，并安装对应 php 版本的 dev
 sudo apt install php7.2-dev 配置 pecl sudo pecl channel-update pecl.php.net sudo pear clear-cache sudo pear update-channels sudo pear upgrade 安装 swoole 扩展 安装 php 的 swoole 扩展
@@ -57,10 +57,10 @@ php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
     
     <item>
       <title>微信扫码 - 关注公众号后网站自动登录</title>
-      <link>http://hugo.zkilm.cn/posts/20210824-wx-scan/</link>
+      <link>https://hugo.zkilm.cn/posts/20210824-wx-scan/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20210824-wx-scan/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20210824-wx-scan/</guid>
       <description>大概流程是：点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。
 大家可以体验一下 「这种登录方式」
 前期准备  服务号（或者微信测试账号） EasyWeChat 扩展包  理解 简单的解释一下扫描这个带参二维码有什么不同：
@@ -73,10 +73,10 @@ php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
     
     <item>
       <title>Laravel的微信公众号模板消息推送📨</title>
-      <link>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
+      <link>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
       <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
       <description>安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.7.*&amp;#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
 # Laravel &amp;lt; 5.8 composer require &amp;#34;overtrue/laravel-wechat:~4.0&amp;#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
  创建数据表  php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54.</description>
@@ -84,10 +84,10 @@ php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
     
     <item>
       <title>GitBook初试🍺</title>
-      <link>http://hugo.zkilm.cn/posts/20190826-try-gitbook/</link>
+      <link>https://hugo.zkilm.cn/posts/20190826-try-gitbook/</link>
       <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20190826-try-gitbook/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20190826-try-gitbook/</guid>
       <description>完成后的成果预览地址：https://zkbook.zam9.com/
  安装 npm install gitbook-cli -g 报错：
 npm WARN checkPermissions Missing write access to /usr/lib/node_modules 原因：安装全局的包，没有权限
@@ -100,10 +100,10 @@ SUMMARY.md 文件作为书籍的目录结构:
     
     <item>
       <title>Laravel解决跨域请求🏃‍</title>
-      <link>http://hugo.zkilm.cn/posts/20190725-cross-request/</link>
+      <link>https://hugo.zkilm.cn/posts/20190725-cross-request/</link>
       <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20190725-cross-request/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20190725-cross-request/</guid>
       <description>今天公司前端突然说请求跨域了，那么就解决下咯！
 创建中间件 首先创建一个中间件
 php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
@@ -112,10 +112,10 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
     
     <item>
       <title>微信的H5分享（基于 Laravel-Wechat）😶</title>
-      <link>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</link>
+      <link>https://hugo.zkilm.cn/posts/20190610-wechat-h5/</link>
       <pubDate>Mon, 10 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20190610-wechat-h5/</guid>
       <description>一、缘由 什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：
 但是，现在需求是，分享后为下面这样：
 没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。
@@ -129,10 +129,10 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
     
     <item>
       <title>PHPOffice之Excel🍜</title>
-      <link>http://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</link>
+      <link>https://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</link>
       <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</guid>
       <description>导语  简单的数据导入导出其实 Maatwebsite/Laravel-Excel 和 box/spout 就够了，听说spout在大量数据下效率较Laravel-Excel 快。这次因为要根据Excel模板导出，在这两个包没找到怎么引入模板的方法，虽然可以设置，但是过于麻烦，就放弃了。最终选择了 PHPOffice/PhpSpreadsheet 。
   PhpSpreadsheet是一个用纯PHP编写的库，它提供了一组类，允许您读取和写入不同的电子表格文件格式，如Excel和LibreOffice Calc。
  PhpSpreadsheet文档传送门

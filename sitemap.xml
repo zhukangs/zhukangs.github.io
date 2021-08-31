@@ -2,79 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://hugo.zkilm.cn/about/</loc>
+    <loc>https://hugo.zkilm.cn/about/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/elasticsearch/</loc>
+    <loc>https://hugo.zkilm.cn/tags/elasticsearch/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20210823-laravel-es/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20210823-laravel-es/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/laravel/</loc>
+    <loc>https://hugo.zkilm.cn/tags/laravel/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/</loc>
+    <loc>https://hugo.zkilm.cn/posts/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/</loc>
+    <loc>https://hugo.zkilm.cn/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/</loc>
+    <loc>https://hugo.zkilm.cn/tags/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</loc>
     <lastmod>2021-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/rabbitmq/</loc>
+    <loc>https://hugo.zkilm.cn/tags/rabbitmq/</loc>
     <lastmod>2021-01-21T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/homestead/</loc>
+    <loc>https://hugo.zkilm.cn/tags/homestead/</loc>
     <lastmod>2020-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20200828-homestead-swoole/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20200828-homestead-swoole/</loc>
     <lastmod>2020-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/swoole/</loc>
+    <loc>https://hugo.zkilm.cn/tags/swoole/</loc>
     <lastmod>2020-08-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/wechat/</loc>
+    <loc>https://hugo.zkilm.cn/tags/wechat/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20210824-wx-scan/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20210824-wx-scan/</loc>
     <lastmod>2020-02-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</loc>
     <lastmod>2019-11-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/gitbook/</loc>
+    <loc>https://hugo.zkilm.cn/tags/gitbook/</loc>
     <lastmod>2019-08-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20190826-try-gitbook/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20190826-try-gitbook/</loc>
     <lastmod>2019-08-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20190725-cross-request/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20190725-cross-request/</loc>
     <lastmod>2019-07-25T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20190610-wechat-h5/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20190610-wechat-h5/</loc>
     <lastmod>2019-06-10T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/phpoffice/</loc>
+    <loc>https://hugo.zkilm.cn/tags/phpoffice/</loc>
     <lastmod>2019-03-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</loc>
     <lastmod>2019-03-20T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20181228-laravel-swoole/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20181228-laravel-swoole/</loc>
     <lastmod>2018-12-28T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20180929-reinstall-homestead/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20180929-reinstall-homestead/</loc>
     <lastmod>2018-09-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/tags/cos/</loc>
+    <loc>https://hugo.zkilm.cn/tags/cos/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://hugo.zkilm.cn/posts/20180806-tengcent-cos/</loc>
+    <loc>https://hugo.zkilm.cn/posts/20180806-tengcent-cos/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
   </url>
 </urlset>

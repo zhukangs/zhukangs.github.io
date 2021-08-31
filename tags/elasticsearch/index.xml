@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Elasticsearch on Promise</title>
-    <link>http://hugo.zkilm.cn/tags/elasticsearch/</link>
+    <link>https://hugo.zkilm.cn/tags/elasticsearch/</link>
     <description>Recent content in Elasticsearch on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://hugo.zkilm.cn/tags/elasticsearch/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/elasticsearch/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elasticsearch 在 Laravel 中的使用👍</title>
-      <link>http://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
+      <link>https://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
       <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
+      <guid>https://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
       <description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&amp;gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&amp;gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&amp;gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
     </item>
     
