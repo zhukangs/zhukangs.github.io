@@ -7,13 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 23 Aug 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Elasticsearch</title>
       <link>https://hugo.zkilm.cn/tags/elasticsearch/</link>
-      <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
       
       <guid>https://hugo.zkilm.cn/tags/elasticsearch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>https://hugo.zkilm.cn/tags/python/</link>
+      <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/tags/python/</guid>
       <description></description>
     </item>
     

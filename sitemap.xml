@@ -2,25 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://hugo.zkilm.cn/about/</loc>
-    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://hugo.zkilm.cn/tags/elasticsearch/</loc>
+    <lastmod>2021-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hugo.zkilm.cn/posts/</loc>
+    <lastmod>2021-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hugo.zkilm.cn/</loc>
+    <lastmod>2021-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hugo.zkilm.cn/tags/python/</loc>
+    <lastmod>2021-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hugo.zkilm.cn/tags/</loc>
+    <lastmod>2021-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hugo.zkilm.cn/posts/20210901-python-es/</loc>
+    <lastmod>2021-09-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://hugo.zkilm.cn/about/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hugo.zkilm.cn/posts/20210823-laravel-es/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hugo.zkilm.cn/tags/laravel/</loc>
-    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hugo.zkilm.cn/posts/</loc>
-    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hugo.zkilm.cn/</loc>
-    <lastmod>2021-08-23T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://hugo.zkilm.cn/tags/</loc>
     <lastmod>2021-08-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</loc>
