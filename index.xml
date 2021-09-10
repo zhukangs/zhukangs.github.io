@@ -7,7 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 01 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>监控服务器异常与重启</title>
+      <link>https://hugo.zkilm.cn/posts/20210909-restart-lnmp/</link>
+      <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/20210909-restart-lnmp/</guid>
+      <description>在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。
+PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判断服务器是否正常运行，脚本 service-restart.sh 如下：
+# ! /bin/sh ###查看fpm服务是否运行 phpfpm_procnum=`ps -ef|grep &amp;#34;php-fpm&amp;#34;|grep -v grep|wc -l` if [ $phpfpm_procnum -eq 0 ] then echo &amp;#34;restart php-fpm...&amp;#34; systemctl restart php-fpm &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi ###查看nginx服务是否运行 nginx_procnum=`ps -ef|grep &amp;#34;nginx&amp;#34;|grep -v grep|wc -l` if [ $nginx_procnum -eq 0 ] then echo &amp;#34;restart nginx...&amp;#34; systemctl restart nginx &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi 查看服务器响应 通过 curl 服务器地址，根据响应信息判断是否出现异常，脚本 nginx404.php 如下：
+&amp;lt;?php $url = &amp;#39;https://test.com&amp;#39;; $cmd = &amp;#39;systemctl restart php-fpm&amp;#39;; for ($i = 0; $i &amp;lt; 5; $i++) { $exec = &amp;#34;curl connect-timeout 3 -I $url2&amp;gt;/dev/null&amp;#34;; $res = shell_exec($exec); if (stripos($res, &amp;#39;404 Not Found&amp;#39;) !</description>
+    </item>
+    
     <item>
       <title>百万级数据导入 Elasticsearch 😌</title>
       <link>https://hugo.zkilm.cn/posts/20210901-python-es/</link>
@@ -117,17 +129,6 @@ php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
  生成带login参数的临时二维码的时候，将二维码的ticket更新到数据库该用户下，默认状态为未使用 用户扫码，微信会推送一个扫码事件，也会把自定义参数login带到事件中，改变二维码状态为已使用 前端进到扫码页面的同时就开始轮询扫描结果接口，状态为已使用则扫码登录成功 未关注的用户，会先根据openid获取用户信息并写入数据库，关注过的则数据库有数据，做相关更新操作。  最后送个自己💪
  全世界就一个独一无二的你，请一定：真诚做人，努力做事！你想要的，岁月都会给你。
  </description>
-    </item>
-    
-    <item>
-      <title>Laravel的微信公众号模板消息推送📨</title>
-      <link>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</link>
-      <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://hugo.zkilm.cn/posts/20191127-wechat-pushmsg/</guid>
-      <description>安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.7.*&amp;#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
-# Laravel &amp;lt; 5.8 composer require &amp;#34;overtrue/laravel-wechat:~4.0&amp;#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
- 创建数据表  php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54.</description>
     </item>
     
   </channel>

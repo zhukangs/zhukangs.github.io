@@ -122,7 +122,7 @@ Eshell V9.2  <span class="o">(</span>abort with ^G<span class="o">)</span>
 </code></pre></div><p>为用户设置读写权限</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmqctl set_permissions -p / admin <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span>
 </code></pre></div><p>打开 <code>RabbitMQ</code> 后台</p>
-<pre><code>浏览器中输入：http:// 服务器 ip+:15672, 例如我的是：192.168.10.10:15672/
+<pre tabindex="0"><code>浏览器中输入：http:// 服务器 ip+:15672, 例如我的是：192.168.10.10:15672/
 </code></pre><p>15672 端口默认是关闭的，因此需要打开</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">1. sudo apt-get install iptables
 2. sudo iptables -I INPUT -p tcp --dport <span class="m">15672</span> -j ACCEPT
@@ -226,7 +226,7 @@ sudo service php7.2-fpm restart
  
 <span class="p">],</span>
 </code></pre></div><p>在 <code>.env</code> 中添加</p>
-<pre><code class="language-dotenv" data-lang="dotenv">QUEUE_CONNECTION=rabbitmq #修改一下
+<pre tabindex="0"><code class="language-dotenv" data-lang="dotenv">QUEUE_CONNECTION=rabbitmq #修改一下
 RABBITMQ_HOST = 127.0.0.1   #要连接得主机名
 RABBITMQ_PORT = 5672  #端口
 RABBITMQ_VHOST = / 

@@ -7,7 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 01 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>LNMP</title>
+      <link>https://hugo.zkilm.cn/tags/lnmp/</link>
+      <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/tags/lnmp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Supervisor</title>
+      <link>https://hugo.zkilm.cn/tags/supervisor/</link>
+      <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/tags/supervisor/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>Elasticsearch</title>
       <link>https://hugo.zkilm.cn/tags/elasticsearch/</link>
@@ -77,24 +95,6 @@
       <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
       
       <guid>https://hugo.zkilm.cn/tags/gitbook/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>PhpOffice</title>
-      <link>https://hugo.zkilm.cn/tags/phpoffice/</link>
-      <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>https://hugo.zkilm.cn/tags/phpoffice/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Cos</title>
-      <link>https://hugo.zkilm.cn/tags/cos/</link>
-      <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>https://hugo.zkilm.cn/tags/cos/</guid>
       <description></description>
     </item>
     

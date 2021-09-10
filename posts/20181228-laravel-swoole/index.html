@@ -147,7 +147,7 @@ yum install php-pear
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan laravels publish
 </code></pre></div><p>4、修改配置 <code>config/laravels.php</code>：监听的IP、端口等。</p>
 <p>5、配置 <code>web.confg</code> 文件，我的是这样</p>
-<pre><code class="language-apacheconfig" data-lang="apacheconfig">map $http_upgrade $connection_upgrade {
+<pre tabindex="0"><code class="language-apacheconfig" data-lang="apacheconfig">map $http_upgrade $connection_upgrade {
     default upgrade;
     ''      close;
 }

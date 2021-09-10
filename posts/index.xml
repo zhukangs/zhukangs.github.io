@@ -6,8 +6,98 @@
 		<generator>Hugo -- gohugo.io</generator>
 		<language>zh-hans</language>
 		<copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-		<lastBuildDate>Wed, 01 Sep 2021 00:00:00 +0000</lastBuildDate>
+		<lastBuildDate>Thu, 09 Sep 2021 00:00:00 +0000</lastBuildDate>
 		<atom:link href="https://hugo.zkilm.cn/posts/index.xml" rel="self" type="application/rss+xml" />
+		
+		<item>
+			<title>监控服务器异常与重启</title>
+			<link>https://hugo.zkilm.cn/posts/20210909-restart-lnmp/</link>
+			<pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
+			
+			<guid>https://hugo.zkilm.cn/posts/20210909-restart-lnmp/</guid>
+			<description>在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。
+PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判断服务器是否正常运行，脚本 service-restart.sh 如下：
+# ! /bin/sh ###查看fpm服务是否运行 phpfpm_procnum=`ps -ef|grep &amp;#34;php-fpm&amp;#34;|grep -v grep|wc -l` if [ $phpfpm_procnum -eq 0 ] then echo &amp;#34;restart php-fpm...&amp;#34; systemctl restart php-fpm &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi ###查看nginx服务是否运行 nginx_procnum=`ps -ef|grep &amp;#34;nginx&amp;#34;|grep -v grep|wc -l` if [ $nginx_procnum -eq 0 ] then echo &amp;#34;restart nginx...&amp;#34; systemctl restart nginx &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi 查看服务器响应 通过 curl 服务器地址，根据响应信息判断是否出现异常，脚本 nginx404.php 如下：
+&amp;lt;?php $url = &amp;#39;https://test.com&amp;#39;; $cmd = &amp;#39;systemctl restart php-fpm&amp;#39;; for ($i = 0; $i &amp;lt; 5; $i++) { $exec = &amp;#34;curl connect-timeout 3 -I $url2&amp;gt;/dev/null&amp;#34;; $res = shell_exec($exec); if (stripos($res, &amp;#39;404 Not Found&amp;#39;) !</description>
+			<content type="html"><![CDATA[<p>在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。</p>
+<h2 id="php与nginx">PHP与Nginx</h2>
+<h3 id="查看服务进程数">查看服务进程数</h3>
+<p>通过查看服务器相关进程数，来判断服务器是否正常运行，脚本 <code>service-restart.sh</code> 如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># ! /bin/sh</span>
+    
+<span class="c1">###查看fpm服务是否运行</span>
+<span class="nv">phpfpm_procnum</span><span class="o">=</span><span class="sb">`</span>ps -ef<span class="p">|</span>grep <span class="s2">&#34;php-fpm&#34;</span><span class="p">|</span>grep -v grep<span class="p">|</span>wc -l<span class="sb">`</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$phpfpm_procnum</span> -eq <span class="m">0</span> <span class="o">]</span>
+    <span class="k">then</span>
+        <span class="nb">echo</span> <span class="s2">&#34;restart php-fpm...&#34;</span>
+        systemctl restart php-fpm &gt;&gt; /var/log/listen_service_start.log 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="k">fi</span>
+<span class="c1">###查看nginx服务是否运行</span>
+<span class="nv">nginx_procnum</span><span class="o">=</span><span class="sb">`</span>ps -ef<span class="p">|</span>grep <span class="s2">&#34;nginx&#34;</span><span class="p">|</span>grep -v grep<span class="p">|</span>wc -l<span class="sb">`</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nv">$nginx_procnum</span> -eq <span class="m">0</span> <span class="o">]</span>
+    <span class="k">then</span> 
+        <span class="nb">echo</span> <span class="s2">&#34;restart nginx...&#34;</span>
+        systemctl restart nginx &gt;&gt; /var/log/listen_service_start.log 2&gt;<span class="p">&amp;</span><span class="m">1</span>
+<span class="k">fi</span>
+</code></pre></div><h3 id="查看服务器响应">查看服务器响应</h3>
+<p>通过 <code>curl</code> 服务器地址，根据响应信息判断是否出现异常，脚本 <code>nginx404.php</code> 如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+    
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">&#39;https://test.com&#39;</span><span class="p">;</span>
+<span class="nv">$cmd</span> <span class="o">=</span> <span class="s1">&#39;systemctl restart php-fpm&#39;</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nv">$i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">;</span> <span class="nv">$i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$exec</span> <span class="o">=</span> <span class="s2">&#34;curl connect-timeout 3 -I </span><span class="si">$url</span><span class="s2"> 2&gt;/dev/null&#34;</span><span class="p">;</span>
+    <span class="nv">$res</span> <span class="o">=</span> <span class="nx">shell_exec</span><span class="p">(</span><span class="nv">$exec</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">stripos</span><span class="p">(</span><span class="nv">$res</span><span class="p">,</span> <span class="s1">&#39;404 Not Found&#39;</span><span class="p">)</span> <span class="o">!==</span> <span class="k">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">shell_exec</span><span class="p">(</span><span class="nv">$cmd</span><span class="p">);</span>
+        <span class="k">exit</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><h2 id="supervisor">Supervisor</h2>
+<h3 id="判断命令响应状态">判断命令响应状态</h3>
+<p>通过执行查看 <code>Supervisor</code> 的状态命令，判断是否为 <code>RUNNING</code>，脚本 <code>check-supervisor.sh</code> 如下</p>
+<p><strong>重启指定</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
+</span><span class="cp"></span>    
+smart-retail-api_00<span class="o">=</span><span class="sb">`</span>supervisorctl status smart-retail-api:smart-retail-api_00<span class="sb">`</span>
+smart-retail-api_00<span class="o">=</span><span class="sb">`</span>supervisorctl status smart-retail-api:smart-retail-api_01<span class="sb">`</span>
+
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$smart</span><span class="s2">-retail-api_00&#34;</span> <span class="o">=</span>~ <span class="s2">&#34;RUNNING&#34;</span> <span class="o">]]</span>
+<span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;smart-retail-api_00 RUNNING&#34;</span>
+<span class="k">else</span>
+    <span class="nb">echo</span> <span class="s2">&#34;smart-retail-api:smart-retail-api_00 starting...&#34;</span>
+    supervisorctl start smart-retail-api:smart-retail-api_00
+<span class="k">fi</span>
+
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$smart</span><span class="s2">-retail-api_01&#34;</span> <span class="o">=</span>~ <span class="s2">&#34;RUNNING&#34;</span> <span class="o">]]</span>
+<span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;smart-retail-api_01 RUNNING&#34;</span>
+<span class="k">else</span>
+    <span class="nb">echo</span> <span class="s2">&#34;smart-retail-api:smart-retail-api_00 starting...&#34;</span>
+    supervisorctl start smart-retail-api:smart-retail-api_01
+<span class="k">fi</span>
+</code></pre></div><p><strong>重启全部</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
+</span><span class="cp"></span>    
+<span class="nv">supervisor_status</span><span class="o">=</span><span class="sb">`</span>supervisorctl status<span class="sb">`</span>
+
+<span class="k">if</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$supervisor_status</span><span class="s2">&#34;</span> <span class="o">=</span>~ <span class="s2">&#34;FATAL&#34;</span> <span class="o">]]</span> <span class="o">||</span> <span class="o">[[</span> <span class="s2">&#34;</span><span class="nv">$supervisor_status</span><span class="s2">&#34;</span> <span class="o">=</span>~ <span class="s2">&#34;STOPPED&#34;</span> <span class="o">]]</span>
+<span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&#34;supervisor restarting all...&#34;</span>
+    supervisorctl restart all
+<span class="k">else</span>
+    <span class="nb">echo</span> <span class="s2">&#34;supervisor RUNNING&#34;</span>
+<span class="k">fi</span>
+</code></pre></div><h2 id="配置任务调度">配置任务调度</h2>
+<p><strong>每分钟检测</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">crontab -e
+    
+* * * * * bash /root/service-restart.sh
+</code></pre></div>]]></content>
+		</item>
 		
 		<item>
 			<title>百万级数据导入 Elasticsearch 😌</title>
@@ -163,7 +253,7 @@ Successful！
 <h3 id="安装-composer-包">安装 <code>composer</code> 包</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require elasticsearch/elasticsearch <span class="s1">&#39;~7.0&#39;</span>
 </code></pre></div><h3 id="配置-configdatabasephp">配置 <code>config/database.php</code></h3>
-<pre><code class="language-dotenv" data-lang="dotenv"># Elasticsearch Config Info
+<pre tabindex="0"><code class="language-dotenv" data-lang="dotenv"># Elasticsearch Config Info
 'elasticsearch' =&gt; [
     // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组
     'hosts' =&gt; explode(',', env('ES_HOSTS')),
@@ -185,9 +275,9 @@ Successful！
     <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div><h3 id="创建索引">创建索引</h3>
-<pre><code>curl -XPUT -u name:pwd http://ip:9200/user_behavior?pretty
+<pre tabindex="0"><code>curl -XPUT -u name:pwd http://ip:9200/user_behavior?pretty
 </code></pre><h3 id="创建索引结构">创建索引结构</h3>
-<pre><code>curl -H'Content-Type: application/json'  -XPUT -u name:pwd http://ip:9200/user_behavior/_mapping/?pretty -d'{
+<pre tabindex="0"><code>curl -H'Content-Type: application/json'  -XPUT -u name:pwd http://ip:9200/user_behavior/_mapping/?pretty -d'{
   &quot;properties&quot;: {
     &quot;open_id&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;store&quot;:true }, 
     &quot;imp_date&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;store&quot;:true }, 
@@ -273,7 +363,7 @@ Eshell V9.2  <span class="o">(</span>abort with ^G<span class="o">)</span>
 </code></pre></div><p>为用户设置读写权限</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmqctl set_permissions -p / admin <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span>
 </code></pre></div><p>打开 <code>RabbitMQ</code> 后台</p>
-<pre><code>浏览器中输入：http:// 服务器 ip+:15672, 例如我的是：192.168.10.10:15672/
+<pre tabindex="0"><code>浏览器中输入：http:// 服务器 ip+:15672, 例如我的是：192.168.10.10:15672/
 </code></pre><p>15672 端口默认是关闭的，因此需要打开</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">1. sudo apt-get install iptables
 2. sudo iptables -I INPUT -p tcp --dport <span class="m">15672</span> -j ACCEPT
@@ -377,7 +467,7 @@ sudo service php7.2-fpm restart
  
 <span class="p">],</span>
 </code></pre></div><p>在 <code>.env</code> 中添加</p>
-<pre><code class="language-dotenv" data-lang="dotenv">QUEUE_CONNECTION=rabbitmq #修改一下
+<pre tabindex="0"><code class="language-dotenv" data-lang="dotenv">QUEUE_CONNECTION=rabbitmq #修改一下
 RABBITMQ_HOST = 127.0.0.1   #要连接得主机名
 RABBITMQ_PORT = 5672  #端口
 RABBITMQ_VHOST = / 
@@ -939,7 +1029,7 @@ sudo n 8.16.1
 
 在执行 gitbook init 主目录下增加 book.json 文件做定制化配置
 </code></pre></div><p>配置目录折叠功能如下：</p>
-<pre><code class="language-smartyconfig" data-lang="smartyconfig">{
+<pre tabindex="0"><code class="language-smartyconfig" data-lang="smartyconfig">{
   &quot;plugins&quot;:[
     &quot;expandable-chapters&quot;,
     &quot;donate&quot;
@@ -1353,7 +1443,7 @@ yum install php-pear
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan laravels publish
 </code></pre></div><p>4、修改配置 <code>config/laravels.php</code>：监听的IP、端口等。</p>
 <p>5、配置 <code>web.confg</code> 文件，我的是这样</p>
-<pre><code class="language-apacheconfig" data-lang="apacheconfig">map $http_upgrade $connection_upgrade {
+<pre tabindex="0"><code class="language-apacheconfig" data-lang="apacheconfig">map $http_upgrade $connection_upgrade {
     default upgrade;
     ''      close;
 }
@@ -1655,7 +1745,7 @@ Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php�
     <span class="p">],</span>
 <span class="p">],</span>
 </code></pre></div><p>4、在<code>.env</code>中添加相关配置数据</p>
-<pre><code class="language-dotenv" data-lang="dotenv"># cosv5
+<pre tabindex="0"><code class="language-dotenv" data-lang="dotenv"># cosv5
 FILESYSTEM_DRIVER=cosv5    //或在app/filesystems.php修改'default' =&gt; 'cosv5',
 COSV5_REGION=ap-guangzhou
 COSV5_APP_ID=125600****

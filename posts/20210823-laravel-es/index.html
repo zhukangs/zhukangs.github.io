@@ -87,7 +87,7 @@
 <h3 id="安装-composer-包">安装 <code>composer</code> 包<a href="#安装-composer-包" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require elasticsearch/elasticsearch <span class="s1">&#39;~7.0&#39;</span>
 </code></pre></div><h3 id="配置-configdatabasephp">配置 <code>config/database.php</code><a href="#配置-configdatabasephp" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<pre><code class="language-dotenv" data-lang="dotenv"># Elasticsearch Config Info
+<pre tabindex="0"><code class="language-dotenv" data-lang="dotenv"># Elasticsearch Config Info
 'elasticsearch' =&gt; [
     // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组
     'hosts' =&gt; explode(',', env('ES_HOSTS')),
@@ -109,9 +109,9 @@
     <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
 <span class="p">});</span>
 </code></pre></div><h3 id="创建索引">创建索引<a href="#创建索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<pre><code>curl -XPUT -u name:pwd http://ip:9200/user_behavior?pretty
+<pre tabindex="0"><code>curl -XPUT -u name:pwd http://ip:9200/user_behavior?pretty
 </code></pre><h3 id="创建索引结构">创建索引结构<a href="#创建索引结构" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<pre><code>curl -H'Content-Type: application/json'  -XPUT -u name:pwd http://ip:9200/user_behavior/_mapping/?pretty -d'{
+<pre tabindex="0"><code>curl -H'Content-Type: application/json'  -XPUT -u name:pwd http://ip:9200/user_behavior/_mapping/?pretty -d'{
   &quot;properties&quot;: {
     &quot;open_id&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;store&quot;:true }, 
     &quot;imp_date&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;store&quot;:true }, 
