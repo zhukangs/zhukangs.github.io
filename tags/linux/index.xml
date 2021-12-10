@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on Promise</title>
+    <link>https://hugo.zkilm.cn/tags/linux/</link>
+    <description>Recent content in Linux on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 14 Dec 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux防火墙</title>
+      <link>https://hugo.zkilm.cn/posts/2020/20201214-linux-firwall/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2020/20201214-linux-firwall/</guid>
+      <description>iptables 防火墙 1、基本操作
+# 查看防火墙状态 service iptables status # 停止防火墙 service iptables stop # 启动防火墙 service iptables start # 重启防火墙 service iptables restart # 永久关闭防火墙 chkconfig iptables off # 永久关闭后重启 chkconfig iptables on 2、开启80端口
+vim /etc/sysconfig/iptables # 加入如下代码 -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT 保存退出后重启防火墙
+service iptables restart firewall 防火墙 1、查看firewall服务状态
+systemctl status firewalld firewall-cmd --state 2、开启、重启、关闭、firewalld.service服务
+# 开启 service firewalld start # 重启 service firewalld restart # 关闭 service firewalld stop 3、查看防火墙规则</description>
+    </item>
+    
+    <item>
+      <title>Linux环境搭建</title>
+      <link>https://hugo.zkilm.cn/posts/2018/20180906-centos-lnmp/</link>
+      <pubDate>Thu, 06 Sep 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2018/20180906-centos-lnmp/</guid>
+      <description>PHP环境搭建 Vm下载地址：https://www.landiannews.com/archives/40619.html CentOSiso: http://isoredirect.centos.org/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1804.iso 1、安装需要的库 yum -y install rsync net-snmp syslog net-snmp-devel wget patch screen gcc gcc-c++ autoconf libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel libxml2 libxml2-devel zlib zlib-devel glibc glibc-devel glib2 glib2-devel bzip2 bzip2-devel ncurses ncurses-devel curl curl-devel e2fsprogs e2fsprogs-devel krb5 krb5-devel libidn libidn-devel openssl openssl-devel openldap openldap-devel nss_ldap openldap-clients openldap-servers ImageMagick-devel net-snmp-devel gd xinetd pcre-devel cmake 2、防火墙添加端口 firewall-cmd --zone=public --add-port=80/tcp --permanent firewall-cmd --zone=public --add-port=443/tcp --permanent firewall-cmd --zone=public --add-port=3306/tcp --permanent firewall-cmd --reload 3、安装mysql 3.</description>
+    </item>
+    
+    <item>
+      <title>Linux学习归纳哈哈🚀</title>
+      <link>https://hugo.zkilm.cn/posts/2016/20160703-linux-study/</link>
+      <pubDate>Sun, 03 Jul 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2016/20160703-linux-study/</guid>
+      <description>系统中常用Shell指令 ①指令单独存在 ② 指令带选项 ③ 指令带选项带参数 ls指令：显示当前目录的所有文件 相关选项： -l ：list缩写，代表以列表形式显示所有文件 -a ：all缩写，代表显示所有文件（包括隐藏文件） ① ls指令 ② ls指令 -l，这个指令还可以进一步简写为ll ③ ls指令 -a ④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件） Ls –l /var/www *.php 列出当前目录下，以.php结尾的文件 ls –al *.php pwd指令：显示当前工作目录 cd指令：跳转到指定目录 ① cd + 路径：跳转到指定的目录 ② cd .. ：跳转到上一级目录 ③ cd + ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root clear ：清屏指令 logout ：退出指令 普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。 Ctrl + Alt + F1 ：切换到图形界面 Ctrl + Alt + F2~F6 ：切换到字符界面 shutdown ：关机指令 相关选项： ① shutdown -h 分钟数：多少分钟后关机（真实关机） ② shutdown -r 分钟数：多少分钟后重启 ③ shutdown -k 分钟数：多少分钟后关机（只发出警告，不关机） ④ shutdown -c ：取消关机，也可以使用快捷键Ctrl + C 但是特别注意：shutdown指令只能是超级管理员使用，使用su root切换超级管理员 halt指令：立即关机 reboot指令：立即重启 VI编辑器的基本操作 ① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件 ② vi + filename ：打开文件并将光标置于最后一行 ③ vi +n filename ：打开文件并将光标置于第n行 ④ vi +/string filename ：打开文件并高亮显示string关键词 提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。 ⑤ vi filename1 filename2 ：同时打开多个文件 提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。 普及小知识：Linux自动补全（非常重要） 当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母+Tab按键就可以实现自动补全。 VI编辑器的命令模式与末行模式 命令模式： ① yy ：复制当前行 nyy ：从当前行开始复制n行，例如：复制3行内容，3yy ② p ：粘贴 ③ dd ：删除当前行 ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。 ④ u ：撤销，相当于Windows中的Ctrl + Z ⑤ d$：删除光标所在位置到行末的所有内容。 ⑥ $：把光标移动到行末。 ⑦ ^：把光标移动到行首。 末行模式： :set nu ：显示行号 :set nonu ：取消行号 /关键词：高亮显示所有关键词 :noh ：取消所有关键词高亮 num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面 :w ：保存文件 :q ：退出 :wq ：保存并退出 特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。 :w!</description>
+    </item>
+    
+  </channel>
+</rss>

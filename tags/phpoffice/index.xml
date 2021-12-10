@@ -7,13 +7,25 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 20 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/phpoffice/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 21 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/phpoffice/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>PHPOffice之Word🍭‍</title>
+      <link>https://hugo.zkilm.cn/posts/2019/20190321-phpoffice-word/</link>
+      <pubDate>Thu, 21 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2019/20190321-phpoffice-word/</guid>
+      <description>导语 在做完根据Excel模板导出数据后，就对Word模板导出产生了兴趣。其实原理差不多。所以还是选择的PHPOffice 套餐。
+ PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。
+ PHPWord文档传送门
+开始 安装 composer require phpoffice/phpword 使用  拿到原始的模板还需要做一些简单的修改：  代码 &amp;lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word  public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&amp;#39;/phpoffice/word_temp.docx&amp;#39;); //设置替换值 （只能替换纯文本）  $template-&amp;gt;setValue( [&amp;#39;Name&amp;#39;,&amp;#39;Date&amp;#39;,&amp;#39;Address&amp;#39;,&amp;#39;Organizer&amp;#39;,&amp;#39;Activity&amp;#39;], [$request-&amp;gt;name,$request-&amp;gt;start_time,$request-&amp;gt;address,$request-&amp;gt;organizer,$request-&amp;gt;activity] ); $filename = date(&amp;#39;Y-m-d&amp;#39;, time()).rand(1000, 9999). &amp;#34;.docx&amp;#34;; //保存到项目  $template-&amp;gt;saveAs(public_path().&amp;#39;/phpoffice/&amp;#39;.$filename); //建议：将数据[&amp;#39;Name&amp;#39;,&amp;#39;Date&amp;#39;,&amp;#39;Address&amp;#39;,&amp;#39;Organizer&amp;#39;,&amp;#39;Activity&amp;#39;]写一份到数据库  //TODO  return back()-&amp;gt;with([&amp;#39;success&amp;#39;=&amp;gt;&amp;#39;导出成功&amp;#39;,&amp;#39;filename&amp;#39;=&amp;gt;$filename]); } } 效果 {.</description>
+    </item>
+    
     <item>
       <title>PHPOffice之Excel🍜</title>
-      <link>https://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</link>
+      <link>https://hugo.zkilm.cn/posts/2019/20190320-phpoffice-excel/</link>
       <pubDate>Wed, 20 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20190320-phpoffice-excel/</guid>
+      <guid>https://hugo.zkilm.cn/posts/2019/20190320-phpoffice-excel/</guid>
       <description>导语  简单的数据导入导出其实 Maatwebsite/Laravel-Excel 和 box/spout 就够了，听说spout在大量数据下效率较Laravel-Excel 快。这次因为要根据Excel模板导出，在这两个包没找到怎么引入模板的方法，虽然可以设置，但是过于麻烦，就放弃了。最终选择了 PHPOffice/PhpSpreadsheet 。
   PhpSpreadsheet是一个用纯PHP编写的库，它提供了一组类，允许您读取和写入不同的电子表格文件格式，如Excel和LibreOffice Calc。
  PhpSpreadsheet文档传送门

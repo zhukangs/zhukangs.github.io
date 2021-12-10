@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Crontab on Promise</title>
+    <link>https://hugo.zkilm.cn/tags/crontab/</link>
+    <description>Recent content in Crontab on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/crontab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Laravel服务之任务调度⏰</title>
+      <link>https://hugo.zkilm.cn/posts/2019/20190304-laravel-crontab/</link>
+      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2019/20190304-laravel-crontab/</guid>
+      <description>基础篇
+Laravel 的命令调度程序允许你在 Laravel 中对命令调度进行清晰流畅的定义。并且在使用调度程序时，只需要在服务器上增加一条 Cron 项目即可。调度是在 app/Console/Kernel.php 文件的 schedule 方法中定义的。为了方便你开始，该方法已经包含了一个简单的例子。
+定义调度 1、在App\Console\Kernel类的schedule方法中定义所有调度任务(Closure)：
+protected function schedule(Schedule $schedule) { $schedule-&amp;gt;call(function () { $saying=str_random(10); Map::where(&amp;#39;id&amp;#39;,32)-&amp;gt;update([&amp;#39;value&amp;#39;=&amp;gt;$saying]); })-&amp;gt;hourly(); $schedule-&amp;gt;call(function () { .. })-&amp;gt;everyMinute(); . . . } 2、Artisan命令调度：
+ 除了计划 Closure 调用，你还能调度 Artisan 命令 和操作系统命令。举个例子，你可以给 command 方法传递命令名称或者类名称来调度一个 Artisan 命令：  $schedule-&amp;gt;command(&amp;#39;emails:send --force&amp;#39;)-&amp;gt;-&amp;gt;dailyAt(&amp;#39;13:00&amp;#39;); $schedule-&amp;gt;command(EmailsCommand::class, [&amp;#39;--force&amp;#39;])-&amp;gt;weekly(); 3、队列任务调度：
+ job 方法可以用来调度 队列任务。这个方法提供了一种快捷方式来调度任务，无需使用 call 方法手动创建闭包来调度任务  $schedule-&amp;gt;job(new Heartbeat)-&amp;gt;everyFiveMinutes(); 4、Shell 命令调度：
+ exec 方法可用于向操作系统发出命令  $shell=&amp;#34;netstat -anp | grep 5200 | grep LISTEN | wc -l&amp;#34;; $shell=&amp;#34;node /home/forge/script.</description>
+    </item>
+    
+  </channel>
+</rss>

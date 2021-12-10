@@ -10,19 +10,19 @@
     <lastBuildDate>Fri, 19 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel 表单验证封装💪</title>
-      <link>https://hugo.zkilm.cn/posts/20211119-laravel-formrequest/</link>
+      <link>https://hugo.zkilm.cn/posts/2021/20211119-laravel-formrequest/</link>
       <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20211119-laravel-formrequest/</guid>
+      <guid>https://hugo.zkilm.cn/posts/2021/20211119-laravel-formrequest/</guid>
       <description>新建「表单验证基类」  新建「表单验证基类」 app/Http/Requests/FormRequest.php  &amp;lt;?php namespace App\Http\Requests; use Illuminate\Foundation\Http\FormRequest as BaseFormRequest; class FormRequest extends BaseFormRequest { use SceneValidator; /** * Determine if the user is authorized to make this request. * * @return bool */ public function authorize() { return true; } } 新建场景验证类  新建 app/Http/Requests/SceneValidator.php  &amp;lt;?php namespace App\Http\Requests; use Illuminate\Contracts\Validation\{Factory, Validator}; trait SceneValidator { protected $scene = null; protected $onlyRule = []; protected $autoValidate = true; /** * Validate.</description>
     </item>
     
     <item>
       <title>监控服务器异常与重启</title>
-      <link>https://hugo.zkilm.cn/posts/20210909-restart-lnmp/</link>
+      <link>https://hugo.zkilm.cn/posts/2021/20210909-restart-lnmp/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20210909-restart-lnmp/</guid>
+      <guid>https://hugo.zkilm.cn/posts/2021/20210909-restart-lnmp/</guid>
       <description>在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。
 PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判断服务器是否正常运行，脚本 service-restart.sh 如下：
 # ! /bin/sh ###查看fpm服务是否运行 phpfpm_procnum=`ps -ef|grep &amp;#34;php-fpm&amp;#34;|grep -v grep|wc -l` if [ $phpfpm_procnum -eq 0 ] then echo &amp;#34;restart php-fpm...&amp;#34; systemctl restart php-fpm &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi ###查看nginx服务是否运行 nginx_procnum=`ps -ef|grep &amp;#34;nginx&amp;#34;|grep -v grep|wc -l` if [ $nginx_procnum -eq 0 ] then echo &amp;#34;restart nginx...&amp;#34; systemctl restart nginx &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi 查看服务器响应 通过 curl 服务器地址，根据响应信息判断是否出现异常，脚本 nginx404.php 如下：
@@ -31,10 +31,10 @@ PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判�
     
     <item>
       <title>百万级数据导入 Elasticsearch 😌</title>
-      <link>https://hugo.zkilm.cn/posts/20210901-python-es/</link>
+      <link>https://hugo.zkilm.cn/posts/2021/20210901-python-es/</link>
       <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20210901-python-es/</guid>
+      <guid>https://hugo.zkilm.cn/posts/2021/20210901-python-es/</guid>
       <description>涉及知识点  Python 读取CSV文件 Elasticsearch 导入json文件  本文目标  完成超过100M的SCV文件上传到ES  导语 如何将100w条记录同步到Es？
 Kibana 有个 Data Visualizer 可以直接上传 CSV 文件，但是有个限制是文件不能大于100M。
 那么对于大于100M的 CSV 文件我们该如何进行上传到ES呢？
@@ -58,25 +58,20 @@ WEB开发者，喜欢折腾，热爱LARAVEL，重度代码洁癖患者。 综合
     
     <item>
       <title>Elasticsearch 在 Laravel 中的使用👍</title>
-      <link>https://hugo.zkilm.cn/posts/20210823-laravel-es/</link>
+      <link>https://hugo.zkilm.cn/posts/2021/20210823-laravel-es/</link>
       <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20210823-laravel-es/</guid>
-      <description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &#39;elasticsearch&#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &#39;hosts&#39; =&amp;gt; explode(&#39;,&#39;, env(&#39;ES_HOSTS&#39;)), &#39;username&#39; =&amp;gt; env(&#39;ES_USERNAME&#39;), &#39;password&#39; =&amp;gt; env(&#39;ES_PASSWORD&#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
+      <guid>https://hugo.zkilm.cn/posts/2021/20210823-laravel-es/</guid>
+      <description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &amp;#39;elasticsearch&amp;#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组  &amp;#39;hosts&amp;#39; =&amp;gt; explode(&amp;#39;,&amp;#39;, env(&amp;#39;ES_HOSTS&amp;#39;)), &amp;#39;username&amp;#39; =&amp;gt; env(&amp;#39;ES_USERNAME&amp;#39;), &amp;#39;password&amp;#39; =&amp;gt; env(&amp;#39;ES_PASSWORD&amp;#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
     </item>
     
     <item>
       <title>Homestead(ubuntu)&#43;Laravel 使用 RabbitMQ</title>
-      <link>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</link>
+      <link>https://hugo.zkilm.cn/posts/2021/20210121-laravel-rabbitmq/</link>
       <pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</guid>
-      <description>安装 erlang erlang 是 RabbitMQ 的依赖。首先执行
-sudo apt-get update 然后执行
-sudo apt-get install erlang 安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：
-Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt; 然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。
-安装 RabbitMq sudo apt-get install rabbitmq-server 安装完毕后，查看 RabbitMQ 状态：
-sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop  # 重启RabbitMQ： service rabbitmq-server restart  配置 RabbitMQ 执行命令，启动 RabbitMQ 插件</description>
+      <guid>https://hugo.zkilm.cn/posts/2021/20210121-laravel-rabbitmq/</guid>
+      <description>安装 erlang  erlang 是 RabbitMQ 的依赖。首先执行  sudo apt-get update  然后执行  sudo apt-get install erlang  安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：  Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt;  然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。  安装 RabbitMq sudo apt-get install rabbitmq-server  安装完毕后，查看 RabbitMQ 状态：  sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop  # 重启RabbitMQ： service rabbitmq-server restart  配置 RabbitMQ  执行命令，启动 RabbitMQ 插件  sudo rabbitmq-plugins enable rabbitmq_management  添加用户 RabbitMQ，格式：rabbitmqctl add_user 用户名 密码  rabbitmqctl add_user admin admin  给予用户管理员权限  sudo rabbitmqctl set_user_tags admin administrator  为用户设置读写权限  sudo rabbitmqctl set_permissions -p / admin &amp;#34;.</description>
     </item>
     
     <item>
@@ -111,17 +106,17 @@ PHP7下使用Elasticsearch：https://blog.junphp.com/details/325.jsp</descriptio
     </item>
     
     <item>
-      <title>Homestead 安装 Swoole 扩展</title>
-      <link>https://hugo.zkilm.cn/posts/20200828-homestead-swoole/</link>
-      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      <title>Linux防火墙</title>
+      <link>https://hugo.zkilm.cn/posts/2020/20201214-linux-firwall/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20200828-homestead-swoole/</guid>
-      <description>配置镜像源 配置好 ubuntu 的国内镜像源并更新
-安装 dev 查看 php 版本，并安装对应 php 版本的 dev
-sudo apt install php7.2-dev 配置 pecl sudo pecl channel-update pecl.php.net sudo pear clear-cache sudo pear update-channels sudo pear upgrade 安装 swoole 扩展 安装 php 的 swoole 扩展
-sudo pecl install swoole 修改 php.ini 在 php.ini 中增加 extension=swoole.so
-php -i | grep php.ini vim /etc/php/7.2/cli/php.ini
-# 在php.ini的尾部增加如下代码 extension=swoole.so 重启 php # 在php.ini的尾部增加如下代码 extension=swoole.so 查看是否成功安装 查看 php 是否成功安装 swoole 模块</description>
+      <guid>https://hugo.zkilm.cn/posts/2020/20201214-linux-firwall/</guid>
+      <description>iptables 防火墙 1、基本操作
+# 查看防火墙状态 service iptables status # 停止防火墙 service iptables stop # 启动防火墙 service iptables start # 重启防火墙 service iptables restart # 永久关闭防火墙 chkconfig iptables off # 永久关闭后重启 chkconfig iptables on 2、开启80端口
+vim /etc/sysconfig/iptables # 加入如下代码 -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT 保存退出后重启防火墙
+service iptables restart firewall 防火墙 1、查看firewall服务状态
+systemctl status firewalld firewall-cmd --state 2、开启、重启、关闭、firewalld.service服务
+# 开启 service firewalld start # 重启 service firewalld restart # 关闭 service firewalld stop 3、查看防火墙规则</description>
     </item>
     
   </channel>

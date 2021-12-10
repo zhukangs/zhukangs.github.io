@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Supervisor配置,每次都会踩好多坑">
+<meta itemprop="description" content="基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！
+ Supervisor（http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
+ 既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor
+安装 先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor # yum install python-setuptools # easy_install supervisor 配置文件 生成配置文件，并建立相应目录，管理 supervisor 启动进程 # echo_supervisord_conf &gt; /etc/supervisord.conf # mkdir -p /etc/supervisor/conf.d/ 1 2 编辑 /etc/supervisord.conf，修改 [include] 区块内容： [include] files = /etc/supervisor/conf.d/*.conf 1 2 这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件 自动启动 在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs # wget -O /usr/lib/systemd/system/supervisord.service https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs 将 supervisord 服务设为自启动 # systemctl enable supervisord.service 输入 supervisorctl 命令可以进入 supervisor 控制台 设置 Laravel 队列 [program:laravel-worker] process_name=%(program_name)s_%(process_num)02d command=/usr/local/php/bin/php /data/wwwroot/app."><meta itemprop="datePublished" content="2018-03-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2018-03-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="197"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Supervisor," /><meta property="og:title" content="Supervisor配置,每次都会踩好多坑" />
+<meta property="og:description" content="基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！
+ Supervisor（http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
+ 既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor
+安装 先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor # yum install python-setuptools # easy_install supervisor 配置文件 生成配置文件，并建立相应目录，管理 supervisor 启动进程 # echo_supervisord_conf &gt; /etc/supervisord.conf # mkdir -p /etc/supervisor/conf.d/ 1 2 编辑 /etc/supervisord.conf，修改 [include] 区块内容： [include] files = /etc/supervisor/conf.d/*.conf 1 2 这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件 自动启动 在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs # wget -O /usr/lib/systemd/system/supervisord.service https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs 将 supervisord 服务设为自启动 # systemctl enable supervisord.service 输入 supervisorctl 命令可以进入 supervisor 控制台 设置 Laravel 队列 [program:laravel-worker] process_name=%(program_name)s_%(process_num)02d command=/usr/local/php/bin/php /data/wwwroot/app." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2018/20180326-install-supervisor/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-03-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-03-26T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="Supervisor配置,每次都会踩好多坑"/>
+<meta name="twitter:description" content="基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！
+ Supervisor（http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
+ 既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor
+安装 先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor # yum install python-setuptools # easy_install supervisor 配置文件 生成配置文件，并建立相应目录，管理 supervisor 启动进程 # echo_supervisord_conf &gt; /etc/supervisord.conf # mkdir -p /etc/supervisor/conf.d/ 1 2 编辑 /etc/supervisord.conf，修改 [include] 区块内容： [include] files = /etc/supervisor/conf.d/*.conf 1 2 这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件 自动启动 在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs # wget -O /usr/lib/systemd/system/supervisord.service https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs 将 supervisord 服务设为自启动 # systemctl enable supervisord.service 输入 supervisorctl 命令可以进入 supervisor 控制台 设置 Laravel 队列 [program:laravel-worker] process_name=%(program_name)s_%(process_num)02d command=/usr/local/php/bin/php /data/wwwroot/app."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Supervisor配置,每次都会踩好多坑</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Mar 26, 26036&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>Supervisor配置,每次都会踩好多坑</h1>
+			</header>
+			<div class="content">
+				<p>基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！</p>
+<blockquote>
+<p>Supervisor（http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。</p>
+</blockquote>
+<p>既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor</p>
+<h3 id="安装">安装<a href="#安装" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor
+    
+# yum install python-setuptools
+# easy_install supervisor
+</code></pre></div><h3 id="配置文件">配置文件<a href="#配置文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">生成配置文件，并建立相应目录，管理 supervisor 启动进程
+    
+# echo_supervisord_conf &gt; /etc/supervisord.conf
+# mkdir -p /etc/supervisor/conf.d/
+1
+2
+编辑 /etc/supervisord.conf，修改 [include] 区块内容：
+
+[include]
+files = /etc/supervisor/conf.d/*.conf
+1
+2
+这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件
+</code></pre></div><h3 id="自动启动">自动启动<a href="#自动启动" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs
+# wget -O /usr/lib/systemd/system/supervisord.service  https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs
+将 supervisord 服务设为自启动
+
+# systemctl enable supervisord.service
+输入 supervisorctl 命令可以进入 supervisor 控制台
+</code></pre></div><h3 id="设置-laravel-队列">设置 Laravel 队列<a href="#设置-laravel-队列" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[program:laravel-worker]</span>
+<span class="na">process_name</span><span class="o">=</span><span class="s">%(program_name)s_%(process_num)02d</span>
+<span class="na">command</span><span class="o">=</span><span class="s">/usr/local/php/bin/php /data/wwwroot/app.com/artisan queue:work database --sleep=3 --tries=3 --daemon</span>
+<span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
+<span class="na">user</span><span class="o">=</span><span class="s">www</span>
+<span class="na">numprocs</span><span class="o">=</span><span class="s">8</span>
+<span class="na">redirect_stderr</span><span class="o">=</span><span class="s">true</span>
+<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/data/wwwroot/app.com/storage/logs/queue.log</span>
+
+<span class="na">//注意：检查你的php所在目录和项目所在目录  是否对应</span>
+
+<span class="na">这里开启了 8 个 queue:work 进程，并监视他们，如果失败的话，自动重启；在项目的 storage/logs/queue.log 记录日志。</span>
+
+<span class="na">启动 supervisor 服务：</span>
+
+<span class="c1"># supervisord</span>
+<span class="na">1</span>
+<span class="na">至此， supervisor 安装及 Laravel 队列设置完毕</span>
+
+<span class="na">如果以后配置文件有修改，或者新增，进入 supervisor 控制台，执行下面的命令</span>
+
+<span class="c1"># supervisorctl</span>
+<span class="na">supervisorctl&gt; reread</span>
+<span class="na">supervisorctl&gt; update</span>
+<span class="na">supervisorctl&gt; start laravel-worker:*</span>
+</code></pre></div><h3 id="遇到的一些坑">遇到的一些坑<a href="#遇到的一些坑" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.unix:///tmp/supervisor.sock no such file问题
+重新生成配置文件 echo_supervisord_conf&gt; /etc/supervisord.conf
+按上面步骤修改配置
+supervisord -c/etc/supervisord.conf
+还有一种说法是将supervisord.conf中的/tmp  该为/var下，具体请看https://blog.csdn.net/qq_28885149/article/details/79364685
+
+2.laravel-worker-ui:laravel-worker-ui_00   FATAL     can&#39;t find command &#39;/usr/local/php/bin/php&#39;
+检查supervisord.conf中的php目录是否正确
+
+3.在使用命令supervisorctl start all启动控制进程时，遇到如下错误
+unix:///tmp/supervisor.sock no such file
+出现上述错误的原因是supervisord并未启动，只要在命令行中使用命令supervisord启动supervisord即可。
+</code></pre></div><h3 id="一些相关命令">一些相关命令<a href="#一些相关命令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">【启动supervisord】  supervisord  建议supervisord -c/etc/supervisord.conf
+【停止supervisord】  supervisorctl shutdown
+【重新加载配置文件】  supervisorctl reload
+【进程管理】
+1.启动supervisord管理的所有进程
+  supervisorctl start all
+2.停止supervisord管理的所有进程
+  supervisorctl stop all
+3.启动supervisord管理的某一个特定进程
+  supervisorctl start program-name // program-name为[program:xx]中的xx
+4.停止supervisord管理的某一个特定进程 
+  supervisorctl stop program-name  // program-name为[program:xx]中的xx
+5.重启所有进程或所有进程
+  supervisorctl restart all  // 重启所有
+  supervisorctl reatart program-name // 重启某一进程，program-name为[program:xx]中的xx
+6.查看supervisord当前管理的所有进程的状态
+  supervisorctl status
+</code></pre></div>
+			</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/supervisor">Supervisor</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>197 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>26036-03-26 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#配置文件">配置文件</a></li>
+        <li><a href="#自动启动">自动启动</a></li>
+        <li><a href="#设置-laravel-队列">设置 Laravel 队列</a></li>
+        <li><a href="#遇到的一些坑">遇到的一些坑</a></li>
+        <li><a href="#一些相关命令">一些相关命令</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2018/20180402-observer-email/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>模型观察者触发邮件通知</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2018/20180320-install-homestead/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>本地Homestead安装😴</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

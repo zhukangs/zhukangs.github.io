@@ -10,14 +10,26 @@
     <lastBuildDate>Thu, 09 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/supervisor/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>监控服务器异常与重启</title>
-      <link>https://hugo.zkilm.cn/posts/20210909-restart-lnmp/</link>
+      <link>https://hugo.zkilm.cn/posts/2021/20210909-restart-lnmp/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20210909-restart-lnmp/</guid>
+      <guid>https://hugo.zkilm.cn/posts/2021/20210909-restart-lnmp/</guid>
       <description>在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。
 PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判断服务器是否正常运行，脚本 service-restart.sh 如下：
 # ! /bin/sh ###查看fpm服务是否运行 phpfpm_procnum=`ps -ef|grep &amp;#34;php-fpm&amp;#34;|grep -v grep|wc -l` if [ $phpfpm_procnum -eq 0 ] then echo &amp;#34;restart php-fpm...&amp;#34; systemctl restart php-fpm &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi ###查看nginx服务是否运行 nginx_procnum=`ps -ef|grep &amp;#34;nginx&amp;#34;|grep -v grep|wc -l` if [ $nginx_procnum -eq 0 ] then echo &amp;#34;restart nginx...&amp;#34; systemctl restart nginx &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi 查看服务器响应 通过 curl 服务器地址，根据响应信息判断是否出现异常，脚本 nginx404.php 如下：
 &amp;lt;?php $url = &amp;#39;https://test.com&amp;#39;; $cmd = &amp;#39;systemctl restart php-fpm&amp;#39;; for ($i = 0; $i &amp;lt; 5; $i++) { $exec = &amp;#34;curl connect-timeout 3 -I $url2&amp;gt;/dev/null&amp;#34;; $res = shell_exec($exec); if (stripos($res, &amp;#39;404 Not Found&amp;#39;) !</description>
+    </item>
+    
+    <item>
+      <title>Supervisor配置,每次都会踩好多坑</title>
+      <link>https://hugo.zkilm.cn/posts/2018/20180326-install-supervisor/</link>
+      <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2018/20180326-install-supervisor/</guid>
+      <description>基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！
+ Supervisor（http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
+ 既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor
+安装 先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor # yum install python-setuptools # easy_install supervisor 配置文件 生成配置文件，并建立相应目录，管理 supervisor 启动进程 # echo_supervisord_conf &amp;gt; /etc/supervisord.conf # mkdir -p /etc/supervisor/conf.d/ 1 2 编辑 /etc/supervisord.conf，修改 [include] 区块内容： [include] files = /etc/supervisor/conf.d/*.conf 1 2 这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件 自动启动 在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs # wget -O /usr/lib/systemd/system/supervisord.service https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs 将 supervisord 服务设为自启动 # systemctl enable supervisord.service 输入 supervisorctl 命令可以进入 supervisor 控制台 设置 Laravel 队列 [program:laravel-worker] process_name=%(program_name)s_%(process_num)02d command=/usr/local/php/bin/php /data/wwwroot/app.</description>
     </item>
     
   </channel>

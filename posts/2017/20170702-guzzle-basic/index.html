@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Guzzle基本使用">
+<meta itemprop="description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。 类似于curl发送http请求的类。
+ Guzzle官方文档
+安装Guzzle 使用composer安装
+php composer.phar require guzzlehttp/guzzle:~6.0 或者编辑项目的composer.json文件，添加Guzzle作为依赖
+{ &#34;require&#34;: { &#34;guzzlehttp/guzzle&#34;: &#34;~6.0&#34; } }  执行 composer update  Guzzle基本使用  发送请求  use GuzzleHttp\Client; $client = new Client([ // Base URI is used with relative requests  &#39;base_uri&#39; =&gt; &#39;http://httpbin.org&#39;, // You can set any number of default request options.  &#39;timeout&#39; =&gt; 2.0, ]); $response = $client-&gt;get(&#39;http://httpbin.org/get&#39;); $response = $client-&gt;delete(&#39;http://httpbin.org/delete&#39;); $response = $client-&gt;head(&#39;http://httpbin.org/get&#39;); $response = $client-&gt;options(&#39;http://httpbin."><meta itemprop="datePublished" content="2017-07-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-07-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="296"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Guzzle," /><meta property="og:title" content="Guzzle基本使用" />
+<meta property="og:description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。 类似于curl发送http请求的类。
+ Guzzle官方文档
+安装Guzzle 使用composer安装
+php composer.phar require guzzlehttp/guzzle:~6.0 或者编辑项目的composer.json文件，添加Guzzle作为依赖
+{ &#34;require&#34;: { &#34;guzzlehttp/guzzle&#34;: &#34;~6.0&#34; } }  执行 composer update  Guzzle基本使用  发送请求  use GuzzleHttp\Client; $client = new Client([ // Base URI is used with relative requests  &#39;base_uri&#39; =&gt; &#39;http://httpbin.org&#39;, // You can set any number of default request options.  &#39;timeout&#39; =&gt; 2.0, ]); $response = $client-&gt;get(&#39;http://httpbin.org/get&#39;); $response = $client-&gt;delete(&#39;http://httpbin.org/delete&#39;); $response = $client-&gt;head(&#39;http://httpbin.org/get&#39;); $response = $client-&gt;options(&#39;http://httpbin." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2017/20170702-guzzle-basic/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-07-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-07-02T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="Guzzle基本使用"/>
+<meta name="twitter:description" content="Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。 类似于curl发送http请求的类。
+ Guzzle官方文档
+安装Guzzle 使用composer安装
+php composer.phar require guzzlehttp/guzzle:~6.0 或者编辑项目的composer.json文件，添加Guzzle作为依赖
+{ &#34;require&#34;: { &#34;guzzlehttp/guzzle&#34;: &#34;~6.0&#34; } }  执行 composer update  Guzzle基本使用  发送请求  use GuzzleHttp\Client; $client = new Client([ // Base URI is used with relative requests  &#39;base_uri&#39; =&gt; &#39;http://httpbin.org&#39;, // You can set any number of default request options.  &#39;timeout&#39; =&gt; 2.0, ]); $response = $client-&gt;get(&#39;http://httpbin.org/get&#39;); $response = $client-&gt;delete(&#39;http://httpbin.org/delete&#39;); $response = $client-&gt;head(&#39;http://httpbin.org/get&#39;); $response = $client-&gt;options(&#39;http://httpbin."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Guzzle基本使用</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Jul 2, 2076&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>Guzzle基本使用</h1>
+			</header>
+			<div class="content">
+				<blockquote>
+<p>Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。
+类似于curl发送http请求的类。</p>
+</blockquote>
+<p><a href="https://guzzle-cn.readthedocs.io/zh_CN/latest/quickstart.html">Guzzle官方文档</a></p>
+<h3 id="安装guzzle">安装Guzzle<a href="#安装guzzle" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>使用composer安装</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php composer.phar require guzzlehttp/guzzle:~6.0
+</code></pre></div><p>或者编辑项目的composer.json文件，添加Guzzle作为依赖</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+   <span class="nt">&#34;require&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;guzzlehttp/guzzle&#34;</span><span class="p">:</span> <span class="s2">&#34;~6.0&#34;</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><ul>
+<li>执行 composer update</li>
+</ul>
+<h3 id="guzzle基本使用">Guzzle基本使用<a href="#guzzle基本使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>发送请求</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+    
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">([</span>
+    <span class="c1">// Base URI is used with relative requests
+</span><span class="c1"></span>    <span class="s1">&#39;base_uri&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://httpbin.org&#39;</span><span class="p">,</span>
+    <span class="c1">// You can set any number of default request options.
+</span><span class="c1"></span>    <span class="s1">&#39;timeout&#39;</span>  <span class="o">=&gt;</span> <span class="mf">2.0</span><span class="p">,</span>
+<span class="p">]);</span>
+
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get&#39;</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/delete&#39;</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">head</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get&#39;</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">options</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/get&#39;</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">patch</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/patch&#39;</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/post&#39;</span><span class="p">);</span>
+<span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;http://httpbin.org/put&#39;</span><span class="p">);</span>
+</code></pre></div><ul>
+<li>设置查询字符串</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;http://httpbin.org?foo=bar&#39;</span><span class="p">);</span>
+</code></pre></div><p>或使用 query 请求参数来声明查询字符串参数：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="s1">&#39;http://httpbin.org&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;foo&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;bar&#39;</span><span class="p">]</span>
+<span class="p">]);</span>
+</code></pre></div><ul>
+<li>设置POST表单</li>
+</ul>
+<p>传入 form_params 数组参数</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$response</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span> <span class="s1">&#39;http://httpbin.org/post&#39;</span><span class="p">,</span> <span class="p">[</span>
+    <span class="s1">&#39;form_params&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+        <span class="s1">&#39;field_name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;abc&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;other_field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;123&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;nested_field&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+            <span class="s1">&#39;nested&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;hello&#39;</span>
+        <span class="p">]</span>
+    <span class="p">]</span>
+<span class="p">]);</span>
+</code></pre></div><ul>
+<li>使用响应</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">### 状态码
+</span><span class="c1"></span><span class="nv">$code</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getStatusCode</span><span class="p">();</span> <span class="c1">// 200
+</span><span class="c1"></span><span class="nv">$reason</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getReasonPhrase</span><span class="p">();</span> <span class="c1">// OK
+</span><span class="c1"></span>
+<span class="c1">### header
+</span><span class="c1">// Check if a header exists.
+</span><span class="c1"></span><span class="k">if</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">hasHeader</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">))</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&#34;It exists&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Get a header from the response.
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeader</span><span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">);</span>
+
+<span class="c1">// Get all of the response headers.
+</span><span class="c1"></span><span class="k">foreach</span> <span class="p">(</span><span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getHeaders</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$name</span> <span class="o">=&gt;</span> <span class="nv">$values</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$name</span> <span class="o">.</span> <span class="s1">&#39;: &#39;</span> <span class="o">.</span> <span class="nx">implode</span><span class="p">(</span><span class="s1">&#39;, &#39;</span><span class="p">,</span> <span class="nv">$values</span><span class="p">)</span> <span class="o">.</span> <span class="s2">&#34;</span><span class="se">\r\n</span><span class="s2">&#34;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="响应体">响应体<a href="#响应体" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$body</span> <span class="o">=</span> <span class="nv">$response</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+<span class="c1">// Implicitly cast the body to a string and echo it
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$body</span><span class="p">;</span>
+<span class="c1">// Explicitly cast the body to a string
+</span><span class="c1"></span><span class="nv">$stringBody</span> <span class="o">=</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span> <span class="nv">$body</span><span class="p">;</span>
+<span class="c1">// Read 10 bytes from the body
+</span><span class="c1"></span><span class="nv">$tenBytes</span> <span class="o">=</span> <span class="nv">$body</span><span class="o">-&gt;</span><span class="na">read</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="c1">// Read the remaining contents of the body as a string
+</span><span class="c1"></span><span class="nv">$remainingBytes</span> <span class="o">=</span> <span class="nv">$body</span><span class="o">-&gt;</span><span class="na">getContents</span><span class="p">();</span>
+</code></pre></div><h3 id="简单案例">简单案例<a href="#简单案例" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">GuzzleHttp\Client</span><span class="p">;</span>
+    <span class="c1">//use GuzzleHttp\Psr7\Request;
+</span><span class="c1"></span>    
+<span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+<span class="nv">$request</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;POST&#39;</span><span class="p">,</span><span class="s1">&#39;http://xxxx.com/test&#39;</span><span class="p">,[</span>
+        <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;key&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;f66748648e4deddcba65ad9504776b74&#39;</span> <span class="p">,</span> <span class="s1">&#39;v&#39;</span> <span class="o">=&gt;</span> <span class="mf">1.0</span> <span class="p">,</span> <span class="s1">&#39;month&#39;</span> <span class="o">=&gt;</span> <span class="mi">11</span> <span class="p">,</span> <span class="s1">&#39;day&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">]</span>
+            <span class="p">]);</span>
+<span class="k">echo</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+
+<span class="k">public</span> <span class="k">function</span> <span class="nf">decoding</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$cipher</span><span class="o">=</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">decode_value</span><span class="p">;</span>
+    <span class="nv">$res</span><span class="o">=</span><span class="nx">Md5</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;cipher&#39;</span><span class="p">,</span><span class="nv">$cipher</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;plain&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+    <span class="k">if</span><span class="p">(</span><span class="nv">$res</span><span class="p">){</span>
+        <span class="k">return</span> <span class="nv">$plain</span><span class="o">=</span><span class="nv">$res</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">][</span><span class="s1">&#39;plain&#39;</span><span class="p">];</span>
+    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Client</span><span class="p">();</span>
+        <span class="nv">$url</span><span class="o">=</span><span class="s2">&#34;http://www.test.com/do.php?c=Api&amp;m=crack&amp;uid=&#34;</span><span class="o">.</span><span class="nv">$uid</span><span class="o">.</span><span class="s2">&#34;&amp;token=&#34;</span><span class="o">.</span><span class="nv">$token</span><span class="o">.</span><span class="s2">&#34;&amp;cipher=&#34;</span><span class="o">.</span><span class="nv">$cipher</span><span class="p">;</span>
+        <span class="nv">$request</span> <span class="o">=</span> <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">request</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">,</span> <span class="nv">$url</span><span class="p">);</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">getBody</span><span class="p">();</span>
+        <span class="nv">$result</span> <span class="o">=</span> <span class="nx">json_decode</span><span class="p">(</span><span class="nv">$result</span><span class="p">,</span><span class="k">true</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+			</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/guzzle">Guzzle</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>296 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2076-07-02 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#安装guzzle">安装Guzzle</a></li>
+        <li><a href="#guzzle基本使用">Guzzle基本使用</a></li>
+        <li><a href="#响应体">响应体</a></li>
+        <li><a href="#简单案例">简单案例</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2017/20170721-nginx-php/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Nginx与PHP交互🐤</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2017/20170611-phpstorm-ftp/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>PHPStorm中使用FTP功能步骤🍔</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

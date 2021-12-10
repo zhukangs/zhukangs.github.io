@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MySQL on Promise</title>
+    <link>https://hugo.zkilm.cn/tags/mysql/</link>
+    <description>Recent content in MySQL on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Mon, 24 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>MySQL 规约‍</title>
+      <link>https://hugo.zkilm.cn/posts/2020/20200824-mysql-statute/</link>
+      <pubDate>Mon, 24 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2020/20200824-mysql-statute/</guid>
+      <description>一、建表规约 1. 【强制】表达是与否概念的字段，必须使用 is_xxx 的方式命名，数据类型是 unsigned tinyint（ 1 表示是，0 表示否），此规则同样适用于 odps 建表。 说明：任何字段如果为非负数，必须是 unsigned。 2. 【强制】表名、字段名必须使用小写字母或数字；禁止出现数字开头，禁止两个下划线中间只出现数字。数据库字段名的修改代价很大，因为无法进行预发布，所以字段名称需要慎重考虑。 正例：getter_admin，task_config，level3_name 反例：GetterAdmin，taskConfig，level_3_name 3. 【强制】表名不使用复数名词。 说明：表名应该仅仅表示表里面的实体内容，不应该表示实体数量，对应于 DO 类名也是单数形式，符合表达习惯。 4. 【强制】禁用保留字，如 desc、range、match、delayed 等，请参考 MySQL 官方保留字。 5. 【强制】唯一索引名为 uk字段名；普通索引名则为 idx字段名。 说明：uk_ 即 unique key；idx_ 即 index 的简称。 6. 【强制】小数类型为 decimal，禁止使用 float 和 double。 说明：float 和 double 在存储的时候，存在精度损失的问题，很可能在值的比较时，得到不正确的结果。如果存储的数据范围超过 decimal 的范围，建议将数据拆成整数和小数分开存储。 7. 【强制】如果存储的字符串长度几乎相等，使用 char 定长字符串类型。 8. 【强制】varchar 是可变长字符串，不预先分配存储空间，长度不要超过 5000，如果存储长度大于此值，定义字段类型为 text，独立出来一张表，用主键来对应，避免影响其它字段索引效率。 9. 【强制】表必备三字段：id, gmt_create, gmt_modified。 说明：其中 id 必为主键，类型为 unsigned bigint、单表时自增、步长为 1。gmt_create,gmt_modified 的类型均为 date_time 类型。 10.</description>
+    </item>
+    
+    <item>
+      <title>性能优化之MySQL优化🚴‍</title>
+      <link>https://hugo.zkilm.cn/posts/2019/20190309-mysql-opt/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2019/20190309-mysql-opt/</guid>
+      <description>SQL语句优化 慢查询 如何发现有问题的SQL？使用mysql慢查询日志对有效率问题的SQL进行监控
+//查看慢查询日志是否开启 show variables like &amp;#39;slow_query_log&amp;#39;; //查看慢查询日志存储位置 show variables like &amp;#39;slow_query_log_file&amp;#39;; //开启慢查询日志 set global slow_query_log=on; //指定慢查询日志存储位置 set global show_query_log_file=&amp;#39;/var/lib/mysql/homestead-slow.log&amp;#39;; //记录没有使用索引的sql set global log_queries_not_using_indexes=on; //记录查询超过1s的sql set global long_query_time=1; 慢查询日志所包含的内容：
+#User@Host:root[root] @localhost[]//执行sql的主机信息 #Query_time:0.0000024 Lock_time:0.00 Rows_sent:0 Rows_esamined:0//sql的执行信息 SET timestamp=1402389324//sql执行时间 select * from store; //sql的内容 MySQL慢查询日志分析工具之mysqldumpslow（mysql官方）
+安装完MySQL后，默认就带了mysqldumpslow，很常用的一个工具。
+//查看参数列表 mysqldumpslow -h //分析慢查询日志中前三条比较慢的sql mysqldumpslow -t 3 /var/lib/mysql/homestead-slow.log | more //输出样式效果 Count:1 Time:0.00s Lock=0.00s Rows=10.0 root[rppt]@localhost select * from store MySQL慢查询日志分析工具之pt-query-digest
+分析结果比mysqldumpslow更详细全面
+//输出到文件 pt-query-digest slow-log &amp;gt; slow_log.</description>
+    </item>
+    
+    <item>
+      <title>mysqldump导出数据库各参数说明</title>
+      <link>https://hugo.zkilm.cn/posts/2017/20170321-mysqldump/</link>
+      <pubDate>Tue, 21 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2017/20170321-mysqldump/</guid>
+      <description> mysqldump是mysql用于转存储数据库的实用程序。它主要产生一个SQL脚本，其中包含从头重新创建数据库所必需的命令CREATE TABLE INSERT等。
+ 下面我们详细介绍一下mysqldump导出的各种实例： 👇👇👇👇👇👇
+导出数据 1 导出一个数据库的结构
+mysqldump-ddbname-uroot-p&amp;gt;dbname.sql2 导出多个数据库的结构
+mysqldump-d-Bdbname1dbname2-uroot-p&amp;gt;dbname.sql3 导出一个数据库中数据（不包含结构）
+mysqldump-tdbname-uroot-p&amp;gt;dbname.sql4 导出多个数据库中数据（不包含结构）
+mysqldump-t-Bdbname1dbname2-uroot-p&amp;gt;dbname.sql5 导出一个数据库的结构以及数据
+mysqldumpdbname-uroot-p&amp;gt;dbname.sql6 导出多个数据库的结构以及数据
+mysqldump-Bdbname1dbname2-uroot-p&amp;gt;dbname.sql7 导出一个数据库中一个表的结构
+mysqldump-ddbname1tablename-uroot-p&amp;gt;tablename.sql8 导出一个数据库中多个表的结构
+mysqldump-d-Bdbname1--tablestablename1tablename2-uroot-p&amp;gt;tablename.sql9 导出一个数据库中一个表的数据（不包含结构）
+mysqldump-tdbname1tablename-uroot-p&amp;gt;tablename.sql10 导出一个数据库中多个表的数据（不包含结构）
+mysqldump-t-Bdbname1--tablestablename1tablename2-uroot-p&amp;gt;tablename.sql11 导出一个数据库中一个表的结构以及数据
+mysqldumpdbname1tablename-uroot-p&amp;gt;tablename.sql12 导出一个数据库中多个表的结构以及数据
+mysqldump-Bdbname1--tablestablename1tablename2-uroot-p&amp;gt;tablename.sql存储过程&amp;amp;函数操作 1 只导出存储过程和函数(不导出结构和数据，要同时导出结构的话，需要同时使用-d)
+mysqldump-R-ndtdbname-uroot-p&amp;gt;dbname.sql2 只导出事件
+mysqldump-E-ndtdbname-uroot-p&amp;gt;dbname.sql3 不导出触发器（触发器是默认导出的–triggers，使用–skip-triggers屏蔽导出触发器）
+mysqldump--skip-triggersdbname1-uroot-p&amp;gt;dbname.sql把导出的数据导入到数据库 &amp;gt;mysql-uroot-p&amp;gt;usedbname;&amp;gt;sourcedbname.sql总结一下 -d 结构(--no-data:不导出任何数据，只导出数据库表结构) -t 数据(--no-create-info:只导出数据，而不添加CREATE TABLE 语句) -n (--no-create-db:只导出数据，而不添加CREATE DATABASE 语句） -R (--routines:导出存储过程以及自定义函数) -E (--events:导出事件) --triggers (默认导出触发器，使用--skip-triggers屏蔽导出) -B (--databases:导出数据库列表，单个库时可省略） --tables 表列表（单个表时可省略） ①同时导出结构以及数据时可同时省略-d和-t ②同时 不 导出结构和数据可使用-ntd ③只导出存储过程和函数可使用-R -ntd ④导出所有(结构&amp;amp;数据&amp;amp;存储过程&amp;amp;函数&amp;amp;事件&amp;amp;触发器)使用-R -E(相当于①，省略了-d -t;触发器默认导出) ⑤只导出结构&amp;amp;函数&amp;amp;事件&amp;amp;触发器使用 -R -E -d </description>
+    </item>
+    
+    <item>
+      <title>MySQL高级操作🥗</title>
+      <link>https://hugo.zkilm.cn/posts/2017/20170106-mysql-advanced/</link>
+      <pubDate>Fri, 06 Jan 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2017/20170106-mysql-advanced/</guid>
+      <description>增加内容（基础命令） 1.表后增加主键altertable表名addprimarykey(字段);在所有字段之后增加primarykey选项：primarykey(字段信息)直接在需要当做主键的字段之后，增加primarykey属性来确定主键2.删除主键altertable表名dropprimarykey;3.自动增长在字段之后增加一个属性auto_increment4.修改自动增长altertable表名auto_increment=值;5.删除自动增长如：altertable表名modifyidint6.查看自增长初始变量showvariableslike&amp;#39;auto_increment%&amp;#39;;7.添加唯一键（与主键基本一样）altertable表名adduniquekey(字段列表);8.删除唯一键altertable表名dropuniquekey;--错误的唯一键可以有多个altertable表名dropindex唯一键名字;高级数据操作 1.多数据插入insertinto表名[(字段列表)]values(值列表),(值列表)…;2.主键冲突更新insertinto表名[(字段列表)]values(值列表)onduplicatekeyupdate字段=新值;3.主键冲突替换replaceinto[(字段列表)]values(值列表);干掉原来的数据，重新插入进去与insert有点像比insert效率低4.蠕虫复制insertinto表名[(字段列表)]select*/字段列表from表;测试表的压力5.更新数据update表名set字段名=新值[where判断条件]limit数量;（没有where是全表更新）6.删除数据deletefrom表名[where条件][limit数量];7.重置自增长truncate表名;---&amp;gt;相当于drop---&amp;gt;再create8.查询数据select[select的选项]字段列表from数据源where条件groupby分组having条件orderby排序limit限制;Select选项：默认all字段列表：字段名[as]别名from数据源：from(select字段列表from表)as别名;聚合函数：group_concat()为了将分组中指定的字段进行合并（字符串拼接）9.分组排序groupby字段[asc|desc]，字段[asc|desc]10.回溯统计groupby字段[asc|desc]withrollup;11.联合查询select语句默认：distinctunion[union选项]规则1:在联合查询中，如果要使用orderby，那么对应的select语句必须使用括号括起来规则2:orderby在联合查询中若要生效，必须配合使用limit：而limit后面必须跟对应的限制数量（通常可以使用一个较大的值：大于对应表的记录数的值）12.连接查询crossjoin:表1crossjoin表2;innerjoin:表1[inner]join表2on匹配条件;不带条件就是交叉查询（避免）outerjoin：主表leftjoin从表on连接条件;-- 外连接必须有on条件 外连接的特点：1、外连接中主表数据记录一定会保存：连接之后不会出现记录数少于主表的情况（但内连接可能少）2、左连接和右连接其实可以互相转换，但是数据对应的位置（表顺序）会改变。13.</description>
+    </item>
+    
+    <item>
+      <title>MySQL基础操作🍕</title>
+      <link>https://hugo.zkilm.cn/posts/2016/20160511-mysql-basic/</link>
+      <pubDate>Sun, 01 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2016/20160511-mysql-basic/</guid>
+      <description>数据库基本操作 1.创建数据库createdatabase数据库名字charset字符集名称;2.显示数据库showdatabases;showdatabaseslike‘匹配模式’;3.显示数据库创建语句showcreatedatabase数据库名字;4.选择数据use数据库名字;5.修改数据库alterdatabase数据库名字charset=字符集;（等号可以省）6.删除数据库dropdatabase数据库名字;数据表操作 1.创建数据表createtable表名(字段名1字段类型[字段属性],-- 字段与字段之间使用逗号分隔 …字段名N字段类型[字段属性]-- 最后一个字段后面不需要逗号) [表选项] 2.复制已有表结构createtable新表名like表名;3.显示数据表showtables;showtableslike‘匹配模式’;4.显示表结构describe表名desc表名(推荐)showcolumnsfrom表名5.显示表创建语句showcreatetable表名;Mysql中有多种语句结束符:;\g\G6.设置表属性（表选项）altertable表名表选项[=]值;engine，charset和collate7.修改表名字renametable旧表名to新表名8.修改表选项altertable表名表选项[=]新值;9.新增字段altertable表名add[column]新字段名列类型[列属性][位置first/after字段名字段类型必须有10.修改字段名altertable表名change旧字段名新字段名字段类型[列属性][新位置]11.修改字段类型altertable表名modify字段名新类型[新属性][新位置]12.删除字段altertable表名drop字段名13.删除表结构droptable表名[,表名2…]，数据基础操作 1.向表中指定字段插入数据insertinto表名[(字段列表)]values(对应字段列表)2.向表中所有字段插入数据insertinto表名values（对应表结构）3.查询表中全部数据select*from表名4.查询表中部分字段select字段列表from表名;5.简单条件查询语句select字段列表*from表名where字段名=值;6.删除操作deletefrom表名[where条件];7.更新操作update表名set字段名=新值[where条件]后期会持续更新&amp;hellip;&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>

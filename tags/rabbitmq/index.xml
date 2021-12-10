@@ -10,16 +10,11 @@
     <lastBuildDate>Thu, 21 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/rabbitmq/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Homestead(ubuntu)&#43;Laravel 使用 RabbitMQ</title>
-      <link>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</link>
+      <link>https://hugo.zkilm.cn/posts/2021/20210121-laravel-rabbitmq/</link>
       <pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/20210121-laravel-rabbitmq/</guid>
-      <description>安装 erlang erlang 是 RabbitMQ 的依赖。首先执行
-sudo apt-get update 然后执行
-sudo apt-get install erlang 安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：
-Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt; 然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。
-安装 RabbitMq sudo apt-get install rabbitmq-server 安装完毕后，查看 RabbitMQ 状态：
-sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop  # 重启RabbitMQ： service rabbitmq-server restart  配置 RabbitMQ 执行命令，启动 RabbitMQ 插件</description>
+      <guid>https://hugo.zkilm.cn/posts/2021/20210121-laravel-rabbitmq/</guid>
+      <description>安装 erlang  erlang 是 RabbitMQ 的依赖。首先执行  sudo apt-get update  然后执行  sudo apt-get install erlang  安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：  Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt;  然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。  安装 RabbitMq sudo apt-get install rabbitmq-server  安装完毕后，查看 RabbitMQ 状态：  sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop  # 重启RabbitMQ： service rabbitmq-server restart  配置 RabbitMQ  执行命令，启动 RabbitMQ 插件  sudo rabbitmq-plugins enable rabbitmq_management  添加用户 RabbitMQ，格式：rabbitmqctl add_user 用户名 密码  rabbitmqctl add_user admin admin  给予用户管理员权限  sudo rabbitmqctl set_user_tags admin administrator  为用户设置读写权限  sudo rabbitmqctl set_permissions -p / admin &amp;#34;.</description>
     </item>
     
   </channel>

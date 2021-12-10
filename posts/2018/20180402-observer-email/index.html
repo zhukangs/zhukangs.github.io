@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="模型观察者触发邮件通知">
+<meta itemprop="description" content="模型观察者(observer)触发邮件通知
+思考 需要思考的是，当我们需要发送一个邮件通知的时候，何时触发这个通知呢？
+实现 这里用的是观察者模型，例如 App\Abservers\EmailObserver.php ，在该观察模型下编写created()方法，即当数据入库成功后触发这个方法，我们还需要在 AppServiceProvider 的 boot 方法中注册观察者， Email::observe(EmailObserver::class); ，接下来将邮件通知的逻辑写在对应的观察者对应的方法中，例如：
+public function created(Email $email) { Mail::to($email)-&gt;send(new EmailSend($email)); } to($email)中的$email为email数据集合，需要注意的是，在这个数据集合中必须要包含有email字段的数据（收件人邮箱），而send(new EmailSend($email))则为发送的邮件内容，这里是将一整条email数据集合作为数据发送了。
+利用Markdown 格式的 Mailable 类，为消息体渲染出漂亮、响应式的 HTML 模板，也能自动生成一个纯文本的副本。
+php artisan make:mail EmailSend --markdown=email.template 在生成的EmailSend.php中的build()方法中：
+public function build() { return $this-&gt;markdown(&#39;email.template&#39;); } 既然是发送邮件，当然需要修改.env中关于邮箱的配置信息了：
+MAIL_DRIVER=smtp MAIL_HOST=smtp.qq.com MAIL_PORT=587 MAIL_USERNAME=xxxxxxx@qq.com//发件人邮箱 MAIL_FROM_ADDRESS=xxxxxxx@qq.com//这个需要自己加上，默认没有 MAIL_PASSWORD=授权码 MAIL_ENCRYPTION=tls "><meta itemprop="datePublished" content="2018-04-02T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2018-04-02T00:00:00+00:00" />
+<meta itemprop="wordCount" content="50"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="模型观察者触发邮件通知" />
+<meta property="og:description" content="模型观察者(observer)触发邮件通知
+思考 需要思考的是，当我们需要发送一个邮件通知的时候，何时触发这个通知呢？
+实现 这里用的是观察者模型，例如 App\Abservers\EmailObserver.php ，在该观察模型下编写created()方法，即当数据入库成功后触发这个方法，我们还需要在 AppServiceProvider 的 boot 方法中注册观察者， Email::observe(EmailObserver::class); ，接下来将邮件通知的逻辑写在对应的观察者对应的方法中，例如：
+public function created(Email $email) { Mail::to($email)-&gt;send(new EmailSend($email)); } to($email)中的$email为email数据集合，需要注意的是，在这个数据集合中必须要包含有email字段的数据（收件人邮箱），而send(new EmailSend($email))则为发送的邮件内容，这里是将一整条email数据集合作为数据发送了。
+利用Markdown 格式的 Mailable 类，为消息体渲染出漂亮、响应式的 HTML 模板，也能自动生成一个纯文本的副本。
+php artisan make:mail EmailSend --markdown=email.template 在生成的EmailSend.php中的build()方法中：
+public function build() { return $this-&gt;markdown(&#39;email.template&#39;); } 既然是发送邮件，当然需要修改.env中关于邮箱的配置信息了：
+MAIL_DRIVER=smtp MAIL_HOST=smtp.qq.com MAIL_PORT=587 MAIL_USERNAME=xxxxxxx@qq.com//发件人邮箱 MAIL_FROM_ADDRESS=xxxxxxx@qq.com//这个需要自己加上，默认没有 MAIL_PASSWORD=授权码 MAIL_ENCRYPTION=tls " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2018/20180402-observer-email/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-04-02T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-04-02T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="模型观察者触发邮件通知"/>
+<meta name="twitter:description" content="模型观察者(observer)触发邮件通知
+思考 需要思考的是，当我们需要发送一个邮件通知的时候，何时触发这个通知呢？
+实现 这里用的是观察者模型，例如 App\Abservers\EmailObserver.php ，在该观察模型下编写created()方法，即当数据入库成功后触发这个方法，我们还需要在 AppServiceProvider 的 boot 方法中注册观察者， Email::observe(EmailObserver::class); ，接下来将邮件通知的逻辑写在对应的观察者对应的方法中，例如：
+public function created(Email $email) { Mail::to($email)-&gt;send(new EmailSend($email)); } to($email)中的$email为email数据集合，需要注意的是，在这个数据集合中必须要包含有email字段的数据（收件人邮箱），而send(new EmailSend($email))则为发送的邮件内容，这里是将一整条email数据集合作为数据发送了。
+利用Markdown 格式的 Mailable 类，为消息体渲染出漂亮、响应式的 HTML 模板，也能自动生成一个纯文本的副本。
+php artisan make:mail EmailSend --markdown=email.template 在生成的EmailSend.php中的build()方法中：
+public function build() { return $this-&gt;markdown(&#39;email.template&#39;); } 既然是发送邮件，当然需要修改.env中关于邮箱的配置信息了：
+MAIL_DRIVER=smtp MAIL_HOST=smtp.qq.com MAIL_PORT=587 MAIL_USERNAME=xxxxxxx@qq.com//发件人邮箱 MAIL_FROM_ADDRESS=xxxxxxx@qq.com//这个需要自己加上，默认没有 MAIL_PASSWORD=授权码 MAIL_ENCRYPTION=tls "/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>模型观察者触发邮件通知</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Apr 2, 2046&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>模型观察者触发邮件通知</h1>
+			</header>
+			<div class="content">
+				<p><strong>模型观察者(observer)触发邮件通知</strong></p>
+<h3 id="思考">思考<a href="#思考" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>需要思考的是，当我们需要发送一个邮件通知的时候，何时触发这个通知呢？</p>
+<h3 id="实现">实现<a href="#实现" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>这里用的是观察者模型，例如 <code>App\Abservers\EmailObserver.php</code>  ，在该观察模型下编写<code>created()</code>方法，即当数据入库成功后触发这个方法，我们还需要在 <code>AppServiceProvider</code> 的 <code>boot</code> 方法中注册观察者，  <code>Email::observe(EmailObserver::class);</code> ，接下来将邮件通知的逻辑写在对应的观察者对应的方法中，例如：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">created</span><span class="p">(</span><span class="nx">Email</span> <span class="nv">$email</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nx">Mail</span><span class="o">::</span><span class="na">to</span><span class="p">(</span><span class="nv">$email</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="k">new</span> <span class="nx">EmailSend</span><span class="p">(</span><span class="nv">$email</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div><p><code>to($email)</code>中的<code>$email</code>为<code>email</code>数据集合，需要注意的是，在这个数据集合中必须要包含有<code>email</code>字段的数据（收件人邮箱），而<code>send(new EmailSend($email))</code>则为发送的邮件内容，这里是将一整条<code>email</code>数据集合作为数据发送了。</p>
+<p>利用Markdown 格式的 Mailable 类，为消息体渲染出漂亮、响应式的 HTML 模板，也能自动生成一个纯文本的副本。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:mail EmailSend --markdown<span class="o">=</span>email.template
+</code></pre></div><p>在生成的<code>EmailSend.php</code>中的<code>build()</code>方法中：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">build</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">markdown</span><span class="p">(</span><span class="s1">&#39;email.template&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>既然是发送邮件，当然需要修改<code>.env</code>中关于邮箱的配置信息了：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">MAIL_DRIVER</span><span class="o">=</span><span class="nx">smtp</span>
+<span class="nx">MAIL_HOST</span><span class="o">=</span><span class="nx">smtp</span><span class="o">.</span><span class="nx">qq</span><span class="o">.</span><span class="nx">com</span>
+<span class="nx">MAIL_PORT</span><span class="o">=</span><span class="mi">587</span>
+<span class="nx">MAIL_USERNAME</span><span class="o">=</span><span class="nx">xxxxxxx</span><span class="o">@</span><span class="nx">qq</span><span class="o">.</span><span class="nx">com</span><span class="c1">//发件人邮箱
+</span><span class="c1"></span><span class="nx">MAIL_FROM_ADDRESS</span><span class="o">=</span><span class="nx">xxxxxxx</span><span class="o">@</span><span class="nx">qq</span><span class="o">.</span><span class="nx">com</span><span class="c1">//这个需要自己加上，默认没有
+</span><span class="c1"></span><span class="nx">MAIL_PASSWORD</span><span class="o">=</span><span class="nx">授权码</span>
+<span class="nx">MAIL_ENCRYPTION</span><span class="o">=</span><span class="nx">tls</span>
+</code></pre></div>
+			</div>
+
+<div class="related-posts thin">
+	<h2>See Also</h2>
+	<ul>
+	
+	<li><a href="/posts/2018/20180110-laravel-paginate/">Laravel手动创建数组分页😏</a></li>
+	
+	<li><a href="/posts/2017/20171108-laravel-ajax/">Laravel中发送Ajax请求🏃‍♂️</a></li>
+	
+	<li><a href="/posts/2017/20171021-laravel-carbon/">Laravel Carbon函数</a></li>
+	
+	<li><a href="/posts/2017/20170913-laravel-middleware/">Laravel中间件👽</a></li>
+	
+	<li><a href="/posts/2017/20170806-laravel-model/">Laravel关联模型</a></li>
+	
+	</ul>
+</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/laravel">Laravel</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>50 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2046-04-02 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#思考">思考</a></li>
+        <li><a href="#实现">实现</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2018/20180410-gogs/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Gogs</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2018/20180326-install-supervisor/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Supervisor配置,每次都会踩好多坑</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

@@ -45,7 +45,7 @@
     </item>
     
     <item>
-      <title>Elasticsearch</title>
+      <title>ElasticSearch</title>
       <link>https://hugo.zkilm.cn/tags/elasticsearch/</link>
       <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
       
@@ -72,9 +72,18 @@
     </item>
     
     <item>
+      <title>Linux</title>
+      <link>https://hugo.zkilm.cn/tags/linux/</link>
+      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/tags/linux/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Homestead</title>
       <link>https://hugo.zkilm.cn/tags/homestead/</link>
-      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hugo.zkilm.cn/tags/homestead/</guid>
       <description></description>
@@ -83,18 +92,9 @@
     <item>
       <title>Swoole</title>
       <link>https://hugo.zkilm.cn/tags/swoole/</link>
-      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 06 Sep 2020 00:00:00 +0000</pubDate>
       
       <guid>https://hugo.zkilm.cn/tags/swoole/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Wechat</title>
-      <link>https://hugo.zkilm.cn/tags/wechat/</link>
-      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://hugo.zkilm.cn/tags/wechat/</guid>
       <description></description>
     </item>
     

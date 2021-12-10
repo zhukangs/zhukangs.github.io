@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>正则 on Promise</title>
+    <link>https://hugo.zkilm.cn/tags/%E6%AD%A3%E5%88%99/</link>
+    <description>Recent content in 正则 on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Tue, 18 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/%E6%AD%A3%E5%88%99/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>正则表达式学习归纳😪</title>
+      <link>https://hugo.zkilm.cn/posts/2017/20170418-regex-study/</link>
+      <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2017/20170418-regex-study/</guid>
+      <description>1、正则表达式
+正则表达式(regular expression)描述了一种字符串匹配的模式， 可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。 模式：使用一种特殊符号来实现字符串的匹配 2、创建正则对象
+①隐式创建 var 正则对象 = /正则表达式/匹配模式; ②直接实例化 var 正则对象 = new RegExp(‘正则表达式’, ‘匹配模式’); 两者之间的功能是完全一致的，都是为了获得正则对象。但是两者之间的区别主要在于语法的不同。 3、匹配模式
+基本语法： var reg = /正则表达式/匹配模式; 在正则表达式中，匹配模式常用的有两种形式： g ：global缩写，代表全局匹配，匹配出所有满足条件的结果 i ：ignore缩写，代表忽略大小写，匹配时，会自动忽略字符串的大小写 4、与正则表达式相关的几个方法
+① RegExp类下的方法(reg.test或reg.exec) test(str) ：判断字符串中是否具有指定模式的子串，返回结果是一个布尔类型的值 exec(str) ：返回字符串中指定模式的子串，一次只能获取一个与之匹配的结果 ② String类下的方法(str.方法(reg)) search(reg) ：与indexOf非常类似，返回指定模式的子串在字符串首次出现的位置 match(reg) ：以数组的形式返回指定模式的字符串，可以返回所有匹配的结果 replace(reg,’替换后的字符’) ：把指定模式的子串进行替换操作 split(reg) ：以指定模式分割字符串，返回结果为数组 5、几个重要概念
+1.子表达式：在正则表达式中，通过一对圆括号括起来的内容，我们就称之为“子表达式”。 如：var reg = /\d(\d)\d/gi; 2.捕获：在正则表达式中，子表达式匹配到相应的内容时，系统会自动捕获这个行为， 然后将子表达式匹配到的内容放入系统的缓存区中。我们把这个过程就称之为“捕获”。 3.反向引用：在正则表达式中，我们可以使用\n（n&amp;gt;0，正整数，代表系统中的缓冲区编号）来获取缓冲区中的内容， 我们把这个过程就称之为“反向引用”。 6、编写正则表达式三步走
+1.匹配符（查什么） 匹配符：字符匹配符用于匹配某个或某些字符 在正则表达式中，通过一对中括号括起来的内容，我们就称之为“字符簇”。 字符簇代表的是一个范围，但是匹配时，只能匹配某个固定的结果。 [a-z] ：匹配字符a到字符z之间的任一字符 [A-Z] ：匹配字符A到字符Z之间的任一字符 [0-9] ：匹配数字0到9之间的任一数字 [0-9a-z] ：匹配数字0到9或字符a到字符z之间的任一字符 [0-9a-zA-Z] ：匹配数字0到9或字符a到字符z或字符A到字符Z之间的任一字符 [abcd] ：匹配字符a或字符b或字符c或字符d [1234] ：匹配数字1或数字2或数字3或数字4 在字符簇中，通过一个^脱字节来表示取反的含义。 [^a-z] ：匹配除字符a到字符z以外的任一字符 [^0-9] ：匹配除数字0到9以外的任一字符 [^abcd] ：匹配除a、b、c、d以外的任一字符 几个比较特殊的匹配符: \d ：匹配一个数字字符，还可以使用[0-9] \D ：匹配一个非数字字符，还可以使用[^0-9] \w ：匹配包括下划线的任何单词字符，还可以使用[0-9a-zA-Z_] \W ：匹配任何非单词字符，还可以使用[^\w] \s ：匹配任何空白字符，space缩写 \S ：匹配任何非空白字符，还可以使用[^\s] .</description>
+    </item>
+    
+  </channel>
+</rss>

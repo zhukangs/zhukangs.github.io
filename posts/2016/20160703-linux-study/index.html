@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Linux学习归纳哈哈🚀">
+<meta itemprop="description" content="系统中常用Shell指令 ①指令单独存在 ② 指令带选项 ③ 指令带选项带参数 ls指令：显示当前目录的所有文件 相关选项： -l ：list缩写，代表以列表形式显示所有文件 -a ：all缩写，代表显示所有文件（包括隐藏文件） ① ls指令 ② ls指令 -l，这个指令还可以进一步简写为ll ③ ls指令 -a ④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件） Ls –l /var/www *.php 列出当前目录下，以.php结尾的文件 ls –al *.php pwd指令：显示当前工作目录 cd指令：跳转到指定目录 ① cd &#43; 路径：跳转到指定的目录 ② cd .. ：跳转到上一级目录 ③ cd &#43; ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root clear ：清屏指令 logout ：退出指令 普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。 Ctrl &#43; Alt &#43; F1 ：切换到图形界面 Ctrl &#43; Alt &#43; F2~F6 ：切换到字符界面 shutdown ：关机指令 相关选项： ① shutdown -h 分钟数：多少分钟后关机（真实关机） ② shutdown -r 分钟数：多少分钟后重启 ③ shutdown -k 分钟数：多少分钟后关机（只发出警告，不关机） ④ shutdown -c ：取消关机，也可以使用快捷键Ctrl &#43; C 但是特别注意：shutdown指令只能是超级管理员使用，使用su root切换超级管理员 halt指令：立即关机 reboot指令：立即重启 VI编辑器的基本操作 ① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件 ② vi &#43; filename ：打开文件并将光标置于最后一行 ③ vi &#43;n filename ：打开文件并将光标置于第n行 ④ vi &#43;/string filename ：打开文件并高亮显示string关键词 提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。 ⑤ vi filename1 filename2 ：同时打开多个文件 提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。 普及小知识：Linux自动补全（非常重要） 当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母&#43;Tab按键就可以实现自动补全。 VI编辑器的命令模式与末行模式 命令模式： ① yy ：复制当前行 nyy ：从当前行开始复制n行，例如：复制3行内容，3yy ② p ：粘贴 ③ dd ：删除当前行 ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。 ④ u ：撤销，相当于Windows中的Ctrl &#43; Z ⑤ d$：删除光标所在位置到行末的所有内容。 ⑥ $：把光标移动到行末。 ⑦ ^：把光标移动到行首。 末行模式： :set nu ：显示行号 :set nonu ：取消行号 /关键词：高亮显示所有关键词 :noh ：取消所有关键词高亮 num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面 :w ：保存文件 :q ：退出 :wq ：保存并退出 特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。 :w!"><meta itemprop="datePublished" content="2016-07-03T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2016-07-03T00:00:00+00:00" />
+<meta itemprop="wordCount" content="452"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Linux," /><meta property="og:title" content="Linux学习归纳哈哈🚀" />
+<meta property="og:description" content="系统中常用Shell指令 ①指令单独存在 ② 指令带选项 ③ 指令带选项带参数 ls指令：显示当前目录的所有文件 相关选项： -l ：list缩写，代表以列表形式显示所有文件 -a ：all缩写，代表显示所有文件（包括隐藏文件） ① ls指令 ② ls指令 -l，这个指令还可以进一步简写为ll ③ ls指令 -a ④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件） Ls –l /var/www *.php 列出当前目录下，以.php结尾的文件 ls –al *.php pwd指令：显示当前工作目录 cd指令：跳转到指定目录 ① cd &#43; 路径：跳转到指定的目录 ② cd .. ：跳转到上一级目录 ③ cd &#43; ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root clear ：清屏指令 logout ：退出指令 普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。 Ctrl &#43; Alt &#43; F1 ：切换到图形界面 Ctrl &#43; Alt &#43; F2~F6 ：切换到字符界面 shutdown ：关机指令 相关选项： ① shutdown -h 分钟数：多少分钟后关机（真实关机） ② shutdown -r 分钟数：多少分钟后重启 ③ shutdown -k 分钟数：多少分钟后关机（只发出警告，不关机） ④ shutdown -c ：取消关机，也可以使用快捷键Ctrl &#43; C 但是特别注意：shutdown指令只能是超级管理员使用，使用su root切换超级管理员 halt指令：立即关机 reboot指令：立即重启 VI编辑器的基本操作 ① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件 ② vi &#43; filename ：打开文件并将光标置于最后一行 ③ vi &#43;n filename ：打开文件并将光标置于第n行 ④ vi &#43;/string filename ：打开文件并高亮显示string关键词 提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。 ⑤ vi filename1 filename2 ：同时打开多个文件 提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。 普及小知识：Linux自动补全（非常重要） 当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母&#43;Tab按键就可以实现自动补全。 VI编辑器的命令模式与末行模式 命令模式： ① yy ：复制当前行 nyy ：从当前行开始复制n行，例如：复制3行内容，3yy ② p ：粘贴 ③ dd ：删除当前行 ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。 ④ u ：撤销，相当于Windows中的Ctrl &#43; Z ⑤ d$：删除光标所在位置到行末的所有内容。 ⑥ $：把光标移动到行末。 ⑦ ^：把光标移动到行首。 末行模式： :set nu ：显示行号 :set nonu ：取消行号 /关键词：高亮显示所有关键词 :noh ：取消所有关键词高亮 num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面 :w ：保存文件 :q ：退出 :wq ：保存并退出 特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。 :w!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2016/20160703-linux-study/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2016-07-03T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-07-03T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="Linux学习归纳哈哈🚀"/>
+<meta name="twitter:description" content="系统中常用Shell指令 ①指令单独存在 ② 指令带选项 ③ 指令带选项带参数 ls指令：显示当前目录的所有文件 相关选项： -l ：list缩写，代表以列表形式显示所有文件 -a ：all缩写，代表显示所有文件（包括隐藏文件） ① ls指令 ② ls指令 -l，这个指令还可以进一步简写为ll ③ ls指令 -a ④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件） Ls –l /var/www *.php 列出当前目录下，以.php结尾的文件 ls –al *.php pwd指令：显示当前工作目录 cd指令：跳转到指定目录 ① cd &#43; 路径：跳转到指定的目录 ② cd .. ：跳转到上一级目录 ③ cd &#43; ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root clear ：清屏指令 logout ：退出指令 普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。 Ctrl &#43; Alt &#43; F1 ：切换到图形界面 Ctrl &#43; Alt &#43; F2~F6 ：切换到字符界面 shutdown ：关机指令 相关选项： ① shutdown -h 分钟数：多少分钟后关机（真实关机） ② shutdown -r 分钟数：多少分钟后重启 ③ shutdown -k 分钟数：多少分钟后关机（只发出警告，不关机） ④ shutdown -c ：取消关机，也可以使用快捷键Ctrl &#43; C 但是特别注意：shutdown指令只能是超级管理员使用，使用su root切换超级管理员 halt指令：立即关机 reboot指令：立即重启 VI编辑器的基本操作 ① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件 ② vi &#43; filename ：打开文件并将光标置于最后一行 ③ vi &#43;n filename ：打开文件并将光标置于第n行 ④ vi &#43;/string filename ：打开文件并高亮显示string关键词 提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。 ⑤ vi filename1 filename2 ：同时打开多个文件 提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。 普及小知识：Linux自动补全（非常重要） 当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母&#43;Tab按键就可以实现自动补全。 VI编辑器的命令模式与末行模式 命令模式： ① yy ：复制当前行 nyy ：从当前行开始复制n行，例如：复制3行内容，3yy ② p ：粘贴 ③ dd ：删除当前行 ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。 ④ u ：撤销，相当于Windows中的Ctrl &#43; Z ⑤ d$：删除光标所在位置到行末的所有内容。 ⑥ $：把光标移动到行末。 ⑦ ^：把光标移动到行首。 末行模式： :set nu ：显示行号 :set nonu ：取消行号 /关键词：高亮显示所有关键词 :noh ：取消所有关键词高亮 num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面 :w ：保存文件 :q ：退出 :wq ：保存并退出 特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。 :w!"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Linux学习归纳哈哈🚀</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Jul 3, 3076&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>Linux学习归纳哈哈🚀</h1>
+			</header>
+			<div class="content">
+				<h3 id="系统中常用shell指令">系统中常用Shell指令<a href="#系统中常用shell指令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">①指令单独存在  ② 指令带选项 ③ 指令带选项带参数
+    
+ls指令：显示当前目录的所有文件
+相关选项：
+-l ：list缩写，代表以列表形式显示所有文件
+-a ：all缩写，代表显示所有文件（包括隐藏文件）
+① ls指令
+② ls指令 -l，这个指令还可以进一步简写为ll
+③ ls指令 -a
+④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件）
+Ls –l /var/www *.php
+列出当前目录下，以.php结尾的文件  ls  –al *.php
+pwd指令：显示当前工作目录
+cd指令：跳转到指定目录
+① cd + 路径：跳转到指定的目录
+② cd .. ：跳转到上一级目录
+③ cd + ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root
+clear ：清屏指令
+logout ：退出指令
+普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。
+Ctrl + Alt + F1 ：切换到图形界面
+Ctrl + Alt + F2~F6 ：切换到字符界面
+shutdown ：关机指令
+相关选项：
+① shutdown  -h  分钟数：多少分钟后关机（真实关机）
+② shutdown  -r  分钟数：多少分钟后重启
+③ shutdown  -k  分钟数：多少分钟后关机（只发出警告，不关机）
+④ shutdown  -c ：取消关机，也可以使用快捷键Ctrl + C
+但是特别注意：shutdown指令只能是超级管理员使用，使用su  root切换超级管理员
+halt指令：立即关机
+reboot指令：立即重启
+</code></pre></div><h3 id="vi编辑器的基本操作">VI编辑器的基本操作<a href="#vi编辑器的基本操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件
+② vi + filename ：打开文件并将光标置于最后一行
+③ vi +n filename ：打开文件并将光标置于第n行
+④ vi +/string filename  ：打开文件并高亮显示string关键词
+提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。
+⑤ vi filename1 filename2 ：同时打开多个文件
+提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。
+
+普及小知识：Linux自动补全（非常重要）
+当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母+Tab按键就可以实现自动补全。
+</code></pre></div><h3 id="vi编辑器的命令模式与末行模式">VI编辑器的命令模式与末行模式<a href="#vi编辑器的命令模式与末行模式" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">命令模式：
+① yy ：复制当前行
+   nyy ：从当前行开始复制n行，例如：复制3行内容，3yy
+② p ：粘贴
+③ dd ：删除当前行
+   ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。
+④ u ：撤销，相当于Windows中的Ctrl + Z
+⑤ d$：删除光标所在位置到行末的所有内容。
+⑥ $：把光标移动到行末。
+⑦ ^：把光标移动到行首。
+
+末行模式：
+:set nu ：显示行号
+:set nonu ：取消行号
+/关键词：高亮显示所有关键词
+:noh ：取消所有关键词高亮
+num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面
+:w ：保存文件
+:q ：退出
+:wq ：保存并退出
+
+特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。
+:w! ：强制保存
+:q! ：强制退出
+:wq! ：强制保存并退出
+:n : 将光标放到指定的行
+</code></pre></div><h3 id="linux系统软件的安装与卸载">Linux系统软件的安装与卸载<a href="#linux系统软件的安装与卸载" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.查询已安装的Linux软件：
+    1、rpm -qa
+    2、选项说明：
+    3、-q ：query缩写，代表查询
+    4、-a ：all缩写，代表查询所有已安装的软件
+    
+2、管道命令
+基本语法：
+rpm  -qa | grep  vim
+管道命令操作符是：”|”。
+作用：将“|”左边命令的结果信息作为下一个命令的输入信息
+文本搜索命令：grep
+
+3、卸载已安装的软件
+基本语法：
+rpm  -e  软件名称
+如：rpm –e vim-common
+
+4、安装Linux软件（rpm包）
+①装载系统镜像1（DVD1）
+②选择已连接，启动光驱
+③到/media目录下寻找DVD光驱中的内容
+④安装rpm软件包，要用到的知识点：
+rpm  -ivh  软件名称：安装软件
+-i ：install缩写，安装
+-vh ：显示安装进度
+
+5、返回上级目录后，单击小b重启计算机
+
+6、更改超级管理员root密码
+基本语法：
+passwd  用户名名称 ：重置密码
+
+7、设置密码后，重启操作系统
+</code></pre></div><h3 id="与组相关的shell指令">与组相关的Shell指令<a href="#与组相关的shell指令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① groupadd 组名：添加组
+相关选项：
+-g ：添加组时，指定组id
+② groupmod 组名
+相关选项：
+-n ：修改组名称
+-g ：修改组id
+
+③ groupdel 组名
+VIM使用小技巧：在末行模式下
+使用:0代表跳转到第1行
+使用:$代表调整到最后1行
+tail指令：在不打开文件的前提下，查看文件的内容
+tail -n 显示最后几行（纯数字） 文件名称
+
+④添加或删除组成员（针对附属组）
+gpasswd  [选项]  组名
+相关选项：
+-a user_name ：添加用户到附属组中
+-d user_name ：从附属组中删除用户
+</code></pre></div><h3 id="与用户的相关的shell指令">与用户的相关的Shell指令<a href="#与用户的相关的shell指令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① useradd指令：添加用户
+相关选项：
+-g group_name ：代表添加用户时指定用户的所属组
+-d  home_dir  -m：添加用户时指定用户的家，如果不指定默认/home/用户名
+
+② usermod 指令：修改用户信息
+相关选项：
+-c comment ：修改用户的备注信息
+-l login_name ：修改用户的名称
+-d home_dir ：修改用户的家
+-g group_name ：修改用户的所属组
+
+③ userdel 指令：删除用户
+相关选项：
+-r ：删除用户时同时删除用户的家
+
+④设置用户口令（密码）
+基本语法：passwd [选项] 用户
+相关选项：
+-S ：Status缩写，查看用户口令状态
+特别说明：如果一个用户没有密码，也会显示密码已被锁定。
+-l ：lock缩写，代表锁定用户，不能登录操作系统
+-u ：unlock缩写，代表解锁用户
+-d ：del缩写，代表删除用户密码
+
+⑤用户的相关指令
+ su指令：切换用户
+特别说明：如果从普通用户切换到超级管理员，需要密码
+如果从超级管理员切换到普通用户，不需要密码
+ newgrp：切换所属组
+ whoami：我是谁
+
+⑥查看用户信息
+id ：查看的内容比较多，查看用户信息
+groups ：查看的内容比较少，只能查看用户的所属组
+
+⑦设置与查看用户资料信息
+ chfn [用户名称] ：更改用户的资料信息
+ finger [用户名称] ：查看用户的资料信息
+安装finger需要依赖的软件
+
+⑧批量添加用户
+ 1.编辑用户文件
+vim user.txt
+2. 编辑用户密码（明文）
+vim pass.txt
+3. 使用newusers指令到user.txt中的用户信息到/etc/passwd文件中
+4. 使用pwunconv指令把/etc/shadow文件中的密码都倒回到/etc/passwd文件中
+5. 使用chpasswd指令把pass.txt文件中的密码导入/etc/passwd文件中
+6. 使用pwconv指令把加密后的密码存储在/etc/shadow文件中
+</code></pre></div><h3 id="目录管理">目录管理<a href="#目录管理" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① mkdir ：创建目录
+相关选项：
+-p ：递归创建
+-m ：创建目录时指定目录权限
+
+② rmdir ：删除目录
+相关参数：
+-p ：递归删除
+</code></pre></div><h3 id="文件相关">文件相关<a href="#文件相关" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① touch指令：创建文件
+ouch指令与vim指令创建文件有何区别呢？
+vim指令打开文件，但是如果文件不存在，则自动创建该文件
+touch指令只能创建文件而没有打开功能
+
+② rm指令删除文件
+相关选项：
+-r ：递归删除（主要用于删除文件夹）
+-f ：关闭删除确认
+
+④文件统计
+基本语法：
+wc  [选项]  &lt;文件列表&gt;
+相关选项：
+-c ：统计文件的字节数
+-l ：lines缩写，统计文件的行数
+-w ：word缩写，统计文件的单词数
+
+⑤grep搜索匹配行
+基本语法：
+grep  [选项]  &lt;字符串&gt;  &lt;源文件&gt;
+相关选项：
+-n ：显示匹配的行号
+-c ：统计一共有多少行
+-i ：ignore缩写，代表匹配时忽略大小写
+
+⑥显示文件内容
+1. cat指令：正序显示文件内容
+2. tac指令：倒序显示文件内容
+
+⑦更改文件的权限
+1. 更改文件的权限
+chmod  -R（递归修改） 777
+2. 更改文件的拥有者
+chown  -R（递归修改） root
+3. 更改文件的所属组
+chgrp  -R（递归修改） itcast
+
+⑧创建链接文件
+软链接创建步骤：
+ln  [-s]  &lt;源文件或目录&gt;  &lt;链接文件或目录&gt;
+
+⑨复制与移动文件或文件夹
+1. cp  [选项]   &lt;源文件路径&gt;   &lt;目标文件路径&gt;
+相关选项：
+-v : 显示进度条
+-R : 递归复制
+-p : 复制时保持文件的原有属性
+-vRp ：递归复制，保存文件的原有属性，显示进度条
+还可以复制文件时更改文件名称
+2. mv指令：剪切或移动
+相关指令：
+-v ：移动时显示进度条
+3. mv指令：文件或文件夹重命名
+基本语法：
+mv  旧文件名 新文件名
+</code></pre></div>
+			</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/linux">Linux</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>452 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>3076-07-03 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#系统中常用shell指令">系统中常用Shell指令</a></li>
+        <li><a href="#vi编辑器的基本操作">VI编辑器的基本操作</a></li>
+        <li><a href="#vi编辑器的命令模式与末行模式">VI编辑器的命令模式与末行模式</a></li>
+        <li><a href="#linux系统软件的安装与卸载">Linux系统软件的安装与卸载</a></li>
+        <li><a href="#与组相关的shell指令">与组相关的Shell指令</a></li>
+        <li><a href="#与用户的相关的shell指令">与用户的相关的Shell指令</a></li>
+        <li><a href="#目录管理">目录管理</a></li>
+        <li><a href="#文件相关">文件相关</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2017/20170106-mysql-advanced/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>MySQL高级操作🥗</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2016/20160511-mysql-basic/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>MySQL基础操作🍕</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

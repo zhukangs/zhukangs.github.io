@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Laravel关联模型">
+<meta itemprop="description" content="laravel关联关系
+以多对多为例   一个用户有多个角色，可以是普通管理员，也可以是超级管理员
+  一个超级管理员也可以被多个用户拥有
+  多对多关联比 hasOne 和 hasMany 关联稍微复杂些。这种关联的一个例子就是具有许多角色的用户，而角色也被其他用户共享。例如，许多用户都可以有「管理员」角色。要定义这种关联，需要用到三个数据库表：users、roles 和 role_user。role_user 表是以相关联的两个模型数据表、依照字母顺序排列命名的，并且包含 user_id 和 role_id 字段。
+多对多关联是通过写一个方法定义的，在方法内部调用 belongsToMany 方法并返回其结果。例如，我们在 User 模型中定义一个 roles 方法：
+&lt;?php namespace App; use Illuminate\Database\Eloquent\Model; class User extends Model { /** * 获得此用户的角色。 */ public function roles() { return $this-&gt;belongsToMany(&#39;App\Role&#39;, &#39;role_user&#39;, &#39;user_id&#39;, &#39;role_id&#39;);//要新建好Role模型  } } 关联关系定义好后，我们就可以通过 roles 动态属性获得用户的角色了：
+$roles = App\User::find(1)-&gt;roles()-&gt;orderBy(&#39;name&#39;)-&gt;get(); 中间表相关：
+1、获得中间表字段 $user = App\User::find(1); foreach ($user-&gt;roles as $role) { echo $role-&gt;pivot-&gt;created_at; } 2、默认情况下，pivot 对象只包含两个关联模型的键。如果中间表里还有额外字段，则必须在定义关联时明确指出： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;withPivot(&#39;column1&#39;, &#39;column2&#39;); 3、如果您想让中间表自动维护 created_at 和 updated_at 时间戳，那么在定义关联时加上 withTimestamps 方法即可： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;withTimestamps(); 4、通过中间表过滤关联数据： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;wherePivot(&#39;approved&#39;, 1); return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;wherePivotIn(&#39;priority&#39;, [1, 2]); 预加载 当作为属性访问 Eloquent 关联时，关联数据是「懒加载」的。意味着在你第一次访问该属性时，才会加载关联数据。不过，是当你查询父模型时，Eloquent 可以「预加载」关联数据。预加载避免了 N &#43; 1 查询问题。要说明 N &#43; 1 查询问题，试想一个 Book 模型关联到 Author 模型："><meta itemprop="datePublished" content="2017-08-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-08-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="210"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Laravel关联模型" />
+<meta property="og:description" content="laravel关联关系
+以多对多为例   一个用户有多个角色，可以是普通管理员，也可以是超级管理员
+  一个超级管理员也可以被多个用户拥有
+  多对多关联比 hasOne 和 hasMany 关联稍微复杂些。这种关联的一个例子就是具有许多角色的用户，而角色也被其他用户共享。例如，许多用户都可以有「管理员」角色。要定义这种关联，需要用到三个数据库表：users、roles 和 role_user。role_user 表是以相关联的两个模型数据表、依照字母顺序排列命名的，并且包含 user_id 和 role_id 字段。
+多对多关联是通过写一个方法定义的，在方法内部调用 belongsToMany 方法并返回其结果。例如，我们在 User 模型中定义一个 roles 方法：
+&lt;?php namespace App; use Illuminate\Database\Eloquent\Model; class User extends Model { /** * 获得此用户的角色。 */ public function roles() { return $this-&gt;belongsToMany(&#39;App\Role&#39;, &#39;role_user&#39;, &#39;user_id&#39;, &#39;role_id&#39;);//要新建好Role模型  } } 关联关系定义好后，我们就可以通过 roles 动态属性获得用户的角色了：
+$roles = App\User::find(1)-&gt;roles()-&gt;orderBy(&#39;name&#39;)-&gt;get(); 中间表相关：
+1、获得中间表字段 $user = App\User::find(1); foreach ($user-&gt;roles as $role) { echo $role-&gt;pivot-&gt;created_at; } 2、默认情况下，pivot 对象只包含两个关联模型的键。如果中间表里还有额外字段，则必须在定义关联时明确指出： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;withPivot(&#39;column1&#39;, &#39;column2&#39;); 3、如果您想让中间表自动维护 created_at 和 updated_at 时间戳，那么在定义关联时加上 withTimestamps 方法即可： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;withTimestamps(); 4、通过中间表过滤关联数据： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;wherePivot(&#39;approved&#39;, 1); return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;wherePivotIn(&#39;priority&#39;, [1, 2]); 预加载 当作为属性访问 Eloquent 关联时，关联数据是「懒加载」的。意味着在你第一次访问该属性时，才会加载关联数据。不过，是当你查询父模型时，Eloquent 可以「预加载」关联数据。预加载避免了 N &#43; 1 查询问题。要说明 N &#43; 1 查询问题，试想一个 Book 模型关联到 Author 模型：" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2017/20170806-laravel-model/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-08-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-08-06T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="Laravel关联模型"/>
+<meta name="twitter:description" content="laravel关联关系
+以多对多为例   一个用户有多个角色，可以是普通管理员，也可以是超级管理员
+  一个超级管理员也可以被多个用户拥有
+  多对多关联比 hasOne 和 hasMany 关联稍微复杂些。这种关联的一个例子就是具有许多角色的用户，而角色也被其他用户共享。例如，许多用户都可以有「管理员」角色。要定义这种关联，需要用到三个数据库表：users、roles 和 role_user。role_user 表是以相关联的两个模型数据表、依照字母顺序排列命名的，并且包含 user_id 和 role_id 字段。
+多对多关联是通过写一个方法定义的，在方法内部调用 belongsToMany 方法并返回其结果。例如，我们在 User 模型中定义一个 roles 方法：
+&lt;?php namespace App; use Illuminate\Database\Eloquent\Model; class User extends Model { /** * 获得此用户的角色。 */ public function roles() { return $this-&gt;belongsToMany(&#39;App\Role&#39;, &#39;role_user&#39;, &#39;user_id&#39;, &#39;role_id&#39;);//要新建好Role模型  } } 关联关系定义好后，我们就可以通过 roles 动态属性获得用户的角色了：
+$roles = App\User::find(1)-&gt;roles()-&gt;orderBy(&#39;name&#39;)-&gt;get(); 中间表相关：
+1、获得中间表字段 $user = App\User::find(1); foreach ($user-&gt;roles as $role) { echo $role-&gt;pivot-&gt;created_at; } 2、默认情况下，pivot 对象只包含两个关联模型的键。如果中间表里还有额外字段，则必须在定义关联时明确指出： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;withPivot(&#39;column1&#39;, &#39;column2&#39;); 3、如果您想让中间表自动维护 created_at 和 updated_at 时间戳，那么在定义关联时加上 withTimestamps 方法即可： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;withTimestamps(); 4、通过中间表过滤关联数据： return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;wherePivot(&#39;approved&#39;, 1); return $this-&gt;belongsToMany(&#39;App\Role&#39;)-&gt;wherePivotIn(&#39;priority&#39;, [1, 2]); 预加载 当作为属性访问 Eloquent 关联时，关联数据是「懒加载」的。意味着在你第一次访问该属性时，才会加载关联数据。不过，是当你查询父模型时，Eloquent 可以「预加载」关联数据。预加载避免了 N &#43; 1 查询问题。要说明 N &#43; 1 查询问题，试想一个 Book 模型关联到 Author 模型："/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Laravel关联模型</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Aug 6, 6086&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>Laravel关联模型</h1>
+			</header>
+			<div class="content">
+				<p><strong>laravel关联关系</strong></p>
+<h3 id="以多对多为例">以多对多为例<a href="#以多对多为例" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>一个用户有多个角色，可以是普通管理员，也可以是超级管理员</p>
+</li>
+<li>
+<p>一个超级管理员也可以被多个用户拥有</p>
+</li>
+</ul>
+<p>多对多关联比 hasOne 和 hasMany 关联稍微复杂些。这种关联的一个例子就是具有许多角色的用户，而角色也被其他用户共享。例如，许多用户都可以有「管理员」角色。要定义这种关联，需要用到三个数据库表：users、roles 和 role_user。role_user 表是以相关联的两个模型数据表、依照字母顺序排列命名的，并且包含 user_id 和 role_id 字段。</p>
+<p>多对多关联是通过写一个方法定义的，在方法内部调用 belongsToMany 方法并返回其结果。例如，我们在 User 模型中定义一个 roles 方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+    
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="sd">/**
+</span><span class="sd">     * 获得此用户的角色。
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">roles</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">belongsToMany</span><span class="p">(</span><span class="s1">&#39;App\Role&#39;</span><span class="p">,</span> <span class="s1">&#39;role_user&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">,</span> <span class="s1">&#39;role_id&#39;</span><span class="p">);</span><span class="c1">//要新建好Role模型
+</span><span class="c1"></span>    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>关联关系定义好后，我们就可以通过 roles 动态属性获得用户的角色了：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$roles</span> <span class="o">=</span> <span class="nx">App\User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">roles</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+</code></pre></div><p>中间表相关：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="mi">1</span><span class="nx">、获得中间表字段</span>
+<span class="nv">$user</span> <span class="o">=</span> <span class="nx">App\User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">roles</span> <span class="k">as</span> <span class="nv">$role</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$role</span><span class="o">-&gt;</span><span class="na">pivot</span><span class="o">-&gt;</span><span class="na">created_at</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="mi">2</span><span class="nx">、默认情况下，pivot</span> <span class="nx">对象只包含两个关联模型的键。如果中间表里还有额外字段，则必须在定义关联时明确指出：</span>
+<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">belongsToMany</span><span class="p">(</span><span class="s1">&#39;App\Role&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">withPivot</span><span class="p">(</span><span class="s1">&#39;column1&#39;</span><span class="p">,</span> <span class="s1">&#39;column2&#39;</span><span class="p">);</span>
+<span class="mi">3</span><span class="nx">、如果您想让中间表自动维护</span> <span class="nx">created_at</span> <span class="nx">和</span> <span class="nx">updated_at</span> <span class="nx">时间戳，那么在定义关联时加上</span> <span class="nx">withTimestamps</span> <span class="nx">方法即可：</span>
+<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">belongsToMany</span><span class="p">(</span><span class="s1">&#39;App\Role&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">withTimestamps</span><span class="p">();</span>
+<span class="mi">4</span><span class="nx">、通过中间表过滤关联数据：</span>
+<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">belongsToMany</span><span class="p">(</span><span class="s1">&#39;App\Role&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">wherePivot</span><span class="p">(</span><span class="s1">&#39;approved&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">belongsToMany</span><span class="p">(</span><span class="s1">&#39;App\Role&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">wherePivotIn</span><span class="p">(</span><span class="s1">&#39;priority&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]);</span>
+</code></pre></div><h3 id="预加载">预加载<a href="#预加载" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>当作为属性访问 Eloquent 关联时，关联数据是「懒加载」的。意味着在你第一次访问该属性时，才会加载关联数据。不过，是当你查询父模型时，Eloquent 可以「预加载」关联数据。预加载避免了 N + 1 查询问题。要说明 N + 1 查询问题，试想一个 Book 模型关联到 Author 模型：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+    
+<span class="k">namespace</span> <span class="nx">App</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Illuminate\Database\Eloquent\Model</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">Book</span> <span class="k">extends</span> <span class="nx">Model</span>
+<span class="p">{</span>
+    <span class="sd">/**
+</span><span class="sd">     * 获得此书的作者。
+</span><span class="sd">     */</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">author</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">belongsTo</span><span class="p">(</span><span class="s1">&#39;App\Author&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div><p>现在，让我们来获得所有书籍和作者数据：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$books</span> <span class="o">=</span> <span class="nx">App\Book</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+    
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$books</span> <span class="k">as</span> <span class="nv">$book</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$book</span><span class="o">-&gt;</span><span class="na">author</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>这个循环会运行一次查询取回所有数据表上的书籍数据，然后又运行一次查询获得每本书的作者数据。如果我们有 25 本书，则循环就会执行 26 次查询：1 次是获得所有书籍数据，另外 25 条查询用来获得每本书的作者数据。</p>
+<p>谢天谢地，我们使用预加载让整个查询减少到 2 次。这是通过指定关联给 with 方法办到的：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$books</span> <span class="o">=</span> <span class="nx">App\Book</span><span class="o">::</span><span class="na">with</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+    
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$books</span> <span class="k">as</span> <span class="nv">$book</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$book</span><span class="o">-&gt;</span><span class="na">author</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div><p>整个操作，只执行了两条查询：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">books</span><span class="w">
+</span><span class="w"></span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">authors</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="p">...)</span><span class="w">
+</span></code></pre></div><h3 id="预加载相关">预加载相关<a href="#预加载相关" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>1、预加载多个关联：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$books</span> <span class="o">=</span> <span class="nx">App\Book</span><span class="o">::</span><span class="na">with</span><span class="p">([</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;publisher&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+</code></pre></div><p>2、预加载嵌套关联，可以使用「点」语法。例如，在一个 Eloquent 语句中，预加载所有书籍作者和这些作者的联系信息：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$books</span> <span class="o">=</span> <span class="nx">App\Book</span><span class="o">::</span><span class="na">with</span><span class="p">(</span><span class="s1">&#39;author.contacts&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+</code></pre></div><p>3、为预加载添加约束条件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$users</span> <span class="o">=</span> <span class="nx">App\User</span><span class="o">::</span><span class="na">with</span><span class="p">([</span><span class="s1">&#39;posts&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$query</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;%first%&#39;</span><span class="p">);</span>
+<span class="p">}])</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+</code></pre></div><p>4、延迟预加载。有时，您可能需要在获得父级模型后才去预加载关联数据。例如，当你需要来动态决定是否加载关联模型时，这可能很有帮助：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$books</span> <span class="o">=</span> <span class="nx">App\Book</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$someCondition</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$books</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="s1">&#39;publisher&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div><p>如果您想设置预加载查询的额外约束条件，可以通过给 load 添加数组键的形式达到目的，数组值是接收查询实例的闭包：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$books</span><span class="o">-&gt;</span><span class="na">load</span><span class="p">([</span><span class="s1">&#39;author&#39;</span> <span class="o">=&gt;</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$query</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;published_date&#39;</span><span class="p">,</span> <span class="s1">&#39;asc&#39;</span><span class="p">);</span>
+<span class="p">}]);</span>
+</code></pre></div>
+			</div>
+
+<div class="related-posts thin">
+	<h2>See Also</h2>
+	<ul>
+	
+	<li><a href="/posts/2017/20170604-laravel-upload/">Laravel操作上传文件的方法</a></li>
+	
+	<li><a href="/posts/2017/20170527-laravel-study04/">Laravel学习笔记（四）🍖</a></li>
+	
+	<li><a href="/posts/2017/20170520-laravel-study03/">Laravel学习笔记（三）</a></li>
+	
+	<li><a href="/posts/2017/20170512-laravel-study02/">Laravel学习笔记（二）🍉</a></li>
+	
+	<li><a href="/posts/2017/20170508-laravel-study01/">Laravel学习笔记（一）</a></li>
+	
+	</ul>
+</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/laravel">Laravel</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>210 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>6086-08-06 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#以多对多为例">以多对多为例</a></li>
+        <li><a href="#预加载">预加载</a></li>
+        <li><a href="#预加载相关">预加载相关</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2017/20170913-laravel-middleware/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Laravel中间件👽</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2017/20170721-nginx-php/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Nginx与PHP交互🐤</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

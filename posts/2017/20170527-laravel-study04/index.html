@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Laravel学习笔记（四）🍖">
+<meta itemprop="description" content="以下都是个人在学习或是工作中的部分记录：
+laravel连表额外添加条件 Product::query()-&gt;from(&#39;products as p&#39;) -&gt;leftJoin(&#39;user_has_products as uhp&#39;, function ($join){ $join-&gt;on(&#39;p.id&#39;, &#39;=&#39;, &#39;uhp.product_id&#39;)-&gt;where(&#39;uhp.user_role&#39;,&#39;=&#39;,&#39;1&#39;); }) laravel中的多条件 Notice::where([&#39;cate&#39;=&gt;2,&#39;is_show&#39;=&gt;1]) laravel carbon 时间戳转日期 $date=Carbon::createFromTimestamp(&#34;时间戳&#34;)-&gt;toDateTimeString() ; //获取昨天的时间戳 $ts = Carbon::yesterday()-&gt;timestamp; laravel时区设置  config/app.php  //协调世界时(UTC, Universal Time Coordinated)，又称世界统一时间，世界标准时间，国际协调时间。 &#39;timezone&#39; =&gt; &#39;UTC&#39;,//// //中国标准时间 &#39;timezone&#39; =&gt; &#39;PRC&#39;, laravel中自带bootstrap的字体路径 //(解决找不到glyphicons-halflings-regular.woff问题) vendor-&gt;phpunit-&gt;php-code-coverage-&gt;src-&gt;Report-&gt;Html-&gt;Renderer-&gt;Template-&gt;fonts //找不到fontawesome-webfont.woff及？v=4.2.0问题 下载地址（http://www.xz7.com/dir/329345.html），更改相应js代码可将？后部分去掉，因为文件不能带&#39;?&#39;等字符 线上服务器执行 composer du 报错 [Symfony\Component\Process\Exception\RuntimeException] The Process class relies on proc_open, which is not available on your PHP installation. 解决办法： 修改php.ini配置文件，并搜索disable_functions指令，找到类似如下内容： disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_get_status,proc_open，popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server 找到proc_open并删除即可。 执行composer artisan config clear 后项目运行报错或执行php artisan报错 Uncaught ReflectionException: Class config does not exist in /www/wwwroot/larabbs/vendor/laravel/framework/src/Illuminate/Container/Container."><meta itemprop="datePublished" content="2017-05-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-05-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="234"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Laravel学习笔记（四）🍖" />
+<meta property="og:description" content="以下都是个人在学习或是工作中的部分记录：
+laravel连表额外添加条件 Product::query()-&gt;from(&#39;products as p&#39;) -&gt;leftJoin(&#39;user_has_products as uhp&#39;, function ($join){ $join-&gt;on(&#39;p.id&#39;, &#39;=&#39;, &#39;uhp.product_id&#39;)-&gt;where(&#39;uhp.user_role&#39;,&#39;=&#39;,&#39;1&#39;); }) laravel中的多条件 Notice::where([&#39;cate&#39;=&gt;2,&#39;is_show&#39;=&gt;1]) laravel carbon 时间戳转日期 $date=Carbon::createFromTimestamp(&#34;时间戳&#34;)-&gt;toDateTimeString() ; //获取昨天的时间戳 $ts = Carbon::yesterday()-&gt;timestamp; laravel时区设置  config/app.php  //协调世界时(UTC, Universal Time Coordinated)，又称世界统一时间，世界标准时间，国际协调时间。 &#39;timezone&#39; =&gt; &#39;UTC&#39;,//// //中国标准时间 &#39;timezone&#39; =&gt; &#39;PRC&#39;, laravel中自带bootstrap的字体路径 //(解决找不到glyphicons-halflings-regular.woff问题) vendor-&gt;phpunit-&gt;php-code-coverage-&gt;src-&gt;Report-&gt;Html-&gt;Renderer-&gt;Template-&gt;fonts //找不到fontawesome-webfont.woff及？v=4.2.0问题 下载地址（http://www.xz7.com/dir/329345.html），更改相应js代码可将？后部分去掉，因为文件不能带&#39;?&#39;等字符 线上服务器执行 composer du 报错 [Symfony\Component\Process\Exception\RuntimeException] The Process class relies on proc_open, which is not available on your PHP installation. 解决办法： 修改php.ini配置文件，并搜索disable_functions指令，找到类似如下内容： disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_get_status,proc_open，popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server 找到proc_open并删除即可。 执行composer artisan config clear 后项目运行报错或执行php artisan报错 Uncaught ReflectionException: Class config does not exist in /www/wwwroot/larabbs/vendor/laravel/framework/src/Illuminate/Container/Container." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2017/20170527-laravel-study04/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-05-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-05-27T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="Laravel学习笔记（四）🍖"/>
+<meta name="twitter:description" content="以下都是个人在学习或是工作中的部分记录：
+laravel连表额外添加条件 Product::query()-&gt;from(&#39;products as p&#39;) -&gt;leftJoin(&#39;user_has_products as uhp&#39;, function ($join){ $join-&gt;on(&#39;p.id&#39;, &#39;=&#39;, &#39;uhp.product_id&#39;)-&gt;where(&#39;uhp.user_role&#39;,&#39;=&#39;,&#39;1&#39;); }) laravel中的多条件 Notice::where([&#39;cate&#39;=&gt;2,&#39;is_show&#39;=&gt;1]) laravel carbon 时间戳转日期 $date=Carbon::createFromTimestamp(&#34;时间戳&#34;)-&gt;toDateTimeString() ; //获取昨天的时间戳 $ts = Carbon::yesterday()-&gt;timestamp; laravel时区设置  config/app.php  //协调世界时(UTC, Universal Time Coordinated)，又称世界统一时间，世界标准时间，国际协调时间。 &#39;timezone&#39; =&gt; &#39;UTC&#39;,//// //中国标准时间 &#39;timezone&#39; =&gt; &#39;PRC&#39;, laravel中自带bootstrap的字体路径 //(解决找不到glyphicons-halflings-regular.woff问题) vendor-&gt;phpunit-&gt;php-code-coverage-&gt;src-&gt;Report-&gt;Html-&gt;Renderer-&gt;Template-&gt;fonts //找不到fontawesome-webfont.woff及？v=4.2.0问题 下载地址（http://www.xz7.com/dir/329345.html），更改相应js代码可将？后部分去掉，因为文件不能带&#39;?&#39;等字符 线上服务器执行 composer du 报错 [Symfony\Component\Process\Exception\RuntimeException] The Process class relies on proc_open, which is not available on your PHP installation. 解决办法： 修改php.ini配置文件，并搜索disable_functions指令，找到类似如下内容： disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_get_status,proc_open，popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server 找到proc_open并删除即可。 执行composer artisan config clear 后项目运行报错或执行php artisan报错 Uncaught ReflectionException: Class config does not exist in /www/wwwroot/larabbs/vendor/laravel/framework/src/Illuminate/Container/Container."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Laravel学习笔记（四）🍖</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>May 27, 27056&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>Laravel学习笔记（四）🍖</h1>
+			</header>
+			<div class="content">
+				<p><strong>以下都是个人在学习或是工作中的部分记录：</strong></p>
+<h3 id="laravel连表额外添加条件">laravel连表额外添加条件<a href="#laravel连表额外添加条件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Product</span><span class="o">::</span><span class="na">query</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">from</span><span class="p">(</span><span class="s1">&#39;products as p&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">leftJoin</span><span class="p">(</span><span class="s1">&#39;user_has_products as uhp&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$join</span><span class="p">){</span>
+        <span class="nv">$join</span><span class="o">-&gt;</span><span class="na">on</span><span class="p">(</span><span class="s1">&#39;p.id&#39;</span><span class="p">,</span> <span class="s1">&#39;=&#39;</span><span class="p">,</span> <span class="s1">&#39;uhp.product_id&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;uhp.user_role&#39;</span><span class="p">,</span><span class="s1">&#39;=&#39;</span><span class="p">,</span><span class="s1">&#39;1&#39;</span><span class="p">);</span>
+    <span class="p">})</span>
+</code></pre></div><h3 id="laravel中的多条件">laravel中的多条件<a href="#laravel中的多条件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Notice</span><span class="o">::</span><span class="na">where</span><span class="p">([</span><span class="s1">&#39;cate&#39;</span><span class="o">=&gt;</span><span class="mi">2</span><span class="p">,</span><span class="s1">&#39;is_show&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div><h3 id="laravel-carbon-时间戳转日期">laravel carbon 时间戳转日期<a href="#laravel-carbon-时间戳转日期" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$date</span><span class="o">=</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTimestamp</span><span class="p">(</span><span class="s2">&#34;时间戳&#34;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">()</span> <span class="p">;</span>
+<span class="c1">//获取昨天的时间戳
+</span><span class="c1"></span><span class="nv">$ts</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">yesterday</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">;</span>
+</code></pre></div><h3 id="laravel时区设置">laravel时区设置<a href="#laravel时区设置" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li><code>config/app.php</code></li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//协调世界时(UTC, Universal Time Coordinated)，又称世界统一时间，世界标准时间，国际协调时间。
+</span><span class="c1"></span><span class="s1">&#39;timezone&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;UTC&#39;</span><span class="p">,</span><span class="c1">////
+</span><span class="c1">//中国标准时间
+</span><span class="c1"></span><span class="s1">&#39;timezone&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;PRC&#39;</span><span class="p">,</span>
+</code></pre></div><h3 id="laravel中自带bootstrap的字体路径">laravel中自带bootstrap的字体路径<a href="#laravel中自带bootstrap的字体路径" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">//(解决找不到glyphicons-halflings-regular.woff问题)
+vendor-&gt;phpunit-&gt;php-code-coverage-&gt;src-&gt;Report-&gt;Html-&gt;Renderer-&gt;Template-&gt;fonts
+//找不到fontawesome-webfont.woff及？v=4.2.0问题
+下载地址（http://www.xz7.com/dir/329345.html），更改相应js代码可将？后部分去掉，因为文件不能带&#39;?&#39;等字符
+</code></pre></div><h3 id="线上服务器执行-composer-du-报错">线上服务器执行 composer du 报错<a href="#线上服务器执行-composer-du-报错" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">[Symfony\Component\Process\Exception\RuntimeException]                       
+The Process class relies on proc_open, which is not available on your PHP installation. 
+
+解决办法：
+修改php.ini配置文件，并搜索disable_functions指令，找到类似如下内容：
+disable_functions = passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_get_status,proc_open，popen,ini_alter,ini_restore,dl,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server
+找到proc_open并删除即可。
+</code></pre></div><h3 id="执行composer-artisan-config-clear-后项目运行报错或执行php-artisan报错">执行composer artisan config clear 后项目运行报错或执行php artisan报错<a href="#执行composer-artisan-config-clear-后项目运行报错或执行php-artisan报错" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Uncaught ReflectionException: Class config does not exist in /www/wwwroot/larabbs/vendor/laravel/framework/src/Illuminate/Container/Container.php
+    
+解决方法就是删除bootstrap/cache/config.php文件；或者检测你的.env文件是否含有空格
+</code></pre></div><h3 id="当本地项目邮箱可以发送线上却报报错">当本地项目邮箱可以发送，线上却报报错<a href="#当本地项目邮箱可以发送线上却报报错" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Connection could not be established with host smtp.qq.com [Connection timed out #110]
+    
+此时可以将MAIL_PORT=25 改为MAIL_PORT=587,换个端口试试
+</code></pre></div><h3 id="laravel多次排序--orderby">laravel多次排序  orderBy<a href="#laravel多次排序--orderby" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">return</span> <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;order&#39;</span><span class="p">,</span><span class="s1">&#39;desc&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;updated_at&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">);</span>
+</code></pre></div><h3 id="注册用户名-正则验证">注册用户名 正则验证<a href="#注册用户名-正则验证" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string|between:3,25|regex:/^[A-Za-z0-9\-\_\x{4e00}-\x{9fa5}]+$/u|unique:users,name,&#39;</span> <span class="o">.</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">id</span><span class="p">(),</span>
+</code></pre></div><h3 id="laravel使用save或update更新数据时created_at和updated_at-字段都更新问题">laravel使用save()或update()更新数据时，created_at和updated_at 字段都更新问题：<a href="#laravel使用save或update更新数据时created_at和updated_at-字段都更新问题" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">(</span><span class="s1">&#39;created_at&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">useCurrent</span><span class="p">();</span>
+<span class="nv">$table</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">(</span><span class="s1">&#39;updated_at&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">useCurrent</span><span class="p">();</span>
+<span class="nx">也可将</span> <span class="nx">设计表时的</span> <span class="nx">更具当前时间戳更新</span> <span class="nx">关闭</span>
+</code></pre></div><h3 id="消息通知邮件数据库">消息通知（邮件，数据库）<a href="#消息通知邮件数据库" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//Observers/ReplyObserver.php
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">created</span><span class="p">(</span><span class="nx">Reply</span> <span class="nv">$reply</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="nv">$topic</span><span class="o">=</span><span class="nv">$reply</span><span class="o">-&gt;</span><span class="na">topic</span><span class="p">;</span>
+    <span class="nv">$topic</span><span class="o">-&gt;</span><span class="na">increment</span><span class="p">(</span><span class="s1">&#39;reply_count&#39;</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">preg_match_all</span><span class="p">(</span><span class="s1">&#39;/@(.*?) /&#39;</span><span class="p">,</span><span class="nv">$reply</span><span class="o">-&gt;</span><span class="na">content</span><span class="p">,</span><span class="nv">$userName</span><span class="p">)){</span>
+         <span class="nv">$atUsers</span><span class="o">=</span><span class="nv">$userName</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+        <span class="nv">$users</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">whereIn</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span><span class="nv">$atUsers</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;!=&#39;</span><span class="p">,</span><span class="nx">Auth</span><span class="o">::</span><span class="na">id</span><span class="p">())</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+        <span class="nx">Notification</span><span class="o">::</span><span class="na">send</span><span class="p">(</span><span class="nv">$users</span><span class="p">,</span> <span class="k">new</span> <span class="nx">TopicReplied</span><span class="p">(</span><span class="nv">$reply</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="c1">// 通知作者话题被回复了
+</span><span class="c1"></span>    <span class="nv">$topic</span><span class="o">-&gt;</span><span class="na">user</span><span class="o">-&gt;</span><span class="na">notify</span><span class="p">(</span><span class="k">new</span> <span class="nx">TopicReplied</span><span class="p">(</span><span class="nv">$reply</span><span class="p">));</span>
+<span class="p">}</span>
+</code></pre></div><h3 id="laravel-自建全局辅助函数">laravel 自建全局辅助函数<a href="#laravel-自建全局辅助函数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>在composer.json中的autoload下增加如下代码加载自动文件</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s2">&#34;autoload&#34;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&#34;classmap&#34;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">&#34;database&#34;</span>
+    <span class="p">],</span>
+    <span class="s2">&#34;psr-4&#34;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&#34;App</span><span class="se">\\</span><span class="s2">&#34;</span><span class="o">:</span> <span class="s2">&#34;app/&#34;</span>
+    <span class="p">},</span>
+    <span class="s2">&#34;files&#34;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="s2">&#34;app/helpers/functions.php&#34;</span>
+    <span class="p">]</span>
+</code></pre></div><ul>
+<li>然后执行composer命令让其自动加载：composer dump-auto    composer du</li>
+</ul>
+<h3 id="composer--install--报错">composer  install  报错<a href="#composer--install--报错" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">Your requirements could not be resolved to an installable set of packages.
+提示我的PHP 7版本太高，不符合composer.json需要的版本，但是在PHP 7下应该也是可以运行的，composer可以设置忽略版本匹配，命令是：
+composerinstall --ignore-platform-reqs
+</code></pre></div><h3 id="禁止更新数据表的默认时间字段created_at-updated_at">禁止更新数据表的默认时间字段created_at updated_at<a href="#禁止更新数据表的默认时间字段created_at-updated_at" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">在对应模型文件头部    如：
+Models\User.php
+public $timestamps=false;
+</code></pre></div><h3 id="用postman修改数据">用postman修改数据<a href="#用postman修改数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">在用postman修改数据时，用的patch请求，但要注意，不能用form-data格式去传参了，而要用x-www-form-urlencoded
+</code></pre></div><h3 id="laravel插入数据并返回成功数据id">laravel插入数据并返回成功数据id<a href="#laravel插入数据并返回成功数据id" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$id</span><span class="o">=</span><span class="nx">Photo</span><span class="o">::</span><span class="na">insertGetId</span><span class="p">(</span><span class="nv">$url</span><span class="p">);</span>
+</code></pre></div><h3 id="laravel模型选取指定字段数据">laravel模型选取指定字段数据<a href="#laravel模型选取指定字段数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$allSources</span> <span class="o">=</span> <span class="nx">HouseSource</span><span class="o">::</span><span class="na">with</span><span class="p">([</span><span class="s1">&#39;poi&#39;</span><span class="o">=&gt;</span><span class="k">function</span> <span class="p">(</span><span class="nv">$query</span><span class="p">){</span>
+    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;house_source_id&#39;</span><span class="p">,</span><span class="s1">&#39;poi_id&#39;</span><span class="p">,</span><span class="s1">&#39;name&#39;</span><span class="p">);</span>
+<span class="p">}])</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;type&#39;</span><span class="p">,</span><span class="s1">&#39;!=&#39;</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">([</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;lng&#39;</span><span class="p">,</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span><span class="s1">&#39;type&#39;</span><span class="p">]);</span>
+</code></pre></div><h3 id="laravel排除关联模型为空的数据-has">laravel排除关联模型为空的数据 has<a href="#laravel排除关联模型为空的数据-has" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 获得所有至少有一条评论的文章...
+</span><span class="c1"></span><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">App\Post</span><span class="o">::</span><span class="na">has</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+<span class="c1">// 获得所有至少有一条评论内容满足 foo% 条件的文章
+</span><span class="c1"></span><span class="nv">$posts</span> <span class="o">=</span> <span class="nx">Post</span><span class="o">::</span><span class="na">whereHas</span><span class="p">(</span><span class="s1">&#39;comments&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$query</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$query</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;content&#39;</span><span class="p">,</span> <span class="s1">&#39;like&#39;</span><span class="p">,</span> <span class="s1">&#39;foo%&#39;</span><span class="p">);</span>
+<span class="p">})</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">();</span>
+</code></pre></div><h3 id="可以在应用程序的任何位置使用全局-config-函数来访问配置值">可以在应用程序的任何位置使用全局 config 函数来访问配置值<a href="#可以在应用程序的任何位置使用全局-config-函数来访问配置值" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$value</span> <span class="o">=</span> <span class="nx">config</span><span class="p">(</span><span class="s1">&#39;app.timezone&#39;</span><span class="p">);</span>
+<span class="c1">//运行时设置配置值
+</span><span class="c1"></span><span class="nx">config</span><span class="p">([</span><span class="s1">&#39;app.timezone&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;America/Chicago&#39;</span><span class="p">]);</span>
+</code></pre></div>
+			</div>
+
+<div class="related-posts thin">
+	<h2>See Also</h2>
+	<ul>
+	
+	<li><a href="/posts/2017/20170520-laravel-study03/">Laravel学习笔记（三）</a></li>
+	
+	<li><a href="/posts/2017/20170512-laravel-study02/">Laravel学习笔记（二）🍉</a></li>
+	
+	<li><a href="/posts/2017/20170508-laravel-study01/">Laravel学习笔记（一）</a></li>
+	
+	<li><a href="/posts/2017/20170426-laravel-captcha/">Laravel之验证码</a></li>
+	
+	</ul>
+</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/laravel">Laravel</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>234 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>27056-05-27 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#laravel连表额外添加条件">laravel连表额外添加条件</a></li>
+        <li><a href="#laravel中的多条件">laravel中的多条件</a></li>
+        <li><a href="#laravel-carbon-时间戳转日期">laravel carbon 时间戳转日期</a></li>
+        <li><a href="#laravel时区设置">laravel时区设置</a></li>
+        <li><a href="#laravel中自带bootstrap的字体路径">laravel中自带bootstrap的字体路径</a></li>
+        <li><a href="#线上服务器执行-composer-du-报错">线上服务器执行 composer du 报错</a></li>
+        <li><a href="#执行composer-artisan-config-clear-后项目运行报错或执行php-artisan报错">执行composer artisan config clear 后项目运行报错或执行php artisan报错</a></li>
+        <li><a href="#当本地项目邮箱可以发送线上却报报错">当本地项目邮箱可以发送，线上却报报错</a></li>
+        <li><a href="#laravel多次排序--orderby">laravel多次排序  orderBy</a></li>
+        <li><a href="#注册用户名-正则验证">注册用户名 正则验证</a></li>
+        <li><a href="#laravel使用save或update更新数据时created_at和updated_at-字段都更新问题">laravel使用save()或update()更新数据时，created_at和updated_at 字段都更新问题：</a></li>
+        <li><a href="#消息通知邮件数据库">消息通知（邮件，数据库）</a></li>
+        <li><a href="#laravel-自建全局辅助函数">laravel 自建全局辅助函数</a></li>
+        <li><a href="#composer--install--报错">composer  install  报错</a></li>
+        <li><a href="#禁止更新数据表的默认时间字段created_at-updated_at">禁止更新数据表的默认时间字段created_at updated_at</a></li>
+        <li><a href="#用postman修改数据">用postman修改数据</a></li>
+        <li><a href="#laravel插入数据并返回成功数据id">laravel插入数据并返回成功数据id</a></li>
+        <li><a href="#laravel模型选取指定字段数据">laravel模型选取指定字段数据</a></li>
+        <li><a href="#laravel排除关联模型为空的数据-has">laravel排除关联模型为空的数据 has</a></li>
+        <li><a href="#可以在应用程序的任何位置使用全局-config-函数来访问配置值">可以在应用程序的任何位置使用全局 config 函数来访问配置值</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2017/20170604-laravel-upload/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Laravel操作上传文件的方法</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2017/20170520-laravel-study03/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Laravel学习笔记（三）</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

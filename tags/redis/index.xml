@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Redis on Promise</title>
+    <link>https://hugo.zkilm.cn/tags/redis/</link>
+    <description>Recent content in Redis on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Fri, 28 Aug 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Homestead安装Redis</title>
+      <link>https://hugo.zkilm.cn/posts/2020/20200828-homestead-redis/</link>
+      <pubDate>Fri, 28 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2020/20200828-homestead-redis/</guid>
+      <description>下载最新安装包  vagrant@homestead:/usr/local/src$ sudo git clone https://github.com/phpredis/phpredis.git Cloning into &amp;#39;phpredis&amp;#39;... remote: Enumerating objects: 41, done. remote: Counting objects: 100% (41/41), done. remote: Compressing objects: 100% (34/34), done. remote: Total 10462 (delta 19), reused 17 (delta 7), pack-reused 10421 Receiving objects: 100% (10462/10462), 6.38 MiB | 31.00 KiB/s, done. Resolving deltas: 100% (7214/7214), done. 使用 phpize 命令完成 php 环境的检测  vagrant@homestead:/usr/local/src$ cd phpredis/ vagrant@homestead:/usr/local/src/phpredis$ sudo /usr/bin/phpize7.2 #不同php版本的情况下phpize版本不同 Configuring for: PHP Api Version: 20170718 Zend Module Api No: 20170718 Zend Extension Api No: 320180731 vagrant@homestead:/usr/local/src/phpredis$ sudo .</description>
+    </item>
+    
+  </channel>
+</rss>

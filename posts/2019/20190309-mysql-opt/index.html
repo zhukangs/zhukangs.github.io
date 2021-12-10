@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="性能优化之MySQL优化🚴‍">
+<meta itemprop="description" content="SQL语句优化 慢查询 如何发现有问题的SQL？使用mysql慢查询日志对有效率问题的SQL进行监控
+//查看慢查询日志是否开启 show variables like &#39;slow_query_log&#39;; //查看慢查询日志存储位置 show variables like &#39;slow_query_log_file&#39;; //开启慢查询日志 set global slow_query_log=on; //指定慢查询日志存储位置 set global show_query_log_file=&#39;/var/lib/mysql/homestead-slow.log&#39;; //记录没有使用索引的sql set global log_queries_not_using_indexes=on; //记录查询超过1s的sql set global long_query_time=1; 慢查询日志所包含的内容：
+#User@Host:root[root] @localhost[]//执行sql的主机信息 #Query_time:0.0000024 Lock_time:0.00 Rows_sent:0 Rows_esamined:0//sql的执行信息 SET timestamp=1402389324//sql执行时间 select * from store; //sql的内容 MySQL慢查询日志分析工具之mysqldumpslow（mysql官方）
+安装完MySQL后，默认就带了mysqldumpslow，很常用的一个工具。
+//查看参数列表 mysqldumpslow -h //分析慢查询日志中前三条比较慢的sql mysqldumpslow -t 3 /var/lib/mysql/homestead-slow.log | more //输出样式效果 Count:1 Time:0.00s Lock=0.00s Rows=10.0 root[rppt]@localhost select * from store MySQL慢查询日志分析工具之pt-query-digest
+分析结果比mysqldumpslow更详细全面
+//输出到文件 pt-query-digest slow-log &gt; slow_log."><meta itemprop="datePublished" content="2019-03-09T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-03-09T00:00:00+00:00" />
+<meta itemprop="wordCount" content="441"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="MySQL," /><meta property="og:title" content="性能优化之MySQL优化🚴‍" />
+<meta property="og:description" content="SQL语句优化 慢查询 如何发现有问题的SQL？使用mysql慢查询日志对有效率问题的SQL进行监控
+//查看慢查询日志是否开启 show variables like &#39;slow_query_log&#39;; //查看慢查询日志存储位置 show variables like &#39;slow_query_log_file&#39;; //开启慢查询日志 set global slow_query_log=on; //指定慢查询日志存储位置 set global show_query_log_file=&#39;/var/lib/mysql/homestead-slow.log&#39;; //记录没有使用索引的sql set global log_queries_not_using_indexes=on; //记录查询超过1s的sql set global long_query_time=1; 慢查询日志所包含的内容：
+#User@Host:root[root] @localhost[]//执行sql的主机信息 #Query_time:0.0000024 Lock_time:0.00 Rows_sent:0 Rows_esamined:0//sql的执行信息 SET timestamp=1402389324//sql执行时间 select * from store; //sql的内容 MySQL慢查询日志分析工具之mysqldumpslow（mysql官方）
+安装完MySQL后，默认就带了mysqldumpslow，很常用的一个工具。
+//查看参数列表 mysqldumpslow -h //分析慢查询日志中前三条比较慢的sql mysqldumpslow -t 3 /var/lib/mysql/homestead-slow.log | more //输出样式效果 Count:1 Time:0.00s Lock=0.00s Rows=10.0 root[rppt]@localhost select * from store MySQL慢查询日志分析工具之pt-query-digest
+分析结果比mysqldumpslow更详细全面
+//输出到文件 pt-query-digest slow-log &gt; slow_log." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2019/20190309-mysql-opt/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2019-03-09T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-03-09T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="性能优化之MySQL优化🚴‍"/>
+<meta name="twitter:description" content="SQL语句优化 慢查询 如何发现有问题的SQL？使用mysql慢查询日志对有效率问题的SQL进行监控
+//查看慢查询日志是否开启 show variables like &#39;slow_query_log&#39;; //查看慢查询日志存储位置 show variables like &#39;slow_query_log_file&#39;; //开启慢查询日志 set global slow_query_log=on; //指定慢查询日志存储位置 set global show_query_log_file=&#39;/var/lib/mysql/homestead-slow.log&#39;; //记录没有使用索引的sql set global log_queries_not_using_indexes=on; //记录查询超过1s的sql set global long_query_time=1; 慢查询日志所包含的内容：
+#User@Host:root[root] @localhost[]//执行sql的主机信息 #Query_time:0.0000024 Lock_time:0.00 Rows_sent:0 Rows_esamined:0//sql的执行信息 SET timestamp=1402389324//sql执行时间 select * from store; //sql的内容 MySQL慢查询日志分析工具之mysqldumpslow（mysql官方）
+安装完MySQL后，默认就带了mysqldumpslow，很常用的一个工具。
+//查看参数列表 mysqldumpslow -h //分析慢查询日志中前三条比较慢的sql mysqldumpslow -t 3 /var/lib/mysql/homestead-slow.log | more //输出样式效果 Count:1 Time:0.00s Lock=0.00s Rows=10.0 root[rppt]@localhost select * from store MySQL慢查询日志分析工具之pt-query-digest
+分析结果比mysqldumpslow更详细全面
+//输出到文件 pt-query-digest slow-log &gt; slow_log."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>性能优化之MySQL优化🚴‍</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Mar 9, 9036&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>性能优化之MySQL优化🚴‍</h1>
+			</header>
+			<div class="content">
+				<h3 id="sql语句优化">SQL语句优化<a href="#sql语句优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<h4 id="慢查询">慢查询<a href="#慢查询" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>如何发现有问题的SQL？使用mysql慢查询日志对有效率问题的SQL进行监控</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">//查看慢查询日志是否开启
+show variables like &#39;slow_query_log&#39;;
+
+//查看慢查询日志存储位置
+show variables like &#39;slow_query_log_file&#39;;
+
+//开启慢查询日志
+set global slow_query_log=on;
+
+//指定慢查询日志存储位置
+set global show_query_log_file=&#39;/var/lib/mysql/homestead-slow.log&#39;;
+
+//记录没有使用索引的sql
+set global log_queries_not_using_indexes=on;
+
+//记录查询超过1s的sql
+set global long_query_time=1;
+</code></pre></div><p>慢查询日志所包含的内容：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">#User@Host:root[root] @localhost[]//执行sql的主机信息
+#Query_time:0.0000024 Lock_time:0.00 Rows_sent:0 Rows_esamined:0//sql的执行信息
+SET timestamp=1402389324//sql执行时间
+select * from store; //sql的内容
+</code></pre></div><p><strong>MySQL慢查询日志分析工具之mysqldumpslow（mysql官方）</strong></p>
+<p>安装完MySQL后，默认就带了mysqldumpslow，很常用的一个工具。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">//查看参数列表
+mysqldumpslow -h
+
+//分析慢查询日志中前三条比较慢的sql
+mysqldumpslow -t 3 /var/lib/mysql/homestead-slow.log | more 
+
+//输出样式效果
+Count:1 Time:0.00s Lock=0.00s Rows=10.0
+root[rppt]@localhost
+select * from store
+</code></pre></div><p><strong>MySQL慢查询日志分析工具之pt-query-digest</strong></p>
+<p>分析结果比mysqldumpslow更详细全面</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">//输出到文件
+pt-query-digest slow-log &gt; slow_log.report
+
+//输出到数据表
+pt-query-digest slow.log -review \
+    h=127.0.0.1,D=test,p=root,P=3306,u=root,t=query_review \
+    --create-reviewtable \
+    --review-history t=hostname_slow
+</code></pre></div><p>基本使用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">//查看参数列表
+pt-query-digest --help
+
+//分析慢查询日志中前三条比较慢的sql
+pt-query-digest /var/lib/mysql/homestead-slow.log | more 
+
+//输出分为三部分
+1.显示除了日志的时间范围，以及总的sql数量和不同的sql数量
+2.Response Time:响应时间占比 Calls:sql执行次数
+3.sql的具体日志
+</code></pre></div><p>如何通过慢查询日志发现有问题的SQL？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.查询次数多且每次查询占用时间长的SQL
+通常为pt-query-digest分析的前几个查询
+
+2.IO大的SQL（数据库主要瓶颈出现在IO层次）
+注意pt-query-digest分析中的Rows examine项
+
+3.未命中索引的SQL
+注意pt-query-digest分析中的Rows examine和Rows Send的对比
+</code></pre></div><p>通过explain查询和分析SQL的执行计划</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="k">explain</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="n">customer_id</span><span class="p">,,</span><span class="n">first_name</span><span class="p">,</span><span class="n">last_name</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">customer</span><span class="p">;</span><span class="w">
+</span></code></pre></div><table>
+<thead>
+<tr>
+<th>Column 1</th>
+<th>Column 2</th>
+<th>Column 3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>select_type</td>
+<td>SIMPLE</td>
+<td></td>
+</tr>
+<tr>
+<td>table</td>
+<td>customer</td>
+<td>该数据关于哪张表。</td>
+</tr>
+<tr>
+<td>type</td>
+<td>ALL</td>
+<td>示连接使用了何种类型。从好到差const,eq_reg,ref,range,index和ALL。</td>
+</tr>
+<tr>
+<td>possible_keys</td>
+<td>NULL</td>
+<td>可能应用在该表的索引，空，没有可能的索引。</td>
+</tr>
+<tr>
+<td>key</td>
+<td>NULL</td>
+<td>实际使用的索引。空，没有使用索引。</td>
+</tr>
+<tr>
+<td>key_len</td>
+<td>NULL</td>
+<td>使用的索引长度。不损失精度下，越短越好。</td>
+</tr>
+<tr>
+<td>ref</td>
+<td>NULL</td>
+<td>显示索引的哪一列被使用了，常数。</td>
+</tr>
+<tr>
+<td>rows</td>
+<td>671</td>
+<td>mysql认为必须检查的数据的行数。</td>
+</tr>
+<tr>
+<td>Extra</td>
+<td>'</td>
+<td>注意：Using filesort,Using tempoary</td>
+</tr>
+</tbody>
+</table>
+<h4 id="count和max的优化">Count()和Max()的优化<a href="#count和max的优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">//查询最后支付时间--优化max()函数
+explain select max(payment_date) from payment;
+create index idx_paydate on payment(payment_data);//给payment_date建立索引(覆盖索引)
+
+//在一条SQL中同时查出2006年和2007年电影的数量--优化Count()函数
+select count(release_year=&#39;2006&#39; or null) as &#39;2006年电影数量&#39;，count(release_year=&#39;2007&#39; or null) as &#39;2007年电影数量&#39; from film;
+//有关count()函数
+https://blog.csdn.net/wendychiang1991/article/details/70909958/
+</code></pre></div><h4 id="子查询优化">子查询优化<a href="#子查询优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">通常情况下，需要把子查询优化为join查询，但在优化时要注意关联键是否有一对多的关系，要注意重复数据。(distinct去重)
+//查询sandra出演的所有影片
+explain select title,release_year,LENGTH from film
+where film_id in (
+    select film_id from film_actor where actor_id in (
+        select actor_id from actor where first_name=&#39;sandra&#39;
+    )
+);
+</code></pre></div><h4 id="group-by的优化">group by的优化<a href="#group-by的优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">//改前 临时表
+explain select actor.first_name,actor_last_name,count(*) from sakila.film_actor
+inner join sakila.actor USING(actor_id)
+group by film_actor.actor_id;
+//改后 结合子查询 索引
+explain select actor.first_name,actor.last_name,c.cnt from sakila.film_actor
+inner join (
+select actor_id,count(*) as cnt from sakila.film_actor group by actor_id) as c USING(actor_id);
+</code></pre></div><h4 id="limit优化">limit优化<a href="#limit优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">limit常用于分页处理，时常会伴随order by 从句使用，因此大多时候会使用Filesorts这样会造成大量的IO问题。
+    
+//文件排序，IO大
+explain select film_id,description from sakila.film order by title limit 50,5;
+1.优化：使用有索引的列或主键进行order by操作（order by film_id）
+2.记录上次返回的主键，在下次查询的时候用主键过滤，避免了数据量大时扫描过多的记录
+select film_id,description from sakila.film where film_if&gt;55 and film_id&lt;=60 order by film_id limit 1,5; 
+页数越大，IO越大
+</code></pre></div><h3 id="索引优化">索引优化<a href="#索引优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<h4 id="如何选择合适的列建立索引">如何选择合适的列建立索引？<a href="#如何选择合适的列建立索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.在where从句，group by从句，order by从句，on从句中出现的列(select)
+2.索引字段越小越好(表每页数据才会更多，IO效率会更高)
+3.离散度大的列放到联合索引的前面
+select * from payment where staff_id=2 and customer_id=584;
+index(staff_id,customer_id)好？还是index(customer_id,staff_id)好？
+由于customer_id的离散度更大(重复率小,可选择性更大)，所以应该使用index(customer_id,staff_id)
+</code></pre></div><h4 id="索引优化sql的方法">索引优化SQL的方法<a href="#索引优化sql的方法" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>索引的维护及优化&ndash;重复及冗余索引</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">冗余索引是指多个索引的前缀列相同，或是在联合索引中包含了主键的索引。如下：key(name,id)就是一个冗余索引
+create table test(
+id int not null primary key,
+name varchar(10) not null,
+key(name,id)
+)engine=innodb;
+//可以删除冗余索引，达到优化效果。
+
+使用pt-duplicate-key-checker工具检查重复及冗余索引
+pt-duplicate-key-checker \
+-uroot \
+-p &#39;&#39; \
+-h 127.0.0.1
+</code></pre></div><p>索引维护的方法&ndash;删除不用索引</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目前mysql中还没有记录索引的使用情况，但是在PerconMySQL和MariaDB中可通过INDEX_STATISTICS表来查看哪些索引未使用，但在mysql中目前只能通过慢查日志配合pt-index-usage工具来进行索引使用情况分析。
+pt-index-usage \
+    -uroot -p&#39;&#39; \
+    mysql-slow.log
+</code></pre></div><h3 id="数据库表结构优化">数据库表结构优化<a href="#数据库表结构优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<h4 id="选择合适的数据类型">选择合适的数据类型<a href="#选择合适的数据类型" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.使用可以存下你的数据的最小的数据类型
+2.使用简单的数据类型。int要比varchar类型在mysql处理上更简单
+3.尽可能的使用not null定义字段
+4.尽量少用text类型，非用不可时最好考虑分表
+*使用int来存储日志时间，利用FROM_UNIXTINE()(得到日期),UNIX_TIMESTAMP()(得到时间戳)两个函数来进行转换
+*使用bigint来存ip地址，利用INET_ATON(),INET_NTOA()两个函数来进行转换
+</code></pre></div><h4 id="表的范式化和反范式化">表的范式化和反范式化<a href="#表的范式化和反范式化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>范式化是指数据库设计的规范，目前说到范式化一般是指第三设计范式，也就是要求数据表中不存在非关键字段对任意候选关键字段的传递函数依赖则符合第三范式。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">不符合第三范式要求的表存在下列问题：
+1.数据冗余：（分类，分类描述）对于每一个商品都会进行记录
+2.数据的插入异常
+3.数据的更新异常
+4.数据的删除异常
+</code></pre></div><p>反范式化是指为了查询效率的考虑把原本符合第三范式的表适当的增加冗余，以达到优化查询的目的，反范式化是一种以空间来换取时间的操作。</p>
+<h4 id="表的拆分">表的拆分<a href="#表的拆分" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>垂直拆分</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">所谓的垂直拆分，就是把原来一个有很多列的表拆分成多个表，这解决了表的宽度问题。通常垂直拆分可以按以下原则进行：
+1.把不常用的字段单独存放到一个表中
+2.把大字段独立存放到一个表中
+3.把经常一起使用的字段放到一起
+</code></pre></div><p>水平拆分</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">表的水平拆分是为了解决单表的数据量过大的问题，水平拆分的表每一个表的结构都是完全一致的。
+常用的水平拆分方法为：
+1.对id进行hash运算，如果要拆分成5个表则使用mod(id,5)去除0-4个值
+2.针对不同的hashID把数据存到不同的表中
+</code></pre></div><h3 id="系统配置优化">系统配置优化<a href="#系统配置优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<h4 id="操作系统配置优化">操作系统配置优化<a href="#操作系统配置优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>数据库是基于操作系统的，目前大多数mysql都是安装在Linux系统之上，所以对于操作系统的一些参数配置也会影响到MYSQL的性能。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">网络方面的配置，要修改/etc/stysctl.conf文件
+#增加tcp支持的队列数
+net.ipv4.tcp_max_syn_backlog = 65535
+#减少断开链接是，资源回收
+net.ipv4.tcp_max_tw_buckets = 8000
+net.ipv4.tcp_tw_reuse = 1
+net.ipv4.tcp_tw_recycle = 1
+net.ipv4.tcp_fin_timeout = 10
+
+打开文件数的限制，可以使用ulimit -a 查看目录的各位限制，可以修改/etcsecurity/limitsconf文件，增加一下内容以修改打开文件数量的限制
+*soft nofile 65535
+*hard nofile 65535
+除此之外最好在mysql服务器上关闭iptables，selinux等防火墙软件。
+</code></pre></div><h4 id="mysql数据库优化">MySQL数据库优化<a href="#mysql数据库优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>MySQL配置文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">mysql可以通过启动时指定配置参数和使用配置文件两种方法进行配置，在大数情况下配置文件位于/etc/my.cnf或是/etc/mysql/my.cnf在windows系统配置文件可以是位于C:/windows/my.ini文件，mysql查找配置文件的顺序可以通过一下方法获得
+/usr/sbin/mysqld --verbose --help | grep -A 1 &#39; Default options &#39;
+</code></pre></div><p>MySQL配置文件&ndash;常用参数说明</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.innodb_buffer_pool_size &gt;= total MB
+非常重要的一个参数，用于配置innodb的缓冲池，如果数据库中只有innodb表，则推荐配置量为总内存的75%
+
+2.innodb_buffer_pool__instances
+MySQL5.5中新增加参数，可以控制缓冲池的个数，默认情况下只有一个缓冲池。
+
+3.innodb_log_buffer_size
+innodb log缓冲的大小，由于日志最长每秒钟就会刷新所以一般不用太大。
+
+4.innodb_flush_log_at_trx_commit
+关键参数，对innodb的IO效率影响很大。默认值为1，可取0，1，2三个值，一般建议为2，但如果数据安全性要求比较高则使用默认值1.
+
+5.innodb_read_io_threads   innodb_write_io_threads
+以上两个参数决定了Innodb读写的IO进程数，默认为4.
+
+6.innodb_file_per_table
+关键参数，控制innodb每一个表使用独立的表空间，默认为off，也就是所有表都会建立在共享表空间中。
+
+7.innodb_stats_on_metadata
+决定了mysql在什么情况下会刷新innodb表的统计信息。
+</code></pre></div><h4 id="第三方配置工具">第三方配置工具<a href="#第三方配置工具" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<p>🔗链接地址：https://tools.percona.com/wizard</p>
+<h3 id="服务器硬件优化">服务器硬件优化<a href="#服务器硬件优化" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>如何选择cpu？</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.mysql有一些工作只能使用到单核cpu，Replicate,SQL...
+2.mysql对cpu核数的支持并不是越多越快。mysql5.5使用的服务器不要超过30核
+</code></pre></div><p>磁盘IO优化</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">常用RAID级别简介
+RAID0：也称条带，就是把多个磁盘链接成一个硬盘使用，这个级别IO最好
+RAID1：也称镜像，要求至少有两个磁盘，每组磁盘存储的数据相同
+RAID5：也是把多个硬盘合并成一个逻辑盘使用，数据读写时会建立奇偶校验信息，分别存储在不同磁盘上。
+RAID1+0：就是RAID1和RAID0的结合。同时具备两个级别的优缺点。一般建议数据库使用这个级别。
+
+SNA和NAT是否适合数据库？
+1.常用于高可用解决方案
+2.顺序读写效率很高，但是随机读写不如人意
+3.数据库随机读写比率很高
+</code></pre></div><p>👇</p>
+<h3 id="结束语">结束语<a href="#结束语" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>从五个不同层次优化mysql性能，较为基础，但是也很实用😊。**这篇是在学习慕课网《性能优化之MySQL优化》视频时做的笔记，视频地址：**<a href="https://www.imooc.com/learn/194">https://www.imooc.com/learn/194</a></p>
+<p>📑笔记文档下载地址：https://pan.baidu.com/s/1YraBQspD-VIrAl4BFaej8A
+提取码：baq5</p>
+
+			</div>
+
+<div class="related-posts thin">
+	<h2>See Also</h2>
+	<ul>
+	
+	<li><a href="/posts/2017/20170321-mysqldump/">mysqldump导出数据库各参数说明</a></li>
+	
+	<li><a href="/posts/2017/20170106-mysql-advanced/">MySQL高级操作🥗</a></li>
+	
+	<li><a href="/posts/2016/20160511-mysql-basic/">MySQL基础操作🍕</a></li>
+	
+	</ul>
+</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/mysql">MySQL</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>441 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>9036-03-09 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#sql语句优化">SQL语句优化</a></li>
+        <li><a href="#索引优化">索引优化</a></li>
+        <li><a href="#数据库表结构优化">数据库表结构优化</a></li>
+        <li><a href="#系统配置优化">系统配置优化</a></li>
+        <li><a href="#服务器硬件优化">服务器硬件优化</a></li>
+        <li><a href="#结束语">结束语</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2019/20190315-laravel-notify/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Notification之红标识提醒🚨‍</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2019/20190308-laravel-elasticsearch/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>使用Elasticsearch做引擎，Scout全文搜索🔍</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Laravel Carbon函数">
+<meta itemprop="description" content="快速切换前后日期 &lt;?php use Carbon\Carbon; $now = Carbon::now(); echo $now; // 2015-03-26 00:36:47 $today = Carbon::today(); echo $today; // 2015-03-26 00:00:00 $tomorrow = Carbon::tomorrow(&#39;Europe/London&#39;); echo $tomorrow; // 2015-03-27 00:00:00 $yesterday = Carbon::yesterday(); echo $yesterday; // 2015-03-25 00:00:00 建立特定日期的时间 &lt;?php use Carbon\Carbon; $timezone = &#39;Asia/Taipei&#39;; // 從「年月日」建立 Carbon::createFromDate($year, $month, $day, $timezone); // 從「時分秒」建立 Carbon::createFromTime($hour, $minute, $second, $timezone); // 從完整的「年月日時分秒」建立 Carbon::create($year, $month, $day, $hour, $minute, $second, $timezone); // 從指定的格式建立 Carbon::createFromFormat($format, $time, $tz); echo Carbon::createFromFormat(&#39;Y-m-d H&#39;, &#39;1975-05-21 22&#39;)-&gt;toDateTimeString(); // 1975-05-21 22:00:00  // 從時間戳記建立 echo Carbon::createFromTimeStamp(-1)-&gt;toDateTimeString(); // 1969-12-31 18:59:59 echo Carbon::createFromTimeStamp(-1, &#39;Europe/London&#39;)-&gt;toDateTimeString(); // 1970-01-01 00:59:59 echo Carbon::createFromTimeStampUTC(-1)-&gt;toDateTimeString(); 转换日期 &lt;?"><meta itemprop="datePublished" content="2017-10-21T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-10-21T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1120"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Laravel Carbon函数" />
+<meta property="og:description" content="快速切换前后日期 &lt;?php use Carbon\Carbon; $now = Carbon::now(); echo $now; // 2015-03-26 00:36:47 $today = Carbon::today(); echo $today; // 2015-03-26 00:00:00 $tomorrow = Carbon::tomorrow(&#39;Europe/London&#39;); echo $tomorrow; // 2015-03-27 00:00:00 $yesterday = Carbon::yesterday(); echo $yesterday; // 2015-03-25 00:00:00 建立特定日期的时间 &lt;?php use Carbon\Carbon; $timezone = &#39;Asia/Taipei&#39;; // 從「年月日」建立 Carbon::createFromDate($year, $month, $day, $timezone); // 從「時分秒」建立 Carbon::createFromTime($hour, $minute, $second, $timezone); // 從完整的「年月日時分秒」建立 Carbon::create($year, $month, $day, $hour, $minute, $second, $timezone); // 從指定的格式建立 Carbon::createFromFormat($format, $time, $tz); echo Carbon::createFromFormat(&#39;Y-m-d H&#39;, &#39;1975-05-21 22&#39;)-&gt;toDateTimeString(); // 1975-05-21 22:00:00  // 從時間戳記建立 echo Carbon::createFromTimeStamp(-1)-&gt;toDateTimeString(); // 1969-12-31 18:59:59 echo Carbon::createFromTimeStamp(-1, &#39;Europe/London&#39;)-&gt;toDateTimeString(); // 1970-01-01 00:59:59 echo Carbon::createFromTimeStampUTC(-1)-&gt;toDateTimeString(); 转换日期 &lt;?" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2017/20171021-laravel-carbon/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-10-21T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-10-21T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="Laravel Carbon函数"/>
+<meta name="twitter:description" content="快速切换前后日期 &lt;?php use Carbon\Carbon; $now = Carbon::now(); echo $now; // 2015-03-26 00:36:47 $today = Carbon::today(); echo $today; // 2015-03-26 00:00:00 $tomorrow = Carbon::tomorrow(&#39;Europe/London&#39;); echo $tomorrow; // 2015-03-27 00:00:00 $yesterday = Carbon::yesterday(); echo $yesterday; // 2015-03-25 00:00:00 建立特定日期的时间 &lt;?php use Carbon\Carbon; $timezone = &#39;Asia/Taipei&#39;; // 從「年月日」建立 Carbon::createFromDate($year, $month, $day, $timezone); // 從「時分秒」建立 Carbon::createFromTime($hour, $minute, $second, $timezone); // 從完整的「年月日時分秒」建立 Carbon::create($year, $month, $day, $hour, $minute, $second, $timezone); // 從指定的格式建立 Carbon::createFromFormat($format, $time, $tz); echo Carbon::createFromFormat(&#39;Y-m-d H&#39;, &#39;1975-05-21 22&#39;)-&gt;toDateTimeString(); // 1975-05-21 22:00:00  // 從時間戳記建立 echo Carbon::createFromTimeStamp(-1)-&gt;toDateTimeString(); // 1969-12-31 18:59:59 echo Carbon::createFromTimeStamp(-1, &#39;Europe/London&#39;)-&gt;toDateTimeString(); // 1970-01-01 00:59:59 echo Carbon::createFromTimeStampUTC(-1)-&gt;toDateTimeString(); 转换日期 &lt;?"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Laravel Carbon函数</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Oct 21, 21106&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>Laravel Carbon函数</h1>
+			</header>
+			<div class="content">
+				<h3 id="快速切换前后日期">快速切换前后日期<a href="#快速切换前后日期" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="nv">$now</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$now</span><span class="p">;</span>                               <span class="c1">// 2015-03-26 00:36:47
+</span><span class="c1"></span><span class="nv">$today</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">today</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$today</span><span class="p">;</span>                             <span class="c1">// 2015-03-26 00:00:00
+</span><span class="c1"></span><span class="nv">$tomorrow</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">tomorrow</span><span class="p">(</span><span class="s1">&#39;Europe/London&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$tomorrow</span><span class="p">;</span>                          <span class="c1">// 2015-03-27 00:00:00
+</span><span class="c1"></span><span class="nv">$yesterday</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">yesterday</span><span class="p">();</span>
+<span class="k">echo</span> <span class="nv">$yesterday</span><span class="p">;</span>                         <span class="c1">// 2015-03-25 00:00:00
+</span></code></pre></div><h3 id="建立特定日期的时间">建立特定日期的时间<a href="#建立特定日期的时间" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="nv">$timezone</span> <span class="o">=</span> <span class="s1">&#39;Asia/Taipei&#39;</span><span class="p">;</span>
+
+<span class="c1">// 從「年月日」建立
+</span><span class="c1"></span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="nv">$year</span><span class="p">,</span> <span class="nv">$month</span><span class="p">,</span> <span class="nv">$day</span><span class="p">,</span> <span class="nv">$timezone</span><span class="p">);</span>
+
+<span class="c1">// 從「時分秒」建立
+</span><span class="c1"></span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTime</span><span class="p">(</span><span class="nv">$hour</span><span class="p">,</span> <span class="nv">$minute</span><span class="p">,</span> <span class="nv">$second</span><span class="p">,</span> <span class="nv">$timezone</span><span class="p">);</span>
+
+<span class="c1">// 從完整的「年月日時分秒」建立
+</span><span class="c1"></span><span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nv">$year</span><span class="p">,</span> <span class="nv">$month</span><span class="p">,</span> <span class="nv">$day</span><span class="p">,</span> <span class="nv">$hour</span><span class="p">,</span> <span class="nv">$minute</span><span class="p">,</span> <span class="nv">$second</span><span class="p">,</span> <span class="nv">$timezone</span><span class="p">);</span>
+
+<span class="c1">// 從指定的格式建立
+</span><span class="c1"></span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromFormat</span><span class="p">(</span><span class="nv">$format</span><span class="p">,</span> <span class="nv">$time</span><span class="p">,</span> <span class="nv">$tz</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromFormat</span><span class="p">(</span><span class="s1">&#39;Y-m-d H&#39;</span><span class="p">,</span> <span class="s1">&#39;1975-05-21 22&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span> <span class="c1">// 1975-05-21 22:00:00
+</span><span class="c1"></span>
+<span class="c1">// 從時間戳記建立
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTimeStamp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>                        <span class="c1">// 1969-12-31 18:59:59
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTimeStamp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;Europe/London&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>       <span class="c1">// 1970-01-01 00:59:59
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTimeStampUTC</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>
+</code></pre></div><h3 id="转换日期">转换日期<a href="#转换日期" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="c1">// 透過文字移動日期
+</span><span class="c1"></span><span class="nv">$knownDate</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2001</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">12</span><span class="p">);</span>          <span class="c1">// create testing date
+</span><span class="c1"></span><span class="nx">Carbon</span><span class="o">::</span><span class="na">setTestNow</span><span class="p">(</span><span class="nv">$knownDate</span><span class="p">);</span>                        <span class="c1">// set the mock
+</span><span class="c1"></span><span class="k">echo</span> <span class="k">new</span> <span class="nx">Carbon</span><span class="p">(</span><span class="s1">&#39;tomorrow&#39;</span><span class="p">);</span>                           <span class="c1">// 2001-05-22 00:00:00  ... notice the time !
+</span><span class="c1"></span><span class="k">echo</span> <span class="k">new</span> <span class="nx">Carbon</span><span class="p">(</span><span class="s1">&#39;yesterday&#39;</span><span class="p">);</span>                          <span class="c1">// 2001-05-20 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="k">new</span> <span class="nx">Carbon</span><span class="p">(</span><span class="s1">&#39;next wednesday&#39;</span><span class="p">);</span>                     <span class="c1">// 2001-05-23 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="k">new</span> <span class="nx">Carbon</span><span class="p">(</span><span class="s1">&#39;last friday&#39;</span><span class="p">);</span>                        <span class="c1">// 2001-05-18 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="k">new</span> <span class="nx">Carbon</span><span class="p">(</span><span class="s1">&#39;this thursday&#39;</span><span class="p">);</span>                      <span class="c1">// 2001-05-24 00:00:00
+</span></code></pre></div><h3 id="取得日期资料">取得日期资料<a href="#取得日期资料" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">parse</span><span class="p">(</span><span class="s1">&#39;2012-9-5 23:26:11.123789&#39;</span><span class="p">);</span>
+
+<span class="c1">// 取的指定時間資料的資訊（整數）
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">year</span><span class="p">);</span>                                         <span class="c1">// int(2012)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">month</span><span class="p">);</span>                                        <span class="c1">// int(9)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">day</span><span class="p">);</span>                                          <span class="c1">// int(5)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">hour</span><span class="p">);</span>                                         <span class="c1">// int(23)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">minute</span><span class="p">);</span>                                       <span class="c1">// int(26)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">second</span><span class="p">);</span>                                       <span class="c1">// int(11)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">micro</span><span class="p">);</span>                                        <span class="c1">// int(123789)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">dayOfWeek</span><span class="p">);</span>                                    <span class="c1">// int(3)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">dayOfYear</span><span class="p">);</span>                                    <span class="c1">// int(248)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">weekOfMonth</span><span class="p">);</span>                                  <span class="c1">// int(1)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">weekOfYear</span><span class="p">);</span>                                   <span class="c1">// int(36)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">daysInMonth</span><span class="p">);</span>                                  <span class="c1">// int(30)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">);</span>                                    <span class="c1">// int(1346901971)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">1975</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">age</span><span class="p">);</span>          <span class="c1">// int(39) calculated vs now in the same tz
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">quarter</span><span class="p">);</span>                                      <span class="c1">// int(3)季度
+</span><span class="c1"></span>
+<span class="c1">// 回傳與 UTC 差異的秒數
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTimestampUTC</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">offset</span><span class="p">);</span>         <span class="c1">// int(0)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTimestamp</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">offset</span><span class="p">);</span>            <span class="c1">// int(-18000)
+</span><span class="c1"></span>
+<span class="c1">// 回傳與 UTC 差異的時數
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTimestamp</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">offsetHours</span><span class="p">);</span>       <span class="c1">// int(-5)
+</span><span class="c1"></span>
+<span class="c1">// 找出當天日否有日光節約時間
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">dst</span><span class="p">);</span>           <span class="c1">// bool(false)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">dst</span><span class="p">);</span>           <span class="c1">// bool(true)
+</span><span class="c1"></span>
+<span class="c1">// 判斷指定的的時區是否與預設的時區相同
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">local</span><span class="p">);</span>                              <span class="c1">// bool(true)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">(</span><span class="s1">&#39;America/Vancouver&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">local</span><span class="p">);</span>           <span class="c1">// bool(false)
+</span><span class="c1"></span>
+<span class="c1">// 判斷是否為 UTC 的時區時間
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">utc</span><span class="p">);</span>                                <span class="c1">// bool(false)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">(</span><span class="s1">&#39;Europe/London&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">utc</span><span class="p">);</span>                 <span class="c1">// bool(true)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromTimestampUTC</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">utc</span><span class="p">);</span>            <span class="c1">// bool(true)
+</span><span class="c1"></span>
+<span class="c1">// 取得時區實例
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">get_class</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">timezone</span><span class="p">);</span>                     <span class="c1">// DateTimeZone
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">get_class</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">tz</span><span class="p">);</span>                           <span class="c1">// DateTimeZone
+</span><span class="c1"></span>
+<span class="c1">// 取得時區實例的名稱
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">timezoneName</span><span class="p">;</span>                            <span class="c1">// America/Toronto
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">tzName</span><span class="p">;</span>                                  <span class="c1">// America/Toronto
+</span></code></pre></div><h3 id="设定时间资料">设定时间资料<a href="#设定时间资料" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">();</span>
+
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">year</span> <span class="o">=</span> <span class="mi">1975</span><span class="p">;</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">month</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>             <span class="c1">// 年份會強制 +1，且月份變為 1 月
+</span><span class="c1"></span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">month</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">day</span> <span class="o">=</span> <span class="mi">21</span><span class="p">;</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">hour</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">minute</span> <span class="o">=</span> <span class="mi">32</span><span class="p">;</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">second</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">timestamp</span> <span class="o">=</span> <span class="mi">169957925</span><span class="p">;</span>  <span class="c1">// 這個設定不會變更時區
+</span><span class="c1"></span>
+<span class="c1">// 透過字串或是 DateTimeZone 實例去設定時區
+</span><span class="c1"></span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">timezone</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">DateTimeZone</span><span class="p">(</span><span class="s1">&#39;Europe/London&#39;</span><span class="p">);</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">timezone</span> <span class="o">=</span> <span class="s1">&#39;Europe/London&#39;</span><span class="p">;</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">tz</span> <span class="o">=</span> <span class="s1">&#39;Europe/London&#39;</span><span class="p">;</span>
+
+<span class="c1">// 鏈結設定方式
+</span><span class="c1"></span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">year</span><span class="p">(</span><span class="mi">1975</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">month</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">day</span><span class="p">(</span><span class="mi">21</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">hour</span><span class="p">(</span><span class="mi">22</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">minute</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">second</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">setDate</span><span class="p">(</span><span class="mi">1975</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">21</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setTime</span><span class="p">(</span><span class="mi">22</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">setDateTime</span><span class="p">(</span><span class="mi">1975</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>
+
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">timestamp</span><span class="p">(</span><span class="mi">169957925</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">timezone</span><span class="p">(</span><span class="s1">&#39;Europe/London&#39;</span><span class="p">);</span>
+
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">tz</span><span class="p">(</span><span class="s1">&#39;America/Toronto&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setTimezone</span><span class="p">(</span><span class="s1">&#39;America/Vancouver&#39;</span><span class="p">);</span>
+</code></pre></div><h3 id="格式化时间资料">格式化时间资料<a href="#格式化时间资料" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">1975</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">);</span>
+
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">()</span> <span class="o">==</span> <span class="nv">$dt</span><span class="p">);</span>          <span class="c1">// bool(true) =&gt; uses __toString()
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toDateString</span><span class="p">();</span>                          <span class="c1">// 1975-12-25
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toFormattedDateString</span><span class="p">();</span>                 <span class="c1">// Dec 25, 1975
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toTimeString</span><span class="p">();</span>                          <span class="c1">// 14:15:16
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>                      <span class="c1">// 1975-12-25 14:15:16
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toDayDateTimeString</span><span class="p">();</span>                   <span class="c1">// Thu, Dec 25, 1975 2:15 PM
+</span><span class="c1"></span>
+<span class="c1">// 仍可以使用 format() 函式
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;l jS \\of F Y h:i:s A&#39;</span><span class="p">);</span>         <span class="c1">// Thursday 25th of December 1975 02:15:16 PM
+</span><span class="c1"></span>
+<span class="c1">// 常用的時間格式
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toAtomString</span><span class="p">();</span>      <span class="c1">// in 1 Jahr
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toCookieString</span><span class="p">();</span>    <span class="c1">// Thursday, 25-Dec-1975 14:15:16 EST
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toIso8601String</span><span class="p">();</span>   <span class="c1">// 1975-12-25T14:15:16-0500
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toRfc822String</span><span class="p">();</span>    <span class="c1">// Thu, 25 Dec 75 14:15:16 -0500
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toRfc850String</span><span class="p">();</span>    <span class="c1">// Thursday, 25-Dec-75 14:15:16 EST
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toRfc1036String</span><span class="p">();</span>   <span class="c1">// Thu, 25 Dec 75 14:15:16 -0500
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toRfc1123String</span><span class="p">();</span>   <span class="c1">// Thu, 25 Dec 1975 14:15:16 -0500
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toRfc2822String</span><span class="p">();</span>   <span class="c1">// Thu, 25 Dec 1975 14:15:16 -0500
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toRfc3339String</span><span class="p">();</span>   <span class="c1">// 1975-12-25T14:15:16-05:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toRssString</span><span class="p">();</span>       <span class="c1">// Thu, 25 Dec 1975 14:15:16 -0500
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toW3cString</span><span class="p">();</span>       <span class="c1">// 1975-12-25T14:15:16-05:00
+</span></code></pre></div><h3 id="比较时间差值">比较时间差值<a href="#比较时间差值" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">tzName</span><span class="p">;</span>                        <span class="c1">// America/Toronto
+</span><span class="c1"></span><span class="nv">$first</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">11</span><span class="p">);</span>
+<span class="nv">$second</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="s1">&#39;America/Vancouver&#39;</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$first</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>                   <span class="c1">// 2012-09-05 23:26:11
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$first</span><span class="o">-&gt;</span><span class="na">tzName</span><span class="p">;</span>                               <span class="c1">// America/Toronto
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$second</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>                  <span class="c1">// 2012-09-05 20:26:11
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$second</span><span class="o">-&gt;</span><span class="na">tzName</span><span class="p">;</span>                              <span class="c1">// America/Vancouver
+</span><span class="c1"></span>
+<span class="c1">// 大於、等於、小於
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">eq</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                     <span class="c1">// bool(true)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">ne</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                     <span class="c1">// bool(false)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">gt</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                     <span class="c1">// bool(false)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">gte</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                    <span class="c1">// bool(true)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">lt</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                     <span class="c1">// bool(false)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">lte</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                    <span class="c1">// bool(true)
+</span><span class="c1"></span>
+<span class="nv">$first</span><span class="o">-&gt;</span><span class="na">setDateTime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nv">$second</span><span class="o">-&gt;</span><span class="na">setDateTime</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>         <span class="c1">// Remember tz is &#39;America/Vancouver&#39;
+</span><span class="c1"></span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">eq</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                     <span class="c1">// bool(false)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">ne</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                     <span class="c1">// bool(true)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">gt</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                     <span class="c1">// bool(false)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">gte</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                    <span class="c1">// bool(false)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">lt</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                     <span class="c1">// bool(true)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$first</span><span class="o">-&gt;</span><span class="na">lte</span><span class="p">(</span><span class="nv">$second</span><span class="p">));</span>                    <span class="c1">// bool(true)
+</span><span class="c1"></span>
+
+
+<span class="c1">// 時間區間比較
+</span><span class="c1"></span><span class="nv">$first</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+<span class="nv">$second</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">between</span><span class="p">(</span><span class="nv">$first</span><span class="p">,</span> <span class="nv">$second</span><span class="p">));</span>          <span class="c1">// bool(true)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">between</span><span class="p">(</span><span class="nv">$first</span><span class="p">,</span> <span class="nv">$second</span><span class="p">));</span>          <span class="c1">// bool(true)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">between</span><span class="p">(</span><span class="nv">$first</span><span class="p">,</span> <span class="nv">$second</span><span class="p">,</span> <span class="k">false</span><span class="p">));</span>   <span class="c1">// bool(false)
+</span><span class="c1"></span>
+
+<span class="c1">// 時間大小比較
+</span><span class="c1"></span><span class="nv">$dt1</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nv">$dt2</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dt1</span><span class="o">-&gt;</span><span class="na">min</span><span class="p">(</span><span class="nv">$dt2</span><span class="p">);</span>                              <span class="c1">// 2012-01-01 00:00:00
+</span><span class="c1"></span>
+<span class="nv">$dt1</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="nv">$dt2</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dt1</span><span class="o">-&gt;</span><span class="na">max</span><span class="p">(</span><span class="nv">$dt2</span><span class="p">);</span>                              <span class="c1">// 2014-01-30 00:00:00
+</span><span class="c1"></span>
+<span class="c1">// now is the default param
+</span><span class="c1"></span><span class="nv">$dt1</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dt1</span><span class="o">-&gt;</span><span class="na">max</span><span class="p">();</span>
+
+
+<span class="c1">// 時間差異運算
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">(</span><span class="s1">&#39;America/Vancouver&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">diffInSeconds</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">(</span><span class="s1">&#39;Europe/London&#39;</span><span class="p">));</span> <span class="c1">// 0
+</span><span class="c1"></span>
+<span class="nv">$dtOttawa</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;America/Toronto&#39;</span><span class="p">);</span>
+<span class="nv">$dtVancouver</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;America/Vancouver&#39;</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dtOttawa</span><span class="o">-&gt;</span><span class="na">diffInHours</span><span class="p">(</span><span class="nv">$dtVancouver</span><span class="p">);</span>                             <span class="c1">// 3
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dtOttawa</span><span class="o">-&gt;</span><span class="na">diffInHours</span><span class="p">(</span><span class="nv">$dtVancouver</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>                      <span class="c1">// 3
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dtVancouver</span><span class="o">-&gt;</span><span class="na">diffInHours</span><span class="p">(</span><span class="nv">$dtOttawa</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>                      <span class="c1">// -3
+</span><span class="c1"></span>
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffInDays</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addMonth</span><span class="p">());</span>                         <span class="c1">// 31
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffInDays</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">subMonth</span><span class="p">(),</span> <span class="k">false</span><span class="p">);</span>                  <span class="c1">// -31
+</span><span class="c1"></span>
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffInDays</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addMonth</span><span class="p">());</span>                         <span class="c1">// 30
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffInDays</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addWeek</span><span class="p">());</span>                          <span class="c1">// 7
+</span><span class="c1"></span>
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffInMinutes</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addSeconds</span><span class="p">(</span><span class="mi">59</span><span class="p">));</span>                  <span class="c1">// 0
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffInMinutes</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addSeconds</span><span class="p">(</span><span class="mi">60</span><span class="p">));</span>                  <span class="c1">// 1
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffInMinutes</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addSeconds</span><span class="p">(</span><span class="mi">119</span><span class="p">));</span>                 <span class="c1">// 1
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffInMinutes</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addSeconds</span><span class="p">(</span><span class="mi">120</span><span class="p">));</span>                 <span class="c1">// 2
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addSeconds</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">secondsSinceMidnight</span><span class="p">();</span>                     <span class="c1">// 120
+</span></code></pre></div><h3 id="时间状态">时间状态<a href="#时间状态" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">();</span>
+
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isWeekday</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isWeekend</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isYesterday</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isToday</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isTomorrow</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isFuture</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isPast</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isLeapYear</span><span class="p">();</span>
+<span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">isSameDay</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">());</span>
+<span class="nv">$born</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">1987</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">23</span><span class="p">);</span>
+<span class="nv">$noCake</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">26</span><span class="p">);</span>
+<span class="nv">$yesCake</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">2014</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">23</span><span class="p">);</span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nv">$born</span><span class="o">-&gt;</span><span class="na">isBirthday</span><span class="p">(</span><span class="nv">$noCake</span><span class="p">));</span>              <span class="c1">// bool(false)  
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nv">$born</span><span class="o">-&gt;</span><span class="na">isBirthday</span><span class="p">(</span><span class="nv">$yesCake</span><span class="p">));</span>             <span class="c1">// bool(true)
+</span></code></pre></div><h3 id="时间运算">时间运算<a href="#时间运算" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="mi">2012</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">31</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">toDateTimeString</span><span class="p">();</span>            <span class="c1">// 2012-01-31 00:00:00
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addYears</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>                   <span class="c1">// 2017-01-31 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addYear</span><span class="p">();</span>                     <span class="c1">// 2018-01-31 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subYear</span><span class="p">();</span>                     <span class="c1">// 2017-01-31 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subYears</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>                   <span class="c1">// 2012-01-31 00:00:00
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addMonths</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>                 <span class="c1">// 2017-01-31 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addMonth</span><span class="p">();</span>                    <span class="c1">// 2017-03-03 00:00:00 equivalent of $dt-&gt;month($dt-&gt;month + 1); so it wraps
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subMonth</span><span class="p">();</span>                    <span class="c1">// 2017-02-03 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subMonths</span><span class="p">(</span><span class="mi">60</span><span class="p">);</span>                 <span class="c1">// 2012-02-03 00:00:00
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addDays</span><span class="p">(</span><span class="mi">29</span><span class="p">);</span>                   <span class="c1">// 2012-03-03 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addDay</span><span class="p">();</span>                      <span class="c1">// 2012-03-04 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subDay</span><span class="p">();</span>                      <span class="c1">// 2012-03-03 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subDays</span><span class="p">(</span><span class="mi">29</span><span class="p">);</span>                   <span class="c1">// 2012-02-03 00:00:00
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addWeekdays</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>                <span class="c1">// 2012-02-09 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addWeekday</span><span class="p">();</span>                  <span class="c1">// 2012-02-10 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subWeekday</span><span class="p">();</span>                  <span class="c1">// 2012-02-09 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subWeekdays</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span>                <span class="c1">// 2012-02-03 00:00:00
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addWeeks</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>                   <span class="c1">// 2012-02-24 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addWeek</span><span class="p">();</span>                     <span class="c1">// 2012-03-02 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subWeek</span><span class="p">();</span>                     <span class="c1">// 2012-02-24 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subWeeks</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>                   <span class="c1">// 2012-02-03 00:00:00
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addHours</span><span class="p">(</span><span class="mi">24</span><span class="p">);</span>                  <span class="c1">// 2012-02-04 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addHour</span><span class="p">();</span>                     <span class="c1">// 2012-02-04 01:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subHour</span><span class="p">();</span>                     <span class="c1">// 2012-02-04 00:00:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subHours</span><span class="p">(</span><span class="mi">24</span><span class="p">);</span>                  <span class="c1">// 2012-02-03 00:00:00
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addMinutes</span><span class="p">(</span><span class="mi">61</span><span class="p">);</span>                <span class="c1">// 2012-02-03 01:01:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addMinute</span><span class="p">();</span>                   <span class="c1">// 2012-02-03 01:02:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subMinute</span><span class="p">();</span>                   <span class="c1">// 2012-02-03 01:01:00
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subMinutes</span><span class="p">(</span><span class="mi">61</span><span class="p">);</span>                <span class="c1">// 2012-02-03 00:00:00
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addSeconds</span><span class="p">(</span><span class="mi">61</span><span class="p">);</span>                <span class="c1">// 2012-02-03 00:01:01
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">addSecond</span><span class="p">();</span>                   <span class="c1">// 2012-02-03 00:01:02
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subSecond</span><span class="p">();</span>                   <span class="c1">// 2012-02-03 00:01:01
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">subSeconds</span><span class="p">(</span><span class="mi">61</span><span class="p">);</span>                <span class="c1">// 2012-02-03 00:00:00
+</span></code></pre></div><h3 id="人类阅读时间格式">人类阅读时间格式<a href="#人类阅读时间格式" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="c1">// 通常會用在留言的時間顯示
+</span><span class="c1">// 該時間會比較與現在的時間的差異
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">subDays</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">diffForHumans</span><span class="p">();</span>               <span class="c1">// 5 days ago
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">diffForHumans</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">subYear</span><span class="p">());</span>   <span class="c1">// 1 year after
+</span><span class="c1"></span>
+<span class="nv">$dt</span> <span class="o">=</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">createFromDate</span><span class="p">(</span><span class="mi">2011</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+
+<span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffForHumans</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addMonth</span><span class="p">());</span>              <span class="c1">// 1 month before
+</span><span class="c1"></span><span class="k">echo</span> <span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">diffForHumans</span><span class="p">(</span><span class="nv">$dt</span><span class="o">-&gt;</span><span class="na">copy</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">subMonth</span><span class="p">());</span>              <span class="c1">// 1 month after
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">addSeconds</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">diffForHumans</span><span class="p">();</span>            <span class="c1">// 5 seconds from now
+</span><span class="c1"></span>
+<span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">subDays</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">diffForHumans</span><span class="p">();</span>              <span class="c1">// 3 weeks ago
+</span><span class="c1"></span><span class="k">echo</span> <span class="nx">Carbon</span><span class="o">::</span><span class="na">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">subDays</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">diffForHumans</span><span class="p">(</span><span class="k">null</span><span class="p">,</span> <span class="k">true</span><span class="p">);</span>    <span class="c1">// 3 weeks
+</span></code></pre></div><h3 id="时间常数">时间常数<a href="#时间常数" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
+<span class="k">use</span> <span class="nx">Carbon\Carbon</span><span class="p">;</span>
+
+<span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">SUNDAY</span><span class="p">);</span>                          <span class="c1">// int(0)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">MONDAY</span><span class="p">);</span>                          <span class="c1">// int(1)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">TUESDAY</span><span class="p">);</span>                         <span class="c1">// int(2)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">WEDNESDAY</span><span class="p">);</span>                       <span class="c1">// int(3)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">THURSDAY</span><span class="p">);</span>                        <span class="c1">// int(4)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">FRIDAY</span><span class="p">);</span>                          <span class="c1">// int(5)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">SATURDAY</span><span class="p">);</span>                        <span class="c1">// int(6)
+</span><span class="c1"></span>
+<span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">YEARS_PER_CENTURY</span><span class="p">);</span>               <span class="c1">// int(100)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">YEARS_PER_DECADE</span><span class="p">);</span>                <span class="c1">// int(10)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">MONTHS_PER_YEAR</span><span class="p">);</span>                 <span class="c1">// int(12)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">WEEKS_PER_YEAR</span><span class="p">);</span>                  <span class="c1">// int(52)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">DAYS_PER_WEEK</span><span class="p">);</span>                   <span class="c1">// int(7)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">HOURS_PER_DAY</span><span class="p">);</span>                   <span class="c1">// int(24)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">MINUTES_PER_HOUR</span><span class="p">);</span>                <span class="c1">// int(60)
+</span><span class="c1"></span><span class="nx">var_dump</span><span class="p">(</span><span class="nx">Carbon</span><span class="o">::</span><span class="na">SECONDS_PER_MINUTE</span><span class="p">);</span>              <span class="c1">// int(60)
+</span></code></pre></div><h3 id="参考资料">参考资料<a href="#参考资料" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p><a href="https://blog.csdn.net/lbwo001/article/details/53063867">https://blog.csdn.net/lbwo001/article/details/53063867</a></p>
+<ul>
+<li>Carbon - A simple PHP API extension for DateTime.</li>
+<li>Carbon - docs</li>
+</ul>
+
+			</div>
+
+<div class="related-posts thin">
+	<h2>See Also</h2>
+	<ul>
+	
+	<li><a href="/posts/2017/20170913-laravel-middleware/">Laravel中间件👽</a></li>
+	
+	<li><a href="/posts/2017/20170806-laravel-model/">Laravel关联模型</a></li>
+	
+	<li><a href="/posts/2017/20170604-laravel-upload/">Laravel操作上传文件的方法</a></li>
+	
+	<li><a href="/posts/2017/20170527-laravel-study04/">Laravel学习笔记（四）🍖</a></li>
+	
+	<li><a href="/posts/2017/20170520-laravel-study03/">Laravel学习笔记（三）</a></li>
+	
+	</ul>
+</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/laravel">Laravel</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>1120 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>21106-10-21 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#快速切换前后日期">快速切换前后日期</a></li>
+        <li><a href="#建立特定日期的时间">建立特定日期的时间</a></li>
+        <li><a href="#转换日期">转换日期</a></li>
+        <li><a href="#取得日期资料">取得日期资料</a></li>
+        <li><a href="#设定时间资料">设定时间资料</a></li>
+        <li><a href="#格式化时间资料">格式化时间资料</a></li>
+        <li><a href="#比较时间差值">比较时间差值</a></li>
+        <li><a href="#时间状态">时间状态</a></li>
+        <li><a href="#时间运算">时间运算</a></li>
+        <li><a href="#人类阅读时间格式">人类阅读时间格式</a></li>
+        <li><a href="#时间常数">时间常数</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2017/20171108-laravel-ajax/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Laravel中发送Ajax请求🏃‍♂️</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2017/20170913-laravel-middleware/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Laravel中间件👽</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

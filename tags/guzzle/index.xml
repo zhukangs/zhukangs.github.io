@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Guzzle on Promise</title>
+    <link>https://hugo.zkilm.cn/tags/guzzle/</link>
+    <description>Recent content in Guzzle on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 02 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/guzzle/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Guzzle基本使用</title>
+      <link>https://hugo.zkilm.cn/posts/2017/20170702-guzzle-basic/</link>
+      <pubDate>Sun, 02 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2017/20170702-guzzle-basic/</guid>
+      <description>Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。 类似于curl发送http请求的类。
+ Guzzle官方文档
+安装Guzzle 使用composer安装
+php composer.phar require guzzlehttp/guzzle:~6.0 或者编辑项目的composer.json文件，添加Guzzle作为依赖
+{ &amp;#34;require&amp;#34;: { &amp;#34;guzzlehttp/guzzle&amp;#34;: &amp;#34;~6.0&amp;#34; } }  执行 composer update  Guzzle基本使用  发送请求  use GuzzleHttp\Client; $client = new Client([ // Base URI is used with relative requests  &amp;#39;base_uri&amp;#39; =&amp;gt; &amp;#39;http://httpbin.org&amp;#39;, // You can set any number of default request options.  &amp;#39;timeout&amp;#39; =&amp;gt; 2.0, ]); $response = $client-&amp;gt;get(&amp;#39;http://httpbin.org/get&amp;#39;); $response = $client-&amp;gt;delete(&amp;#39;http://httpbin.org/delete&amp;#39;); $response = $client-&amp;gt;head(&amp;#39;http://httpbin.org/get&amp;#39;); $response = $client-&amp;gt;options(&amp;#39;http://httpbin.</description>
+    </item>
+    
+  </channel>
+</rss>

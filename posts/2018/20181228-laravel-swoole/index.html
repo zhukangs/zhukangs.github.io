@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="使用LaravelS🚀">
+<meta itemprop="description" content="Laravels 介绍  LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。 在使用laravels之前，必须先装上swoole的扩展。
+ swoole文档：https://wiki.swoole.com/wiki/index/prid-1
+laraves文档：https://github.com/hhxsv5/laravel-s
+环境：在VMware虚拟机中自己搭的环境，Centos7，PHP7.2.12，Nginx1.14.2，MySQL 5.5.60。
+安装 Swoole 扩展 1、直接 pecl install swoole ,会报错，因为装有php老版本的依赖，所以要装新的
+yum install -y php72w-mysqlnd php72w-fpm php70w-pecl-redis php72w-common php72w-pdo php72w php72w-gd php72w-gd php72w-cli php72w-mbstring php72w-devel 因为我是PHP7.2，如果你是PHP7.0,将上面的php72替换为php70即可。
+2、如果报错：
+PHP Parse error: syntax error, unexpected //&#39;new&#39; (T_NEW) in /usr/share/pear/PEAR/Frontend.php on //line 91 解决方案：
+安装PECL //php版本 &gt; 7 wget http://pear.php.net/go-pear.phar php go-pear.phar //php版本 &lt; 7 yum install php-pear 3、安装swoole包
+1.pecl install swoole 2.WARNING:channel &#34;pecl.php.net&#34; has updated its protocols,use &#34;pecl channel-update pecl."><meta itemprop="datePublished" content="2018-12-28T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2018-12-28T00:00:00+00:00" />
+<meta itemprop="wordCount" content="440"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Laravel,Swoole," /><meta property="og:title" content="使用LaravelS🚀" />
+<meta property="og:description" content="Laravels 介绍  LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。 在使用laravels之前，必须先装上swoole的扩展。
+ swoole文档：https://wiki.swoole.com/wiki/index/prid-1
+laraves文档：https://github.com/hhxsv5/laravel-s
+环境：在VMware虚拟机中自己搭的环境，Centos7，PHP7.2.12，Nginx1.14.2，MySQL 5.5.60。
+安装 Swoole 扩展 1、直接 pecl install swoole ,会报错，因为装有php老版本的依赖，所以要装新的
+yum install -y php72w-mysqlnd php72w-fpm php70w-pecl-redis php72w-common php72w-pdo php72w php72w-gd php72w-gd php72w-cli php72w-mbstring php72w-devel 因为我是PHP7.2，如果你是PHP7.0,将上面的php72替换为php70即可。
+2、如果报错：
+PHP Parse error: syntax error, unexpected //&#39;new&#39; (T_NEW) in /usr/share/pear/PEAR/Frontend.php on //line 91 解决方案：
+安装PECL //php版本 &gt; 7 wget http://pear.php.net/go-pear.phar php go-pear.phar //php版本 &lt; 7 yum install php-pear 3、安装swoole包
+1.pecl install swoole 2.WARNING:channel &#34;pecl.php.net&#34; has updated its protocols,use &#34;pecl channel-update pecl." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2018/20181228-laravel-swoole/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-12-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-12-28T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="使用LaravelS🚀"/>
+<meta name="twitter:description" content="Laravels 介绍  LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。 在使用laravels之前，必须先装上swoole的扩展。
+ swoole文档：https://wiki.swoole.com/wiki/index/prid-1
+laraves文档：https://github.com/hhxsv5/laravel-s
+环境：在VMware虚拟机中自己搭的环境，Centos7，PHP7.2.12，Nginx1.14.2，MySQL 5.5.60。
+安装 Swoole 扩展 1、直接 pecl install swoole ,会报错，因为装有php老版本的依赖，所以要装新的
+yum install -y php72w-mysqlnd php72w-fpm php70w-pecl-redis php72w-common php72w-pdo php72w php72w-gd php72w-gd php72w-cli php72w-mbstring php72w-devel 因为我是PHP7.2，如果你是PHP7.0,将上面的php72替换为php70即可。
+2、如果报错：
+PHP Parse error: syntax error, unexpected //&#39;new&#39; (T_NEW) in /usr/share/pear/PEAR/Frontend.php on //line 91 解决方案：
+安装PECL //php版本 &gt; 7 wget http://pear.php.net/go-pear.phar php go-pear.phar //php版本 &lt; 7 yum install php-pear 3、安装swoole包
+1.pecl install swoole 2.WARNING:channel &#34;pecl.php.net&#34; has updated its protocols,use &#34;pecl channel-update pecl."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>使用LaravelS🚀</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Dec 28, 28126&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>使用LaravelS🚀</h1>
+			</header>
+			<div class="content">
+				<h3 id="laravels-介绍">Laravels 介绍<a href="#laravels-介绍" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<blockquote>
+<p>LaravelS是一个胶水项目，用于快速集成Swoole到Laravel或Lumen，然后赋予它们更好的性能、更多可能性。
+在使用laravels之前，必须先装上swoole的扩展。</p>
+</blockquote>
+<p>swoole文档：<a href="https://wiki.swoole.com/wiki/index/prid-1">https://wiki.swoole.com/wiki/index/prid-1</a></p>
+<p>laraves文档：<a href="https://github.com/hhxsv5/laravel-s">https://github.com/hhxsv5/laravel-s</a></p>
+<p>环境：在VMware虚拟机中自己搭的环境，Centos7，PHP7.2.12，Nginx1.14.2，MySQL 5.5.60。</p>
+<h3 id="安装-swoole-扩展">安装 Swoole 扩展<a href="#安装-swoole-扩展" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>1、直接 <code>pecl install swoole</code> ,会报错，因为装有php老版本的依赖，所以要装新的</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">yum install -y php72w-mysqlnd php72w-fpm php70w-pecl-redis php72w-common php72w-pdo php72w php72w-gd php72w-gd php72w-cli php72w-mbstring php72w-devel
+</code></pre></div><p>因为我是PHP7.2，如果你是PHP7.0,将上面的php72替换为php70即可。</p>
+<p>2、如果报错：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">PHP Parse error:  syntax error, unexpected //<span class="s1">&#39;new&#39;</span> <span class="o">(</span>T_NEW<span class="o">)</span> in /usr/share/pear/PEAR/Frontend.php on //line <span class="m">91</span>
+</code></pre></div><p>解决方案：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">安装PECL
+//php版本 &gt; <span class="m">7</span>
+wget http://pear.php.net/go-pear.phar
+php go-pear.phar
+
+//php版本 &lt; <span class="m">7</span>
+yum install php-pear
+</code></pre></div><p>3、安装swoole包</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">1.pecl install swoole
+2.WARNING:channel <span class="s2">&#34;pecl.php.net&#34;</span> has updated its protocols,use <span class="s2">&#34;pecl channel-update pecl.php.net&#34;</span> to update.
+需要更新：pecl channel-update pecl.php.net
+3.查找下php.ini的位置：php -i <span class="p">|</span>grep php.ini
+4.然后在php.ini中增加：extension<span class="o">=</span>swoole.so
+5.重启下php：systemctl restart php
+6.查看下是否已经成功加载了swoole:php -m <span class="p">|</span> grep swoole
+</code></pre></div><p>如果还没装上，推荐参考：<a href="https://www.cnblogs.com/phpwechat/p/8417331.html">https://www.cnblogs.com/phpwechat/p/8417331.html</a></p>
+<h3 id="使用laravels">使用LaravelS<a href="#使用laravels" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>1、安装 <code>laravels</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require <span class="s2">&#34;hhxsv5/laravel-s:~3.3&#34;</span> -vvv
+</code></pre></div><p>2、注册 <code>Service Provider</code>, 位于 <code>config/app.php</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+    <span class="c1">//...
+</span><span class="c1"></span>    <span class="nx">Hhxsv5\LaravelS\Illuminate\LaravelSServiceProvider</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+<span class="p">],</span>
+</code></pre></div><p>3、发布配置和二进制文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan laravels publish
+</code></pre></div><p>4、修改配置 <code>config/laravels.php</code>：监听的IP、端口等。</p>
+<p>5、配置 <code>web.confg</code> 文件，我的是这样</p>
+<pre tabindex="0"><code class="language-apacheconfig" data-lang="apacheconfig">map $http_upgrade $connection_upgrade {
+    default upgrade;
+    ''      close;
+}
+upstream laravels {
+    # 通过 IP:Port 连接
+    server 127.0.0.1:5200 weight=5 max_fails=3 fail_timeout=30s;
+    # 通过 UnixSocket Stream 连接，小诀窍：将socket文件放在/dev/shm目录下，可获得更好的性能
+    #server unix:/xxxpath/laravel-s-test/storage/laravels.sock weight=5 max_fails=3 fail_timeout=30s;
+    #server 192.168.1.1:5200 weight=3 max_fails=3 fail_timeout=30s;
+    #server 192.168.1.2:5200 backup;
+    keepalive 16;
+}
+server {
+    listen 80;
+    # 别忘了绑Host哟
+    server_name laras.test;
+    root /var/www/laras/public;
+    #access_log /yyypath/log/nginx/$server_name.access.log  main;
+    autoindex off;
+    index index.html index.htm;
+    # Nginx处理静态资源(建议开启gzip)，LaravelS处理动态资源。
+    location / {
+        index  index.php index.html index.htm;
+        try_files $uri $uri/ /index.php?$query_string;
+        if (!-e $request_filename){  
+            rewrite ^/(.*) /index.php last;  
+        } 
+    }
+    location ~ \.php$ {
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+    }
+    
+    location ~* ^.+\.(jpg|jpeg|gif|png|bmp)$ {  
+        access_log off;  
+        root /var/www/laras/public;  
+        expires 30d;  
+        break; }
+    # 当请求PHP文件时直接响应404，防止暴露public/*.php
+    #location ~* \.php$ {
+    #    return 404;
+    #}
+    # Http和WebSocket共存，Nginx通过location区分
+    # !!! WebSocket连接时路径为/ws
+    # Javascript: var ws = new WebSocket(&quot;ws://laravels.com/ws&quot;);
+    location =/ws {
+        proxy_http_version 1.1;
+        # proxy_connect_timeout 60s;
+        # proxy_send_timeout 60s;
+        # proxy_read_timeout：如果60秒内被代理的服务器没有响应数据给Nginx，那么Nginx会关闭当前连接；同时，Swoole的心跳设置也会影响连接的关闭
+        # proxy_read_timeout 60s;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-PORT $remote_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header Scheme $scheme;
+        proxy_set_header Server-Protocol $server_protocol;
+        proxy_set_header Server-Name $server_name;
+        proxy_set_header Server-Addr $server_addr;
+        proxy_set_header Server-Port $server_port;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_pass http://laravels;
+    }
+    location @laravels {
+        proxy_http_version 1.1;
+        # proxy_connect_timeout 60s;
+        # proxy_send_timeout 60s;
+        # proxy_read_timeout 60s;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Real-PORT $remote_port;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header Host $http_host;
+        proxy_set_header Scheme $scheme;
+        proxy_set_header Server-Protocol $server_protocol;
+        proxy_set_header Server-Name $server_name;
+        proxy_set_header Server-Addr $server_addr;
+        proxy_set_header Server-Port $server_port;
+        proxy_set_header Connection &quot;&quot;;
+        proxy_pass http://laravels;
+    }
+}
+</code></pre><p>6、毫秒级定时任务 <code>App\Jobs\Timer\TestCronJob</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//如laravels文档 我的是这样 仅用于测试
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">client_send</span><span class="p">(</span><span class="s1">&#39;123456789&#39;</span><span class="p">);</span>
+    <span class="nx">Test</span><span class="o">::</span><span class="na">create</span><span class="p">([</span><span class="s1">&#39;num&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;66&#39;</span><span class="p">]);</span>
+<span class="p">}</span>
+<span class="c1">//namespace App\Services\WebSocketClientService
+</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">client_send</span><span class="p">(</span><span class="nv">$msg</span><span class="p">,</span><span class="nv">$url</span><span class="o">=</span><span class="s1">&#39;127.0.0.1&#39;</span><span class="p">,</span><span class="nv">$port</span><span class="o">=</span><span class="mi">5200</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocketClientService</span><span class="p">(</span><span class="nv">$url</span><span class="p">,</span> <span class="nv">$port</span><span class="p">);</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">connect</span><span class="p">();</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">send</span><span class="p">(</span><span class="nv">$msg</span><span class="p">);</span>
+         <span class="cm">/*$data = @$client-&gt;recv();
+</span><span class="cm">        \Log::info($data);*/</span>
+        <span class="nv">$client</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div><p>7、启用 <code>WebSocket</code> 服务器 <code>App\Services\WebSocketService</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">如 laravels 文档 
+https://github.com/hhxsv5/laravel-s/blob/master/README-CN.md#%E5%90%AF%E7%94%A8websocket%E6%9C%8D%E5%8A%A1%E5%99%A8
+</code></pre></div><p>8、视图页面开启 <code>websocket</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+    <span class="kd">var</span> <span class="nx">ws</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s2">&#34;ws://&#34;</span><span class="o">+</span><span class="nb">window</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">host</span><span class="o">+</span><span class="s2">&#34;/ws?c=&#34;</span><span class="o">+</span><span class="s2">&#34;{{ csrf_token() }}&#34;</span><span class="p">);</span>
+    <span class="c1">//成功连接websoc的时候
+</span><span class="c1"></span>    <span class="nx">ws</span><span class="p">.</span><span class="nx">onopen</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ws onopen&#39;</span><span class="p">);</span>
+<span class="c1">//        ws.send(&#39;client msg&#39;);
+</span><span class="c1"></span>    <span class="p">};</span>
+    <span class="c1">//连接错误的时候
+</span><span class="c1"></span>    <span class="nx">ws</span><span class="p">.</span><span class="nx">onerror</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ws onerror&#39;</span><span class="p">);</span>
+    <span class="p">};</span>
+    <span class="nx">ws</span><span class="p">.</span><span class="nx">onmessage</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">};</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div><p>9、开启服务
+重启 <code>nginx</code> 和 <code>php</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">systemctl</span>  <span class="nx">restart</span> <span class="nx">nginx</span>
+<span class="nx">systemctl</span>   <span class="nx">restart</span>  <span class="nx">php</span><span class="o">-</span><span class="nx">fpm</span>
+</code></pre></div><p>开启 <code>laravels</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">php</span>  <span class="nx">bin</span><span class="o">/</span><span class="nx">laravels</span>  <span class="nx">starts</span>
+</code></pre></div>
+			</div>
+
+<div class="related-posts thin">
+	<h2>See Also</h2>
+	<ul>
+	
+	<li><a href="/posts/2018/20180805-tencent-sms/">腾讯云短信的简单使用</a></li>
+	
+	<li><a href="/posts/2018/20180718-laravel-seeder/">Laravel之假数据（Seeder）</a></li>
+	
+	<li><a href="/posts/2018/20180703-laravel-exception/">Laravel之异常处理（Exception）</a></li>
+	
+	<li><a href="/posts/2018/20180623-laravel-attr/">模型文件中访问器&amp;修改器的用法🍺</a></li>
+	
+	<li><a href="/posts/2018/20180614-laravel-middlleware02/">Laravel之中间件（Middleware）🌼</a></li>
+	
+	</ul>
+</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/laravel">Laravel</a></span><span class="tag"><a href="https://hugo.zkilm.cn/tags/swoole">Swoole</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>440 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>28126-12-28 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#laravels-介绍">Laravels 介绍</a></li>
+        <li><a href="#安装-swoole-扩展">安装 Swoole 扩展</a></li>
+        <li><a href="#使用laravels">使用LaravelS</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2019/20190111-laravel-eloquent/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Laravel模型常用属性</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2018/20180929-reinstall-homestead/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>再次安装 Homestead</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

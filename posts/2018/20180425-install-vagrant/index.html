@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Vagrant安装之旅😈">
+<meta itemprop="description" content="记vagrant安装之旅
+思考 首先，vagrant是什么？
+ Vagrant目前是国内互联网公司应用最多的内部开发环境工具。Vagrant是我们开发者的福音，使我们完全摆脱了重复配置环境的处境。Vagrant简单的配置，丰富的自动化脚本资源以及分享的便捷性都是我们应该学习的思想，节省开发人员的大量准备工作时间,使开发人员更专注公司业务开发。
+ 开始 1、下载VirtualBox 5.1.38 x86/AMD64 下载地址：https://www.virtualbox.org/wiki/Download_Old_Builds_5_1 2、下载Vagrant 1.8.6.msi 下载地址：https://releases.hashicorp.com/vagrant/1.8.6/ 3、下载box，我选的是以ubuntu作为系统镜像 下载地址：https://pan.baidu.com/s/1nS_12Vccdiara-iLAnht5w 密码：ktjw 4、然后傻瓜式安装这两个软件，vagrant安装完后需要重启电脑 5、新建目录 如code/boxes，将ubuntu-14.04-amd64.box放在boxes下 6、添加打造属于自己的box，vagrant box add ubuntu1404 ubuntu-14.04-amd64.box 7、初始化box，vagrant init ubuntu1404，此时会在boxes下生成Vagrantfile配置文件 8、此时执行vagrant up 启动虚拟机，然后vagrant ssh 进入虚拟机 9、这个时候你就可以在该虚拟机上配置你自己想要的系统环境，比如安装nginx PHP MySQL redis等等 10、导出自己的box，vagrant package --output ubuntu1404_testbox --base ubuntu1404 11、Vagrantfile相关配置 config.vm.box=&#34;ubuntu1404&#34; //box 名称  config.vm.hostname=&#34;lnmp&#34; //配置hostname  config.vm.network &#34;private_network&#34;,ip:&#34;192.168.22.20&#34; //配置私有网络ip  vb.customize [&#34;modifyvm&#34;,:id,&#34;--memory&#34;,&#34;1024&#34;] //修改内存  vb.name=&#34;testname&#34; //修改virtualbox的名称  12、vagrant up 可能会遇到的问题： Vagrant was unable to mount VirtualBox shared folders."><meta itemprop="datePublished" content="2018-04-25T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2018-04-25T00:00:00+00:00" />
+<meta itemprop="wordCount" content="236"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Vagrant," /><meta property="og:title" content="Vagrant安装之旅😈" />
+<meta property="og:description" content="记vagrant安装之旅
+思考 首先，vagrant是什么？
+ Vagrant目前是国内互联网公司应用最多的内部开发环境工具。Vagrant是我们开发者的福音，使我们完全摆脱了重复配置环境的处境。Vagrant简单的配置，丰富的自动化脚本资源以及分享的便捷性都是我们应该学习的思想，节省开发人员的大量准备工作时间,使开发人员更专注公司业务开发。
+ 开始 1、下载VirtualBox 5.1.38 x86/AMD64 下载地址：https://www.virtualbox.org/wiki/Download_Old_Builds_5_1 2、下载Vagrant 1.8.6.msi 下载地址：https://releases.hashicorp.com/vagrant/1.8.6/ 3、下载box，我选的是以ubuntu作为系统镜像 下载地址：https://pan.baidu.com/s/1nS_12Vccdiara-iLAnht5w 密码：ktjw 4、然后傻瓜式安装这两个软件，vagrant安装完后需要重启电脑 5、新建目录 如code/boxes，将ubuntu-14.04-amd64.box放在boxes下 6、添加打造属于自己的box，vagrant box add ubuntu1404 ubuntu-14.04-amd64.box 7、初始化box，vagrant init ubuntu1404，此时会在boxes下生成Vagrantfile配置文件 8、此时执行vagrant up 启动虚拟机，然后vagrant ssh 进入虚拟机 9、这个时候你就可以在该虚拟机上配置你自己想要的系统环境，比如安装nginx PHP MySQL redis等等 10、导出自己的box，vagrant package --output ubuntu1404_testbox --base ubuntu1404 11、Vagrantfile相关配置 config.vm.box=&#34;ubuntu1404&#34; //box 名称  config.vm.hostname=&#34;lnmp&#34; //配置hostname  config.vm.network &#34;private_network&#34;,ip:&#34;192.168.22.20&#34; //配置私有网络ip  vb.customize [&#34;modifyvm&#34;,:id,&#34;--memory&#34;,&#34;1024&#34;] //修改内存  vb.name=&#34;testname&#34; //修改virtualbox的名称  12、vagrant up 可能会遇到的问题： Vagrant was unable to mount VirtualBox shared folders." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2018/20180425-install-vagrant/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2018-04-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2018-04-25T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="Vagrant安装之旅😈"/>
+<meta name="twitter:description" content="记vagrant安装之旅
+思考 首先，vagrant是什么？
+ Vagrant目前是国内互联网公司应用最多的内部开发环境工具。Vagrant是我们开发者的福音，使我们完全摆脱了重复配置环境的处境。Vagrant简单的配置，丰富的自动化脚本资源以及分享的便捷性都是我们应该学习的思想，节省开发人员的大量准备工作时间,使开发人员更专注公司业务开发。
+ 开始 1、下载VirtualBox 5.1.38 x86/AMD64 下载地址：https://www.virtualbox.org/wiki/Download_Old_Builds_5_1 2、下载Vagrant 1.8.6.msi 下载地址：https://releases.hashicorp.com/vagrant/1.8.6/ 3、下载box，我选的是以ubuntu作为系统镜像 下载地址：https://pan.baidu.com/s/1nS_12Vccdiara-iLAnht5w 密码：ktjw 4、然后傻瓜式安装这两个软件，vagrant安装完后需要重启电脑 5、新建目录 如code/boxes，将ubuntu-14.04-amd64.box放在boxes下 6、添加打造属于自己的box，vagrant box add ubuntu1404 ubuntu-14.04-amd64.box 7、初始化box，vagrant init ubuntu1404，此时会在boxes下生成Vagrantfile配置文件 8、此时执行vagrant up 启动虚拟机，然后vagrant ssh 进入虚拟机 9、这个时候你就可以在该虚拟机上配置你自己想要的系统环境，比如安装nginx PHP MySQL redis等等 10、导出自己的box，vagrant package --output ubuntu1404_testbox --base ubuntu1404 11、Vagrantfile相关配置 config.vm.box=&#34;ubuntu1404&#34; //box 名称  config.vm.hostname=&#34;lnmp&#34; //配置hostname  config.vm.network &#34;private_network&#34;,ip:&#34;192.168.22.20&#34; //配置私有网络ip  vb.customize [&#34;modifyvm&#34;,:id,&#34;--memory&#34;,&#34;1024&#34;] //修改内存  vb.name=&#34;testname&#34; //修改virtualbox的名称  12、vagrant up 可能会遇到的问题： Vagrant was unable to mount VirtualBox shared folders."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Vagrant安装之旅😈</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Apr 25, 25046&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>Vagrant安装之旅😈</h1>
+			</header>
+			<div class="content">
+				<p><strong>记vagrant安装之旅</strong></p>
+<h3 id="思考">思考<a href="#思考" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>首先，vagrant是什么？</p>
+<blockquote>
+<p>Vagrant目前是国内互联网公司应用最多的内部开发环境工具。Vagrant是我们开发者的福音，使我们完全摆脱了重复配置环境的处境。Vagrant简单的配置，丰富的自动化脚本资源以及分享的便捷性都是我们应该学习的思想，节省开发人员的大量准备工作时间,使开发人员更专注公司业务开发。</p>
+</blockquote>
+<h3 id="开始">开始<a href="#开始" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="mi">1</span><span class="nx">、下载VirtualBox</span> <span class="mf">5.1</span><span class="o">.</span><span class="mi">38</span>  <span class="nx">x86</span><span class="o">/</span><span class="nx">AMD64</span>
+<span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">virtualbox</span><span class="o">.</span><span class="nx">org</span><span class="o">/</span><span class="nx">wiki</span><span class="o">/</span><span class="nx">Download_Old_Builds_5_1</span>
+
+<span class="mi">2</span><span class="nx">、下载Vagrant</span> <span class="mf">1.8</span><span class="o">.</span><span class="mf">6.</span><span class="nx">msi</span>
+<span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">releases</span><span class="o">.</span><span class="nx">hashicorp</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span>
+
+<span class="mi">3</span><span class="nx">、下载box，我选的是以ubuntu作为系统镜像</span>
+<span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">pan</span><span class="o">.</span><span class="nx">baidu</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">s</span><span class="o">/</span><span class="mi">1</span><span class="nx">nS_12Vccdiara</span><span class="o">-</span><span class="nx">iLAnht5w</span>  <span class="nx">密码：ktjw</span>
+
+<span class="mi">4</span><span class="nx">、然后傻瓜式安装这两个软件，vagrant安装完后需要重启电脑</span>
+
+<span class="mi">5</span><span class="nx">、新建目录</span> <span class="nx">如code</span><span class="o">/</span><span class="nx">boxes，将ubuntu</span><span class="o">-</span><span class="mf">14.04</span><span class="o">-</span><span class="nx">amd64</span><span class="o">.</span><span class="nx">box放在boxes下</span>
+
+<span class="mi">6</span><span class="nx">、添加打造属于自己的box，vagrant</span> <span class="nx">box</span> <span class="nx">add</span> <span class="nx">ubuntu1404</span> <span class="nx">ubuntu</span><span class="o">-</span><span class="mf">14.04</span><span class="o">-</span><span class="nx">amd64</span><span class="o">.</span><span class="nx">box</span>
+
+<span class="mi">7</span><span class="nx">、初始化box，vagrant</span> <span class="nx">init</span> <span class="nx">ubuntu1404，此时会在boxes下生成Vagrantfile配置文件</span>
+
+<span class="mi">8</span><span class="nx">、此时执行vagrant</span> <span class="nx">up</span> <span class="nx">启动虚拟机，然后vagrant</span> <span class="nx">ssh</span> <span class="nx">进入虚拟机</span>
+
+<span class="mi">9</span><span class="nx">、这个时候你就可以在该虚拟机上配置你自己想要的系统环境，比如安装nginx</span> <span class="nx">PHP</span> <span class="nx">MySQL</span> <span class="nx">redis等等</span>
+
+<span class="mi">10</span><span class="nx">、导出自己的box，vagrant</span> <span class="nx">package</span> <span class="o">--</span><span class="nx">output</span> <span class="nx">ubuntu1404_testbox</span>  <span class="o">--</span><span class="nx">base</span> <span class="nx">ubuntu1404</span>
+  
+<span class="mi">11</span><span class="nx">、Vagrantfile相关配置</span>
+  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">box</span><span class="o">=</span><span class="s2">&#34;ubuntu1404&#34;</span> <span class="c1">//box 名称
+</span><span class="c1"></span>  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">hostname</span><span class="o">=</span><span class="s2">&#34;lnmp&#34;</span>   <span class="c1">//配置hostname
+</span><span class="c1"></span>  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">network</span> <span class="s2">&#34;private_network&#34;</span><span class="p">,</span><span class="nx">ip</span><span class="o">:</span><span class="s2">&#34;192.168.22.20&#34;</span>  <span class="c1">//配置私有网络ip
+</span><span class="c1"></span>  <span class="nx">vb</span><span class="o">.</span><span class="nx">customize</span> <span class="p">[</span><span class="s2">&#34;modifyvm&#34;</span><span class="p">,</span><span class="o">:</span><span class="nx">id</span><span class="p">,</span><span class="s2">&#34;--memory&#34;</span><span class="p">,</span><span class="s2">&#34;1024&#34;</span><span class="p">]</span>  <span class="c1">//修改内存
+</span><span class="c1"></span>  <span class="nx">vb</span><span class="o">.</span><span class="nx">name</span><span class="o">=</span><span class="s2">&#34;testname&#34;</span>  <span class="c1">//修改virtualbox的名称
+</span><span class="c1"></span>    
+<span class="mi">12</span><span class="nx">、vagrant</span> <span class="nx">up</span> <span class="nx">可能会遇到的问题：</span>
+<span class="nx">Vagrant</span> <span class="nx">was</span> <span class="nx">unable</span> <span class="nx">to</span> <span class="nx">mount</span> <span class="nx">VirtualBox</span> <span class="nx">shared</span> <span class="nx">folders</span><span class="o">.</span> <span class="k">This</span> <span class="nx">is</span> <span class="nx">usually</span>
+<span class="nx">because</span> <span class="nx">the</span> <span class="nx">filesystem</span> <span class="s2">&#34;vboxsf&#34;</span> <span class="nx">is</span> <span class="k">not</span> <span class="nx">available</span><span class="o">.</span> <span class="k">This</span> <span class="nx">filesystem</span> <span class="nx">is</span>
+<span class="nx">made</span> <span class="nx">available</span> <span class="nx">via</span> <span class="nx">the</span> <span class="nx">VirtualBox</span> <span class="nx">Guest</span> <span class="nx">Additions</span> <span class="k">and</span> <span class="nx">kernel</span> <span class="nx">module</span><span class="o">.</span>
+<span class="nx">Please</span> <span class="nx">verify</span> <span class="nx">that</span> <span class="nx">these</span> <span class="nx">guest</span> <span class="nx">additions</span> <span class="nx">are</span> <span class="nx">properly</span> <span class="nx">installed</span> <span class="nx">in</span> <span class="nx">the</span>
+<span class="nx">guest</span><span class="o">.</span> <span class="k">This</span> <span class="nx">is</span> <span class="k">not</span> <span class="nx">a</span> <span class="nx">bug</span> <span class="nx">in</span> <span class="nx">Vagrant</span> <span class="k">and</span> <span class="nx">is</span> <span class="nx">usually</span> <span class="nx">caused</span> <span class="nx">by</span> <span class="nx">a</span> <span class="nx">faulty</span>
+<span class="nx">Vagrant</span> <span class="nx">box</span><span class="o">.</span> <span class="k">For</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">command</span> <span class="nx">attempted</span> <span class="nx">was</span><span class="o">:</span>
+
+<span class="nx">mount</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">vboxsf</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">uid</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="nx">gid</span><span class="o">=</span><span class="mi">1000</span> <span class="nx">vagrant</span> <span class="o">/</span><span class="nx">vagrant</span>
+
+<span class="nx">The</span> <span class="nx">error</span> <span class="nx">output</span> <span class="nx">from</span> <span class="nx">the</span> <span class="nx">command</span> <span class="nx">was</span><span class="o">:</span>
+
+<span class="nx">mount</span><span class="o">:</span> <span class="nx">unknown</span> <span class="nx">filesystem</span> <span class="nx">type</span> <span class="s1">&#39;vboxsf&#39;</span>
+<span class="nx">以上为执行vagrant</span> <span class="nx">up</span> <span class="nx">时的报错，说是Vagrant无法挂载VirtualBox共享文件夹，</span>
+<span class="nx">解决方法是执行vagrant</span> <span class="nx">plugin</span> <span class="nx">install</span> <span class="nx">vagrant</span><span class="o">-</span><span class="nx">vbguest，然后再尝试vagrant</span> <span class="nx">up</span>
+  
+<span class="mi">13</span><span class="nx">、资源推荐：</span>
+  <span class="nx">慕课在线视频：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">imooc</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">learn</span><span class="o">/</span><span class="mi">805</span>
+  <span class="nx">视频对应资料：https</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">apanly</span><span class="o">/</span><span class="nx">mooc</span><span class="o">/</span><span class="nx">tree</span><span class="o">/</span><span class="nx">master</span><span class="o">/</span><span class="nx">vagrant</span>
+  <span class="nx">vagrant</span> <span class="nx">up解决：https</span><span class="o">://</span><span class="nx">blog</span><span class="o">.</span><span class="nx">csdn</span><span class="o">.</span><span class="nx">net</span><span class="o">/</span><span class="nx">changjiangwang</span><span class="o">/</span><span class="nx">article</span><span class="o">/</span><span class="nx">details</span><span class="o">/</span><span class="mi">79129510</span>
+                <span class="nx">https</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">scotch</span><span class="o">-</span><span class="nx">io</span><span class="o">/</span><span class="nx">scotch</span><span class="o">-</span><span class="nx">box</span><span class="o">/</span><span class="nx">issues</span><span class="o">/</span><span class="mi">296</span>
+  <span class="nx">vagrant学习手册：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">vagrantup</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">intro</span><span class="o">/</span><span class="nx">getting</span><span class="o">-</span><span class="nx">started</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">html</span>
+
+<span class="mi">14</span><span class="nx">、常用命令：</span>
+<span class="err">$</span> <span class="nx">vagrant</span> <span class="o">-</span><span class="nx">v</span>        <span class="c1"># 显示当前版本
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">init</span>      <span class="c1"># 初始化
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">up</span>        <span class="c1"># 启动虚拟机
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">halt</span>      <span class="c1"># 关闭虚拟机
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">reload</span>    <span class="c1"># 重启虚拟机
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">ssh</span>       <span class="c1"># SSH 至虚拟机
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">suspend</span>   <span class="c1"># 挂起虚拟机
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">resume</span>    <span class="c1"># 唤醒虚拟机
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">status</span>    <span class="c1"># 查看虚拟机运行状态
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">destroy</span>   <span class="c1"># 销毁当前虚拟机
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">status</span>    <span class="c1"># 查看VM当前的状态
+</span><span class="c1"></span>
+
+<span class="c1">#box管理命令
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="k">list</span>    <span class="c1"># 查看本地box列表
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="nx">add</span> <span class="nx">boxname</span> <span class="nx">系统镜像名</span>    <span class="c1"># 添加box到列表
+</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="nx">remove</span> <span class="nx">boxname</span>  <span class="c1"># 从box列表移除
+</span></code></pre></div>
+			</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/vagrant">Vagrant</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>236 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>25046-04-25 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#思考">思考</a></li>
+        <li><a href="#开始">开始</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2018/20180505-api-jwt/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Laravel的API初始搭建之JWT</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2018/20180410-gogs/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Gogs</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

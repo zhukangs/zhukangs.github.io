@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="MySQL高级操作🥗">
+<meta itemprop="description" content="增加内容（基础命令） 1.表后增加主键altertable表名addprimarykey(字段);在所有字段之后增加primarykey选项：primarykey(字段信息)直接在需要当做主键的字段之后，增加primarykey属性来确定主键2.删除主键altertable表名dropprimarykey;3.自动增长在字段之后增加一个属性auto_increment4.修改自动增长altertable表名auto_increment=值;5.删除自动增长如：altertable表名modifyidint6.查看自增长初始变量showvariableslike&#39;auto_increment%&#39;;7.添加唯一键（与主键基本一样）altertable表名adduniquekey(字段列表);8.删除唯一键altertable表名dropuniquekey;--错误的唯一键可以有多个altertable表名dropindex唯一键名字;高级数据操作 1.多数据插入insertinto表名[(字段列表)]values(值列表),(值列表)…;2.主键冲突更新insertinto表名[(字段列表)]values(值列表)onduplicatekeyupdate字段=新值;3.主键冲突替换replaceinto[(字段列表)]values(值列表);干掉原来的数据，重新插入进去与insert有点像比insert效率低4.蠕虫复制insertinto表名[(字段列表)]select*/字段列表from表;测试表的压力5.更新数据update表名set字段名=新值[where判断条件]limit数量;（没有where是全表更新）6.删除数据deletefrom表名[where条件][limit数量];7.重置自增长truncate表名;---&gt;相当于drop---&gt;再create8.查询数据select[select的选项]字段列表from数据源where条件groupby分组having条件orderby排序limit限制;Select选项：默认all字段列表：字段名[as]别名from数据源：from(select字段列表from表)as别名;聚合函数：group_concat()为了将分组中指定的字段进行合并（字符串拼接）9.分组排序groupby字段[asc|desc]，字段[asc|desc]10.回溯统计groupby字段[asc|desc]withrollup;11.联合查询select语句默认：distinctunion[union选项]规则1:在联合查询中，如果要使用orderby，那么对应的select语句必须使用括号括起来规则2:orderby在联合查询中若要生效，必须配合使用limit：而limit后面必须跟对应的限制数量（通常可以使用一个较大的值：大于对应表的记录数的值）12.连接查询crossjoin:表1crossjoin表2;innerjoin:表1[inner]join表2on匹配条件;不带条件就是交叉查询（避免）outerjoin：主表leftjoin从表on连接条件;-- 外连接必须有on条件 外连接的特点：1、外连接中主表数据记录一定会保存：连接之后不会出现记录数少于主表的情况（但内连接可能少）2、左连接和右连接其实可以互相转换，但是数据对应的位置（表顺序）会改变。13."><meta itemprop="datePublished" content="2017-01-06T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2017-01-06T00:00:00+00:00" />
+<meta itemprop="wordCount" content="5"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="MySQL," /><meta property="og:title" content="MySQL高级操作🥗" />
+<meta property="og:description" content="增加内容（基础命令） 1.表后增加主键altertable表名addprimarykey(字段);在所有字段之后增加primarykey选项：primarykey(字段信息)直接在需要当做主键的字段之后，增加primarykey属性来确定主键2.删除主键altertable表名dropprimarykey;3.自动增长在字段之后增加一个属性auto_increment4.修改自动增长altertable表名auto_increment=值;5.删除自动增长如：altertable表名modifyidint6.查看自增长初始变量showvariableslike&#39;auto_increment%&#39;;7.添加唯一键（与主键基本一样）altertable表名adduniquekey(字段列表);8.删除唯一键altertable表名dropuniquekey;--错误的唯一键可以有多个altertable表名dropindex唯一键名字;高级数据操作 1.多数据插入insertinto表名[(字段列表)]values(值列表),(值列表)…;2.主键冲突更新insertinto表名[(字段列表)]values(值列表)onduplicatekeyupdate字段=新值;3.主键冲突替换replaceinto[(字段列表)]values(值列表);干掉原来的数据，重新插入进去与insert有点像比insert效率低4.蠕虫复制insertinto表名[(字段列表)]select*/字段列表from表;测试表的压力5.更新数据update表名set字段名=新值[where判断条件]limit数量;（没有where是全表更新）6.删除数据deletefrom表名[where条件][limit数量];7.重置自增长truncate表名;---&gt;相当于drop---&gt;再create8.查询数据select[select的选项]字段列表from数据源where条件groupby分组having条件orderby排序limit限制;Select选项：默认all字段列表：字段名[as]别名from数据源：from(select字段列表from表)as别名;聚合函数：group_concat()为了将分组中指定的字段进行合并（字符串拼接）9.分组排序groupby字段[asc|desc]，字段[asc|desc]10.回溯统计groupby字段[asc|desc]withrollup;11.联合查询select语句默认：distinctunion[union选项]规则1:在联合查询中，如果要使用orderby，那么对应的select语句必须使用括号括起来规则2:orderby在联合查询中若要生效，必须配合使用limit：而limit后面必须跟对应的限制数量（通常可以使用一个较大的值：大于对应表的记录数的值）12.连接查询crossjoin:表1crossjoin表2;innerjoin:表1[inner]join表2on匹配条件;不带条件就是交叉查询（避免）outerjoin：主表leftjoin从表on连接条件;-- 外连接必须有on条件 外连接的特点：1、外连接中主表数据记录一定会保存：连接之后不会出现记录数少于主表的情况（但内连接可能少）2、左连接和右连接其实可以互相转换，但是数据对应的位置（表顺序）会改变。13." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2017/20170106-mysql-advanced/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2017-01-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2017-01-06T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="MySQL高级操作🥗"/>
+<meta name="twitter:description" content="增加内容（基础命令） 1.表后增加主键altertable表名addprimarykey(字段);在所有字段之后增加primarykey选项：primarykey(字段信息)直接在需要当做主键的字段之后，增加primarykey属性来确定主键2.删除主键altertable表名dropprimarykey;3.自动增长在字段之后增加一个属性auto_increment4.修改自动增长altertable表名auto_increment=值;5.删除自动增长如：altertable表名modifyidint6.查看自增长初始变量showvariableslike&#39;auto_increment%&#39;;7.添加唯一键（与主键基本一样）altertable表名adduniquekey(字段列表);8.删除唯一键altertable表名dropuniquekey;--错误的唯一键可以有多个altertable表名dropindex唯一键名字;高级数据操作 1.多数据插入insertinto表名[(字段列表)]values(值列表),(值列表)…;2.主键冲突更新insertinto表名[(字段列表)]values(值列表)onduplicatekeyupdate字段=新值;3.主键冲突替换replaceinto[(字段列表)]values(值列表);干掉原来的数据，重新插入进去与insert有点像比insert效率低4.蠕虫复制insertinto表名[(字段列表)]select*/字段列表from表;测试表的压力5.更新数据update表名set字段名=新值[where判断条件]limit数量;（没有where是全表更新）6.删除数据deletefrom表名[where条件][limit数量];7.重置自增长truncate表名;---&gt;相当于drop---&gt;再create8.查询数据select[select的选项]字段列表from数据源where条件groupby分组having条件orderby排序limit限制;Select选项：默认all字段列表：字段名[as]别名from数据源：from(select字段列表from表)as别名;聚合函数：group_concat()为了将分组中指定的字段进行合并（字符串拼接）9.分组排序groupby字段[asc|desc]，字段[asc|desc]10.回溯统计groupby字段[asc|desc]withrollup;11.联合查询select语句默认：distinctunion[union选项]规则1:在联合查询中，如果要使用orderby，那么对应的select语句必须使用括号括起来规则2:orderby在联合查询中若要生效，必须配合使用limit：而limit后面必须跟对应的限制数量（通常可以使用一个较大的值：大于对应表的记录数的值）12.连接查询crossjoin:表1crossjoin表2;innerjoin:表1[inner]join表2on匹配条件;不带条件就是交叉查询（避免）outerjoin：主表leftjoin从表on连接条件;-- 外连接必须有on条件 外连接的特点：1、外连接中主表数据记录一定会保存：连接之后不会出现记录数少于主表的情况（但内连接可能少）2、左连接和右连接其实可以互相转换，但是数据对应的位置（表顺序）会改变。13."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>MySQL高级操作🥗</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Jan 6, 6016&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>MySQL高级操作🥗</h1>
+			</header>
+			<div class="content">
+				<h3 id="增加内容基础命令">增加内容（基础命令）<a href="#增加内容基础命令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="mi">1</span><span class="p">.</span><span class="err">表后增加主键</span><span class="n">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">(</span><span class="err">字段</span><span class="p">);</span><span class="w">
+</span><span class="w">  </span><span class="err">在所有字段之后增加</span><span class="n">primary</span><span class="w"> </span><span class="n">key选项</span><span class="err">：</span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">(</span><span class="err">字段信息</span><span class="p">)</span><span class="w">
+</span><span class="w">  </span><span class="err">直接在需要当做主键的字段之后，增加</span><span class="n">primary</span><span class="w"> </span><span class="n">key属性来确定主键</span><span class="w">
+</span><span class="w"></span><span class="mi">2</span><span class="p">.</span><span class="err">删除主键</span><span class="n">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="k">drop</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="mi">3</span><span class="p">.</span><span class="err">自动增长在字段之后增加一个属性</span><span class="n">auto_increment</span><span class="w">
+</span><span class="w"></span><span class="mi">4</span><span class="p">.</span><span class="err">修改自动增长</span><span class="w"> </span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">表名</span><span class="n">auto_increment</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">值</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="mi">5</span><span class="p">.</span><span class="err">删除自动增长</span><span class="w"> </span><span class="err">如：</span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="n">modify</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="kt">int</span><span class="w">
+</span><span class="w"></span><span class="mi">6</span><span class="p">.</span><span class="err">查看自增长初始变量</span><span class="w"> </span><span class="k">show</span><span class="w"> </span><span class="n">variables</span><span class="w"> </span><span class="k">like</span><span class="w"> </span><span class="s1">&#39;auto_increment%&#39;</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="mi">7</span><span class="p">.</span><span class="err">添加唯一键（与主键基本一样）</span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">表名</span><span class="n">add</span><span class="w"> </span><span class="k">unique</span><span class="w"> </span><span class="k">key</span><span class="p">(</span><span class="err">字段列表</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="mi">8</span><span class="p">.</span><span class="err">删除唯一键</span><span class="w"> </span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">表名</span><span class="n">drop</span><span class="w"> </span><span class="k">unique</span><span class="w"> </span><span class="k">key</span><span class="p">;</span><span class="w">  </span><span class="o">-</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="err">错误的</span><span class="w"> </span><span class="err">唯一键可以有多个</span><span class="w">
+</span><span class="w">  </span><span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="err">表名</span><span class="n">drop</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="err">唯一键名字</span><span class="p">;</span><span class="w">
+</span></code></pre></div><h3 id="高级数据操作">高级数据操作<a href="#高级数据操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-mysql" data-lang="mysql"><span class="mi">1</span><span class="p">.</span><span class="err">多数据插入</span><span class="w"> </span><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="p">[(</span><span class="err">字段列表</span><span class="p">)]</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="err">值列表</span><span class="p">),</span><span class="w"> </span><span class="p">(</span><span class="err">值列表</span><span class="p">)</span><span class="err">…</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="mi">2</span><span class="p">.</span><span class="err">主键冲突更新</span><span class="n">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="p">[(</span><span class="err">字段列表</span><span class="p">)]</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="err">值列表</span><span class="p">)</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">duplicate</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="n">update字段</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">新值</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="mi">3</span><span class="p">.</span><span class="err">主键冲突替换</span><span class="n">replace</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="p">[(</span><span class="err">字段列表</span><span class="p">)]</span><span class="w"> </span><span class="k">values</span><span class="p">(</span><span class="err">值列表</span><span class="p">);</span><span class="w">  </span><span class="err">干掉原来的数据，重新插入进去</span><span class="w"> </span><span class="err">与</span><span class="n">insert有点像</span><span class="w"> </span><span class="err">比</span><span class="n">insert效率低</span><span class="w">
+</span><span class="w"></span><span class="mi">4</span><span class="p">.</span><span class="err">蠕虫复制</span><span class="n">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="p">[(</span><span class="err">字段列表</span><span class="p">)]</span><span class="w"> </span><span class="k">select</span><span class="w">  </span><span class="o">*/</span><span class="err">字段列表</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">表</span><span class="p">;</span><span class="w"> </span><span class="err">测试表的压力</span><span class="w">
+</span><span class="w"></span><span class="mi">5</span><span class="p">.</span><span class="err">更新数据</span><span class="n">update表名</span><span class="w"> </span><span class="kt">set</span><span class="w"> </span><span class="err">字段名</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">新值</span><span class="w"> </span><span class="p">[</span><span class="k">where</span><span class="w"> </span><span class="err">判断条件</span><span class="p">]</span><span class="w"> </span><span class="k">limit</span><span class="w"> </span><span class="err">数量</span><span class="p">;</span><span class="err">（没有</span><span class="n">where是全表更新</span><span class="err">）</span><span class="w">
+</span><span class="w"></span><span class="mi">6</span><span class="p">.</span><span class="err">删除数据</span><span class="n">delete</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">表名</span><span class="w"> </span><span class="p">[</span><span class="k">where</span><span class="w"> </span><span class="err">条件</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="k">limit</span><span class="w"> </span><span class="err">数量</span><span class="p">];</span><span class="w">
+</span><span class="w"></span><span class="mi">7</span><span class="p">.</span><span class="err">重置自增长</span><span class="n">truncate</span><span class="w"> </span><span class="err">表名</span><span class="p">;</span><span class="w"> </span><span class="o">---&gt;</span><span class="w"> </span><span class="err">相当于</span><span class="n">drop</span><span class="w"> </span><span class="o">---&gt;</span><span class="w"> </span><span class="err">再</span><span class="n">create</span><span class="w">
+</span><span class="w"></span><span class="mi">8</span><span class="p">.</span><span class="err">查询数据</span><span class="w"> </span><span class="k">select</span><span class="w">  </span><span class="p">[</span><span class="n">select的选项</span><span class="w"> </span><span class="p">]</span><span class="w">  </span><span class="err">字段列表</span><span class="w">   </span><span class="k">from</span><span class="w"> </span><span class="err">数据源</span><span class="w">   </span><span class="n">where条件</span><span class="w">   </span><span class="k">group</span><span class="w"> </span><span class="n">by分组</span><span class="w">  </span><span class="n">having条件</span><span class="w"> </span><span class="k">order</span><span class="w"> </span><span class="n">by排序</span><span class="w">   </span><span class="n">limit限制</span><span class="p">;</span><span class="w">
+</span><span class="w">  </span><span class="n">Select选项</span><span class="err">：默认</span><span class="n">all</span><span class="w">   </span><span class="err">字段列表：字段名</span><span class="w"> </span><span class="p">[</span><span class="k">as</span><span class="p">]</span><span class="w"> </span><span class="err">别名</span><span class="w">  </span><span class="n">from数据源</span><span class="err">：</span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">表</span><span class="p">)</span><span class="w">  </span><span class="k">as</span><span class="w"> </span><span class="err">别名</span><span class="p">;</span><span class="w">  </span><span class="err">聚合函数：</span><span class="nf">group_concat</span><span class="p">()</span><span class="err">为了将分组中指定的字段进行合并（字符串拼接）</span><span class="w">
+</span><span class="w"></span><span class="mi">9</span><span class="p">.</span><span class="err">分组排序</span><span class="n">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="err">字段</span><span class="w"> </span><span class="p">[</span><span class="k">asc</span><span class="o">|</span><span class="k">desc</span><span class="p">]</span><span class="err">，字段</span><span class="w"> </span><span class="p">[</span><span class="k">asc</span><span class="o">|</span><span class="k">desc</span><span class="p">]</span><span class="w">
+</span><span class="w"></span><span class="mi">10</span><span class="p">.</span><span class="err">回溯统计</span><span class="n">group</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="err">字段</span><span class="w"> </span><span class="p">[</span><span class="k">asc</span><span class="o">|</span><span class="k">desc</span><span class="p">]</span><span class="w"> </span><span class="n">withrollup</span><span class="p">;</span><span class="w">
+</span><span class="w"></span><span class="mi">11</span><span class="p">.</span><span class="err">联合查询</span><span class="n">select</span><span class="w"> </span><span class="err">语句</span><span class="w"> </span><span class="err">默认：</span><span class="k">distinct</span><span class="w"> </span><span class="k">union</span><span class="w"> </span><span class="p">[</span><span class="k">union</span><span class="w"> </span><span class="err">选项</span><span class="p">]</span><span class="w">
+</span><span class="w">   </span><span class="err">规则</span><span class="mi">1</span><span class="p">:</span><span class="w"> </span><span class="err">在联合查询中，如果要使用</span><span class="n">order</span><span class="w"> </span><span class="k">by</span><span class="err">，那么对应的</span><span class="n">select语句必须使用括号括起来</span><span class="w">
+</span><span class="w">   </span><span class="err">规则</span><span class="mi">2</span><span class="p">:</span><span class="w"> </span><span class="n">orderby在联合查询中若要生效</span><span class="err">，必须配合使用</span><span class="n">limit</span><span class="err">：而</span><span class="n">limit后面必须跟对应的限制数量</span><span class="err">（通常可以使用一个较大的值：大于对应表的记录数的值）</span><span class="w">
+</span><span class="w"></span><span class="mi">12</span><span class="p">.</span><span class="err">连接查询</span><span class="w"> </span><span class="k">cross</span><span class="w"> </span><span class="k">join</span><span class="p">:</span><span class="err">表</span><span class="mi">1</span><span class="w"> </span><span class="k">cross</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="err">表</span><span class="mi">2</span><span class="p">;</span><span class="w">  
+</span><span class="w">   </span><span class="k">inner</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="err">表</span><span class="mi">1</span><span class="w"> </span><span class="p">[</span><span class="k">inner</span><span class="p">]</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="err">表</span><span class="mi">2</span><span class="w">  </span><span class="n">on匹配条件</span><span class="p">;</span><span class="w"> </span><span class="err">不带条件就是交叉查询（避免）</span><span class="w">
+</span><span class="w">   </span><span class="k">outer</span><span class="w"> </span><span class="k">join</span><span class="err">：主表</span><span class="w"> </span><span class="k">left</span><span class="w"> </span><span class="k">join</span><span class="w"> </span><span class="err">从表</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="err">连接条件</span><span class="p">;</span><span class="w">  </span><span class="c1">-- 外连接必须有on条件
+</span><span class="c1"></span><span class="w">   </span><span class="err">外连接的特点：</span><span class="w">
+</span><span class="w">     </span><span class="mi">1</span><span class="err">、外连接中主表数据记录一定会保存：连接之后不会出现记录数少于主表的情况（但内连接可能少）</span><span class="w">
+</span><span class="w">     </span><span class="mi">2</span><span class="err">、左连接和右连接其实可以互相转换，但是数据对应的位置（表顺序）会改变。</span><span class="w">
+</span><span class="w"></span><span class="mi">13</span><span class="p">.</span><span class="err">标量子查询</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">数据源</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">条件判断</span><span class="w"> </span><span class="o">=/&lt;&gt;</span><span class="w"> </span><span class="p">(</span><span class="k">select</span><span class="w"> </span><span class="err">字段名</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="err">数据源</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="err">条件判断</span><span class="p">);</span><span class="w"> </span><span class="o">//</span><span class="err">注意，括号中标量子查询得到的结果只有一个值</span><span class="w">
+</span><span class="w"></span><span class="mi">14</span><span class="p">.</span><span class="err">列子查询</span><span class="w"> </span><span class="err">主查询</span><span class="n">where</span><span class="w"> </span><span class="err">条件</span><span class="nf">in</span><span class="w">  </span><span class="p">(</span><span class="err">列子查询</span><span class="p">);</span><span class="w">
+</span><span class="w"></span><span class="mi">15</span><span class="p">.</span><span class="err">行子查询</span><span class="w"> </span><span class="err">主查询</span><span class="n">where</span><span class="w"> </span><span class="err">条件</span><span class="p">[</span><span class="err">（构造一个行元素）</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="err">行子查询</span><span class="p">);</span><span class="w">
+</span><span class="w">   </span><span class="err">行元素：行元素对应的就是多个字段，把多个字段“合起来”作为一个元素参与运算，把这种情况称之为行元素。</span><span class="w">
+</span><span class="w"></span><span class="mi">16</span><span class="p">.</span><span class="err">表子查询</span><span class="w"> </span><span class="k">select</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="p">(</span><span class="err">表子查询</span><span class="p">)</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">别名</span><span class="w"> </span><span class="p">[</span><span class="k">where</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="k">group</span><span class="w"> </span><span class="k">by</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="k">having</span><span class="p">][</span><span class="k">order</span><span class="w"> </span><span class="k">by</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="k">limit</span><span class="p">];</span><span class="w">
+</span><span class="w"></span><span class="mi">17</span><span class="p">.</span><span class="n">exists子查询</span><span class="w"> </span><span class="k">where</span><span class="w"> </span><span class="k">exists</span><span class="p">(</span><span class="err">查询语句</span><span class="p">)</span><span class="err">；</span><span class="w"> </span><span class="err">查询返回的结果只有</span><span class="mi">0</span><span class="err">或者</span><span class="mi">1</span><span class="err">，</span><span class="mi">1</span><span class="err">代表成立，</span><span class="mi">0</span><span class="err">代表不成立</span><span class="w">
+</span></code></pre></div>
+			</div>
+
+<div class="related-posts thin">
+	<h2>See Also</h2>
+	<ul>
+	
+	<li><a href="/posts/2016/20160511-mysql-basic/">MySQL基础操作🍕</a></li>
+	
+	</ul>
+</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/mysql">MySQL</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>5 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>6016-01-06 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#增加内容基础命令">增加内容（基础命令）</a></li>
+        <li><a href="#高级数据操作">高级数据操作</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2017/20170321-mysqldump/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>mysqldump导出数据库各参数说明</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2016/20160703-linux-study/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Linux学习归纳哈哈🚀</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>
