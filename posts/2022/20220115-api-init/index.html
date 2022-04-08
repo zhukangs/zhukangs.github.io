@@ -13,7 +13,7 @@
 DB_CONNECTION=mysql // host地址 DB_HOST=127.0.0.1 // 端口号 DB_PORT=3306 // 数据库名 DB_DATABASE=laravel9 // 用户名 DB_USERNAME=root // 密码 DB_PASSWORD=   时区（配置 config/app.php 文件）
 &#39;timezone&#39; =&gt; &#39;PRC&#39;, // 大陆时间     安装扩展包"><meta itemprop="datePublished" content="2022-01-15T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-01-15T00:00:00+00:00" />
-<meta itemprop="wordCount" content="1362"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="1362"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel,API," /><meta property="og:title" content="Laravel 开发 API 初始搭建" />
 <meta property="og:description" content="前言 使用 Laravel 开发过不少项目，大部分还是前后端分离的，所以今天就总结归纳下在开发API项目时，Laravel 的前期框架搭建过程！
 环境  PHP 8.0.5 (cli) MySQL 8.0.25-0ubuntu0.20.04.1 (Ubuntu) Nginx nginx/1.18.0 (Ubuntu) IDE PhpStorm2020.2  搭建   安装
@@ -22,12 +22,12 @@ DB_CONNECTION=mysql // host地址 DB_HOST=127.0.0.1 // 端口号 DB_PORT=3306 //
 DB_CONNECTION=mysql // host地址 DB_HOST=127.0.0.1 // 端口号 DB_PORT=3306 // 数据库名 DB_DATABASE=laravel9 // 用户名 DB_USERNAME=root // 密码 DB_PASSWORD=   时区（配置 config/app.php 文件）
 &#39;timezone&#39; =&gt; &#39;PRC&#39;, // 大陆时间     安装扩展包" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2022/20220115-api-init/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2022/20220115-api-init/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-01-15T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-01-15T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Laravel 开发 API 初始搭建"/>
 <meta name="twitter:description" content="前言 使用 Laravel 开发过不少项目，大部分还是前后端分离的，所以今天就总结归纳下在开发API项目时，Laravel 的前期框架搭建过程！
@@ -94,7 +94,7 @@ DB_CONNECTION=mysql // host地址 DB_HOST=127.0.0.1 // 端口号 DB_PORT=3306 //
 				<h1>Laravel 开发 API 初始搭建</h1>
 			</header>
 			<div class="content">
-				<p><img src="https://qiniu.zkilm.cn/blog/cover/wallhaven-g79zzq.png" alt="简单生活，热爱一切！"></p>
+				<p><img src="https://qiniu.zkilm.cn/blog/cover/blue-light.png" alt="封面！"></p>
 <h3 id="前言">前言<a href="#前言" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>使用 <code>Laravel</code> 开发过不少项目，大部分还是前后端分离的，所以今天就总结归纳下在开发API项目时，<code>Laravel</code> 的前期框架搭建过程！</p>
 <h3 id="环境">环境<a href="#环境" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>

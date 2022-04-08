@@ -11,19 +11,19 @@
 php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
 &lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&gt;header(&#39;Access-Control-Allow-Origin&#39;, &#39;*&#39;); $response-&gt;header(&#39;Access-Control-Allow-Headers&#39;, &#39;Origin, Content-Type, Cookie, Accept&#39;); $response-&gt;header(&#39;Access-Control-Allow-Methods&#39;, &#39;GET, POST, PATCH, PUT, OPTIONS&#39;); $response-&gt;header(&#39;Access-Control-Allow-Credentials&#39;, &#39;true&#39;); //ession共享的需求才用到  return $response; } } 注册中间件 添加到全局中间件 Kernel."><meta itemprop="datePublished" content="2019-07-25T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-07-25T00:00:00+00:00" />
-<meta itemprop="wordCount" content="94"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="94"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Laravel解决跨域请求🏃‍" />
 <meta property="og:description" content="今天公司前端突然说请求跨域了，那么就解决下咯！
 创建中间件 首先创建一个中间件
 php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
 &lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&gt;header(&#39;Access-Control-Allow-Origin&#39;, &#39;*&#39;); $response-&gt;header(&#39;Access-Control-Allow-Headers&#39;, &#39;Origin, Content-Type, Cookie, Accept&#39;); $response-&gt;header(&#39;Access-Control-Allow-Methods&#39;, &#39;GET, POST, PATCH, PUT, OPTIONS&#39;); $response-&gt;header(&#39;Access-Control-Allow-Credentials&#39;, &#39;true&#39;); //ession共享的需求才用到  return $response; } } 注册中间件 添加到全局中间件 Kernel." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190725-cross-request/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190725-cross-request/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-07-25T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-07-25T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Laravel解决跨域请求🏃‍"/>
 <meta name="twitter:description" content="今天公司前端突然说请求跨域了，那么就解决下咯！

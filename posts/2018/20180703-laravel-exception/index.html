@@ -9,17 +9,17 @@
 <meta itemprop="description" content="当你启动一个新的 Laravel 项目时，错误及异常处理是已为你配置好了的。App\Exceptions\Handler 类负责记录应用程序触发的所有异常并呈现给用户。在本文档中，我们将深入探讨这个类。
  创建异常处理类： php artisan make:exception InvalidRequestException 编写代码  编写 app/Exceptions/InvalidRequestException.php 文件  &lt;?php namespace App\Exceptions; use Exception; use Illuminate\Http\Request; class InvalidRequestException extends Exception { public function __construct(string $message = &#34;&#34;, int $code = 400) { parent::__construct($message, $code); } public function render(Request $request) { if ($request-&gt;expectsJson()) { // json() 方法第二个参数就是 Http 返回码  return response()-&gt;json([&#39;msg&#39; =&gt; $this-&gt;message], $this-&gt;code); } return view(&#39;pages.error&#39;, [&#39;msg&#39; =&gt; $this-&gt;message]); } }  Laravel 5."><meta itemprop="datePublished" content="2018-07-03T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2018-07-03T00:00:00+00:00" />
-<meta itemprop="wordCount" content="186"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="186"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Laravel之异常处理（Exception）" />
 <meta property="og:description" content="当你启动一个新的 Laravel 项目时，错误及异常处理是已为你配置好了的。App\Exceptions\Handler 类负责记录应用程序触发的所有异常并呈现给用户。在本文档中，我们将深入探讨这个类。
  创建异常处理类： php artisan make:exception InvalidRequestException 编写代码  编写 app/Exceptions/InvalidRequestException.php 文件  &lt;?php namespace App\Exceptions; use Exception; use Illuminate\Http\Request; class InvalidRequestException extends Exception { public function __construct(string $message = &#34;&#34;, int $code = 400) { parent::__construct($message, $code); } public function render(Request $request) { if ($request-&gt;expectsJson()) { // json() 方法第二个参数就是 Http 返回码  return response()-&gt;json([&#39;msg&#39; =&gt; $this-&gt;message], $this-&gt;code); } return view(&#39;pages.error&#39;, [&#39;msg&#39; =&gt; $this-&gt;message]); } }  Laravel 5." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180703-laravel-exception/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180703-laravel-exception/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-07-03T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-07-03T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Laravel之异常处理（Exception）"/>
 <meta name="twitter:description" content="当你启动一个新的 Laravel 项目时，错误及异常处理是已为你配置好了的。App\Exceptions\Handler 类负责记录应用程序触发的所有异常并呈现给用户。在本文档中，我们将深入探讨这个类。

@@ -15,7 +15,7 @@ php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Ker
 &#39;api&#39; =&gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &#39;throttle:api&#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ],   配置   重写默认模型
 执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。"><meta itemprop="datePublished" content="2022-02-18T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2022-02-18T00:00:00+00:00" />
-<meta itemprop="wordCount" content="377"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="377"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel,API," /><meta property="og:title" content="Laravel 使用 Sanctum API 授权" />
 <meta property="og:description" content="介绍  Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
  相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272
@@ -26,12 +26,12 @@ php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Ker
 &#39;api&#39; =&gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &#39;throttle:api&#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ],   配置   重写默认模型
 执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2022/20220218-api-sanctum/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2022/20220218-api-sanctum/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-02-18T00:00:00+00:00" />
 <meta property="article:modified_time" content="2022-02-18T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Laravel 使用 Sanctum API 授权"/>
 <meta name="twitter:description" content="介绍  Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
@@ -100,7 +100,7 @@ php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Ker
 				<h1>Laravel 使用 Sanctum API 授权</h1>
 			</header>
 			<div class="content">
-				<p><img src="https://qiniu.zkilm.cn/blog/posts/laravel_sanctum.jpg" alt="简单生活，热爱一切！"></p>
+				<p><img src="https://qiniu.zkilm.cn/blog/posts/2022/20220218-api-sanctum.jpg" alt="封面"></p>
 <h3 id="介绍">介绍<a href="#介绍" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <blockquote>
 <p><a href="https://github.com/laravel/sanctum">Laravel Sanctum</a> 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。</p>

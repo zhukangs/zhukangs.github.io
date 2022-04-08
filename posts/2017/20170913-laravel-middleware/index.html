@@ -11,19 +11,19 @@
 大致流程：
 第一步  运行Artisan 命令 make:middleware 创建新的中间件：  php artisan make:middleware CheckIpIsRegistered 第二步  编写中间件  &lt;?php namespace App\Http\Middleware; use Closure; class CheckIpIsRegistered { /** * 处理传入的请求 * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { if (false) { //添加的你逻辑  return redirect(&#39;home&#39;); } return $next($request); } } 第三步  再 app/Http/Kernel.php 注册中间件：  protected $routeMiddleware = [ &#39;auth&#39; =&gt; \Illuminate\Auth\Middleware\Authenticate::class, &#39;auth."><meta itemprop="datePublished" content="2017-09-13T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2017-09-13T00:00:00+00:00" />
-<meta itemprop="wordCount" content="93"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="93"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Laravel中间件👽" />
 <meta property="og:description" content="如：laravel自带的用户认证如何在注册前执行中间件？
 可以使用自定义中间件来解决。
 大致流程：
 第一步  运行Artisan 命令 make:middleware 创建新的中间件：  php artisan make:middleware CheckIpIsRegistered 第二步  编写中间件  &lt;?php namespace App\Http\Middleware; use Closure; class CheckIpIsRegistered { /** * 处理传入的请求 * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { if (false) { //添加的你逻辑  return redirect(&#39;home&#39;); } return $next($request); } } 第三步  再 app/Http/Kernel.php 注册中间件：  protected $routeMiddleware = [ &#39;auth&#39; =&gt; \Illuminate\Auth\Middleware\Authenticate::class, &#39;auth." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2017/20170913-laravel-middleware/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2017/20170913-laravel-middleware/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-09-13T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-09-13T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Laravel中间件👽"/>
 <meta name="twitter:description" content="如：laravel自带的用户认证如何在注册前执行中间件？

@@ -20,7 +20,7 @@
 安装 composer 安装 lcobucci/jwt ，我这里默认安装的是最新版 4.1 。
 composer require lcobucci/jwt 封装 在 app\Helpers 目录下新建 Jwt.php 文件，封装 Jwt 类。
 &amp;lt;?php /** * Created by PhpStorm. * User: zhukang * Date: 2019/8/22 * Time: 16:39 */ namespace App\Helpers; use Illuminate\Support\Facades\Redis; use Lcobucci\Clock\SystemClock; use Lcobucci\JWT\Configuration; use Lcobucci\JWT\Exception; use Lcobucci\JWT\Signer\Hmac\Sha256; use Lcobucci\JWT\Signer\Key\InMemory; use Lcobucci\JWT\Token\Plain; use Lcobucci\JWT\Validation\Constraint\IdentifiedBy; use Lcobucci\JWT\Validation\Constraint\IssuedBy; use Lcobucci\JWT\Validation\Constraint\PermittedFor; use Lcobucci\JWT\Validation\Constraint\SignedWith; use Lcobucci\JWT\Validation\Constraint\ValidAt; use Lcobucci\JWT\Validation\RequiredConstraintsViolated; trait Jwt { protected $issuedBy;//签发人  protected $permittedFor;//受众  protected $identifiedBy;//jwt编号  protected $issuedAt;//签发时间  protected $expiresAt;//过期时间  protected $jwt_secret; //秘钥  public function __construct() { //获取jwt配置信息  $jwt_configs = config(&amp;#39;jwt&amp;#39;); $this-&amp;gt;issuedBy = $jwt_configs[&amp;#39;issuedBy&amp;#39;]; $this-&amp;gt;permittedFor = $jwt_configs[&amp;#39;permittedFor&amp;#39;]; $this-&amp;gt;identifiedBy = $jwt_configs[&amp;#39;identifiedBy&amp;#39;]; $this-&amp;gt;issuedAt = $jwt_configs[&amp;#39;issuedAt&amp;#39;]; $this-&amp;gt;expiresAt = $this-&amp;gt;issuedAt-&amp;gt;modify($jwt_configs[&amp;#39;expiresAt&amp;#39;]); $this-&amp;gt;jwt_secret = $jwt_configs[&amp;#39;jwt_secret&amp;#39;]; } /** * @Description:生成jwt配置对象 * @return Configuration * @Author:zhukang * @Date:2022/4/7 16:05 */ public function createJwtObject() { return Configuration::forSymmetricSigner( new Sha256(), InMemory::base64Encoded($this-&amp;gt;jwt_secret) ); } /** * @Description:生成token * @param array $bind 需要在jwt载体(payload)中加入的数据 [&amp;#39;userid&amp;#39;=&amp;gt;1,&amp;#39;xxxx&amp;#39;=&amp;gt;xxxx] * @return string \Lcobucci\JWT\Token * @Author:zhukang * @Date:2022/4/7 16:04 */ public function getToken(array $bind = []) { $jwt_object = $this-&amp;gt;createJwtObject(); $jwt_obj = $jwt_object-&amp;gt;builder() -&amp;gt;issuedBy($this-&amp;gt;issuedBy) -&amp;gt;permittedFor($this-&amp;gt;permittedFor) -&amp;gt;identifiedBy($this-&amp;gt;identifiedBy) -&amp;gt;issuedAt($this-&amp;gt;issuedAt) -&amp;gt;canOnlyBeUsedAfter($this-&amp;gt;issuedAt) -&amp;gt;expiresAt($this-&amp;gt;expiresAt); if (is_array($bind) &amp;amp;&amp;amp; !</description>
-			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/blog/posts/jwt.webp" alt="简单生活，热爱一切！"></p>
+			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/blog/posts/2022/20220305-api-jwt.jpg" alt="封面！"></p>
 <h3 id="什么是jwt">什么是JWT</h3>
 <blockquote>
 <p>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（<a href="https://link.jianshu.com?t=https://tools.ietf.org/html/rfc7519">(RFC 7519</a>).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。作者：Dearmadman链接：https://www.jianshu.com/p/576dbf44b2ae来源：简书著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
@@ -420,7 +420,7 @@ php artisan vendor:publish --provider=&amp;#34;Laravel\Sanctum\SanctumServicePro
 php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Kernel.php 文件中的 api 中间件组中
 &amp;#39;api&amp;#39; =&amp;gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &amp;#39;throttle:api&amp;#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ],   配置   重写默认模型
 执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。</description>
-			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/blog/posts/laravel_sanctum.jpg" alt="简单生活，热爱一切！"></p>
+			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/blog/posts/2022/20220218-api-sanctum.jpg" alt="封面"></p>
 <h3 id="介绍">介绍</h3>
 <blockquote>
 <p><a href="https://github.com/laravel/sanctum">Laravel Sanctum</a> 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。</p>
@@ -634,7 +634,7 @@ php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Ker
   数据库（配置根目录下 .env 文件）
 DB_CONNECTION=mysql // host地址 DB_HOST=127.0.0.1 // 端口号 DB_PORT=3306 // 数据库名 DB_DATABASE=laravel9 // 用户名 DB_USERNAME=root // 密码 DB_PASSWORD=   时区（配置 config/app.php 文件）
 &amp;#39;timezone&amp;#39; =&amp;gt; &amp;#39;PRC&amp;#39;, // 大陆时间     安装扩展包</description>
-			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/blog/cover/wallhaven-g79zzq.png" alt="简单生活，热爱一切！"></p>
+			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/blog/cover/blue-light.png" alt="封面！"></p>
 <h3 id="前言">前言</h3>
 <p>使用 <code>Laravel</code> 开发过不少项目，大部分还是前后端分离的，所以今天就总结归纳下在开发API项目时，<code>Laravel</code> 的前期框架搭建过程！</p>
 <h3 id="环境">环境</h3>
@@ -3545,9 +3545,9 @@ systemctl status firewalld firewall-cmd --state 2、开启、重启、关闭、f
 </span></span><span class="line"><span class="cl"><span class="c1">//配置路由(web.php):
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">any</span><span class="p">(</span><span class="s1">&#39;/wechat/{account}&#39;</span><span class="p">,</span> <span class="s1">&#39;Api\WeChatController@serve&#39;</span><span class="p">);</span>       
 </span></span></code></pre></div><h3 id="测试平台">测试平台</h3>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/wxgzhpz.jpg" alt="测试平台"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20191127-wechat-pushmsg01.jpg" alt="测试平台"></p>
 <h3 id="增加消息模板">增加消息模板</h3>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/mbxxsz.jpg" alt="增加消息模板"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20191127-wechat-pushmsg02.jpg" alt="增加消息模板"></p>
 <h3 id="新建模板消息控制器">新建模板消息控制器</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan make:controller Api/WechatTemplateMsgController
 </span></span></code></pre></div><p>代码如下：</p>
@@ -3595,9 +3595,9 @@ systemctl status firewalld firewall-cmd --state 2、开启、重启、关闭、f
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;wechat/send_template_msg&#39;</span><span class="p">,</span> <span class="s1">&#39;WechatTemplateMsgController@sendTemplateMsg&#39;</span><span class="p">);</span>
 </span></span></code></pre></div><h4 id="测试">测试</h4>
 <p>Postman调用发送模板消息接口：
-<img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/postman_mb.jpg" alt="Postman调用发送模板消息接口"></p>
+<img src="https://qiniu.zkilm.cn/blog/posts/2019/20191127-wechat-pushmsg03.jpg" alt="Postman调用发送模板消息接口"></p>
 <p>效果图：
-<img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/mbxgt.jpg" alt="效果图"></p>
+<img src="https://qiniu.zkilm.cn/blog/posts/2019/20191127-wechat-pushmsg04.jpg" alt="效果图"></p>
 ]]></content>
 		</item>
 		
@@ -3778,9 +3778,9 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
 在需要调用分享的页面上，进行 config 配置的时候，首先通过 ajax 将基本参数传送给服务端url（`http://test.zks.design/jssdkconfig`）。 一些需要的参数可能如下： 可以参照 EasyWechat 的文档 https://www.easywechat.com/docs/4.1/basic-services/jssdk 其中建议 $app-&amp;gt;jssdk-&amp;gt;setUrl($url) 设置当前URL 一定是自己前端的页面的 url。 5.将获取到的 config 直接放在 js 中</description>
 			<content type="html"><![CDATA[<h3 id="一缘由">一、缘由</h3>
 <p>什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：</p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/h5_before.png" alt="Before"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190610-wechat-h501.png" alt="Before"></p>
 <p>但是，现在需求是，分享后为下面这样：</p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/h5_after.png" alt="After"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190610-wechat-h502.png" alt="After"></p>
 <p>没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。</p>
 <h3 id="二基本流程">二、基本流程</h3>
 <p><strong>1.设置JS接口安全域名</strong></p>
@@ -3931,14 +3931,14 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
 			<description>导语 在做完根据Excel模板导出数据后，就对Word模板导出产生了兴趣。其实原理差不多。所以还是选择的PHPOffice 套餐。
  PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。
  PHPWord文档传送门
-开始 安装 composer require phpoffice/phpword 使用  拿到原始的模板还需要做一些简单的修改：  代码 &amp;lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word  public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&amp;#39;/phpoffice/word_temp.docx&amp;#39;); //设置替换值 （只能替换纯文本）  $template-&amp;gt;setValue( [&amp;#39;Name&amp;#39;,&amp;#39;Date&amp;#39;,&amp;#39;Address&amp;#39;,&amp;#39;Organizer&amp;#39;,&amp;#39;Activity&amp;#39;], [$request-&amp;gt;name,$request-&amp;gt;start_time,$request-&amp;gt;address,$request-&amp;gt;organizer,$request-&amp;gt;activity] ); $filename = date(&amp;#39;Y-m-d&amp;#39;, time()).rand(1000, 9999). &amp;#34;.docx&amp;#34;; //保存到项目  $template-&amp;gt;saveAs(public_path().&amp;#39;/phpoffice/&amp;#39;.$filename); //建议：将数据[&amp;#39;Name&amp;#39;,&amp;#39;Date&amp;#39;,&amp;#39;Address&amp;#39;,&amp;#39;Organizer&amp;#39;,&amp;#39;Activity&amp;#39;]写一份到数据库  //TODO  return back()-&amp;gt;with([&amp;#39;success&amp;#39;=&amp;gt;&amp;#39;导出成功&amp;#39;,&amp;#39;filename&amp;#39;=&amp;gt;$filename]); } } 效果 {.</description>
+开始 安装 composer require phpoffice/phpword 使用  拿到原始的模板还需要做一些简单的修改：  代码 &amp;lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word  public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&amp;#39;/phpoffice/word_temp.docx&amp;#39;); //设置替换值 （只能替换纯文本）  $template-&amp;gt;setValue( [&amp;#39;Name&amp;#39;,&amp;#39;Date&amp;#39;,&amp;#39;Address&amp;#39;,&amp;#39;Organizer&amp;#39;,&amp;#39;Activity&amp;#39;], [$request-&amp;gt;name,$request-&amp;gt;start_time,$request-&amp;gt;address,$request-&amp;gt;organizer,$request-&amp;gt;activity] ); $filename = date(&amp;#39;Y-m-d&amp;#39;, time()).rand(1000, 9999). &amp;#34;.docx&amp;#34;; //保存到项目  $template-&amp;gt;saveAs(public_path().&amp;#39;/phpoffice/&amp;#39;.$filename); //建议：将数据[&amp;#39;Name&amp;#39;,&amp;#39;Date&amp;#39;,&amp;#39;Address&amp;#39;,&amp;#39;Organizer&amp;#39;,&amp;#39;Activity&amp;#39;]写一份到数据库  //TODO  return back()-&amp;gt;with([&amp;#39;success&amp;#39;=&amp;gt;&amp;#39;导出成功&amp;#39;,&amp;#39;filename&amp;#39;=&amp;gt;$filename]); } } 效果 结束语 目前是将文件保存在了项目，想要安全点可以丢到Storage文件夹下或者上传至cos，oos，七牛等。直接输出到浏览器暂时还没找到对应的方法。</description>
 			<content type="html"><![CDATA[<h3 id="导语">导语</h3>
 <p>在做完根据Excel模板导出数据后，就对Word模板导出产生了兴趣。其实原理差不多。所以还是选择的PHPOffice 套餐。</p>
 <blockquote>
 <p>PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。</p>
 </blockquote>
 <p><a href="https://phpword.readthedocs.io/en/latest/">PHPWord文档传送门</a></p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/word_template.jpg" alt="原始模板"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190321-phpoffice-word01.jpg" alt="原始模板"></p>
 <h3 id="开始">开始</h3>
 <h4 id="安装">安装</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require phpoffice/phpword
@@ -3946,7 +3946,7 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
 <ul>
 <li>拿到原始的模板还需要做一些简单的修改：</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/modfile.jpg" alt="修改后"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190321-phpoffice-word02.jpg" alt="修改后"></p>
 <h4 id="代码">代码</h4>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
 </span></span><span class="line"><span class="cl">    
@@ -3982,7 +3982,7 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h4 id="效果">效果</h4>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/res_word.jpg" alt="完成效果图">{.figure}</p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190321-phpoffice-word03.jpg" alt="完成效果图"></p>
 <h3 id="结束语">结束语</h3>
 <p>目前是将文件保存在了项目，想要安全点可以丢到<code>Storage</code>文件夹下或者上传至<code>cos</code>，<code>oos</code>，<code>七牛</code>等。直接输出到浏览器暂时还没找到对应的方法。</p>
 <blockquote>
@@ -4009,7 +4009,7 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
 <p><a href="https://github.com/PHPOffice/PhpSpreadsheet">PhpSpreadsheet</a>是一个用纯PHP编写的库，它提供了一组类，允许您读取和写入不同的电子表格文件格式，如Excel和LibreOffice Calc。</p>
 </blockquote>
 <p><a href="https://phpoffice.github.io/PhpSpreadsheet/master/PhpOffice.html">PhpSpreadsheet文档传送门</a></p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/excel_template.jpg" alt="Excel模板效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190320-phpoffice-excel01.jpg" alt="Excel模板效果图"></p>
 <h3 id="安装">安装</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require phpoffice/phpspreadsheet
 </span></span></code></pre></div><h3 id="使用">使用</h3>
@@ -4097,7 +4097,7 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
 </span></span><span class="line"><span class="cl">    <span class="o">.</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="效果">效果</h3>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/excel_result.jpg" alt="完成效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190320-phpoffice-excel02.jpg" alt="完成效果图"></p>
 <h3 id="结束语">结束语</h3>
 <blockquote>
 <p>摆脱悲观，拥抱满溢而出的希望，朝着梦想，准备出发。🍀</p>
@@ -4116,15 +4116,13 @@ php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后�
 			<guid>https://blog.zkilm.cn/posts/2019/20190315-laravel-notify/</guid>
 			<description>导语 Laravel 自带了一套极具扩展性的消息通知系统，尤其还支持多种通知频道(这里我用的是数据库通知频道)，我们将利用此套系统来向用户发送消息提醒。
 最终效果如下图所示：
-{.figure}
-{.figure}
 开始 准备基本的功能开发 一个用户给另外一个用户发送消息，将信息存入数据库表（notify_tests表）
    id msg send_id rev_id updated_at created_at     1 啊哈哈	哈 1 2 2019-03-15 02:34:13 2019-03-15 02:34:13    准备数据  通知数据库,存储所有通知信息  1.php artisan notifications:table 2.php artisan migrate  跟踪用户有多少未读通知(给user表加字段)  1.php artisan make:migration add_notification_count_to_users_table --table=users 2.//database/migrations/{$timestamp}_add_notification_count_to_users_table.php public function up() { Schema::table(&amp;#39;users&amp;#39;, function (Blueprint $table) { $table-&amp;gt;integer(&amp;#39;notification_count&amp;#39;)-&amp;gt;unsigned()-&amp;gt;default(0); }); } public function down() { Schema::table(&amp;#39;users&amp;#39;, function (Blueprint $table) { $table-&amp;gt;dropColumn(&amp;#39;notification_count&amp;#39;); }); } 3.</description>
 			<content type="html"><![CDATA[<h3 id="导语">导语</h3>
 <p>Laravel 自带了一套极具扩展性的消息通知系统，尤其还支持多种通知频道(这里我用的是数据库通知频道)，我们将利用此套系统来向用户发送消息提醒。</p>
 <p>最终效果如下图所示：</p>
-<p><img src="https://zam9.com/image/uiatBsEsnJ6oCqB4FOfyDLpRqapJ8RWhhhSnB0yl.png" alt="表单效果">{.figure}</p>
-<p><img src="https://zam9.com/image/O56lkktHkzTlJyMz0XbQEysRvtmxZpttXmqYe7iM.png" alt="消息列表效果">{.figure}</p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190315-laravel-notify01.png" alt="表单效果"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190315-laravel-notify02.png" alt="消息列表效果"></p>
 <h3 id="开始">开始</h3>
 <h4 id="准备基本的功能开发">准备基本的功能开发</h4>
 <p>一个用户给另外一个用户发送消息，将信息存入数据库表（<code>notify_tests</code>表）</p>
@@ -4780,8 +4778,8 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">response</span><span class="p">(</span><span class="nx">json_encode</span><span class="p">([</span><span class="s1">&#39;status&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;msg&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;ok&#39;</span><span class="p">,</span><span class="s1">&#39;data&#39;</span><span class="o">=&gt;</span><span class="nv">$posts</span><span class="p">]));</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>5、效果展示：</p>
-<p><img src="https://zam9.com/image/ZiW1tPh2uzU8bDUZgMerKcIiBU0rmH17Q28s9vKU.png" alt="搜索前效果图">{.figure}</p>
-<p><img src="https://zam9.com/image/ioZC2hEdhqS3fR63GxwGaYwo5tBGWV2c9skoLsWz.png" alt="搜索后效果图">{.figure}</p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190308-laravel-elasticsearch01.png" alt="搜索前效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190308-laravel-elasticsearch02.png" alt="搜索后效果图"></p>
 <h3 id="几个基本的概念">几个基本的概念</h3>
 <table>
 <thead>
@@ -5171,16 +5169,16 @@ composer create-project --prefer-dist laravel/laravel passport 2、安装 Larave
 <p>1、注册</p>
 <p><code>Headers</code> ：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span> <span class="o">:</span> <span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
-</span></span></code></pre></div><p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/passport01.jpg" alt="注册"></p>
+</span></span></code></pre></div><p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190125-laravel-passport01.jpg" alt="注册"></p>
 <p>2、登录</p>
 <p><code>Headers</code> ：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">Content</span><span class="o">-</span><span class="nx">Type</span> <span class="o">:</span> <span class="nx">application</span><span class="o">/</span><span class="nx">json</span>
-</span></span></code></pre></div><p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/passport02.jpg" alt="登录"></p>
+</span></span></code></pre></div><p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190125-laravel-passport02.jpg" alt="登录"></p>
 <p>3、退出</p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/passport03.jpg" alt="退出"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190125-laravel-passport03.jpg" alt="退出"></p>
 <p>注意：<code>Bearer</code> 和 <code>token</code>之间有个空格哦！！！！</p>
 <p>4、用户信息</p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/passport04.jpg" alt="用户信息"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190125-laravel-passport04.jpg" alt="用户信息"></p>
 <p>注意：<code>Bearer</code> 和 <code>token</code> 之间有个空格哦！！！！</p>
 <p>参考：<a href="https://laravel-china.org/docs/laravel/5.7/passport/2270">https://laravel-china.org/docs/laravel/5.7/passport/2270</a></p>
 ]]></content>
@@ -5745,8 +5743,8 @@ Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php�
 <p>文档地址：<a href="https://cloud.tencent.com/document/product/436/11365">https://cloud.tencent.com/document/product/436/11365</a></p>
 <h3 id="上传前准备">上传前准备</h3>
 <p>快速入门流程图：</p>
-<p><img src="https://mc.qcloudimg.com/static/img/520720197375cee1cc86ad0ebc38ffe2/image.png" alt="效果图"></p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_1.jpg" alt="效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180806-tencent-cos01.png" alt="流程"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180806-tencent-cos02.jpg" alt="存储桶列表"></p>
 <p>在注册完并创建好存储桶后，需要拿到相关配置信息，<code>APPID</code>，<code>SecretId</code>，<code>SecretKey</code>（密钥管理），在存储桶下创建一个test文件夹，本次测试图片全部上传到该文件夹下，当然你也可以不创建，存储桶检测到没有该文件夹，会自动创建。本次记录只是走到了上传对象 。</p>
 <h3 id="测试过程">测试过程</h3>
 <p>1、<code>composer</code>腾讯云COS对象存储 V5包</p>
@@ -5810,8 +5808,8 @@ COSV5_SCHEME=https
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$result</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="nx">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span><span class="s1">&#39;上传成功&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="结果">结果</h3>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_3.jpg" alt="效果图"></p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_2.jpg" alt="效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180806-tencent-cos03.jpg" alt="文件列表"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180806-tencent-cos04.jpg" alt="效果图"></p>
 <p><strong>只是做了简单的对象上传，后面的包括下载对象，上传对象，删除存储桶等并没有做！！！</strong></p>
 ]]></content>
 		</item>
@@ -5840,11 +5838,11 @@ composer require &amp;#34;overtrue/easy-sms&amp;#34; 3、由于该组件还没�
 </code></pre><ul>
 <li>短信签名图（注意这里的签名内容须为 <code>ICP备案的负责人名称</code>+<code>网站名称</code>）：</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/sms_sing.jpg" alt="签名"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180805-tencent-sms01.jpg" alt="签名"></p>
 <ul>
 <li>短信正文即模板图：</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/sms_temp.jpg" alt=""></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180805-tencent-sms02.jpg" alt="模板"></p>
 <h3 id="下面记录一下测试过程">下面记录一下测试过程</h3>
 <p>1、<code>composer</code>了一个全新的<code>laravel</code>框架5.7：</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer create-project --prefer-dist laravel/laravel <span class="nb">test</span>
@@ -5939,7 +5937,7 @@ composer require &amp;#34;overtrue/easy-sms&amp;#34; 3、由于该组件还没�
 <ul>
 <li>发送短信表单页面</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/sms_form.jpg" alt="短信表单"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180805-tencent-sms03.jpg" alt="短信表单"></p>
 <ul>
 <li><code>TestController</code>拿到<code>phone</code>，然后去调用腾讯云短信服务，像该手机号发送短信验证码</li>
 </ul>
@@ -5991,11 +5989,11 @@ composer require &amp;#34;overtrue/easy-sms&amp;#34; 3、由于该组件还没�
 <ul>
 <li>手机收到的效果：</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/sms_phone.jpg" alt="手机短信"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180805-tencent-sms04.jpg" alt="效果"></p>
 <ul>
 <li>简单登录后：</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/sms_success.jpg" alt="手机短信"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180805-tencent-sms05.jpg" alt="首页"></p>
 <!-- raw HTML omitted -->
 <p><strong>只是做了测试短信的发送是否成功，后续的登录验证并没有做！！！！</strong></p>
 ]]></content>
@@ -6099,7 +6097,7 @@ factory 工厂文件会使用 faker 来自动生成字段的内容，默认情�
 			<guid>https://blog.zkilm.cn/posts/2018/20180710-git-study/</guid>
 			<description>Git基础命令🧐  查看本地分支  git branch  查看本地分支与远程分支  git branch -a  创建分支  git branch [分支名]  创建分支并切换到这个分支下  git checkout -b [分支名]  从远程分支上创建某个分支并切换到这个分支下  // 示例: git checkout -b test origin/test git checkout -b 分支名/[远程分支名]  删除一个已被终止的分支  git branch -d &amp;lt;branch_name&amp;gt;  删除一个正打开的分支  git branch -D &amp;lt;branch_name&amp;gt;  /恢复被删除的分支  git branch &amp;lt;branch_name&amp;gt; &amp;lt;hash_val&amp;gt;  合并某分支到当前分支  git merge [分支名]  推送本地某个分支到远程某个分支  // 示例: git push 远程主机名:[远程分支名] git push origin master:master  拉取远程某个分支到本地某个分支  // 示例: git pull 远程主机名:[本地分支名] git pull origin master:master  储藏当前工作状态（可多次）新建的文件须先add再stash  git stash //简写 git stash save &amp;#34;message&amp;#34; //备注  查看当前储藏  git stash list  恢复某一储藏版本  // 示例: git stash apply stash@{0} git stash apply [stash@{0}]  删除某一储藏版本  // 示例: git stash drop stash@{0} git stash drop [stash@{0}]  恢复最新的储藏，并把最新的储藏删掉  git stash pop 待续 .</description>
 			<content type="html"><![CDATA[<h3 id="git基础命令">Git基础命令🧐</h3>
-<p><img src="https://qiniu.zkilm.cn/git.jpg" alt="Git基础流程"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/git_workflow.jpg" alt="Git基础流程"></p>
 <ul>
 <li>查看本地分支</li>
 </ul>
@@ -8385,22 +8383,22 @@ PHPStorm拥有FTP功能，因此无需下载其他FTP软件
 <ul>
 <li>找到头部的工具栏，点击 <code>Tool（工具）</code>，选择 <code>Deployment</code>下的 <code>Configuration...</code></li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/phpstorm01.jpg" alt="图一"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2017/20170611-phpstorm-ftp01.jpg" alt="图一"></p>
 <h3 id="第二步">第二步</h3>
 <ul>
 <li>点击左上角的 <code>+</code> 号，添加一个 <code>web server</code>，在弹窗中填写相关信息</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/phpstorm02.jpg" alt="图二"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2017/20170611-phpstorm-ftp02.jpg" alt="图二"></p>
 <h3 id="第三步">第三步</h3>
 <ul>
 <li>填写 <code>Host</code>、<code>Port</code>、<code>User Name</code>、<code>Password</code> 等信息，与服务器链接</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/phpstorm03.jpg" alt="图三"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2017/20170611-phpstorm-ftp03.jpg" alt="图三"></p>
 <h3 id="第四步">第四步</h3>
 <ul>
 <li>切换到 <code>Mappings</code>，选择根路径</li>
 </ul>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/phpstorm04.jpg" alt="图四"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2017/20170611-phpstorm-ftp04.jpg" alt="图四"></p>
 ]]></content>
 		</item>
 		
@@ -9430,7 +9428,7 @@ mysqldump--skip-triggersdbname1-uroot-p&amp;gt;dbname.sql把导出的数据导�
 			
 			<guid>https://blog.zkilm.cn/posts/2016/20160305-php-basic/</guid>
 			<description>有关输出的函数 print() //类似于echo输出提供的内容，返回1 print_r() //一般用于打印数组,不打印类型 var_dump() //打印数据的值,还有类型 有关时间的函数 date() //显示日期时间 举例：date(“Y-m-dH:i:s”) time() //时间戳（秒数） microtime() //返回时间戳和微秒数 strtotime() //将日期时间的字符串解析成时间戳 数学相关函数 max($v1,$v2,$v3…) //求最大值 min($v1,$v2,$v3…) //求最小值 rand() //随机数 mt_rand() //生成更好的随机数 round(变量 [,N]) //保留n位小 ceil() //向上取整 floor() //向下取整 pow(x,y) //求xY abs() //绝对值 sqrt() //求平方根 有关函数的函数 function_exists(函数名) //判断函数是否存在 func_get_arg(下标) //获取指定下标对应的参数 func_get_args() //在自定义函数中获取所有的参数（返回值是一个数组） func_num_args() //获取当前自定义函数的参数数量 字符串相关的函数 strlen() //得到字符串的长度 mb_strlen($字符串变量名 ，字符编码) implode(连接方式,数组) //连接成一个字符串 explode(分割字符,目标字符串) //变成数组 str_split(字符串,字符长度) //按照指定长度拆分字符串得到数组 trim(字符串[,指定字符]) //默认是用来去除字符串两边的空格 ltrim() //去除左边的 rtrim() //去除右边的 substr(字符串,起始位置从0开始[,长度]) strstr(字符串,匹配字符) //从指定位置开始，截取到最后（可以用来去文件后缀名） strtolower() //全部小写 strtoupper() //全部大写 ucfirst() //首字母大写 strpos(字符串，匹配字符) //判断字符在目标字符串中出现的位置（首次） strrpos(字符串，匹配字符) str_replace(匹配目标,替换的内容,字符串本身) printf/sprintf(输出字符串有占位符,顺序占位内容.</description>
-			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/wallhaven-g79zzq.png" alt="配图"></p>
+			<content type="html"><![CDATA[<p><img src="https://qiniu.zkilm.cn/blog/posts/2016/php02.png" alt="封面"></p>
 <h3 id="有关输出的函数">有关输出的函数</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">print</span><span class="p">()</span> <span class="c1">//类似于echo输出提供的内容，返回1
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">print_r</span><span class="p">()</span>  <span class="c1">//一般用于打印数组,不打印类型

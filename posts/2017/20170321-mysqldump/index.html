@@ -25,7 +25,7 @@ mysqldump-R-ndtdbname-uroot-p&gt;dbname.sql2 只导出事件
 mysqldump-E-ndtdbname-uroot-p&gt;dbname.sql3 不导出触发器（触发器是默认导出的–triggers，使用–skip-triggers屏蔽导出触发器）
 mysqldump--skip-triggersdbname1-uroot-p&gt;dbname.sql把导出的数据导入到数据库 &gt;mysql-uroot-p&gt;usedbname;&gt;sourcedbname.sql总结一下 -d 结构(--no-data:不导出任何数据，只导出数据库表结构) -t 数据(--no-create-info:只导出数据，而不添加CREATE TABLE 语句) -n (--no-create-db:只导出数据，而不添加CREATE DATABASE 语句） -R (--routines:导出存储过程以及自定义函数) -E (--events:导出事件) --triggers (默认导出触发器，使用--skip-triggers屏蔽导出) -B (--databases:导出数据库列表，单个库时可省略） --tables 表列表（单个表时可省略） ①同时导出结构以及数据时可同时省略-d和-t ②同时 不 导出结构和数据可使用-ntd ③只导出存储过程和函数可使用-R -ntd ④导出所有(结构&amp;数据&amp;存储过程&amp;函数&amp;事件&amp;触发器)使用-R -E(相当于①，省略了-d -t;触发器默认导出) ⑤只导出结构&amp;函数&amp;事件&amp;触发器使用 -R -E -d "><meta itemprop="datePublished" content="2017-03-21T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2017-03-21T00:00:00+00:00" />
-<meta itemprop="wordCount" content="72"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="72"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="MySQL," /><meta property="og:title" content="mysqldump导出数据库各参数说明" />
 <meta property="og:description" content=" mysqldump是mysql用于转存储数据库的实用程序。它主要产生一个SQL脚本，其中包含从头重新创建数据库所必需的命令CREATE TABLE INSERT等。
  下面我们详细介绍一下mysqldump导出的各种实例： 👇👇👇👇👇👇
@@ -46,12 +46,12 @@ mysqldump-R-ndtdbname-uroot-p&gt;dbname.sql2 只导出事件
 mysqldump-E-ndtdbname-uroot-p&gt;dbname.sql3 不导出触发器（触发器是默认导出的–triggers，使用–skip-triggers屏蔽导出触发器）
 mysqldump--skip-triggersdbname1-uroot-p&gt;dbname.sql把导出的数据导入到数据库 &gt;mysql-uroot-p&gt;usedbname;&gt;sourcedbname.sql总结一下 -d 结构(--no-data:不导出任何数据，只导出数据库表结构) -t 数据(--no-create-info:只导出数据，而不添加CREATE TABLE 语句) -n (--no-create-db:只导出数据，而不添加CREATE DATABASE 语句） -R (--routines:导出存储过程以及自定义函数) -E (--events:导出事件) --triggers (默认导出触发器，使用--skip-triggers屏蔽导出) -B (--databases:导出数据库列表，单个库时可省略） --tables 表列表（单个表时可省略） ①同时导出结构以及数据时可同时省略-d和-t ②同时 不 导出结构和数据可使用-ntd ③只导出存储过程和函数可使用-R -ntd ④导出所有(结构&amp;数据&amp;存储过程&amp;函数&amp;事件&amp;触发器)使用-R -E(相当于①，省略了-d -t;触发器默认导出) ⑤只导出结构&amp;函数&amp;事件&amp;触发器使用 -R -E -d " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2017/20170321-mysqldump/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2017/20170321-mysqldump/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-03-21T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-03-21T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="mysqldump导出数据库各参数说明"/>
 <meta name="twitter:description" content=" mysqldump是mysql用于转存储数据库的实用程序。它主要产生一个SQL脚本，其中包含从头重新创建数据库所必需的命令CREATE TABLE INSERT等。

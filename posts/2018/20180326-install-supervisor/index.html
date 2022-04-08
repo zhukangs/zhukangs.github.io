@@ -11,19 +11,19 @@
  既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor
 安装 先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor # yum install python-setuptools # easy_install supervisor 配置文件 生成配置文件，并建立相应目录，管理 supervisor 启动进程 # echo_supervisord_conf &gt; /etc/supervisord.conf # mkdir -p /etc/supervisor/conf.d/ 1 2 编辑 /etc/supervisord.conf，修改 [include] 区块内容： [include] files = /etc/supervisor/conf.d/*.conf 1 2 这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件 自动启动 在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs # wget -O /usr/lib/systemd/system/supervisord.service https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs 将 supervisord 服务设为自启动 # systemctl enable supervisord.service 输入 supervisorctl 命令可以进入 supervisor 控制台 设置 Laravel 队列 [program:laravel-worker] process_name=%(program_name)s_%(process_num)02d command=/usr/local/php/bin/php /data/wwwroot/app."><meta itemprop="datePublished" content="2018-03-26T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2018-03-26T00:00:00+00:00" />
-<meta itemprop="wordCount" content="197"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="197"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Supervisor," /><meta property="og:title" content="Supervisor配置,每次都会踩好多坑" />
 <meta property="og:description" content="基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！
  Supervisor（http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
  既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor
 安装 先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor # yum install python-setuptools # easy_install supervisor 配置文件 生成配置文件，并建立相应目录，管理 supervisor 启动进程 # echo_supervisord_conf &gt; /etc/supervisord.conf # mkdir -p /etc/supervisor/conf.d/ 1 2 编辑 /etc/supervisord.conf，修改 [include] 区块内容： [include] files = /etc/supervisor/conf.d/*.conf 1 2 这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件 自动启动 在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs # wget -O /usr/lib/systemd/system/supervisord.service https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs 将 supervisord 服务设为自启动 # systemctl enable supervisord.service 输入 supervisorctl 命令可以进入 supervisor 控制台 设置 Laravel 队列 [program:laravel-worker] process_name=%(program_name)s_%(process_num)02d command=/usr/local/php/bin/php /data/wwwroot/app." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180326-install-supervisor/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180326-install-supervisor/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-03-26T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-03-26T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Supervisor配置,每次都会踩好多坑"/>
 <meta name="twitter:description" content="基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！

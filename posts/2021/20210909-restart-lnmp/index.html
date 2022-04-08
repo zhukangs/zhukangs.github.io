@@ -11,19 +11,19 @@ PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判�
 # ! /bin/sh ###查看fpm服务是否运行 phpfpm_procnum=`ps -ef|grep &#34;php-fpm&#34;|grep -v grep|wc -l` if [ $phpfpm_procnum -eq 0 ] then echo &#34;restart php-fpm...&#34; systemctl restart php-fpm &gt;&gt; /var/log/listen_service_start.log 2&gt;&amp;1 fi ###查看nginx服务是否运行 nginx_procnum=`ps -ef|grep &#34;nginx&#34;|grep -v grep|wc -l` if [ $nginx_procnum -eq 0 ] then echo &#34;restart nginx...&#34; systemctl restart nginx &gt;&gt; /var/log/listen_service_start.log 2&gt;&amp;1 fi 查看服务器响应 通过 curl 服务器地址，根据响应信息判断是否出现异常，脚本 nginx404.php 如下：
 &lt;?php $url = &#39;https://test.com&#39;; $cmd = &#39;systemctl restart php-fpm&#39;; for ($i = 0; $i &lt; 5; $i&#43;&#43;) { $exec = &#34;curl connect-timeout 3 -I $url2&gt;/dev/null&#34;; $res = shell_exec($exec); if (stripos($res, &#39;404 Not Found&#39;) !"><meta itemprop="datePublished" content="2021-09-09T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-09T00:00:00+00:00" />
-<meta itemprop="wordCount" content="195"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="195"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="LNMP,Supervisor," /><meta property="og:title" content="监控服务器异常与重启" />
 <meta property="og:description" content="在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。
 PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判断服务器是否正常运行，脚本 service-restart.sh 如下：
 # ! /bin/sh ###查看fpm服务是否运行 phpfpm_procnum=`ps -ef|grep &#34;php-fpm&#34;|grep -v grep|wc -l` if [ $phpfpm_procnum -eq 0 ] then echo &#34;restart php-fpm...&#34; systemctl restart php-fpm &gt;&gt; /var/log/listen_service_start.log 2&gt;&amp;1 fi ###查看nginx服务是否运行 nginx_procnum=`ps -ef|grep &#34;nginx&#34;|grep -v grep|wc -l` if [ $nginx_procnum -eq 0 ] then echo &#34;restart nginx...&#34; systemctl restart nginx &gt;&gt; /var/log/listen_service_start.log 2&gt;&amp;1 fi 查看服务器响应 通过 curl 服务器地址，根据响应信息判断是否出现异常，脚本 nginx404.php 如下：
 &lt;?php $url = &#39;https://test.com&#39;; $cmd = &#39;systemctl restart php-fpm&#39;; for ($i = 0; $i &lt; 5; $i&#43;&#43;) { $exec = &#34;curl connect-timeout 3 -I $url2&gt;/dev/null&#34;; $res = shell_exec($exec); if (stripos($res, &#39;404 Not Found&#39;) !" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2021/20210909-restart-lnmp/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2021/20210909-restart-lnmp/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-09-09T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-09-09T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="监控服务器异常与重启"/>
 <meta name="twitter:description" content="在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。

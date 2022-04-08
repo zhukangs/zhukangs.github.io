@@ -10,18 +10,18 @@
 # Laravel &lt; 5.8 composer require &#34;overtrue/laravel-wechat:~4.0&#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
  创建数据表  php artisan make:model Wechat -m $table-&gt;increments(&#39;id&#39;); $table-&gt;string(&#39;aid&#39;)-&gt;nullable(); $table-&gt;string(&#39;wechat_app_id&#39;)-&gt;nullable(); //微信公众号设置参数 $table-&gt;string(&#39;wechat_secret&#39;)-&gt;nullable(); $table-&gt;string(&#39;wechat_token&#39;)-&gt;nullable(); $table-&gt;string(&#39;wechat_aes_key&#39;)-&gt;nullable(); $table-&gt;string(&#39;pay_mch_id&#39;)-&gt;nullable(); //微信支付设置参数 $table-&gt;string(&#39;pay_api_key&#39;)-&gt;nullable(); $table-&gt;string(&#39;pay_cert_path&#39;)-&gt;nullable(); $table-&gt;string(&#39;pay_key_path&#39;)-&gt;nullable(); $table-&gt;string(&#39;op_app_id&#39;)-&gt;nullable(); //微信开放平台设置参数 $table-&gt;string(&#39;op_secret&#39;)-&gt;nullable(); $table-&gt;string(&#39;op_token&#39;)-&gt;nullable(); $table-&gt;string(&#39;op_aes_key&#39;)-&gt;nullable(); $table-&gt;string(&#39;work_corp_id&#39;)-&gt;nullable(); //微信企业号设置参数 $table-&gt;string(&#39;work_agent_id&#39;)-&gt;nullable(); $table-&gt;string(&#39;work_secret&#39;)-&gt;nullable(); $table-&gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54."><meta itemprop="datePublished" content="2019-11-27T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-11-27T00:00:00+00:00" />
-<meta itemprop="wordCount" content="697"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="697"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel,Wechat," /><meta property="og:title" content="Laravel的微信公众号模板消息推送📨" />
 <meta property="og:description" content="安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &#34;5.7.*&#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
 # Laravel &lt; 5.8 composer require &#34;overtrue/laravel-wechat:~4.0&#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
  创建数据表  php artisan make:model Wechat -m $table-&gt;increments(&#39;id&#39;); $table-&gt;string(&#39;aid&#39;)-&gt;nullable(); $table-&gt;string(&#39;wechat_app_id&#39;)-&gt;nullable(); //微信公众号设置参数 $table-&gt;string(&#39;wechat_secret&#39;)-&gt;nullable(); $table-&gt;string(&#39;wechat_token&#39;)-&gt;nullable(); $table-&gt;string(&#39;wechat_aes_key&#39;)-&gt;nullable(); $table-&gt;string(&#39;pay_mch_id&#39;)-&gt;nullable(); //微信支付设置参数 $table-&gt;string(&#39;pay_api_key&#39;)-&gt;nullable(); $table-&gt;string(&#39;pay_cert_path&#39;)-&gt;nullable(); $table-&gt;string(&#39;pay_key_path&#39;)-&gt;nullable(); $table-&gt;string(&#39;op_app_id&#39;)-&gt;nullable(); //微信开放平台设置参数 $table-&gt;string(&#39;op_secret&#39;)-&gt;nullable(); $table-&gt;string(&#39;op_token&#39;)-&gt;nullable(); $table-&gt;string(&#39;op_aes_key&#39;)-&gt;nullable(); $table-&gt;string(&#39;work_corp_id&#39;)-&gt;nullable(); //微信企业号设置参数 $table-&gt;string(&#39;work_agent_id&#39;)-&gt;nullable(); $table-&gt;string(&#39;work_secret&#39;)-&gt;nullable(); $table-&gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20191127-wechat-pushmsg/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20191127-wechat-pushmsg/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-11-27T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-11-27T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Laravel的微信公众号模板消息推送📨"/>
 <meta name="twitter:description" content="安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &#34;5.7.*&#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
@@ -396,9 +396,9 @@
 </span></span><span class="line"><span class="cl"><span class="c1">//配置路由(web.php):
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">any</span><span class="p">(</span><span class="s1">&#39;/wechat/{account}&#39;</span><span class="p">,</span> <span class="s1">&#39;Api\WeChatController@serve&#39;</span><span class="p">);</span>       
 </span></span></code></pre></div><h3 id="测试平台">测试平台<a href="#测试平台" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/wxgzhpz.jpg" alt="测试平台"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20191127-wechat-pushmsg01.jpg" alt="测试平台"></p>
 <h3 id="增加消息模板">增加消息模板<a href="#增加消息模板" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/mbxxsz.jpg" alt="增加消息模板"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20191127-wechat-pushmsg02.jpg" alt="增加消息模板"></p>
 <h3 id="新建模板消息控制器">新建模板消息控制器<a href="#新建模板消息控制器" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan make:controller Api/WechatTemplateMsgController
 </span></span></code></pre></div><p>代码如下：</p>
@@ -446,9 +446,9 @@
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;wechat/send_template_msg&#39;</span><span class="p">,</span> <span class="s1">&#39;WechatTemplateMsgController@sendTemplateMsg&#39;</span><span class="p">);</span>
 </span></span></code></pre></div><h4 id="测试">测试<a href="#测试" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <p>Postman调用发送模板消息接口：
-<img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/postman_mb.jpg" alt="Postman调用发送模板消息接口"></p>
+<img src="https://qiniu.zkilm.cn/blog/posts/2019/20191127-wechat-pushmsg03.jpg" alt="Postman调用发送模板消息接口"></p>
 <p>效果图：
-<img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/mbxgt.jpg" alt="效果图"></p>
+<img src="https://qiniu.zkilm.cn/blog/posts/2019/20191127-wechat-pushmsg04.jpg" alt="效果图"></p>
 
 			</div>
 

@@ -15,7 +15,7 @@ php artisan make:mail EmailSend --markdown=email.template 在生成的EmailSend.
 public function build() { return $this-&gt;markdown(&#39;email.template&#39;); } 既然是发送邮件，当然需要修改.env中关于邮箱的配置信息了：
 MAIL_DRIVER=smtp MAIL_HOST=smtp.qq.com MAIL_PORT=587 MAIL_USERNAME=xxxxxxx@qq.com//发件人邮箱 MAIL_FROM_ADDRESS=xxxxxxx@qq.com//这个需要自己加上，默认没有 MAIL_PASSWORD=授权码 MAIL_ENCRYPTION=tls "><meta itemprop="datePublished" content="2018-04-02T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2018-04-02T00:00:00+00:00" />
-<meta itemprop="wordCount" content="50"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="50"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="模型观察者触发邮件通知" />
 <meta property="og:description" content="模型观察者(observer)触发邮件通知
 思考 需要思考的是，当我们需要发送一个邮件通知的时候，何时触发这个通知呢？
@@ -26,12 +26,12 @@ php artisan make:mail EmailSend --markdown=email.template 在生成的EmailSend.
 public function build() { return $this-&gt;markdown(&#39;email.template&#39;); } 既然是发送邮件，当然需要修改.env中关于邮箱的配置信息了：
 MAIL_DRIVER=smtp MAIL_HOST=smtp.qq.com MAIL_PORT=587 MAIL_USERNAME=xxxxxxx@qq.com//发件人邮箱 MAIL_FROM_ADDRESS=xxxxxxx@qq.com//这个需要自己加上，默认没有 MAIL_PASSWORD=授权码 MAIL_ENCRYPTION=tls " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180402-observer-email/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180402-observer-email/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-04-02T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-04-02T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="模型观察者触发邮件通知"/>
 <meta name="twitter:description" content="模型观察者(observer)触发邮件通知

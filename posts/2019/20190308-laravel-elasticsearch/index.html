@@ -14,7 +14,7 @@ cd test 2、安装Laravel scout 全文搜索包
 composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改：
  /vendor/laravel/scout/src/Searchable.php 有一个getScoutModelsByIds()方法的这段代码注释掉就可以了。  if ($builder-&gt;queryCallback) { call_user_func($builder-&gt;queryCallback, $query); }   将laravel/scout 5.0.0版本换成 laravel/scout 5.0.3即可解决Undefined property: Laravel\Scout\Builder::$queryCallback报错问题。不用手动修改源码。"><meta itemprop="datePublished" content="2019-03-08T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-03-08T00:00:00+00:00" />
-<meta itemprop="wordCount" content="285"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="283"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel,ElasticSearch," /><meta property="og:title" content="使用Elasticsearch做引擎，Scout全文搜索🔍" />
 <meta property="og:description" content="ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便
  准备 1、安装测试Laravel5.5用于测试
@@ -24,12 +24,12 @@ cd test 2、安装Laravel scout 全文搜索包
 composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改：
  /vendor/laravel/scout/src/Searchable.php 有一个getScoutModelsByIds()方法的这段代码注释掉就可以了。  if ($builder-&gt;queryCallback) { call_user_func($builder-&gt;queryCallback, $query); }   将laravel/scout 5.0.0版本换成 laravel/scout 5.0.3即可解决Undefined property: Laravel\Scout\Builder::$queryCallback报错问题。不用手动修改源码。" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190308-laravel-elasticsearch/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190308-laravel-elasticsearch/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-03-08T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-03-08T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="使用Elasticsearch做引擎，Scout全文搜索🔍"/>
 <meta name="twitter:description" content="ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便
@@ -239,8 +239,8 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 </span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">response</span><span class="p">(</span><span class="nx">json_encode</span><span class="p">([</span><span class="s1">&#39;status&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span><span class="s1">&#39;msg&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;ok&#39;</span><span class="p">,</span><span class="s1">&#39;data&#39;</span><span class="o">=&gt;</span><span class="nv">$posts</span><span class="p">]));</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><p>5、效果展示：</p>
-<p><img src="https://zam9.com/image/ZiW1tPh2uzU8bDUZgMerKcIiBU0rmH17Q28s9vKU.png" alt="搜索前效果图">{.figure}</p>
-<p><img src="https://zam9.com/image/ioZC2hEdhqS3fR63GxwGaYwo5tBGWV2c9skoLsWz.png" alt="搜索后效果图">{.figure}</p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190308-laravel-elasticsearch01.png" alt="搜索前效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190308-laravel-elasticsearch02.png" alt="搜索后效果图"></p>
 <h3 id="几个基本的概念">几个基本的概念<a href="#几个基本的概念" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <table>
 <thead>
@@ -302,7 +302,7 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/laravel">Laravel</a></span><span class="tag"><a href="https://blog.zkilm.cn/tags/elasticsearch">ElasticSearch</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>285 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>283 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>8036-03-08 00:00 &#43;0000</p>
 			</footer>
 		</article>

@@ -8,32 +8,26 @@
 <meta itemprop="name" content="Notification之红标识提醒🚨‍">
 <meta itemprop="description" content="导语 Laravel 自带了一套极具扩展性的消息通知系统，尤其还支持多种通知频道(这里我用的是数据库通知频道)，我们将利用此套系统来向用户发送消息提醒。
 最终效果如下图所示：
-{.figure}
-{.figure}
 开始 准备基本的功能开发 一个用户给另外一个用户发送消息，将信息存入数据库表（notify_tests表）
    id msg send_id rev_id updated_at created_at     1 啊哈哈	哈 1 2 2019-03-15 02:34:13 2019-03-15 02:34:13    准备数据  通知数据库,存储所有通知信息  1.php artisan notifications:table 2.php artisan migrate  跟踪用户有多少未读通知(给user表加字段)  1.php artisan make:migration add_notification_count_to_users_table --table=users 2.//database/migrations/{$timestamp}_add_notification_count_to_users_table.php public function up() { Schema::table(&#39;users&#39;, function (Blueprint $table) { $table-&gt;integer(&#39;notification_count&#39;)-&gt;unsigned()-&gt;default(0); }); } public function down() { Schema::table(&#39;users&#39;, function (Blueprint $table) { $table-&gt;dropColumn(&#39;notification_count&#39;); }); } 3."><meta itemprop="datePublished" content="2019-03-15T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-03-15T00:00:00+00:00" />
-<meta itemprop="wordCount" content="314"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="312"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Notification之红标识提醒🚨‍" />
 <meta property="og:description" content="导语 Laravel 自带了一套极具扩展性的消息通知系统，尤其还支持多种通知频道(这里我用的是数据库通知频道)，我们将利用此套系统来向用户发送消息提醒。
 最终效果如下图所示：
-{.figure}
-{.figure}
 开始 准备基本的功能开发 一个用户给另外一个用户发送消息，将信息存入数据库表（notify_tests表）
    id msg send_id rev_id updated_at created_at     1 啊哈哈	哈 1 2 2019-03-15 02:34:13 2019-03-15 02:34:13    准备数据  通知数据库,存储所有通知信息  1.php artisan notifications:table 2.php artisan migrate  跟踪用户有多少未读通知(给user表加字段)  1.php artisan make:migration add_notification_count_to_users_table --table=users 2.//database/migrations/{$timestamp}_add_notification_count_to_users_table.php public function up() { Schema::table(&#39;users&#39;, function (Blueprint $table) { $table-&gt;integer(&#39;notification_count&#39;)-&gt;unsigned()-&gt;default(0); }); } public function down() { Schema::table(&#39;users&#39;, function (Blueprint $table) { $table-&gt;dropColumn(&#39;notification_count&#39;); }); } 3." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190315-laravel-notify/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190315-laravel-notify/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-03-15T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-03-15T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Notification之红标识提醒🚨‍"/>
 <meta name="twitter:description" content="导语 Laravel 自带了一套极具扩展性的消息通知系统，尤其还支持多种通知频道(这里我用的是数据库通知频道)，我们将利用此套系统来向用户发送消息提醒。
 最终效果如下图所示：
-{.figure}
-{.figure}
 开始 准备基本的功能开发 一个用户给另外一个用户发送消息，将信息存入数据库表（notify_tests表）
    id msg send_id rev_id updated_at created_at     1 啊哈哈	哈 1 2 2019-03-15 02:34:13 2019-03-15 02:34:13    准备数据  通知数据库,存储所有通知信息  1.php artisan notifications:table 2.php artisan migrate  跟踪用户有多少未读通知(给user表加字段)  1.php artisan make:migration add_notification_count_to_users_table --table=users 2.//database/migrations/{$timestamp}_add_notification_count_to_users_table.php public function up() { Schema::table(&#39;users&#39;, function (Blueprint $table) { $table-&gt;integer(&#39;notification_count&#39;)-&gt;unsigned()-&gt;default(0); }); } public function down() { Schema::table(&#39;users&#39;, function (Blueprint $table) { $table-&gt;dropColumn(&#39;notification_count&#39;); }); } 3."/>
 
@@ -97,8 +91,8 @@
 				<h3 id="导语">导语<a href="#导语" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>Laravel 自带了一套极具扩展性的消息通知系统，尤其还支持多种通知频道(这里我用的是数据库通知频道)，我们将利用此套系统来向用户发送消息提醒。</p>
 <p>最终效果如下图所示：</p>
-<p><img src="https://zam9.com/image/uiatBsEsnJ6oCqB4FOfyDLpRqapJ8RWhhhSnB0yl.png" alt="表单效果">{.figure}</p>
-<p><img src="https://zam9.com/image/O56lkktHkzTlJyMz0XbQEysRvtmxZpttXmqYe7iM.png" alt="消息列表效果">{.figure}</p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190315-laravel-notify01.png" alt="表单效果"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190315-laravel-notify02.png" alt="消息列表效果"></p>
 <h3 id="开始">开始<a href="#开始" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <h4 id="准备基本的功能开发">准备基本的功能开发<a href="#准备基本的功能开发" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <p>一个用户给另外一个用户发送消息，将信息存入数据库表（<code>notify_tests</code>表）</p>
@@ -322,7 +316,7 @@
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/laravel">Laravel</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>314 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>312 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>15036-03-15 00:00 &#43;0000</p>
 			</footer>
 		</article>

@@ -17,7 +17,7 @@ composer require freyo/flysystem-qcloud-cos-v5 2、在config/app.php的providers
 Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php中的disks里下添加
 &#39;disks&#39;=&gt;[ // ...  &#39;cosv5&#39; =&gt; [ &#39;driver&#39; =&gt; &#39;cosv5&#39;, &#39;region&#39; =&gt; env(&#39;COSV5_REGION&#39;, &#39;ap-guangzhou&#39;), &#39;credentials&#39; =&gt; [ &#39;appId&#39; =&gt; env(&#39;COSV5_APP_ID&#39;), &#39;secretId&#39; =&gt; env(&#39;COSV5_SECRET_ID&#39;), &#39;secretKey&#39; =&gt; env(&#39;COSV5_SECRET_KEY&#39;), ], &#39;timeout&#39; =&gt; env(&#39;COSV5_TIMEOUT&#39;, 60), &#39;connect_timeout&#39; =&gt; env(&#39;COSV5_CONNECT_TIMEOUT&#39;, 60), &#39;bucket&#39; =&gt; env(&#39;COSV5_BUCKET&#39;), &#39;cdn&#39; =&gt; env(&#39;COSV5_CDN&#39;), &#39;scheme&#39; =&gt; env(&#39;COSV5_SCHEME&#39;, &#39;https&#39;), ], ], 4、在."><meta itemprop="datePublished" content="2018-08-06T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2018-08-06T00:00:00+00:00" />
-<meta itemprop="wordCount" content="134"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="134"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Cos," /><meta property="og:title" content="腾讯云存储的简单使用🚗" />
 <meta property="og:description" content="导语 将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。
 对象存储 COS 简介
@@ -30,12 +30,12 @@ composer require freyo/flysystem-qcloud-cos-v5 2、在config/app.php的providers
 Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php中的disks里下添加
 &#39;disks&#39;=&gt;[ // ...  &#39;cosv5&#39; =&gt; [ &#39;driver&#39; =&gt; &#39;cosv5&#39;, &#39;region&#39; =&gt; env(&#39;COSV5_REGION&#39;, &#39;ap-guangzhou&#39;), &#39;credentials&#39; =&gt; [ &#39;appId&#39; =&gt; env(&#39;COSV5_APP_ID&#39;), &#39;secretId&#39; =&gt; env(&#39;COSV5_SECRET_ID&#39;), &#39;secretKey&#39; =&gt; env(&#39;COSV5_SECRET_KEY&#39;), ], &#39;timeout&#39; =&gt; env(&#39;COSV5_TIMEOUT&#39;, 60), &#39;connect_timeout&#39; =&gt; env(&#39;COSV5_CONNECT_TIMEOUT&#39;, 60), &#39;bucket&#39; =&gt; env(&#39;COSV5_BUCKET&#39;), &#39;cdn&#39; =&gt; env(&#39;COSV5_CDN&#39;), &#39;scheme&#39; =&gt; env(&#39;COSV5_SCHEME&#39;, &#39;https&#39;), ], ], 4、在." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180806-tencent-cos/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180806-tencent-cos/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-08-06T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-08-06T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="腾讯云存储的简单使用🚗"/>
 <meta name="twitter:description" content="导语 将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。
@@ -115,8 +115,8 @@ Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php�
 <p>文档地址：<a href="https://cloud.tencent.com/document/product/436/11365">https://cloud.tencent.com/document/product/436/11365</a></p>
 <h3 id="上传前准备">上传前准备<a href="#上传前准备" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>快速入门流程图：</p>
-<p><img src="https://mc.qcloudimg.com/static/img/520720197375cee1cc86ad0ebc38ffe2/image.png" alt="效果图"></p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_1.jpg" alt="效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180806-tencent-cos01.png" alt="流程"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180806-tencent-cos02.jpg" alt="存储桶列表"></p>
 <p>在注册完并创建好存储桶后，需要拿到相关配置信息，<code>APPID</code>，<code>SecretId</code>，<code>SecretKey</code>（密钥管理），在存储桶下创建一个test文件夹，本次测试图片全部上传到该文件夹下，当然你也可以不创建，存储桶检测到没有该文件夹，会自动创建。本次记录只是走到了上传对象 。</p>
 <h3 id="测试过程">测试过程<a href="#测试过程" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>1、<code>composer</code>腾讯云COS对象存储 V5包</p>
@@ -180,8 +180,8 @@ COSV5_SCHEME=https
 </span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="nv">$result</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="k">return</span> <span class="nx">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">(</span><span class="s1">&#39;success&#39;</span><span class="p">,</span><span class="s1">&#39;上传成功&#39;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="结果">结果<a href="#结果" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_3.jpg" alt="效果图"></p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/static/cos_2.jpg" alt="效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180806-tencent-cos03.jpg" alt="文件列表"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2018/20180806-tencent-cos04.jpg" alt="效果图"></p>
 <p><strong>只是做了简单的对象上传，后面的包括下载对象，上传对象，删除存储桶等并没有做！！！</strong></p>
 
 			</div>

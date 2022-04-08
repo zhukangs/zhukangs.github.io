@@ -11,19 +11,19 @@
  PhpSpreadsheet文档传送门
 安装 composer require phpoffice/phpspreadsheet 使用 &lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use App\Models\TreasureLog; use Carbon\Carbon; use Illuminate\Support\Facades\Auth; use PhpOffice\PhpSpreadsheet\Spreadsheet; use PhpOffice\PhpSpreadsheet\Writer\Xlsx; //可以生成多种格式类 use PhpOffice\PhpSpreadsheet\IOFactory; use PhpOffice\PhpSpreadsheet\Style\Alignment; use PhpOffice\PhpSpreadsheet\Style\Border; class TestController extends Controller{ . . public function excelExport() { $rows=TreasureLog::select(&#39;id&#39;,&#39;user_id&#39;,&#39;product_id&#39;,&#39;product_name&#39;,&#39;type&#39;,&#39;coin_type&#39;)-&gt;limit(100)-&gt;get()-&gt;toArray(); //通过工厂模式创建内容  $spreadsheet = IOFactory::load(public_path().&#39;/phpoffice/biser.xlsx&#39;); $worksheet = $spreadsheet-&gt;getActiveSheet(); $worksheet-&gt;setCellValue(&#39;B8&#39;,rand(100000,999999)); $worksheet-&gt;setCellValue(&#39;B9&#39;,Carbon::now()); $worksheet-&gt;setCellValue(&#39;B10&#39;,Auth::user()-&gt;name); $num=12; foreach ($rows as $row){ $num&#43;&#43;; $worksheet-&gt;setCellValue(&#39;A&#39;."><meta itemprop="datePublished" content="2019-03-20T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-03-20T00:00:00+00:00" />
-<meta itemprop="wordCount" content="174"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="174"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="PhpOffice," /><meta property="og:title" content="PHPOffice之Excel🍜" />
 <meta property="og:description" content="导语  简单的数据导入导出其实 Maatwebsite/Laravel-Excel 和 box/spout 就够了，听说spout在大量数据下效率较Laravel-Excel 快。这次因为要根据Excel模板导出，在这两个包没找到怎么引入模板的方法，虽然可以设置，但是过于麻烦，就放弃了。最终选择了 PHPOffice/PhpSpreadsheet 。
   PhpSpreadsheet是一个用纯PHP编写的库，它提供了一组类，允许您读取和写入不同的电子表格文件格式，如Excel和LibreOffice Calc。
  PhpSpreadsheet文档传送门
 安装 composer require phpoffice/phpspreadsheet 使用 &lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use App\Models\TreasureLog; use Carbon\Carbon; use Illuminate\Support\Facades\Auth; use PhpOffice\PhpSpreadsheet\Spreadsheet; use PhpOffice\PhpSpreadsheet\Writer\Xlsx; //可以生成多种格式类 use PhpOffice\PhpSpreadsheet\IOFactory; use PhpOffice\PhpSpreadsheet\Style\Alignment; use PhpOffice\PhpSpreadsheet\Style\Border; class TestController extends Controller{ . . public function excelExport() { $rows=TreasureLog::select(&#39;id&#39;,&#39;user_id&#39;,&#39;product_id&#39;,&#39;product_name&#39;,&#39;type&#39;,&#39;coin_type&#39;)-&gt;limit(100)-&gt;get()-&gt;toArray(); //通过工厂模式创建内容  $spreadsheet = IOFactory::load(public_path().&#39;/phpoffice/biser.xlsx&#39;); $worksheet = $spreadsheet-&gt;getActiveSheet(); $worksheet-&gt;setCellValue(&#39;B8&#39;,rand(100000,999999)); $worksheet-&gt;setCellValue(&#39;B9&#39;,Carbon::now()); $worksheet-&gt;setCellValue(&#39;B10&#39;,Auth::user()-&gt;name); $num=12; foreach ($rows as $row){ $num&#43;&#43;; $worksheet-&gt;setCellValue(&#39;A&#39;." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190320-phpoffice-excel/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190320-phpoffice-excel/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-03-20T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-03-20T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="PHPOffice之Excel🍜"/>
 <meta name="twitter:description" content="导语  简单的数据导入导出其实 Maatwebsite/Laravel-Excel 和 box/spout 就够了，听说spout在大量数据下效率较Laravel-Excel 快。这次因为要根据Excel模板导出，在这两个包没找到怎么引入模板的方法，虽然可以设置，但是过于麻烦，就放弃了。最终选择了 PHPOffice/PhpSpreadsheet 。
@@ -96,7 +96,7 @@
 <p><a href="https://github.com/PHPOffice/PhpSpreadsheet">PhpSpreadsheet</a>是一个用纯PHP编写的库，它提供了一组类，允许您读取和写入不同的电子表格文件格式，如Excel和LibreOffice Calc。</p>
 </blockquote>
 <p><a href="https://phpoffice.github.io/PhpSpreadsheet/master/PhpOffice.html">PhpSpreadsheet文档传送门</a></p>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/excel_template.jpg" alt="Excel模板效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190320-phpoffice-excel01.jpg" alt="Excel模板效果图"></p>
 <h3 id="安装">安装<a href="#安装" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require phpoffice/phpspreadsheet
 </span></span></code></pre></div><h3 id="使用">使用<a href="#使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
@@ -184,7 +184,7 @@
 </span></span><span class="line"><span class="cl">    <span class="o">.</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></div><h3 id="效果">效果<a href="#效果" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/excel_result.jpg" alt="完成效果图"></p>
+<p><img src="https://qiniu.zkilm.cn/blog/posts/2019/20190320-phpoffice-excel02.jpg" alt="完成效果图"></p>
 <h3 id="结束语">结束语<a href="#结束语" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <blockquote>
 <p>摆脱悲观，拥抱满溢而出的希望，朝着梦想，准备出发。🍀</p>

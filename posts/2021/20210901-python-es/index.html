@@ -16,7 +16,7 @@ Kibana 有个 Data Visualizer 可以直接上传 CSV 文件，但是有个限制
 步骤一：对总CSV文件进行json格式化，格式化为指定的json格式，需要符合Bulk API的上传要求 步骤二：对json文件进行拆分存储，保证单json文件大小不超过50M Py脚本 Python 代码如下(test.py)：
 import csv from collections import defaultdict, OrderedDict import json import time import argparse import os parser = argparse.ArgumentParser(description=&#39;自定义CLI传参&#39;) parser.add_argument(&#39;--csv_filename&#39;, &#39;-cf&#39;, help=&#39;csv_filename 选取指定CSV文件名，必要参数&#39;, required=True) parser.add_argument(&#39;--json_dirname&#39;, &#39;-jd&#39;, help=&#39;json_dirname 将作为JSON文件目录名，必要参数&#39;, required=True) args = parser.parse_args() start_time=time."><meta itemprop="datePublished" content="2021-09-01T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2021-09-01T00:00:00+00:00" />
-<meta itemprop="wordCount" content="282"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="wordCount" content="282"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Python,Elasticsearch," /><meta property="og:title" content="百万级数据导入 Elasticsearch 😌" />
 <meta property="og:description" content="涉及知识点  Python 读取CSV文件 Elasticsearch 导入json文件  本文目标  完成超过100M的SCV文件上传到ES  导语 如何将100w条记录同步到Es？
 Kibana 有个 Data Visualizer 可以直接上传 CSV 文件，但是有个限制是文件不能大于100M。
@@ -28,12 +28,12 @@ Kibana 有个 Data Visualizer 可以直接上传 CSV 文件，但是有个限制
 步骤一：对总CSV文件进行json格式化，格式化为指定的json格式，需要符合Bulk API的上传要求 步骤二：对json文件进行拆分存储，保证单json文件大小不超过50M Py脚本 Python 代码如下(test.py)：
 import csv from collections import defaultdict, OrderedDict import json import time import argparse import os parser = argparse.ArgumentParser(description=&#39;自定义CLI传参&#39;) parser.add_argument(&#39;--csv_filename&#39;, &#39;-cf&#39;, help=&#39;csv_filename 选取指定CSV文件名，必要参数&#39;, required=True) parser.add_argument(&#39;--json_dirname&#39;, &#39;-jd&#39;, help=&#39;json_dirname 将作为JSON文件目录名，必要参数&#39;, required=True) args = parser.parse_args() start_time=time." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2021/20210901-python-es/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2021/20210901-python-es/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-09-01T00:00:00+00:00" />
 <meta property="article:modified_time" content="2021-09-01T00:00:00+00:00" />
 
 <meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="百万级数据导入 Elasticsearch 😌"/>
 <meta name="twitter:description" content="涉及知识点  Python 读取CSV文件 Elasticsearch 导入json文件  本文目标  完成超过100M的SCV文件上传到ES  导语 如何将100w条记录同步到Es？
