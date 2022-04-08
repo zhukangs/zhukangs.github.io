@@ -83,251 +83,251 @@
 <ul>
 <li>新建「表单验证基类」 <code>app/Http/Requests/FormRequest.php</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"> <span class="o">&lt;?</span><span class="nx">php</span>
-    
-<span class="k">namespace</span> <span class="nx">App\Http\Requests</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Illuminate\Foundation\Http\FormRequest</span> <span class="k">as</span> <span class="nx">BaseFormRequest</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">FormRequest</span> <span class="k">extends</span> <span class="nx">BaseFormRequest</span>
-<span class="p">{</span>
-    <span class="k">use</span> <span class="nx">SceneValidator</span><span class="p">;</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Determine if the user is authorized to make this request.
-</span><span class="sd">     *
-</span><span class="sd">     * @return bool
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">authorize</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="新建场景验证类">新建场景验证类<a href="#新建场景验证类" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"> <span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Http\Requests</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Foundation\Http\FormRequest</span> <span class="k">as</span> <span class="nx">BaseFormRequest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">FormRequest</span> <span class="k">extends</span> <span class="nx">BaseFormRequest</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">SceneValidator</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Determine if the user is authorized to make this request.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return bool
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">authorize</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="新建场景验证类">新建场景验证类<a href="#新建场景验证类" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>新建 <code>app/Http/Requests/SceneValidator.php</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-    
-<span class="k">namespace</span> <span class="nx">App\Http\Requests</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Illuminate\Contracts\Validation\</span><span class="p">{</span><span class="nx">Factory</span><span class="p">,</span> <span class="nx">Validator</span><span class="p">};</span>
-
-<span class="k">trait</span> <span class="nx">SceneValidator</span>
-<span class="p">{</span>
-    <span class="k">protected</span> <span class="nv">$scene</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
-
-    <span class="k">protected</span> <span class="nv">$onlyRule</span> <span class="o">=</span> <span class="p">[];</span>
-
-    <span class="k">protected</span> <span class="nv">$autoValidate</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Validate.
-</span><span class="sd">     *
-</span><span class="sd">     * @param string|array $scene
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">validate</span><span class="p">(</span><span class="nv">$scene</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoValidate</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$scene</span><span class="p">))</span> <span class="p">{</span>
-                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">onlyRule</span> <span class="o">=</span> <span class="nv">$scene</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">scene</span> <span class="o">=</span> <span class="nv">$scene</span><span class="p">;</span>
-            <span class="p">}</span>
-
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleValidate</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * 覆盖 ValidatesWhenResolvedTrait-&gt;validateResolved
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">validateResolved</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">method_exists</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;autoValidate&#39;</span><span class="p">))</span> <span class="p">{</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoValidate</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;autoValidate&#39;</span><span class="p">]);</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoValidate</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleValidate</span><span class="p">();</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Handle validate.
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">function</span> <span class="nf">handleValidate</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">parent</span><span class="o">::</span><span class="na">validateResolved</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * 定义 FormRequest-&gt;getValidatorInstance 下 validator 验证器
-</span><span class="sd">     *
-</span><span class="sd">     * @param Factory $factory
-</span><span class="sd">     *
-</span><span class="sd">     * @return Validator
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">validator</span><span class="p">(</span><span class="nx">Factory</span> <span class="nv">$factory</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$validationData</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isMethod</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">()</span> <span class="o">:</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">();</span>
-        <span class="k">return</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$validationData</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRules</span><span class="p">(),</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">messages</span><span class="p">(),</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">());</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Get rules.
-</span><span class="sd">     *
-</span><span class="sd">     * @return array
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getRules</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleScene</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;rules&#39;</span><span class="p">]));</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Handle scene.
-</span><span class="sd">     *
-</span><span class="sd">     * @param array $rules
-</span><span class="sd">     *
-</span><span class="sd">     * @return array
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">function</span> <span class="nf">handleScene</span><span class="p">(</span><span class="k">array</span> <span class="nv">$rules</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">onlyRule</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleRules</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">onlyRule</span><span class="p">,</span> <span class="nv">$rules</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">scene</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">method_exists</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;scene&#39;</span><span class="p">))</span> <span class="p">{</span>
-            <span class="nv">$scene</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;scene&#39;</span><span class="p">]);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">array_key_exists</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">scene</span><span class="p">,</span> <span class="nv">$scene</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleRules</span><span class="p">(</span><span class="nv">$scene</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">scene</span><span class="p">],</span> <span class="nv">$rules</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="nv">$rules</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Handle rules.
-</span><span class="sd">     *
-</span><span class="sd">     * @param array $sceneRules
-</span><span class="sd">     * @param array $rules
-</span><span class="sd">     *
-</span><span class="sd">     * @return array
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">function</span> <span class="nf">handleRules</span><span class="p">(</span><span class="k">array</span> <span class="nv">$sceneRules</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$rules</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$result</span> <span class="o">=</span> <span class="p">[];</span>
-        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$sceneRules</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="nx">is_numeric</span><span class="p">(</span><span class="nv">$key</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">array_key_exists</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="nv">$rules</span><span class="p">))</span> <span class="p">{</span>
-                <span class="nv">$result</span><span class="p">[</span><span class="nv">$value</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$rules</span><span class="p">[</span><span class="nv">$value</span><span class="p">];</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="nv">$result</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="新建请求类">新建「请求类」<a href="#新建请求类" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Http\Requests</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Contracts\Validation\</span><span class="p">{</span><span class="nx">Factory</span><span class="p">,</span> <span class="nx">Validator</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">trait</span> <span class="nx">SceneValidator</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$scene</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$onlyRule</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$autoValidate</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Validate.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param string|array $scene
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">validate</span><span class="p">(</span><span class="nv">$scene</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoValidate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">is_array</span><span class="p">(</span><span class="nv">$scene</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">onlyRule</span> <span class="o">=</span> <span class="nv">$scene</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">scene</span> <span class="o">=</span> <span class="nv">$scene</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleValidate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * 覆盖 ValidatesWhenResolvedTrait-&gt;validateResolved
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">validateResolved</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">method_exists</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;autoValidate&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoValidate</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;autoValidate&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">autoValidate</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleValidate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Handle validate.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">handleValidate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">parent</span><span class="o">::</span><span class="na">validateResolved</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * 定义 FormRequest-&gt;getValidatorInstance 下 validator 验证器
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param Factory $factory
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return Validator
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">validator</span><span class="p">(</span><span class="nx">Factory</span> <span class="nv">$factory</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$validationData</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">isMethod</span><span class="p">(</span><span class="s1">&#39;GET&#39;</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">()</span> <span class="o">:</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">make</span><span class="p">(</span><span class="nv">$validationData</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getRules</span><span class="p">(),</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">messages</span><span class="p">(),</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">attributes</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Get rules.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return array
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getRules</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleScene</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;rules&#39;</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Handle scene.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param array $rules
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return array
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">handleScene</span><span class="p">(</span><span class="k">array</span> <span class="nv">$rules</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">onlyRule</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleRules</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">onlyRule</span><span class="p">,</span> <span class="nv">$rules</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">scene</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">method_exists</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;scene&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$scene</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">container</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">([</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;scene&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">array_key_exists</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">scene</span><span class="p">,</span> <span class="nv">$scene</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">handleRules</span><span class="p">(</span><span class="nv">$scene</span><span class="p">[</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">scene</span><span class="p">],</span> <span class="nv">$rules</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$rules</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Handle rules.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param array $sceneRules
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @param array $rules
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return array
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">handleRules</span><span class="p">(</span><span class="k">array</span> <span class="nv">$sceneRules</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$rules</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$result</span> <span class="o">=</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$sceneRules</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nx">is_numeric</span><span class="p">(</span><span class="nv">$key</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">array_key_exists</span><span class="p">(</span><span class="nv">$value</span><span class="p">,</span> <span class="nv">$rules</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$result</span><span class="p">[</span><span class="nv">$value</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$rules</span><span class="p">[</span><span class="nv">$value</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="nv">$result</span><span class="p">[</span><span class="nv">$key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="新建请求类">新建「请求类」<a href="#新建请求类" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>新建「请求类」 <code>app/Http/Requests/PermissionRequest.php</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-    
-<span class="k">namespace</span> <span class="nx">App\Http\Requests</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Illuminate\Validation\Rule</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">PermissionRequest</span> <span class="k">extends</span> <span class="nx">FormRequest</span>
-<span class="p">{</span>
-    <span class="k">protected</span> <span class="nv">$autoValidate</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Get the validation rules that apply to the request.
-</span><span class="sd">     *
-</span><span class="sd">     * @return array
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="c1">//全部的验证规则
-</span><span class="c1"></span>            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;between:2,16&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="nx">Rule</span><span class="o">::</span><span class="na">in</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>
-            <span class="s1">&#39;user_ids&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;role_id&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;action_codes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">],</span>
-        <span class="p">];</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * Get custom attributes for validator errors.
-</span><span class="sd">     *
-</span><span class="sd">     * @return array
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">attributes</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;角色名称&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;角色类型&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;user_ids&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;用户ID集&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;role_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;角色ID&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;用户ID&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;action_codes&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;行为编码集&#39;</span><span class="p">,</span>
-        <span class="p">];</span>
-    <span class="p">}</span>
-
-    <span class="sd">/**
-</span><span class="sd">     * scene.
-</span><span class="sd">     *
-</span><span class="sd">     * @return array
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">scene</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="s1">&#39;roleCreate&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;roleMemberAdd&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;user_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;role_id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;roleMemberDel&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;roleMemberList&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;roleActionEdit&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">,</span> <span class="s1">&#39;action_codes&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;roleActionList&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">],</span>
-            <span class="s1">&#39;allActionMarkList&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">],</span>
-        <span class="p">];</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="编辑控制器">编辑控制器<a href="#编辑控制器" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Http\Requests</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Validation\Rule</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">PermissionRequest</span> <span class="k">extends</span> <span class="nx">FormRequest</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$autoValidate</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Get the validation rules that apply to the request.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return array
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//全部的验证规则
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;string&#39;</span><span class="p">,</span> <span class="s1">&#39;between:2,16&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;int&#39;</span><span class="p">,</span> <span class="nx">Rule</span><span class="o">::</span><span class="na">in</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">])],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;user_ids&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;role_id&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;integer&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;action_codes&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;array&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * Get custom attributes for validator errors.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return array
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">attributes</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;角色名称&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;角色类型&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;user_ids&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;用户ID集&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;role_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;角色ID&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;user_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;用户ID&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;action_codes&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;行为编码集&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * scene.
+</span></span></span><span class="line"><span class="cl"><span class="sd">     *
+</span></span></span><span class="line"><span class="cl"><span class="sd">     * @return array
+</span></span></span><span class="line"><span class="cl"><span class="sd">     */</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">scene</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;roleCreate&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;type&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;roleMemberAdd&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;user_ids&#39;</span><span class="p">,</span> <span class="s1">&#39;role_id&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;roleMemberDel&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">,</span> <span class="s1">&#39;user_id&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;roleMemberList&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;roleActionEdit&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">,</span> <span class="s1">&#39;action_codes&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;roleActionList&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;allActionMarkList&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;role_id&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="编辑控制器">编辑控制器<a href="#编辑控制器" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>编辑 <code>app/Http/Controllers/PermissionController.php</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">...</span>
-<span class="k">use</span> <span class="nx">App\Http\Requests\PermissionRequest</span><span class="p">;</span>
-<span class="o">...</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">roleCreate</span><span class="p">(</span><span class="nx">PermissionRequest</span> <span class="nv">$request</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">//参数验证
-</span><span class="c1"></span>    <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="s1">&#39;roleCreate&#39;</span><span class="p">);</span>
-    <span class="o">...</span>
-<span class="p">}</span>
-<span class="o">...</span>
-</code></pre></div><h3 id="编辑配置文件">编辑配置文件<a href="#编辑配置文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Http\Requests\PermissionRequest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">roleCreate</span><span class="p">(</span><span class="nx">PermissionRequest</span> <span class="nv">$request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//参数验证
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="s1">&#39;roleCreate&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="o">...</span>
+</span></span></code></pre></div><h3 id="编辑配置文件">编辑配置文件<a href="#编辑配置文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>编辑 <code>config/app.php</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="s1">&#39;locale&#39;</span><span class="w"> </span><span class="l">=&gt; &#39;zn&#39;,</span><span class="w">
-</span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="s1">&#39;locale&#39;</span><span class="w"> </span><span class="l">=&gt; &#39;zn&#39;,</span><span class="w">
+</span></span></span></code></pre></div><ul>
 <li>或安装 <code>overtrue/laravel-lang</code> - 语言包</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">composer require &#34;overtrue/laravel-lang:~3.0&#34;</span><span class="w">
-</span><span class="w">    
-</span><span class="w"></span><span class="c"># 1. 配置 config/app.php</span><span class="w">
-</span><span class="w"></span><span class="l">Illuminate\Translation\TranslationServiceProvider::class</span><span class="w">
-</span><span class="w"></span><span class="l">替换</span><span class="w">
-</span><span class="w"></span><span class="l">Overtrue\LaravelLang\TranslationServiceProvider::class</span><span class="w">
-</span><span class="w">
-</span><span class="w"></span><span class="c"># 2. 配置 config/app.php</span><span class="w">
-</span><span class="w"></span><span class="s1">&#39;locale&#39;</span><span class="w"> </span><span class="l">=&gt; &#39;zh-CN&#39;</span><span class="w">
-</span></code></pre></div><h3 id="编辑异常处理文件">编辑异常处理文件<a href="#编辑异常处理文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">composer require &#34;overtrue/laravel-lang:~3.0&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 1. 配置 config/app.php</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">Illuminate\Translation\TranslationServiceProvider::class</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">替换</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">Overtrue\LaravelLang\TranslationServiceProvider::class</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c"># 2. 配置 config/app.php</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="s1">&#39;locale&#39;</span><span class="w"> </span><span class="l">=&gt; &#39;zh-CN&#39;</span><span class="w">
+</span></span></span></code></pre></div><h3 id="编辑异常处理文件">编辑异常处理文件<a href="#编辑异常处理文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>
 <p>编辑 <code>app/Exception/Handler.php</code></p>
@@ -336,62 +336,62 @@
 <p>Laravel 6.*</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">report</span><span class="p">(</span><span class="nx">Exception</span> <span class="nv">$exception</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="k">parent</span><span class="o">::</span><span class="na">report</span><span class="p">(</span><span class="nv">$exception</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">function</span> <span class="nf">render</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nx">Exception</span> <span class="nv">$exception</span><span class="p">)</span>
-<span class="p">{</span>
-  <span class="nv">$commonHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CommonHandler</span><span class="p">();</span>
-  <span class="c1">// 验证错误
-</span><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s2">&#34;api/*&#34;</span><span class="p">))</span> <span class="p">{</span><span class="c1">// 我们仅仅处理 api的异常，所以这里要排除下其他前缀路由
-</span><span class="c1"></span>    <span class="c1">//如果抛出的异常是 DefineValidationException 的实例，我们就可以确定该异常是表单验证异常
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">\Illuminate\Validation\ValidationException</span><span class="p">)</span> <span class="p">{</span>
-      <span class="c1">// 下面是你需要包装的数据
-</span><span class="c1"></span>      <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">validator</span><span class="o">-&gt;</span><span class="na">errors</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span><span class="c1">// 更好的获取错误的方法
-</span><span class="c1"></span>      <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">authMessage</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nv">$message</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="c1">//处理请求方法异常
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">MethodNotAllowedHttpException</span><span class="p">){</span>
-      <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">authMessage</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nv">$$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
-    <span class="p">}</span>
-
-
-    <span class="c1">//处理内部错误异常
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">((</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">FatalThrowableError</span> <span class="o">||</span> <span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">\ErrorException</span> <span class="o">||</span> <span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">QueryException</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;APP_ENV&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;local&#39;</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">authMessage</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nv">$$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-
-  <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">render</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$exception</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">report</span><span class="p">(</span><span class="nx">Exception</span> <span class="nv">$exception</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">parent</span><span class="o">::</span><span class="na">report</span><span class="p">(</span><span class="nv">$exception</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">render</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nx">Exception</span> <span class="nv">$exception</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$commonHandler</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CommonHandler</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 验证错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">is</span><span class="p">(</span><span class="s2">&#34;api/*&#34;</span><span class="p">))</span> <span class="p">{</span><span class="c1">// 我们仅仅处理 api的异常，所以这里要排除下其他前缀路由
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">//如果抛出的异常是 DefineValidationException 的实例，我们就可以确定该异常是表单验证异常
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">\Illuminate\Validation\ValidationException</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 下面是你需要包装的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">validator</span><span class="o">-&gt;</span><span class="na">errors</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span><span class="c1">// 更好的获取错误的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">authMessage</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nv">$message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//处理请求方法异常
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">MethodNotAllowedHttpException</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">authMessage</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nv">$$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//处理内部错误异常
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">((</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">FatalThrowableError</span> <span class="o">||</span> <span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">\ErrorException</span> <span class="o">||</span> <span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">QueryException</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;APP_ENV&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="s1">&#39;local&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">authMessage</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span> <span class="nv">$$exception</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">render</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$exception</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
 <li>Laravel 8.*</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">()</span>
-<span class="p">{</span>
-  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">reportable</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//
-</span><span class="c1"></span>  <span class="p">});</span>
-
-  <span class="c1">//捕捉表单验证错误
-</span><span class="c1"></span>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderable</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ValidationException</span> <span class="nv">$exception</span><span class="p">,</span> <span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">validator</span><span class="o">-&gt;</span><span class="na">errors</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span><span class="c1">// 更好的获取错误的方法
-</span><span class="c1"></span>    <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="mi">40000</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="p">[]]);</span>
-  <span class="p">});</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="post-请求测试">POST 请求测试<a href="#post-请求测试" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">register</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">reportable</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">Throwable</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">//捕捉表单验证错误
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">renderable</span><span class="p">(</span><span class="k">function</span> <span class="p">(</span><span class="nx">ValidationException</span> <span class="nv">$exception</span><span class="p">,</span> <span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$message</span> <span class="o">=</span> <span class="nv">$exception</span><span class="o">-&gt;</span><span class="na">validator</span><span class="o">-&gt;</span><span class="na">errors</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span><span class="c1">// 更好的获取错误的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">return</span> <span class="nx">response</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">json</span><span class="p">([</span><span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="mi">40000</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span> <span class="o">=&gt;</span> <span class="nv">$message</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span> <span class="o">=&gt;</span> <span class="p">[]]);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="post-请求测试">POST 请求测试<a href="#post-请求测试" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>POST 请求 <code>/permission/role/create</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
-    <span class="nt">&#34;status&#34;</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span>
-    <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;角色名称 必须在 2 到 16 个字符之间&#34;</span><span class="p">,</span>
-    <span class="nt">&#34;data&#34;</span><span class="p">:</span> <span class="p">[]</span>
-<span class="p">}</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;status&#34;</span><span class="p">:</span> <span class="mi">40000</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;msg&#34;</span><span class="p">:</span> <span class="s2">&#34;角色名称 必须在 2 到 16 个字符之间&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;data&#34;</span><span class="p">:</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>
 			</div>
 
 <div class="related-posts thin">
@@ -440,6 +440,9 @@
 </nav>
 		</aside>
 		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2021/20211215-rsa/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>RSA加解密🔒</span>
+			</a>
 			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2021/20210909-restart-lnmp/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>监控服务器异常与重启</span>
 			</a>
@@ -462,7 +465,7 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -470,7 +473,7 @@
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

@@ -94,90 +94,90 @@
 </blockquote>
 <p>既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor</p>
 <h3 id="安装">安装<a href="#安装" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor
-    
-# yum install python-setuptools
-# easy_install supervisor
-</code></pre></div><h3 id="配置文件">配置文件<a href="#配置文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">生成配置文件，并建立相应目录，管理 supervisor 启动进程
-    
-# echo_supervisord_conf &gt; /etc/supervisord.conf
-# mkdir -p /etc/supervisor/conf.d/
-1
-2
-编辑 /etc/supervisord.conf，修改 [include] 区块内容：
-
-[include]
-files = /etc/supervisor/conf.d/*.conf
-1
-2
-这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件
-</code></pre></div><h3 id="自动启动">自动启动<a href="#自动启动" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs
-# wget -O /usr/lib/systemd/system/supervisord.service  https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs
-将 supervisord 服务设为自启动
-
-# systemctl enable supervisord.service
-输入 supervisorctl 命令可以进入 supervisor 控制台
-</code></pre></div><h3 id="设置-laravel-队列">设置 Laravel 队列<a href="#设置-laravel-队列" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="k">[program:laravel-worker]</span>
-<span class="na">process_name</span><span class="o">=</span><span class="s">%(program_name)s_%(process_num)02d</span>
-<span class="na">command</span><span class="o">=</span><span class="s">/usr/local/php/bin/php /data/wwwroot/app.com/artisan queue:work database --sleep=3 --tries=3 --daemon</span>
-<span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
-<span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
-<span class="na">user</span><span class="o">=</span><span class="s">www</span>
-<span class="na">numprocs</span><span class="o">=</span><span class="s">8</span>
-<span class="na">redirect_stderr</span><span class="o">=</span><span class="s">true</span>
-<span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/data/wwwroot/app.com/storage/logs/queue.log</span>
-
-<span class="na">//注意：检查你的php所在目录和项目所在目录  是否对应</span>
-
-<span class="na">这里开启了 8 个 queue:work 进程，并监视他们，如果失败的话，自动重启；在项目的 storage/logs/queue.log 记录日志。</span>
-
-<span class="na">启动 supervisor 服务：</span>
-
-<span class="c1"># supervisord</span>
-<span class="na">1</span>
-<span class="na">至此， supervisor 安装及 Laravel 队列设置完毕</span>
-
-<span class="na">如果以后配置文件有修改，或者新增，进入 supervisor 控制台，执行下面的命令</span>
-
-<span class="c1"># supervisorctl</span>
-<span class="na">supervisorctl&gt; reread</span>
-<span class="na">supervisorctl&gt; update</span>
-<span class="na">supervisorctl&gt; start laravel-worker:*</span>
-</code></pre></div><h3 id="遇到的一些坑">遇到的一些坑<a href="#遇到的一些坑" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.unix:///tmp/supervisor.sock no such file问题
-重新生成配置文件 echo_supervisord_conf&gt; /etc/supervisord.conf
-按上面步骤修改配置
-supervisord -c/etc/supervisord.conf
-还有一种说法是将supervisord.conf中的/tmp  该为/var下，具体请看https://blog.csdn.net/qq_28885149/article/details/79364685
-
-2.laravel-worker-ui:laravel-worker-ui_00   FATAL     can&#39;t find command &#39;/usr/local/php/bin/php&#39;
-检查supervisord.conf中的php目录是否正确
-
-3.在使用命令supervisorctl start all启动控制进程时，遇到如下错误
-unix:///tmp/supervisor.sock no such file
-出现上述错误的原因是supervisord并未启动，只要在命令行中使用命令supervisord启动supervisord即可。
-</code></pre></div><h3 id="一些相关命令">一些相关命令<a href="#一些相关命令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">【启动supervisord】  supervisord  建议supervisord -c/etc/supervisord.conf
-【停止supervisord】  supervisorctl shutdown
-【重新加载配置文件】  supervisorctl reload
-【进程管理】
-1.启动supervisord管理的所有进程
-  supervisorctl start all
-2.停止supervisord管理的所有进程
-  supervisorctl stop all
-3.启动supervisord管理的某一个特定进程
-  supervisorctl start program-name // program-name为[program:xx]中的xx
-4.停止supervisord管理的某一个特定进程 
-  supervisorctl stop program-name  // program-name为[program:xx]中的xx
-5.重启所有进程或所有进程
-  supervisorctl restart all  // 重启所有
-  supervisorctl reatart program-name // 重启某一进程，program-name为[program:xx]中的xx
-6.查看supervisord当前管理的所有进程的状态
-  supervisorctl status
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">先安装 Python 的 easy_install，再通过 easy_install 安装 supervisor
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"># yum install python-setuptools
+</span></span><span class="line"><span class="cl"># easy_install supervisor
+</span></span></code></pre></div><h3 id="配置文件">配置文件<a href="#配置文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">生成配置文件，并建立相应目录，管理 supervisor 启动进程
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"># echo_supervisord_conf &gt; /etc/supervisord.conf
+</span></span><span class="line"><span class="cl"># mkdir -p /etc/supervisor/conf.d/
+</span></span><span class="line"><span class="cl">1
+</span></span><span class="line"><span class="cl">2
+</span></span><span class="line"><span class="cl">编辑 /etc/supervisord.conf，修改 [include] 区块内容：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">[include]
+</span></span><span class="line"><span class="cl">files = /etc/supervisor/conf.d/*.conf
+</span></span><span class="line"><span class="cl">1
+</span></span><span class="line"><span class="cl">2
+</span></span><span class="line"><span class="cl">这样， supervisor 会加载 /etc/supervisor/conf.d/ 下的所有 .conf 文件
+</span></span></code></pre></div><h3 id="自动启动">自动启动<a href="#自动启动" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">在 https://github.com/Supervisor/initscripts 下载 CentOS 使用的自动启动服务脚本 centos-systemd-etcs
+</span></span><span class="line"><span class="cl"># wget -O /usr/lib/systemd/system/supervisord.service  https://github.com/Supervisor/initscripts/raw/master/centos-systemd-etcs
+</span></span><span class="line"><span class="cl">将 supervisord 服务设为自启动
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># systemctl enable supervisord.service
+</span></span><span class="line"><span class="cl">输入 supervisorctl 命令可以进入 supervisor 控制台
+</span></span></code></pre></div><h3 id="设置-laravel-队列">设置 Laravel 队列<a href="#设置-laravel-队列" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ini" data-lang="ini"><span class="line"><span class="cl"><span class="k">[program:laravel-worker]</span>
+</span></span><span class="line"><span class="cl"><span class="na">process_name</span><span class="o">=</span><span class="s">%(program_name)s_%(process_num)02d</span>
+</span></span><span class="line"><span class="cl"><span class="na">command</span><span class="o">=</span><span class="s">/usr/local/php/bin/php /data/wwwroot/app.com/artisan queue:work database --sleep=3 --tries=3 --daemon</span>
+</span></span><span class="line"><span class="cl"><span class="na">autostart</span><span class="o">=</span><span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">autorestart</span><span class="o">=</span><span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">user</span><span class="o">=</span><span class="s">www</span>
+</span></span><span class="line"><span class="cl"><span class="na">numprocs</span><span class="o">=</span><span class="s">8</span>
+</span></span><span class="line"><span class="cl"><span class="na">redirect_stderr</span><span class="o">=</span><span class="s">true</span>
+</span></span><span class="line"><span class="cl"><span class="na">stdout_logfile</span><span class="o">=</span><span class="s">/data/wwwroot/app.com/storage/logs/queue.log</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">//注意：检查你的php所在目录和项目所在目录  是否对应</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">这里开启了 8 个 queue:work 进程，并监视他们，如果失败的话，自动重启；在项目的 storage/logs/queue.log 记录日志。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">启动 supervisor 服务：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># supervisord</span>
+</span></span><span class="line"><span class="cl"><span class="na">1</span>
+</span></span><span class="line"><span class="cl"><span class="na">至此， supervisor 安装及 Laravel 队列设置完毕</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="na">如果以后配置文件有修改，或者新增，进入 supervisor 控制台，执行下面的命令</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># supervisorctl</span>
+</span></span><span class="line"><span class="cl"><span class="na">supervisorctl&gt; reread</span>
+</span></span><span class="line"><span class="cl"><span class="na">supervisorctl&gt; update</span>
+</span></span><span class="line"><span class="cl"><span class="na">supervisorctl&gt; start laravel-worker:*</span>
+</span></span></code></pre></div><h3 id="遇到的一些坑">遇到的一些坑<a href="#遇到的一些坑" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1.unix:///tmp/supervisor.sock no such file问题
+</span></span><span class="line"><span class="cl">重新生成配置文件 echo_supervisord_conf&gt; /etc/supervisord.conf
+</span></span><span class="line"><span class="cl">按上面步骤修改配置
+</span></span><span class="line"><span class="cl">supervisord -c/etc/supervisord.conf
+</span></span><span class="line"><span class="cl">还有一种说法是将supervisord.conf中的/tmp  该为/var下，具体请看https://blog.csdn.net/qq_28885149/article/details/79364685
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.laravel-worker-ui:laravel-worker-ui_00   FATAL     can&#39;t find command &#39;/usr/local/php/bin/php&#39;
+</span></span><span class="line"><span class="cl">检查supervisord.conf中的php目录是否正确
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3.在使用命令supervisorctl start all启动控制进程时，遇到如下错误
+</span></span><span class="line"><span class="cl">unix:///tmp/supervisor.sock no such file
+</span></span><span class="line"><span class="cl">出现上述错误的原因是supervisord并未启动，只要在命令行中使用命令supervisord启动supervisord即可。
+</span></span></code></pre></div><h3 id="一些相关命令">一些相关命令<a href="#一些相关命令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">【启动supervisord】  supervisord  建议supervisord -c/etc/supervisord.conf
+</span></span><span class="line"><span class="cl">【停止supervisord】  supervisorctl shutdown
+</span></span><span class="line"><span class="cl">【重新加载配置文件】  supervisorctl reload
+</span></span><span class="line"><span class="cl">【进程管理】
+</span></span><span class="line"><span class="cl">1.启动supervisord管理的所有进程
+</span></span><span class="line"><span class="cl">  supervisorctl start all
+</span></span><span class="line"><span class="cl">2.停止supervisord管理的所有进程
+</span></span><span class="line"><span class="cl">  supervisorctl stop all
+</span></span><span class="line"><span class="cl">3.启动supervisord管理的某一个特定进程
+</span></span><span class="line"><span class="cl">  supervisorctl start program-name // program-name为[program:xx]中的xx
+</span></span><span class="line"><span class="cl">4.停止supervisord管理的某一个特定进程 
+</span></span><span class="line"><span class="cl">  supervisorctl stop program-name  // program-name为[program:xx]中的xx
+</span></span><span class="line"><span class="cl">5.重启所有进程或所有进程
+</span></span><span class="line"><span class="cl">  supervisorctl restart all  // 重启所有
+</span></span><span class="line"><span class="cl">  supervisorctl reatart program-name // 重启某一进程，program-name为[program:xx]中的xx
+</span></span><span class="line"><span class="cl">6.查看supervisord当前管理的所有进程的状态
+</span></span><span class="line"><span class="cl">  supervisorctl status
+</span></span></code></pre></div>
 			</div>
 
 			<hr class="post-end">
@@ -233,7 +233,7 @@ unix:///tmp/supervisor.sock no such file
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -241,7 +241,7 @@ unix:///tmp/supervisor.sock no such file
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

@@ -95,78 +95,78 @@
 <p>Vagrant目前是国内互联网公司应用最多的内部开发环境工具。Vagrant是我们开发者的福音，使我们完全摆脱了重复配置环境的处境。Vagrant简单的配置，丰富的自动化脚本资源以及分享的便捷性都是我们应该学习的思想，节省开发人员的大量准备工作时间,使开发人员更专注公司业务开发。</p>
 </blockquote>
 <h3 id="开始">开始<a href="#开始" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="mi">1</span><span class="nx">、下载VirtualBox</span> <span class="mf">5.1</span><span class="o">.</span><span class="mi">38</span>  <span class="nx">x86</span><span class="o">/</span><span class="nx">AMD64</span>
-<span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">virtualbox</span><span class="o">.</span><span class="nx">org</span><span class="o">/</span><span class="nx">wiki</span><span class="o">/</span><span class="nx">Download_Old_Builds_5_1</span>
-
-<span class="mi">2</span><span class="nx">、下载Vagrant</span> <span class="mf">1.8</span><span class="o">.</span><span class="mf">6.</span><span class="nx">msi</span>
-<span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">releases</span><span class="o">.</span><span class="nx">hashicorp</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span>
-
-<span class="mi">3</span><span class="nx">、下载box，我选的是以ubuntu作为系统镜像</span>
-<span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">pan</span><span class="o">.</span><span class="nx">baidu</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">s</span><span class="o">/</span><span class="mi">1</span><span class="nx">nS_12Vccdiara</span><span class="o">-</span><span class="nx">iLAnht5w</span>  <span class="nx">密码：ktjw</span>
-
-<span class="mi">4</span><span class="nx">、然后傻瓜式安装这两个软件，vagrant安装完后需要重启电脑</span>
-
-<span class="mi">5</span><span class="nx">、新建目录</span> <span class="nx">如code</span><span class="o">/</span><span class="nx">boxes，将ubuntu</span><span class="o">-</span><span class="mf">14.04</span><span class="o">-</span><span class="nx">amd64</span><span class="o">.</span><span class="nx">box放在boxes下</span>
-
-<span class="mi">6</span><span class="nx">、添加打造属于自己的box，vagrant</span> <span class="nx">box</span> <span class="nx">add</span> <span class="nx">ubuntu1404</span> <span class="nx">ubuntu</span><span class="o">-</span><span class="mf">14.04</span><span class="o">-</span><span class="nx">amd64</span><span class="o">.</span><span class="nx">box</span>
-
-<span class="mi">7</span><span class="nx">、初始化box，vagrant</span> <span class="nx">init</span> <span class="nx">ubuntu1404，此时会在boxes下生成Vagrantfile配置文件</span>
-
-<span class="mi">8</span><span class="nx">、此时执行vagrant</span> <span class="nx">up</span> <span class="nx">启动虚拟机，然后vagrant</span> <span class="nx">ssh</span> <span class="nx">进入虚拟机</span>
-
-<span class="mi">9</span><span class="nx">、这个时候你就可以在该虚拟机上配置你自己想要的系统环境，比如安装nginx</span> <span class="nx">PHP</span> <span class="nx">MySQL</span> <span class="nx">redis等等</span>
-
-<span class="mi">10</span><span class="nx">、导出自己的box，vagrant</span> <span class="nx">package</span> <span class="o">--</span><span class="nx">output</span> <span class="nx">ubuntu1404_testbox</span>  <span class="o">--</span><span class="nx">base</span> <span class="nx">ubuntu1404</span>
-  
-<span class="mi">11</span><span class="nx">、Vagrantfile相关配置</span>
-  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">box</span><span class="o">=</span><span class="s2">&#34;ubuntu1404&#34;</span> <span class="c1">//box 名称
-</span><span class="c1"></span>  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">hostname</span><span class="o">=</span><span class="s2">&#34;lnmp&#34;</span>   <span class="c1">//配置hostname
-</span><span class="c1"></span>  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">network</span> <span class="s2">&#34;private_network&#34;</span><span class="p">,</span><span class="nx">ip</span><span class="o">:</span><span class="s2">&#34;192.168.22.20&#34;</span>  <span class="c1">//配置私有网络ip
-</span><span class="c1"></span>  <span class="nx">vb</span><span class="o">.</span><span class="nx">customize</span> <span class="p">[</span><span class="s2">&#34;modifyvm&#34;</span><span class="p">,</span><span class="o">:</span><span class="nx">id</span><span class="p">,</span><span class="s2">&#34;--memory&#34;</span><span class="p">,</span><span class="s2">&#34;1024&#34;</span><span class="p">]</span>  <span class="c1">//修改内存
-</span><span class="c1"></span>  <span class="nx">vb</span><span class="o">.</span><span class="nx">name</span><span class="o">=</span><span class="s2">&#34;testname&#34;</span>  <span class="c1">//修改virtualbox的名称
-</span><span class="c1"></span>    
-<span class="mi">12</span><span class="nx">、vagrant</span> <span class="nx">up</span> <span class="nx">可能会遇到的问题：</span>
-<span class="nx">Vagrant</span> <span class="nx">was</span> <span class="nx">unable</span> <span class="nx">to</span> <span class="nx">mount</span> <span class="nx">VirtualBox</span> <span class="nx">shared</span> <span class="nx">folders</span><span class="o">.</span> <span class="k">This</span> <span class="nx">is</span> <span class="nx">usually</span>
-<span class="nx">because</span> <span class="nx">the</span> <span class="nx">filesystem</span> <span class="s2">&#34;vboxsf&#34;</span> <span class="nx">is</span> <span class="k">not</span> <span class="nx">available</span><span class="o">.</span> <span class="k">This</span> <span class="nx">filesystem</span> <span class="nx">is</span>
-<span class="nx">made</span> <span class="nx">available</span> <span class="nx">via</span> <span class="nx">the</span> <span class="nx">VirtualBox</span> <span class="nx">Guest</span> <span class="nx">Additions</span> <span class="k">and</span> <span class="nx">kernel</span> <span class="nx">module</span><span class="o">.</span>
-<span class="nx">Please</span> <span class="nx">verify</span> <span class="nx">that</span> <span class="nx">these</span> <span class="nx">guest</span> <span class="nx">additions</span> <span class="nx">are</span> <span class="nx">properly</span> <span class="nx">installed</span> <span class="nx">in</span> <span class="nx">the</span>
-<span class="nx">guest</span><span class="o">.</span> <span class="k">This</span> <span class="nx">is</span> <span class="k">not</span> <span class="nx">a</span> <span class="nx">bug</span> <span class="nx">in</span> <span class="nx">Vagrant</span> <span class="k">and</span> <span class="nx">is</span> <span class="nx">usually</span> <span class="nx">caused</span> <span class="nx">by</span> <span class="nx">a</span> <span class="nx">faulty</span>
-<span class="nx">Vagrant</span> <span class="nx">box</span><span class="o">.</span> <span class="k">For</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">command</span> <span class="nx">attempted</span> <span class="nx">was</span><span class="o">:</span>
-
-<span class="nx">mount</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">vboxsf</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">uid</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="nx">gid</span><span class="o">=</span><span class="mi">1000</span> <span class="nx">vagrant</span> <span class="o">/</span><span class="nx">vagrant</span>
-
-<span class="nx">The</span> <span class="nx">error</span> <span class="nx">output</span> <span class="nx">from</span> <span class="nx">the</span> <span class="nx">command</span> <span class="nx">was</span><span class="o">:</span>
-
-<span class="nx">mount</span><span class="o">:</span> <span class="nx">unknown</span> <span class="nx">filesystem</span> <span class="nx">type</span> <span class="s1">&#39;vboxsf&#39;</span>
-<span class="nx">以上为执行vagrant</span> <span class="nx">up</span> <span class="nx">时的报错，说是Vagrant无法挂载VirtualBox共享文件夹，</span>
-<span class="nx">解决方法是执行vagrant</span> <span class="nx">plugin</span> <span class="nx">install</span> <span class="nx">vagrant</span><span class="o">-</span><span class="nx">vbguest，然后再尝试vagrant</span> <span class="nx">up</span>
-  
-<span class="mi">13</span><span class="nx">、资源推荐：</span>
-  <span class="nx">慕课在线视频：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">imooc</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">learn</span><span class="o">/</span><span class="mi">805</span>
-  <span class="nx">视频对应资料：https</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">apanly</span><span class="o">/</span><span class="nx">mooc</span><span class="o">/</span><span class="nx">tree</span><span class="o">/</span><span class="nx">master</span><span class="o">/</span><span class="nx">vagrant</span>
-  <span class="nx">vagrant</span> <span class="nx">up解决：https</span><span class="o">://</span><span class="nx">blog</span><span class="o">.</span><span class="nx">csdn</span><span class="o">.</span><span class="nx">net</span><span class="o">/</span><span class="nx">changjiangwang</span><span class="o">/</span><span class="nx">article</span><span class="o">/</span><span class="nx">details</span><span class="o">/</span><span class="mi">79129510</span>
-                <span class="nx">https</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">scotch</span><span class="o">-</span><span class="nx">io</span><span class="o">/</span><span class="nx">scotch</span><span class="o">-</span><span class="nx">box</span><span class="o">/</span><span class="nx">issues</span><span class="o">/</span><span class="mi">296</span>
-  <span class="nx">vagrant学习手册：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">vagrantup</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">intro</span><span class="o">/</span><span class="nx">getting</span><span class="o">-</span><span class="nx">started</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">html</span>
-
-<span class="mi">14</span><span class="nx">、常用命令：</span>
-<span class="err">$</span> <span class="nx">vagrant</span> <span class="o">-</span><span class="nx">v</span>        <span class="c1"># 显示当前版本
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">init</span>      <span class="c1"># 初始化
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">up</span>        <span class="c1"># 启动虚拟机
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">halt</span>      <span class="c1"># 关闭虚拟机
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">reload</span>    <span class="c1"># 重启虚拟机
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">ssh</span>       <span class="c1"># SSH 至虚拟机
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">suspend</span>   <span class="c1"># 挂起虚拟机
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">resume</span>    <span class="c1"># 唤醒虚拟机
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">status</span>    <span class="c1"># 查看虚拟机运行状态
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">destroy</span>   <span class="c1"># 销毁当前虚拟机
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">status</span>    <span class="c1"># 查看VM当前的状态
-</span><span class="c1"></span>
-
-<span class="c1">#box管理命令
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="k">list</span>    <span class="c1"># 查看本地box列表
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="nx">add</span> <span class="nx">boxname</span> <span class="nx">系统镜像名</span>    <span class="c1"># 添加box到列表
-</span><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="nx">remove</span> <span class="nx">boxname</span>  <span class="c1"># 从box列表移除
-</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="mi">1</span><span class="nx">、下载VirtualBox</span> <span class="mf">5.1</span><span class="o">.</span><span class="mi">38</span>  <span class="nx">x86</span><span class="o">/</span><span class="nx">AMD64</span>
+</span></span><span class="line"><span class="cl"><span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">virtualbox</span><span class="o">.</span><span class="nx">org</span><span class="o">/</span><span class="nx">wiki</span><span class="o">/</span><span class="nx">Download_Old_Builds_5_1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="nx">、下载Vagrant</span> <span class="mf">1.8</span><span class="o">.</span><span class="mf">6.</span><span class="nx">msi</span>
+</span></span><span class="line"><span class="cl"><span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">releases</span><span class="o">.</span><span class="nx">hashicorp</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">vagrant</span><span class="o">/</span><span class="mf">1.8</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">3</span><span class="nx">、下载box，我选的是以ubuntu作为系统镜像</span>
+</span></span><span class="line"><span class="cl"><span class="nx">下载地址：https</span><span class="o">://</span><span class="nx">pan</span><span class="o">.</span><span class="nx">baidu</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">s</span><span class="o">/</span><span class="mi">1</span><span class="nx">nS_12Vccdiara</span><span class="o">-</span><span class="nx">iLAnht5w</span>  <span class="nx">密码：ktjw</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">4</span><span class="nx">、然后傻瓜式安装这两个软件，vagrant安装完后需要重启电脑</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">5</span><span class="nx">、新建目录</span> <span class="nx">如code</span><span class="o">/</span><span class="nx">boxes，将ubuntu</span><span class="o">-</span><span class="mf">14.04</span><span class="o">-</span><span class="nx">amd64</span><span class="o">.</span><span class="nx">box放在boxes下</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">6</span><span class="nx">、添加打造属于自己的box，vagrant</span> <span class="nx">box</span> <span class="nx">add</span> <span class="nx">ubuntu1404</span> <span class="nx">ubuntu</span><span class="o">-</span><span class="mf">14.04</span><span class="o">-</span><span class="nx">amd64</span><span class="o">.</span><span class="nx">box</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">7</span><span class="nx">、初始化box，vagrant</span> <span class="nx">init</span> <span class="nx">ubuntu1404，此时会在boxes下生成Vagrantfile配置文件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">8</span><span class="nx">、此时执行vagrant</span> <span class="nx">up</span> <span class="nx">启动虚拟机，然后vagrant</span> <span class="nx">ssh</span> <span class="nx">进入虚拟机</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">9</span><span class="nx">、这个时候你就可以在该虚拟机上配置你自己想要的系统环境，比如安装nginx</span> <span class="nx">PHP</span> <span class="nx">MySQL</span> <span class="nx">redis等等</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">10</span><span class="nx">、导出自己的box，vagrant</span> <span class="nx">package</span> <span class="o">--</span><span class="nx">output</span> <span class="nx">ubuntu1404_testbox</span>  <span class="o">--</span><span class="nx">base</span> <span class="nx">ubuntu1404</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="mi">11</span><span class="nx">、Vagrantfile相关配置</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">box</span><span class="o">=</span><span class="s2">&#34;ubuntu1404&#34;</span> <span class="c1">//box 名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">hostname</span><span class="o">=</span><span class="s2">&#34;lnmp&#34;</span>   <span class="c1">//配置hostname
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">config</span><span class="o">.</span><span class="nx">vm</span><span class="o">.</span><span class="nx">network</span> <span class="s2">&#34;private_network&#34;</span><span class="p">,</span><span class="nx">ip</span><span class="o">:</span><span class="s2">&#34;192.168.22.20&#34;</span>  <span class="c1">//配置私有网络ip
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">vb</span><span class="o">.</span><span class="nx">customize</span> <span class="p">[</span><span class="s2">&#34;modifyvm&#34;</span><span class="p">,</span><span class="o">:</span><span class="nx">id</span><span class="p">,</span><span class="s2">&#34;--memory&#34;</span><span class="p">,</span><span class="s2">&#34;1024&#34;</span><span class="p">]</span>  <span class="c1">//修改内存
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">vb</span><span class="o">.</span><span class="nx">name</span><span class="o">=</span><span class="s2">&#34;testname&#34;</span>  <span class="c1">//修改virtualbox的名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span><span class="line"><span class="cl"><span class="mi">12</span><span class="nx">、vagrant</span> <span class="nx">up</span> <span class="nx">可能会遇到的问题：</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Vagrant</span> <span class="nx">was</span> <span class="nx">unable</span> <span class="nx">to</span> <span class="nx">mount</span> <span class="nx">VirtualBox</span> <span class="nx">shared</span> <span class="nx">folders</span><span class="o">.</span> <span class="k">This</span> <span class="nx">is</span> <span class="nx">usually</span>
+</span></span><span class="line"><span class="cl"><span class="nx">because</span> <span class="nx">the</span> <span class="nx">filesystem</span> <span class="s2">&#34;vboxsf&#34;</span> <span class="nx">is</span> <span class="k">not</span> <span class="nx">available</span><span class="o">.</span> <span class="k">This</span> <span class="nx">filesystem</span> <span class="nx">is</span>
+</span></span><span class="line"><span class="cl"><span class="nx">made</span> <span class="nx">available</span> <span class="nx">via</span> <span class="nx">the</span> <span class="nx">VirtualBox</span> <span class="nx">Guest</span> <span class="nx">Additions</span> <span class="k">and</span> <span class="nx">kernel</span> <span class="nx">module</span><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Please</span> <span class="nx">verify</span> <span class="nx">that</span> <span class="nx">these</span> <span class="nx">guest</span> <span class="nx">additions</span> <span class="nx">are</span> <span class="nx">properly</span> <span class="nx">installed</span> <span class="nx">in</span> <span class="nx">the</span>
+</span></span><span class="line"><span class="cl"><span class="nx">guest</span><span class="o">.</span> <span class="k">This</span> <span class="nx">is</span> <span class="k">not</span> <span class="nx">a</span> <span class="nx">bug</span> <span class="nx">in</span> <span class="nx">Vagrant</span> <span class="k">and</span> <span class="nx">is</span> <span class="nx">usually</span> <span class="nx">caused</span> <span class="nx">by</span> <span class="nx">a</span> <span class="nx">faulty</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Vagrant</span> <span class="nx">box</span><span class="o">.</span> <span class="k">For</span> <span class="nx">context</span><span class="p">,</span> <span class="nx">the</span> <span class="nx">command</span> <span class="nx">attempted</span> <span class="nx">was</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">mount</span> <span class="o">-</span><span class="nx">t</span> <span class="nx">vboxsf</span> <span class="o">-</span><span class="nx">o</span> <span class="nx">uid</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="nx">gid</span><span class="o">=</span><span class="mi">1000</span> <span class="nx">vagrant</span> <span class="o">/</span><span class="nx">vagrant</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">The</span> <span class="nx">error</span> <span class="nx">output</span> <span class="nx">from</span> <span class="nx">the</span> <span class="nx">command</span> <span class="nx">was</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">mount</span><span class="o">:</span> <span class="nx">unknown</span> <span class="nx">filesystem</span> <span class="nx">type</span> <span class="s1">&#39;vboxsf&#39;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">以上为执行vagrant</span> <span class="nx">up</span> <span class="nx">时的报错，说是Vagrant无法挂载VirtualBox共享文件夹，</span>
+</span></span><span class="line"><span class="cl"><span class="nx">解决方法是执行vagrant</span> <span class="nx">plugin</span> <span class="nx">install</span> <span class="nx">vagrant</span><span class="o">-</span><span class="nx">vbguest，然后再尝试vagrant</span> <span class="nx">up</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="mi">13</span><span class="nx">、资源推荐：</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">慕课在线视频：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">imooc</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">learn</span><span class="o">/</span><span class="mi">805</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">视频对应资料：https</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">apanly</span><span class="o">/</span><span class="nx">mooc</span><span class="o">/</span><span class="nx">tree</span><span class="o">/</span><span class="nx">master</span><span class="o">/</span><span class="nx">vagrant</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">vagrant</span> <span class="nx">up解决：https</span><span class="o">://</span><span class="nx">blog</span><span class="o">.</span><span class="nx">csdn</span><span class="o">.</span><span class="nx">net</span><span class="o">/</span><span class="nx">changjiangwang</span><span class="o">/</span><span class="nx">article</span><span class="o">/</span><span class="nx">details</span><span class="o">/</span><span class="mi">79129510</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">https</span><span class="o">://</span><span class="nx">github</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">scotch</span><span class="o">-</span><span class="nx">io</span><span class="o">/</span><span class="nx">scotch</span><span class="o">-</span><span class="nx">box</span><span class="o">/</span><span class="nx">issues</span><span class="o">/</span><span class="mi">296</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">vagrant学习手册：https</span><span class="o">://</span><span class="nx">www</span><span class="o">.</span><span class="nx">vagrantup</span><span class="o">.</span><span class="nx">com</span><span class="o">/</span><span class="nx">intro</span><span class="o">/</span><span class="nx">getting</span><span class="o">-</span><span class="nx">started</span><span class="o">/</span><span class="nx">index</span><span class="o">.</span><span class="nx">html</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">14</span><span class="nx">、常用命令：</span>
+</span></span><span class="line"><span class="cl"><span class="err">$</span> <span class="nx">vagrant</span> <span class="o">-</span><span class="nx">v</span>        <span class="c1"># 显示当前版本
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">init</span>      <span class="c1"># 初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">up</span>        <span class="c1"># 启动虚拟机
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">halt</span>      <span class="c1"># 关闭虚拟机
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">reload</span>    <span class="c1"># 重启虚拟机
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">ssh</span>       <span class="c1"># SSH 至虚拟机
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">suspend</span>   <span class="c1"># 挂起虚拟机
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">resume</span>    <span class="c1"># 唤醒虚拟机
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">status</span>    <span class="c1"># 查看虚拟机运行状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">destroy</span>   <span class="c1"># 销毁当前虚拟机
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">status</span>    <span class="c1"># 查看VM当前的状态
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#box管理命令
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="k">list</span>    <span class="c1"># 查看本地box列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="nx">add</span> <span class="nx">boxname</span> <span class="nx">系统镜像名</span>    <span class="c1"># 添加box到列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="err">$</span> <span class="nx">vagrant</span> <span class="nx">box</span> <span class="nx">remove</span> <span class="nx">boxname</span>  <span class="c1"># 从box列表移除
+</span></span></span></code></pre></div>
 			</div>
 
 			<hr class="post-end">
@@ -218,7 +218,7 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -226,7 +226,7 @@
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

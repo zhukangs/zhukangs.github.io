@@ -80,40 +80,40 @@
 			</header>
 			<div class="content">
 				<h3 id="laravel项目初始">laravel项目初始<a href="#laravel项目初始" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.复制.env.example为.env，配置数据库信息，并自行在mysql中建一个对应的数据库。
-  cp .env.example .env
-
-2.composer install 安装相关包。
-
-3.php artisan key:generate 生成应用Key。
-
-4.php artisan migrate 运行迁移生成数据表。
-进行数据库迁移，如果有seeder的话，运行php artisan db:seed
-
-5.配置虚拟机或者使用php artisan serve启动服务。
-</code></pre></div><h3 id="通过composer创建项目">通过Composer创建项目<a href="#通过composer创建项目" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">或者，你还可以通过在终端中运行 create-project 命令来安装 Laravel：
-    
-composer create-project --prefer-dist laravel/laravel blog &#34;5.5.*&#34;
-</code></pre></div><h3 id="captcha验证码">captcha（验证码）<a href="#captcha验证码" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">先来用这个命令，将包装上
-    
-composer require mews/captcha
-
-再来跑这个命令，生成验证码的配置文件
-
-php artisan vendor:publish
-
-修改html
-</code></pre></div><h3 id="i18n语言包">i18n语言包<a href="#i18n语言包" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">composer require caouecs/laravel-lang:~3.0
-    
-1. 找到vendor/caouecs/laravel-lang/src/zh-CN，整个文件夹复制到resources/lang。
-2. 修改app/config.php  &#39;locale&#39; =&gt; &#39;zh-CN&#39;,
-</code></pre></div><h3 id="删除一个资源">删除一个资源<a href="#删除一个资源" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/js/laravel.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-<span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{route(&#39;issues.destroy&#39;, $issue-&gt;id)}}&#34;</span> <span class="na">data-method</span><span class="o">=</span><span class="s">&#34;delete&#34;</span> <span class="na">data-token</span><span class="o">=</span><span class="s">&#34;{{csrf_token()}}&#34;</span> <span class="na">data-confirm</span><span class="o">=</span><span class="s">&#34;Are you sure?&#34;</span> <span class="err">...</span><span class="p">&gt;</span>Destroy<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-</code></pre></div><p>待更新&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1.复制.env.example为.env，配置数据库信息，并自行在mysql中建一个对应的数据库。
+</span></span><span class="line"><span class="cl">  cp .env.example .env
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.composer install 安装相关包。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3.php artisan key:generate 生成应用Key。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4.php artisan migrate 运行迁移生成数据表。
+</span></span><span class="line"><span class="cl">进行数据库迁移，如果有seeder的话，运行php artisan db:seed
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">5.配置虚拟机或者使用php artisan serve启动服务。
+</span></span></code></pre></div><h3 id="通过composer创建项目">通过Composer创建项目<a href="#通过composer创建项目" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">或者，你还可以通过在终端中运行 create-project 命令来安装 Laravel：
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">composer create-project --prefer-dist laravel/laravel blog &#34;5.5.*&#34;
+</span></span></code></pre></div><h3 id="captcha验证码">captcha（验证码）<a href="#captcha验证码" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">先来用这个命令，将包装上
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">composer require mews/captcha
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">再来跑这个命令，生成验证码的配置文件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">php artisan vendor:publish
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">修改html
+</span></span></code></pre></div><h3 id="i18n语言包">i18n语言包<a href="#i18n语言包" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">composer require caouecs/laravel-lang:~3.0
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">1. 找到vendor/caouecs/laravel-lang/src/zh-CN，整个文件夹复制到resources/lang。
+</span></span><span class="line"><span class="cl">2. 修改app/config.php  &#39;locale&#39; =&gt; &#39;zh-CN&#39;,
+</span></span></code></pre></div><h3 id="删除一个资源">删除一个资源<a href="#删除一个资源" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;/assets/js/laravel.js&#34;</span><span class="p">&gt;&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{route(&#39;issues.destroy&#39;, $issue-&gt;id)}}&#34;</span> <span class="na">data-method</span><span class="o">=</span><span class="s">&#34;delete&#34;</span> <span class="na">data-token</span><span class="o">=</span><span class="s">&#34;{{csrf_token()}}&#34;</span> <span class="na">data-confirm</span><span class="o">=</span><span class="s">&#34;Are you sure?&#34;</span> <span class="err">...</span><span class="p">&gt;</span>Destroy<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>待更新&hellip;</p>
 
 			</div>
 
@@ -178,7 +178,7 @@ php artisan vendor:publish
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -186,7 +186,7 @@ php artisan vendor:publish
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

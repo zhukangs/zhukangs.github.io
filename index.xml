@@ -7,7 +7,59 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 19 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Laravel 使用JWT API 授权🚀</title>
+      <link>https://hugo.zkilm.cn/posts/2022/20220305-api-jwt/</link>
+      <pubDate>Sat, 05 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2022/20220305-api-jwt/</guid>
+      <description>什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。作者：Dearmadman链接：https://www.jianshu.com/p/576dbf44b2ae来源：简书著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+ 关于JWT讲解与分析：https://learnku.com/articles/17883
+安装 composer 安装 lcobucci/jwt ，我这里默认安装的是最新版 4.1 。
+composer require lcobucci/jwt 封装 在 app\Helpers 目录下新建 Jwt.php 文件，封装 Jwt 类。
+&amp;lt;?php /** * Created by PhpStorm. * User: zhukang * Date: 2019/8/22 * Time: 16:39 */ namespace App\Helpers; use Illuminate\Support\Facades\Redis; use Lcobucci\Clock\SystemClock; use Lcobucci\JWT\Configuration; use Lcobucci\JWT\Exception; use Lcobucci\JWT\Signer\Hmac\Sha256; use Lcobucci\JWT\Signer\Key\InMemory; use Lcobucci\JWT\Token\Plain; use Lcobucci\JWT\Validation\Constraint\IdentifiedBy; use Lcobucci\JWT\Validation\Constraint\IssuedBy; use Lcobucci\JWT\Validation\Constraint\PermittedFor; use Lcobucci\JWT\Validation\Constraint\SignedWith; use Lcobucci\JWT\Validation\Constraint\ValidAt; use Lcobucci\JWT\Validation\RequiredConstraintsViolated; trait Jwt { protected $issuedBy;//签发人  protected $permittedFor;//受众  protected $identifiedBy;//jwt编号  protected $issuedAt;//签发时间  protected $expiresAt;//过期时间  protected $jwt_secret; //秘钥  public function __construct() { //获取jwt配置信息  $jwt_configs = config(&amp;#39;jwt&amp;#39;); $this-&amp;gt;issuedBy = $jwt_configs[&amp;#39;issuedBy&amp;#39;]; $this-&amp;gt;permittedFor = $jwt_configs[&amp;#39;permittedFor&amp;#39;]; $this-&amp;gt;identifiedBy = $jwt_configs[&amp;#39;identifiedBy&amp;#39;]; $this-&amp;gt;issuedAt = $jwt_configs[&amp;#39;issuedAt&amp;#39;]; $this-&amp;gt;expiresAt = $this-&amp;gt;issuedAt-&amp;gt;modify($jwt_configs[&amp;#39;expiresAt&amp;#39;]); $this-&amp;gt;jwt_secret = $jwt_configs[&amp;#39;jwt_secret&amp;#39;]; } /** * @Description:生成jwt配置对象 * @return Configuration * @Author:zhukang * @Date:2022/4/7 16:05 */ public function createJwtObject() { return Configuration::forSymmetricSigner( new Sha256(), InMemory::base64Encoded($this-&amp;gt;jwt_secret) ); } /** * @Description:生成token * @param array $bind 需要在jwt载体(payload)中加入的数据 [&amp;#39;userid&amp;#39;=&amp;gt;1,&amp;#39;xxxx&amp;#39;=&amp;gt;xxxx] * @return string \Lcobucci\JWT\Token * @Author:zhukang * @Date:2022/4/7 16:04 */ public function getToken(array $bind = []) { $jwt_object = $this-&amp;gt;createJwtObject(); $jwt_obj = $jwt_object-&amp;gt;builder() -&amp;gt;issuedBy($this-&amp;gt;issuedBy) -&amp;gt;permittedFor($this-&amp;gt;permittedFor) -&amp;gt;identifiedBy($this-&amp;gt;identifiedBy) -&amp;gt;issuedAt($this-&amp;gt;issuedAt) -&amp;gt;canOnlyBeUsedAfter($this-&amp;gt;issuedAt) -&amp;gt;expiresAt($this-&amp;gt;expiresAt); if (is_array($bind) &amp;amp;&amp;amp; !</description>
+    </item>
+    
+    <item>
+      <title>Laravel 使用 Sanctum API 授权</title>
+      <link>https://hugo.zkilm.cn/posts/2022/20220218-api-sanctum/</link>
+      <pubDate>Fri, 18 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2022/20220218-api-sanctum/</guid>
+      <description>介绍  Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
+ 相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272
+安装   安装 Laravel Sanctum
+composer require laravel/sanctum   Artisan 命令发布 Sanctum 的配置和迁移文件
+php artisan vendor:publish --provider=&amp;#34;Laravel\Sanctum\SanctumServiceProvider&amp;#34;   Sanctum 将创建一个数据库表来存储 API 令牌
+php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Kernel.php 文件中的 api 中间件组中
+&amp;#39;api&amp;#39; =&amp;gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &amp;#39;throttle:api&amp;#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ],   配置   重写默认模型
+执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。</description>
+    </item>
+    
+    <item>
+      <title>Laravel 开发 API 初始搭建</title>
+      <link>https://hugo.zkilm.cn/posts/2022/20220115-api-init/</link>
+      <pubDate>Sat, 15 Jan 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2022/20220115-api-init/</guid>
+      <description>前言 使用 Laravel 开发过不少项目，大部分还是前后端分离的，所以今天就总结归纳下在开发API项目时，Laravel 的前期框架搭建过程！
+环境  PHP 8.0.5 (cli) MySQL 8.0.25-0ubuntu0.20.04.1 (Ubuntu) Nginx nginx/1.18.0 (Ubuntu) IDE PhpStorm2020.2  搭建   安装
+//默认安装最新版本 composer create-project laravel/laravel newapi //指定版本 composer create-project --prefer-dist laravel/laravel newapi &amp;#34;6.0.*&amp;#34;   配置
+  数据库（配置根目录下 .env 文件）
+DB_CONNECTION=mysql // host地址 DB_HOST=127.0.0.1 // 端口号 DB_PORT=3306 // 数据库名 DB_DATABASE=laravel9 // 用户名 DB_USERNAME=root // 密码 DB_PASSWORD=   时区（配置 config/app.php 文件）
+&amp;#39;timezone&amp;#39; =&amp;gt; &amp;#39;PRC&amp;#39;, // 大陆时间     安装扩展包</description>
+    </item>
+    
+    <item>
+      <title>RSA加解密🔒</title>
+      <link>https://hugo.zkilm.cn/posts/2021/20211215-rsa/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2021/20211215-rsa/</guid>
+      <description>生成RSA公私钥  代码  class RsaHandler { /** * 过期时间 * @var int|mixed */ protected $expire; /** * 密钥密码 * @var string */ protected $pass_phrase; /** * 密钥保存路径 * @var string */ protected $path; /** * 私钥 * @var string */ protected $private_key; /** * 时间戳 * @var integer */ protected $time; /** * 基础配置 * @var string[] */ public $dn = [ &amp;#34;countryName&amp;#34; =&amp;gt; &amp;#34;CN&amp;#34;, &amp;#34;stateOrProvinceName&amp;#34; =&amp;gt; &amp;#34;ChongQing&amp;#34;, &amp;#34;localityName&amp;#34; =&amp;gt; &amp;#34;China&amp;#34;, &amp;#34;organizationName&amp;#34; =&amp;gt; &amp;#34;The Brain Room Limited&amp;#34;, &amp;#34;organizationalUnitName&amp;#34; =&amp;gt; &amp;#34;PHP Documentation Team&amp;#34;, &amp;#34;commonName&amp;#34; =&amp;gt; &amp;#34;Rancy Bruce&amp;#34;, &amp;#34;emailAddress&amp;#34; =&amp;gt; &amp;#34;rancy@rancy.</description>
+    </item>
+    
     <item>
       <title>Laravel 表单验证封装💪</title>
       <link>https://hugo.zkilm.cn/posts/2021/20211119-laravel-formrequest/</link>
@@ -72,51 +124,6 @@ WEB开发者，喜欢折腾，热爱LARAVEL，重度代码洁癖患者。 综合
       
       <guid>https://hugo.zkilm.cn/posts/2021/20210121-laravel-rabbitmq/</guid>
       <description>安装 erlang  erlang 是 RabbitMQ 的依赖。首先执行  sudo apt-get update  然后执行  sudo apt-get install erlang  安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：  Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt;  然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。  安装 RabbitMq sudo apt-get install rabbitmq-server  安装完毕后，查看 RabbitMQ 状态：  sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop  # 重启RabbitMQ： service rabbitmq-server restart  配置 RabbitMQ  执行命令，启动 RabbitMQ 插件  sudo rabbitmq-plugins enable rabbitmq_management  添加用户 RabbitMQ，格式：rabbitmqctl add_user 用户名 密码  rabbitmqctl add_user admin admin  给予用户管理员权限  sudo rabbitmqctl set_user_tags admin administrator  为用户设置读写权限  sudo rabbitmqctl set_permissions -p / admin &amp;#34;.</description>
-    </item>
-    
-    <item>
-      <title>Golang</title>
-      <link>https://hugo.zkilm.cn/reading/20210901-goweb-start/</link>
-      <pubDate>Sat, 02 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://hugo.zkilm.cn/reading/20210901-goweb-start/</guid>
-      <description>Golang Web入门：https://mp.weixin.qq.com/s/IIjl93QFAnyjpLu3XgjQxA
-跟煎鱼学 Go：https://eddycjy.com/go-categories/
-Go语言中文文档：http://topgoer.com/</description>
-    </item>
-    
-    <item>
-      <title>Elasticsearch</title>
-      <link>https://hugo.zkilm.cn/reading/20210901-elasticsearch-start/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://hugo.zkilm.cn/reading/20210901-elasticsearch-start/</guid>
-      <description>Elasticsearch 中文文档：https://docs.es.shiyueshuyi.xyz/#/README
-PHP7下使用Elasticsearch：https://blog.junphp.com/details/325.jsp</description>
-    </item>
-    
-    <item>
-      <title>Kafka</title>
-      <link>https://hugo.zkilm.cn/reading/20210901-kafka-start/</link>
-      <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://hugo.zkilm.cn/reading/20210901-kafka-start/</guid>
-      <description>Kafka入门：https://mp.weixin.qq.com/s/yaYwH0XLF9jW8VcSnUOz-g
-全网最通俗易懂的Kafka入门：https://zhuanlan.zhihu.com/p/95215691</description>
-    </item>
-    
-    <item>
-      <title>Linux防火墙</title>
-      <link>https://hugo.zkilm.cn/posts/2020/20201214-linux-firwall/</link>
-      <pubDate>Mon, 14 Dec 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://hugo.zkilm.cn/posts/2020/20201214-linux-firwall/</guid>
-      <description>iptables 防火墙 1、基本操作
-# 查看防火墙状态 service iptables status # 停止防火墙 service iptables stop # 启动防火墙 service iptables start # 重启防火墙 service iptables restart # 永久关闭防火墙 chkconfig iptables off # 永久关闭后重启 chkconfig iptables on 2、开启80端口
-vim /etc/sysconfig/iptables # 加入如下代码 -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT 保存退出后重启防火墙
-service iptables restart firewall 防火墙 1、查看firewall服务状态
-systemctl status firewalld firewall-cmd --state 2、开启、重启、关闭、firewalld.service服务
-# 开启 service firewalld start # 重启 service firewalld restart # 关闭 service firewalld stop 3、查看防火墙规则</description>
     </item>
     
   </channel>

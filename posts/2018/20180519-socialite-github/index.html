@@ -112,30 +112,30 @@ composer require &#34;overtrue/laravel-socialite:~2.0&#34; 2、注册服务 (con
 <p>简单的解释一下流程👇</p>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1. 客户端（app/浏览器）将用户导向第三方认证服务器
-2. 用户在第三方认证服务器，选择是否给予客户端授权
-3. 用户同意授权后，认证服务器将用户导向客户端事先指定的 重定向URI，同时附上一个授权码。
-4. 客户端将授权码发送至服务器，服务器通过授权码以及 APP_SECRET 向第三方服务器申请 access_token
-5. 服务器通过 access_token，向第三方服务器申请用户数据，完成登录流程
-</code></pre></div><p>以上是一个基本流程，无论是网页应用，还是手机应用，流程都基本相同。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1. 客户端（app/浏览器）将用户导向第三方认证服务器
+</span></span><span class="line"><span class="cl">2. 用户在第三方认证服务器，选择是否给予客户端授权
+</span></span><span class="line"><span class="cl">3. 用户同意授权后，认证服务器将用户导向客户端事先指定的 重定向URI，同时附上一个授权码。
+</span></span><span class="line"><span class="cl">4. 客户端将授权码发送至服务器，服务器通过授权码以及 APP_SECRET 向第三方服务器申请 access_token
+</span></span><span class="line"><span class="cl">5. 服务器通过 access_token，向第三方服务器申请用户数据，完成登录流程
+</span></span></code></pre></div><p>以上是一个基本流程，无论是网页应用，还是手机应用，流程都基本相同。</p>
 <h3 id="配置">配置<a href="#配置" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>使用 <code>overtrue/laravel-socialite</code> 来实现 Github 登录，支持国内应用的 Laravel 扩展包，比如微信、QQ、微博等。当然，你用laravel/socialite包也是可以的，不过对QQ，微博等国内的就不支持了。</p>
 <p>1、安装Laravel扩展包</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require <span class="s2">&#34;overtrue/laravel-socialite:~2.0&#34;</span>
-</code></pre></div><p>2、注册服务 (<code>config/app.php</code>)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="c1">// Other service providers...
-</span><span class="c1"></span>    <span class="nx">Overtrue\LaravelSocialite\ServiceProvider</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
-<span class="p">],</span>
-</code></pre></div><p>3、把 <code>Socialite facade</code> 加入到 <code>aliases</code> 数组中 <code>config/app.php</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;Socialite&#39;</span> <span class="o">=&gt;</span> <span class="nx">Laravel\Socialite\Facades\Socialite</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
-</code></pre></div><p>4、添加上应用程序所使用的 OAuth 服务的凭证(<code>config/services.php</code>)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;github&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="s1">&#39;client_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;d53ab19b1c64d0f7****&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;client_secret&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3d90bf64d4fa2aa4*****ecc67646651cec32491&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;redirect&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://test.test/login/github/callback&#39;</span><span class="p">,</span>
-<span class="p">],</span>
-</code></pre></div><p>5、Github申请应用</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require <span class="s2">&#34;overtrue/laravel-socialite:~2.0&#34;</span>
+</span></span></code></pre></div><p>2、注册服务 (<code>config/app.php</code>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;providers&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Other service providers...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Overtrue\LaravelSocialite\ServiceProvider</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">],</span>
+</span></span></code></pre></div><p>3、把 <code>Socialite facade</code> 加入到 <code>aliases</code> 数组中 <code>config/app.php</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;Socialite&#39;</span> <span class="o">=&gt;</span> <span class="nx">Laravel\Socialite\Facades\Socialite</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span></code></pre></div><p>4、添加上应用程序所使用的 OAuth 服务的凭证(<code>config/services.php</code>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;github&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;client_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;d53ab19b1c64d0f7****&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;client_secret&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;3d90bf64d4fa2aa4*****ecc67646651cec32491&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;redirect&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;http://test.test/login/github/callback&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">],</span>
+</span></span></code></pre></div><p>5、Github申请应用</p>
 <p>点击<a href="https://github.com/settings/applications/new">链接</a>到申请页面：</p>
 <table>
 <thead>
@@ -166,35 +166,35 @@ composer require &#34;overtrue/laravel-socialite:~2.0&#34; 2、注册服务 (con
 <p>申请后会拿到<code>Client ID</code>和<code>Client Secret</code>。</p>
 <h3 id="实现github登录">实现GitHub登录<a href="#实现github登录" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>1、需要两个路由：一个重定向用户到 Github 授权，另一个在 Github 验证之后接收回调</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//第三方登录测试
-</span><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;login/github&#39;</span><span class="p">,</span> <span class="s1">&#39;Auth\LoginController@redirectToProvider&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;githubLogin&#39;</span><span class="p">);</span>
-<span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;login/github/callback&#39;</span><span class="p">,</span> <span class="s1">&#39;Auth\LoginController@handleProviderCallback&#39;</span><span class="p">);</span>
-</code></pre></div><p>2、接下来给 <code>LoginControlle</code>r 控制添加两个方法，<code>redirectToProvider</code> 方法重定向到 Github 授权页面，<code>handleProviderCallback</code>方法在 Github 验证之后接收回调(<code>Auth\LoginControllrt.php</code>)</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//重定向到 Github 授权页面
-</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">redirectToProvider</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="nx">Socialite</span><span class="o">::</span><span class="na">driver</span><span class="p">(</span><span class="s1">&#39;github&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">();</span>
-<span class="p">}</span>
- 
-<span class="c1">// 在 Github 验证之后接收回调
-</span><span class="c1"></span><span class="k">protected</span> <span class="nv">$github_user</span><span class="p">;</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">handleProviderCallback</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="nv">$github_user</span> <span class="o">=</span> <span class="nx">Socialite</span><span class="o">::</span><span class="na">driver</span><span class="p">(</span><span class="s1">&#39;github&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">();</span>
-    <span class="nv">$user</span><span class="o">=</span><span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;github_name&#39;</span><span class="p">,</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">nickname</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
-    <span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$user</span><span class="p">)){</span>
-        <span class="nv">$user</span><span class="o">=</span><span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
-            <span class="s1">&#39;name&#39;</span><span class="o">=&gt;</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span>
-            <span class="s1">&#39;email&#39;</span><span class="o">=&gt;</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">email</span><span class="p">,</span>
-            <span class="s1">&#39;github_name&#39;</span><span class="o">=&gt;</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">nickname</span><span class="p">,</span>
-            <span class="s1">&#39;avatar&#39;</span><span class="o">=&gt;</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">avatar</span><span class="p">,</span>
-            <span class="s1">&#39;verified&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
-        <span class="p">]);</span>
-    <span class="p">}</span>
-    <span class="nx">\Auth</span><span class="o">::</span><span class="na">login</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">Redirect</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">guest</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="结束语">结束语<a href="#结束语" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//第三方登录测试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;login/github&#39;</span><span class="p">,</span> <span class="s1">&#39;Auth\LoginController@redirectToProvider&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;githubLogin&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;login/github/callback&#39;</span><span class="p">,</span> <span class="s1">&#39;Auth\LoginController@handleProviderCallback&#39;</span><span class="p">);</span>
+</span></span></code></pre></div><p>2、接下来给 <code>LoginControlle</code>r 控制添加两个方法，<code>redirectToProvider</code> 方法重定向到 Github 授权页面，<code>handleProviderCallback</code>方法在 Github 验证之后接收回调(<code>Auth\LoginControllrt.php</code>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//重定向到 Github 授权页面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">redirectToProvider</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">Socialite</span><span class="o">::</span><span class="na">driver</span><span class="p">(</span><span class="s1">&#39;github&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="c1">// 在 Github 验证之后接收回调
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">protected</span> <span class="nv">$github_user</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">handleProviderCallback</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$github_user</span> <span class="o">=</span> <span class="nx">Socialite</span><span class="o">::</span><span class="na">driver</span><span class="p">(</span><span class="s1">&#39;github&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$user</span><span class="o">=</span><span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;github_name&#39;</span><span class="p">,</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">nickname</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="k">empty</span><span class="p">(</span><span class="nv">$user</span><span class="p">)){</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$user</span><span class="o">=</span><span class="nx">User</span><span class="o">::</span><span class="na">create</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;name&#39;</span><span class="o">=&gt;</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;email&#39;</span><span class="o">=&gt;</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">email</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;github_name&#39;</span><span class="o">=&gt;</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">nickname</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;avatar&#39;</span><span class="o">=&gt;</span><span class="nv">$github_user</span><span class="o">-&gt;</span><span class="na">avatar</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;verified&#39;</span><span class="o">=&gt;</span><span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">\Auth</span><span class="o">::</span><span class="na">login</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">Redirect</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">guest</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="结束语">结束语<a href="#结束语" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <blockquote>
 <p>即使生活是一片沙漠🏜，也要在沙漠中开出花朵🌼。</p>
 </blockquote>
@@ -269,7 +269,7 @@ composer require &#34;overtrue/laravel-socialite:~2.0&#34; 2、注册服务 (con
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -277,7 +277,7 @@ composer require &#34;overtrue/laravel-socialite:~2.0&#34; 2、注册服务 (con
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

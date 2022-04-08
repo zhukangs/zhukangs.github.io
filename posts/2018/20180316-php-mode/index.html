@@ -116,118 +116,118 @@
 <ul>
 <li>抽象工厂模式（Abstract Factory）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：在不指定具体类的情况下创建一系列相关或依赖对象。 通常创建的类都实现相同的接口。
-抽象工厂的客户并不关心这些对象是如何创建的，它只是知道它们是如何一起运行的。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：在不指定具体类的情况下创建一系列相关或依赖对象。 通常创建的类都实现相同的接口。
+</span></span><span class="line"><span class="cl">抽象工厂的客户并不关心这些对象是如何创建的，它只是知道它们是如何一起运行的。
+</span></span></code></pre></div><ul>
 <li>建造者模式（Builder）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：建造者是创建一个复杂对象的一部分接口。
-有时候，如果建造者对他所创建的东西拥有较好的知识储备，这个接口就可能成为一个有默认方法的抽象类（又称为适配器）。
-如果对象有复杂的继承树，那么对于建造者来说，有一个复杂继承树也是符合逻辑的。
-注意：建造者通常有一个「流式接口」，例如 PHPUnit 模拟生成器。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：建造者是创建一个复杂对象的一部分接口。
+</span></span><span class="line"><span class="cl">有时候，如果建造者对他所创建的东西拥有较好的知识储备，这个接口就可能成为一个有默认方法的抽象类（又称为适配器）。
+</span></span><span class="line"><span class="cl">如果对象有复杂的继承树，那么对于建造者来说，有一个复杂继承树也是符合逻辑的。
+</span></span><span class="line"><span class="cl">注意：建造者通常有一个「流式接口」，例如 PHPUnit 模拟生成器。
+</span></span></code></pre></div><ul>
 <li>工厂方法模式（Factory Method）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：对比简单工厂模式的优点是，您可以将其子类用不同的方法来创建一个对象。
-举一个简单的例子，这个抽象类可能只是一个接口。
-这种模式是「真正」的设计模式， 因为他实现了S.O.L.I.D原则中「D」的 「依赖倒置」。
-这意味着工厂方法模式取决于抽象类，而不是具体的类。 这是与简单工厂模式和静态工厂模式相比的优势。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：对比简单工厂模式的优点是，您可以将其子类用不同的方法来创建一个对象。
+</span></span><span class="line"><span class="cl">举一个简单的例子，这个抽象类可能只是一个接口。
+</span></span><span class="line"><span class="cl">这种模式是「真正」的设计模式， 因为他实现了S.O.L.I.D原则中「D」的 「依赖倒置」。
+</span></span><span class="line"><span class="cl">这意味着工厂方法模式取决于抽象类，而不是具体的类。 这是与简单工厂模式和静态工厂模式相比的优势。
+</span></span></code></pre></div><ul>
 <li>SOLID原则</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">单一职责原则SRP:一个类应该有且只有一个去改变它的理由，这意味着一个类应该只有一项工作;
-
-开放封闭原则OCP:对象或实体应该对扩展开放，对修改封闭;
-
-替换原则LSP:在对象x为类型T时q(x)成立,那么当S是T的子类时,对象y为类型S时q(y)也应成立(即对父类的调用同样适用于子类);
-
-接口分离原则ISP:不应强迫客户端实现一个它用不上的接口，或是说客户端不应该被迫依赖它们不使用的方法;
-
-依赖倒置原则DIP:实体必须依靠抽象而不是具体实现。它表示高层次的模块不应该依赖于低层次的模块，它们都应该依赖于抽象;
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">单一职责原则SRP:一个类应该有且只有一个去改变它的理由，这意味着一个类应该只有一项工作;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">开放封闭原则OCP:对象或实体应该对扩展开放，对修改封闭;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">替换原则LSP:在对象x为类型T时q(x)成立,那么当S是T的子类时,对象y为类型S时q(y)也应成立(即对父类的调用同样适用于子类);
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">接口分离原则ISP:不应强迫客户端实现一个它用不上的接口，或是说客户端不应该被迫依赖它们不使用的方法;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">依赖倒置原则DIP:实体必须依靠抽象而不是具体实现。它表示高层次的模块不应该依赖于低层次的模块，它们都应该依赖于抽象;
+</span></span></code></pre></div><ul>
 <li>除SOLID原则外还有很多其它的面向对象原则。如：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">&#34;组合替代继承&#34;:这是说相对于继承，要更倾向于使用组合；
-
-&#34;笛米特法则&#34;：这是说&#34;你的类对其它类知道的越少越好&#34;；
-
-&#34;共同封闭原则&#34;：这是说&#34;相关类应该打包在一起&#34;；
-
-&#34;稳定抽象原则&#34;：这是说&#34;类越稳定，越应该由抽象类组成&#34;;
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">&#34;组合替代继承&#34;:这是说相对于继承，要更倾向于使用组合；
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&#34;笛米特法则&#34;：这是说&#34;你的类对其它类知道的越少越好&#34;；
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&#34;共同封闭原则&#34;：这是说&#34;相关类应该打包在一起&#34;；
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">&#34;稳定抽象原则&#34;：这是说&#34;类越稳定，越应该由抽象类组成&#34;;
+</span></span></code></pre></div><ul>
 <li>多例模式（Multiton）</li>
 </ul>
 <blockquote>
 <p>多例模式被公认为是 反面模式，为了获得更好的可测试性和可维护性，请使用『依赖注入模式』。</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：多例模式是指存在一个类有多个相同实例，而且该实例都是该类本身。这个类叫做多例类。 多例模式的特点是：
-多例类可以有多个实例。
-多例类必须自己创建、管理自己的实例，并向外界提供自己的实例。
-多例模式实际上就是单例模式的推广
-
-举例：
-1.2个数据库连接器，比如一个是 MySQL ，另一个是 SQLite
-2.多个记录器（一个用于记录调试消息，一个用于记录错误）
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：多例模式是指存在一个类有多个相同实例，而且该实例都是该类本身。这个类叫做多例类。 多例模式的特点是：
+</span></span><span class="line"><span class="cl">多例类可以有多个实例。
+</span></span><span class="line"><span class="cl">多例类必须自己创建、管理自己的实例，并向外界提供自己的实例。
+</span></span><span class="line"><span class="cl">多例模式实际上就是单例模式的推广
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">举例：
+</span></span><span class="line"><span class="cl">1.2个数据库连接器，比如一个是 MySQL ，另一个是 SQLite
+</span></span><span class="line"><span class="cl">2.多个记录器（一个用于记录调试消息，一个用于记录错误）
+</span></span></code></pre></div><ul>
 <li>对象池模式（Pool）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：对象池模式是一种提前准备了一组已经初始化了的对象『池』而不是按需创建或者销毁的创建型设计模式。
-对象池的客户端会向对象池中请求一个对象，然后使用这个返回的对象执行相关操作。当客户端使用完毕，
-它将把这个特定类型的工厂对象返回给对象池，而不是销毁掉这个对象。
-在初始化实例成本高，实例化率高，可用实例不足的情况下，对象池可以极大地提升性能。
-在创建对象（尤其是通过网络）时间花销不确定的情况下，通过对象池在可期时间内就可以获得所需的对象。
-无论如何，对象池模式在需要耗时创建对象方面，例如创建数据库连接，套接字连接，线程和大型图形对象（比方字体或位图等），
-使用起来都是大有裨益的。在某些情况下，简单的对象池（无外部资源，只占内存）可能效率不高，甚至会有损性能。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：对象池模式是一种提前准备了一组已经初始化了的对象『池』而不是按需创建或者销毁的创建型设计模式。
+</span></span><span class="line"><span class="cl">对象池的客户端会向对象池中请求一个对象，然后使用这个返回的对象执行相关操作。当客户端使用完毕，
+</span></span><span class="line"><span class="cl">它将把这个特定类型的工厂对象返回给对象池，而不是销毁掉这个对象。
+</span></span><span class="line"><span class="cl">在初始化实例成本高，实例化率高，可用实例不足的情况下，对象池可以极大地提升性能。
+</span></span><span class="line"><span class="cl">在创建对象（尤其是通过网络）时间花销不确定的情况下，通过对象池在可期时间内就可以获得所需的对象。
+</span></span><span class="line"><span class="cl">无论如何，对象池模式在需要耗时创建对象方面，例如创建数据库连接，套接字连接，线程和大型图形对象（比方字体或位图等），
+</span></span><span class="line"><span class="cl">使用起来都是大有裨益的。在某些情况下，简单的对象池（无外部资源，只占内存）可能效率不高，甚至会有损性能。
+</span></span></code></pre></div><ul>
 <li>原型模式（Prototype）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：相比正常创建一个对象 ( new Foo() )，首先创建一个原型，然后克隆它会更节省开销。
-示例：大数据量 ( 例如：通过 ORM 模型一次性往数据库插入 1,000,000 条数据 ) 。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：相比正常创建一个对象 ( new Foo() )，首先创建一个原型，然后克隆它会更节省开销。
+</span></span><span class="line"><span class="cl">示例：大数据量 ( 例如：通过 ORM 模型一次性往数据库插入 1,000,000 条数据 ) 。
+</span></span></code></pre></div><ul>
 <li>简单工厂模式（Simple Factory）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：简单工厂模式是一个精简版的工厂模式。
-它与静态工厂模式最大的区别是它不是『静态』的。因为非静态，所以你可以拥有多个不同参数的工厂，你可以为其创建子类。
-甚至可以模拟（Mock）他，这对编写可测试的代码来讲至关重要。 这也是它比静态工厂模式受欢迎的原因
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：简单工厂模式是一个精简版的工厂模式。
+</span></span><span class="line"><span class="cl">它与静态工厂模式最大的区别是它不是『静态』的。因为非静态，所以你可以拥有多个不同参数的工厂，你可以为其创建子类。
+</span></span><span class="line"><span class="cl">甚至可以模拟（Mock）他，这对编写可测试的代码来讲至关重要。 这也是它比静态工厂模式受欢迎的原因
+</span></span></code></pre></div><ul>
 <li>单例模式（Singleton）</li>
 </ul>
 <blockquote>
 <p>单例模式被公认为是 反面模式，为了获得更好的可测试性和可维护性，请使用『依赖注入模式』。</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：在应用程序调用的时候，只能获得一个对象实例。
-例子：
-数据库连接
-日志 (多种不同用途的日志也可能会成为多例模式)
-在应用中锁定文件 (系统中只存在一个 ...)
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：在应用程序调用的时候，只能获得一个对象实例。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">数据库连接
+</span></span><span class="line"><span class="cl">日志 (多种不同用途的日志也可能会成为多例模式)
+</span></span><span class="line"><span class="cl">在应用中锁定文件 (系统中只存在一个 ...)
+</span></span></code></pre></div><ul>
 <li>静态工厂模式（Static Factory）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：与抽象工厂模式类似，此模式用于创建一系列相关或相互依赖的对象。 『静态工厂模式』与『抽象工厂模式』的区别在于，
-    只使用一个静态方法来创建所有类型对象， 此方法通常被命名为 factory 或 build。
-例子:Zend Framework: Zend_Cache_Backend 或 _Frontend 使用工厂方法创建缓存后端或前端；
-</code></pre></div><h3 id="结构型">结构型<a href="#结构型" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：与抽象工厂模式类似，此模式用于创建一系列相关或相互依赖的对象。 『静态工厂模式』与『抽象工厂模式』的区别在于，
+</span></span><span class="line"><span class="cl">    只使用一个静态方法来创建所有类型对象， 此方法通常被命名为 factory 或 build。
+</span></span><span class="line"><span class="cl">例子:Zend Framework: Zend_Cache_Backend 或 _Frontend 使用工厂方法创建缓存后端或前端；
+</span></span></code></pre></div><h3 id="结构型">结构型<a href="#结构型" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>适配器模式（Adapter）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：将一个类的接口转换成可应用的兼容接口。适配器使原本由于接口不兼容而不能一起工作的那些类可以一起工作。
-例子：
-客户端数据库适配器；
-使用多个不同的网络服务和适配器来规范数据使得出结果是相同的；
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：将一个类的接口转换成可应用的兼容接口。适配器使原本由于接口不兼容而不能一起工作的那些类可以一起工作。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">客户端数据库适配器；
+</span></span><span class="line"><span class="cl">使用多个不同的网络服务和适配器来规范数据使得出结果是相同的；
+</span></span></code></pre></div><ul>
 <li>桥梁模式（Bridge）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：将抽象与实现分离，这样两者可以独立地改变。
-例子：Symfony 学术桥梁
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：将抽象与实现分离，这样两者可以独立地改变。
+</span></span><span class="line"><span class="cl">例子：Symfony 学术桥梁
+</span></span></code></pre></div><ul>
 <li>组合模式（Composite）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：一组对象与该对象的单个实例的处理方式一致。
-示例：
-一个表单类实例在处理其表单所有元素的方法与处理该表单自身实例方法相同，在调用方法 render() 时，
-会随之遍历它的所有子元素并对他们调用 render() 方法；
-Zend_Config: 一个配置选项树，每个选项自身就是一个 Zend_Config 对象；
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：一组对象与该对象的单个实例的处理方式一致。
+</span></span><span class="line"><span class="cl">示例：
+</span></span><span class="line"><span class="cl">一个表单类实例在处理其表单所有元素的方法与处理该表单自身实例方法相同，在调用方法 render() 时，
+</span></span><span class="line"><span class="cl">会随之遍历它的所有子元素并对他们调用 render() 方法；
+</span></span><span class="line"><span class="cl">Zend_Config: 一个配置选项树，每个选项自身就是一个 Zend_Config 对象；
+</span></span></code></pre></div><ul>
 <li>数据映射模式（Data Mapper）</li>
 </ul>
 <pre tabindex="0"><code>目标：数据映射器是一种数据访问层，它执行持久性数据存储（通常是关系数据库）和内存数据表示（域层）之间的数据双向传输。 
@@ -241,220 +241,220 @@ Zend_Config: 一个配置选项树，每个选项自身就是一个 Zend_Config 
 </code></pre><ul>
 <li>装饰模式（Decorator）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：为类实例动态增加新的方法。
-例子：
-Zend Framework: Zend_Form_Element 实例的装饰者；
-Web Service Layer: 用于 REST 服务的 JSON 和 XML 装饰者 (当然，在这个例子中理应只有一个是被允许的)；
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：为类实例动态增加新的方法。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">Zend Framework: Zend_Form_Element 实例的装饰者；
+</span></span><span class="line"><span class="cl">Web Service Layer: 用于 REST 服务的 JSON 和 XML 装饰者 (当然，在这个例子中理应只有一个是被允许的)；
+</span></span></code></pre></div><ul>
 <li>依赖注入模式（Dependency Injection）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：用松散耦合的方式来更好的实现可测试、可维护和可扩展的代码。
-用法:DatabaseConfiguration 被注入  DatabaseConnection  并获取所需的  $config 。
-如果没有依赖注入模式， 配置将直接创建  DatabaseConnection 。这对测试和扩展来说很不好。
-例子：
-Doctrine2 ORM 使用依赖注入。 例如，注入到  Connection  对象的配置。 
-对于测试而言， 可以轻松的创建可扩展的模拟数据并注入到  Connection  对象中；
-Symfony 和 Zend Framework 2 已经有了依赖注入的容器。他们通过配置的数组来创建对象，并在需要的地方注入 (在控制器中)；
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：用松散耦合的方式来更好的实现可测试、可维护和可扩展的代码。
+</span></span><span class="line"><span class="cl">用法:DatabaseConfiguration 被注入  DatabaseConnection  并获取所需的  $config 。
+</span></span><span class="line"><span class="cl">如果没有依赖注入模式， 配置将直接创建  DatabaseConnection 。这对测试和扩展来说很不好。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">Doctrine2 ORM 使用依赖注入。 例如，注入到  Connection  对象的配置。 
+</span></span><span class="line"><span class="cl">对于测试而言， 可以轻松的创建可扩展的模拟数据并注入到  Connection  对象中；
+</span></span><span class="line"><span class="cl">Symfony 和 Zend Framework 2 已经有了依赖注入的容器。他们通过配置的数组来创建对象，并在需要的地方注入 (在控制器中)；
+</span></span></code></pre></div><ul>
 <li>门面模式（Facade）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：门面模式的最初目的并不是为了避免让你阅读复杂的 API 文档，这只是一个附带作用。
-其实它的本意是为了降低耦合性并且遵循 Demeter 定律。
-一个门面旨在通过嵌入许多（但有时只有一个）接口来分离客户端和子系统。当然，也是为了降低复杂度。
-门面不会禁止你访问子系统。你可以（应该）有多个门面对应一个子系统。这就是为什么一个好的门面里没有 new 的原因。
-如果每个方法都有多种创建，那并不是一个门面，而是一个构建器 [抽象的|静态的|简单的] 或是一个工厂 [方法] 。
-最好的门面是没有 new 的，并且其构造函数带有接口类型提示的参数。 如果你需要创建新的实例，可以使用工厂作为变量。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：门面模式的最初目的并不是为了避免让你阅读复杂的 API 文档，这只是一个附带作用。
+</span></span><span class="line"><span class="cl">其实它的本意是为了降低耦合性并且遵循 Demeter 定律。
+</span></span><span class="line"><span class="cl">一个门面旨在通过嵌入许多（但有时只有一个）接口来分离客户端和子系统。当然，也是为了降低复杂度。
+</span></span><span class="line"><span class="cl">门面不会禁止你访问子系统。你可以（应该）有多个门面对应一个子系统。这就是为什么一个好的门面里没有 new 的原因。
+</span></span><span class="line"><span class="cl">如果每个方法都有多种创建，那并不是一个门面，而是一个构建器 [抽象的|静态的|简单的] 或是一个工厂 [方法] 。
+</span></span><span class="line"><span class="cl">最好的门面是没有 new 的，并且其构造函数带有接口类型提示的参数。 如果你需要创建新的实例，可以使用工厂作为变量。
+</span></span></code></pre></div><ul>
 <li>流接口模式（Fluent Interface）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：用来编写易于阅读的代码，就像自然语言一样（如英语）。
-例子：
-Doctrine2 的 QueryBuilder，就像下面例子中类似；
-PHPUnit 使用连贯接口来创建 mock 对象；
-Yii 框架：CDbCommand 与 CActiveRecord 也使用此模式；
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：用来编写易于阅读的代码，就像自然语言一样（如英语）。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">Doctrine2 的 QueryBuilder，就像下面例子中类似；
+</span></span><span class="line"><span class="cl">PHPUnit 使用连贯接口来创建 mock 对象；
+</span></span><span class="line"><span class="cl">Yii 框架：CDbCommand 与 CActiveRecord 也使用此模式；
+</span></span></code></pre></div><ul>
 <li>享元模式（Flyweight）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：为了节约内存的使用，享元模式会尽量使类似的对象共享内存。在大量类似对象被使用的情况中这是十分必要的。
-常用做法是在外部数据结构中保存类似对象的状态，并在需要时将他们传递给享元对象。
-</code></pre></div><p>代理模式（Proxy）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：链接任何具有高价值或无法复制的代码。
-例子:Doctrine2 使用代理来实现框架的“魔术”（例如：延迟加载），而用户仍然使用他们自己的实体类且不会使用到代理。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：为了节约内存的使用，享元模式会尽量使类似的对象共享内存。在大量类似对象被使用的情况中这是十分必要的。
+</span></span><span class="line"><span class="cl">常用做法是在外部数据结构中保存类似对象的状态，并在需要时将他们传递给享元对象。
+</span></span></code></pre></div><p>代理模式（Proxy）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：链接任何具有高价值或无法复制的代码。
+</span></span><span class="line"><span class="cl">例子:Doctrine2 使用代理来实现框架的“魔术”（例如：延迟加载），而用户仍然使用他们自己的实体类且不会使用到代理。
+</span></span></code></pre></div><ul>
 <li>注册模式（Registry）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：目的是能够存储在应用程序中经常使用的对象实例，通常会使用只有静态方法的抽象类来实现（或使用单例模式）。
-需要注意的是这里可能会引入全局的状态，我们需要使用依赖注入来避免它。
-例子：
-Zend 框架 1：Zend_Registry 实现了整个应用程序的 logger 对象和前端控制器等；
-Yii 框架：CWebApplication 具有全部应用程序组件，例如 CWebUser，CUrlManager 等。
-</code></pre></div><h3 id="行为型">行为型<a href="#行为型" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：目的是能够存储在应用程序中经常使用的对象实例，通常会使用只有静态方法的抽象类来实现（或使用单例模式）。
+</span></span><span class="line"><span class="cl">需要注意的是这里可能会引入全局的状态，我们需要使用依赖注入来避免它。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">Zend 框架 1：Zend_Registry 实现了整个应用程序的 logger 对象和前端控制器等；
+</span></span><span class="line"><span class="cl">Yii 框架：CWebApplication 具有全部应用程序组件，例如 CWebUser，CUrlManager 等。
+</span></span></code></pre></div><h3 id="行为型">行为型<a href="#行为型" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>责任链模式（Chain Of Responsibilities）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：建立一个对象链来按指定顺序处理调用。如果其中一个对象无法处理命令，
-它会委托这个调用给它的下一个对象来进行处理，以此类推。
-例子:
-日记框架，每个链元素自主决定如何处理日记消息;
-垃圾邮件过滤器;
-缓存：例如第一个对象是一个 Memcached 接口实例，如果 “丢失” 它会委托数据库接口处理这个调用;
-Yii 框架: CFilterChain 是一个控制器行为过滤器链。
-执行点会有链上的过滤器逐个传递，并且只有当所有的过滤器验证通过，这个行为最后才会被调用。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：建立一个对象链来按指定顺序处理调用。如果其中一个对象无法处理命令，
+</span></span><span class="line"><span class="cl">它会委托这个调用给它的下一个对象来进行处理，以此类推。
+</span></span><span class="line"><span class="cl">例子:
+</span></span><span class="line"><span class="cl">日记框架，每个链元素自主决定如何处理日记消息;
+</span></span><span class="line"><span class="cl">垃圾邮件过滤器;
+</span></span><span class="line"><span class="cl">缓存：例如第一个对象是一个 Memcached 接口实例，如果 “丢失” 它会委托数据库接口处理这个调用;
+</span></span><span class="line"><span class="cl">Yii 框架: CFilterChain 是一个控制器行为过滤器链。
+</span></span><span class="line"><span class="cl">执行点会有链上的过滤器逐个传递，并且只有当所有的过滤器验证通过，这个行为最后才会被调用。
+</span></span></code></pre></div><ul>
 <li>命令行模式（Command）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：为了封装调用和解耦。
-我们有一个调用程序和一个接收器。 这种模式使用「命令行」将方法调用委托给接收器并且呈现相同的「执行」方法。 
-因此，调用程序只知道调用「执行」去处理客户端的命令。接收器会从调用程序中分离出来。
-这个模式的另一面是取消方法的 execute()，也就是 undo() 。
-命令行也可以通过最小量的复制粘贴和依赖组合（不是继承）被聚合，从而组合成更复杂的命令集。
-例子：
-文本编辑器：所有事件都是可以被解除、堆放，保存的命令；
-Symfony2：SF2 命令可以从 CLI 运行，它的建立只需考虑到命令行模式；
-大型 CLI 工具使用子程序来分发不同的任务并将它们封装在「模型」中，每个模块都可以通过命令行模式实现（例如：vagrant）。
-</code></pre></div><p>迭代器模式（Iterator）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：让对象变得可迭代并表现得像对象集合。
-例子：在文件中的所有行（对象表示形式的）上逐行处理文件（也是对象）。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：为了封装调用和解耦。
+</span></span><span class="line"><span class="cl">我们有一个调用程序和一个接收器。 这种模式使用「命令行」将方法调用委托给接收器并且呈现相同的「执行」方法。 
+</span></span><span class="line"><span class="cl">因此，调用程序只知道调用「执行」去处理客户端的命令。接收器会从调用程序中分离出来。
+</span></span><span class="line"><span class="cl">这个模式的另一面是取消方法的 execute()，也就是 undo() 。
+</span></span><span class="line"><span class="cl">命令行也可以通过最小量的复制粘贴和依赖组合（不是继承）被聚合，从而组合成更复杂的命令集。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">文本编辑器：所有事件都是可以被解除、堆放，保存的命令；
+</span></span><span class="line"><span class="cl">Symfony2：SF2 命令可以从 CLI 运行，它的建立只需考虑到命令行模式；
+</span></span><span class="line"><span class="cl">大型 CLI 工具使用子程序来分发不同的任务并将它们封装在「模型」中，每个模块都可以通过命令行模式实现（例如：vagrant）。
+</span></span></code></pre></div><p>迭代器模式（Iterator）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：让对象变得可迭代并表现得像对象集合。
+</span></span><span class="line"><span class="cl">例子：在文件中的所有行（对象表示形式的）上逐行处理文件（也是对象）。
+</span></span></code></pre></div><ul>
 <li>中介者模式（Mediator）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：本模式提供了一种轻松的多组件之间弱耦合的协同方式。如果你有个“情报中心”，观察者模式也是个好选择，
-类似于控制器（并非 MVC 意义上的控制器）。所有关联协同的组件（称作 Colleague）仅与 MediatorInterface 接口建立耦合，
-面向对象编程中这是好事，一个良友胜于有多个朋友。这是该模式的重要特性。
-</code></pre></div><p>备忘录模式（Memento）</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：它提供了在不破坏封装（对象不需要具有返回当前状态的函数）的情况下恢复到之前状态（使用回滚）或者获取对象的内部状态。
-    
-备忘录模式使用 3 个类来实现：Originator，Caretaker 和 Memento。
-
-Memento —— 负责存储 Originator 的 唯一内部状态 ，它可以包含： string，number， array，类的实例等等。
-Memento 「不是公开的类」（任何人都不应该且不能更改它），并防止 Originator 以外的对象访问它，
-它提供2个接口：Caretaker 只能看到备忘录的窄接口，他只能将备忘录传递给其他对象。
-Originator 却可看到备忘录的宽接口，允许它访问返回到先前状态所需要的所有数据。
-
-Originator —— 它负责创建 Memento  ，并记录 外部对象当前时刻的状态， 并可使用 Memento 恢复内部状态。
-Originator 可根据需要决定 Memento 存储 Originator 的哪些内部状态。
-Originator 也许（不是应该）有自己的方法（methods）。 但是，他们 不能更改已保存对象的当前状态。
-
-Caretaker —— 负责保存 Memento。 它可以修改一个对象；决定 Originator 中对象当前时刻的状态； 
-从 Originator 获取对象的当前状态； 或者回滚 Originator 中对象的状态。
-
-例子：
-发送一个随机数；
-并将这个随机数存在时序机中；
-保存之前控制  ORM Model  中的状态。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：本模式提供了一种轻松的多组件之间弱耦合的协同方式。如果你有个“情报中心”，观察者模式也是个好选择，
+</span></span><span class="line"><span class="cl">类似于控制器（并非 MVC 意义上的控制器）。所有关联协同的组件（称作 Colleague）仅与 MediatorInterface 接口建立耦合，
+</span></span><span class="line"><span class="cl">面向对象编程中这是好事，一个良友胜于有多个朋友。这是该模式的重要特性。
+</span></span></code></pre></div><p>备忘录模式（Memento）</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：它提供了在不破坏封装（对象不需要具有返回当前状态的函数）的情况下恢复到之前状态（使用回滚）或者获取对象的内部状态。
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">备忘录模式使用 3 个类来实现：Originator，Caretaker 和 Memento。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Memento —— 负责存储 Originator 的 唯一内部状态 ，它可以包含： string，number， array，类的实例等等。
+</span></span><span class="line"><span class="cl">Memento 「不是公开的类」（任何人都不应该且不能更改它），并防止 Originator 以外的对象访问它，
+</span></span><span class="line"><span class="cl">它提供2个接口：Caretaker 只能看到备忘录的窄接口，他只能将备忘录传递给其他对象。
+</span></span><span class="line"><span class="cl">Originator 却可看到备忘录的宽接口，允许它访问返回到先前状态所需要的所有数据。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Originator —— 它负责创建 Memento  ，并记录 外部对象当前时刻的状态， 并可使用 Memento 恢复内部状态。
+</span></span><span class="line"><span class="cl">Originator 可根据需要决定 Memento 存储 Originator 的哪些内部状态。
+</span></span><span class="line"><span class="cl">Originator 也许（不是应该）有自己的方法（methods）。 但是，他们 不能更改已保存对象的当前状态。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Caretaker —— 负责保存 Memento。 它可以修改一个对象；决定 Originator 中对象当前时刻的状态； 
+</span></span><span class="line"><span class="cl">从 Originator 获取对象的当前状态； 或者回滚 Originator 中对象的状态。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">发送一个随机数；
+</span></span><span class="line"><span class="cl">并将这个随机数存在时序机中；
+</span></span><span class="line"><span class="cl">保存之前控制  ORM Model  中的状态。
+</span></span></code></pre></div><ul>
 <li>空对象模式（Null Object）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：空对象模式不属于 GoF 设计模式，但是它作为一种经常出现的套路足以被视为设计模式了。它具有如下优点：
-客户端代码简单
-可以减少报空指针异常的几率
-测试用例不需要考虑太多条件
-返回一个对象或 null 应该用返回对象或者 NullObject 代替。NullObject 简化了死板的代码，消除了客户端代码中的条件检查，
-例如 if (!is_null($obj)) { $obj-&gt;callSomething(); } 只需 $obj-&gt;callSomething(); 就行。
-例子：
-Symfony2: 空日志；
-Symfony2: Symfony/Console 空输出；
-责任链模式中的空处理器；
-命令行模式中的空命令。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：空对象模式不属于 GoF 设计模式，但是它作为一种经常出现的套路足以被视为设计模式了。它具有如下优点：
+</span></span><span class="line"><span class="cl">客户端代码简单
+</span></span><span class="line"><span class="cl">可以减少报空指针异常的几率
+</span></span><span class="line"><span class="cl">测试用例不需要考虑太多条件
+</span></span><span class="line"><span class="cl">返回一个对象或 null 应该用返回对象或者 NullObject 代替。NullObject 简化了死板的代码，消除了客户端代码中的条件检查，
+</span></span><span class="line"><span class="cl">例如 if (!is_null($obj)) { $obj-&gt;callSomething(); } 只需 $obj-&gt;callSomething(); 就行。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">Symfony2: 空日志；
+</span></span><span class="line"><span class="cl">Symfony2: Symfony/Console 空输出；
+</span></span><span class="line"><span class="cl">责任链模式中的空处理器；
+</span></span><span class="line"><span class="cl">命令行模式中的空命令。
+</span></span></code></pre></div><ul>
 <li>观察者模式（Observer）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：当对象的状态发生变化时，所有依赖于它的对象都得到通知并被自动更新。它使用的是低耦合的方式。
-例子：使用观察者模式观察消息队列在 GUI 中的运行情况。
-</code></pre></div><p><strong>PHP 已经定义了2个接口用于快速实现观察者模式：SplObserver 和 SplSubject。</strong></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：当对象的状态发生变化时，所有依赖于它的对象都得到通知并被自动更新。它使用的是低耦合的方式。
+</span></span><span class="line"><span class="cl">例子：使用观察者模式观察消息队列在 GUI 中的运行情况。
+</span></span></code></pre></div><p><strong>PHP 已经定义了2个接口用于快速实现观察者模式：SplObserver 和 SplSubject。</strong></p>
 <ul>
 <li>规格模式（Specification）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：构建一个清晰的业务规则规范，其中每条规则都能被针对性地检查。
-每个规范类中都有一个称为isSatisfiedBy的方法，方法判断给定的规则是否满足规范从而返回 true 或 false。
-例子：
-RulerZ
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：构建一个清晰的业务规则规范，其中每条规则都能被针对性地检查。
+</span></span><span class="line"><span class="cl">每个规范类中都有一个称为isSatisfiedBy的方法，方法判断给定的规则是否满足规范从而返回 true 或 false。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">RulerZ
+</span></span></code></pre></div><ul>
 <li>状态模式（State）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：状态模式可以基于一个对象的同种事务而封装出不同的行为。
-它提供一种简洁的方式使得对象在运行时可以改变自身行为，而不必借助单一庞大的条件判断语句。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：状态模式可以基于一个对象的同种事务而封装出不同的行为。
+</span></span><span class="line"><span class="cl">它提供一种简洁的方式使得对象在运行时可以改变自身行为，而不必借助单一庞大的条件判断语句。
+</span></span></code></pre></div><ul>
 <li>策略模式（Strategy）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">术语：上下文    策略    具体策略
-目的：分离「策略」并使他们之间能互相快速切换。此外，这种模式是一种不错的继承替代方案（替代使用扩展抽象类的方式）。
-例子：
-对一个对象列表进行排序，一种按照日期，一种按照 id；
-简化版的的单元测试：例如，在使用文件存储和内存存储之间互相切换。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">术语：上下文    策略    具体策略
+</span></span><span class="line"><span class="cl">目的：分离「策略」并使他们之间能互相快速切换。此外，这种模式是一种不错的继承替代方案（替代使用扩展抽象类的方式）。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">对一个对象列表进行排序，一种按照日期，一种按照 id；
+</span></span><span class="line"><span class="cl">简化版的的单元测试：例如，在使用文件存储和内存存储之间互相切换。
+</span></span></code></pre></div><ul>
 <li>模板方法模式（Template Method）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：模板方法模式是一种行为型的设计模式。
-可能你已经见过这种模式很多次了。它是一种让抽象模板的子类「完成」一系列算法的行为策略。
-众所周知的「好莱坞原则」：「不要打电话给我们，我们会打电话给你」。
-这个类不是由子类调用的，而是以相反的方式。怎么做？当然很抽象啦！
-换而言之，它是一种非常适合框架库的算法骨架。用户只需要实现子类的一种方法，其父类便可去搞定这项工作了。
-这是一种分离具体类的简单办法，且可以减少复制粘贴，这也是它常见的原因。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：模板方法模式是一种行为型的设计模式。
+</span></span><span class="line"><span class="cl">可能你已经见过这种模式很多次了。它是一种让抽象模板的子类「完成」一系列算法的行为策略。
+</span></span><span class="line"><span class="cl">众所周知的「好莱坞原则」：「不要打电话给我们，我们会打电话给你」。
+</span></span><span class="line"><span class="cl">这个类不是由子类调用的，而是以相反的方式。怎么做？当然很抽象啦！
+</span></span><span class="line"><span class="cl">换而言之，它是一种非常适合框架库的算法骨架。用户只需要实现子类的一种方法，其父类便可去搞定这项工作了。
+</span></span><span class="line"><span class="cl">这是一种分离具体类的简单办法，且可以减少复制粘贴，这也是它常见的原因。
+</span></span></code></pre></div><ul>
 <li>访问者模式（Visitor）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：访问者模式可以让你将对象操作外包给其他对象。这样做的最主要原因就是关注（数据结构和数据操作）分离。
-但是被访问的类必须定一个契约接受访问者。 (详见例子中的 Role::accept 方法)
-契约可以是一个抽象类也可直接就是一个接口。在此情况下，每个访问者必须自行选择调用访问者的哪个方法。
-</code></pre></div><p>更多类型</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：访问者模式可以让你将对象操作外包给其他对象。这样做的最主要原因就是关注（数据结构和数据操作）分离。
+</span></span><span class="line"><span class="cl">但是被访问的类必须定一个契约接受访问者。 (详见例子中的 Role::accept 方法)
+</span></span><span class="line"><span class="cl">契约可以是一个抽象类也可直接就是一个接口。在此情况下，每个访问者必须自行选择调用访问者的哪个方法。
+</span></span></code></pre></div><p>更多类型</p>
 <ul>
 <li>委托模式（Delegation）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：在委托模式的示例里，一个对象将它要执行的任务委派给与之关联的帮助对象去执行。
-在示例中，「组长」声明了 writeCode 方法并使用它，
-其实「组长」把 writeCode 委托给「菜鸟开发者」的 writeBadCode 方法做了。
-这种反转责任的做法隐藏了其内部执行 writeBadCode 的细节。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：在委托模式的示例里，一个对象将它要执行的任务委派给与之关联的帮助对象去执行。
+</span></span><span class="line"><span class="cl">在示例中，「组长」声明了 writeCode 方法并使用它，
+</span></span><span class="line"><span class="cl">其实「组长」把 writeCode 委托给「菜鸟开发者」的 writeBadCode 方法做了。
+</span></span><span class="line"><span class="cl">这种反转责任的做法隐藏了其内部执行 writeBadCode 的细节。
+</span></span></code></pre></div><ul>
 <li>服务定位器模式（Service Locator）</li>
 </ul>
 <blockquote>
 <p>服务定位器模式被认为是一种反面模式！
 服务定位器模式被一些人认为是一种反面模式。它违反了依赖倒置原则。该模式隐藏类的依赖，而不是暴露依赖（如果暴露可通过依赖注入的方式注入依赖）。当某项服务的依赖发生变化时，使用该服务的类的功能将面临被破坏的风险，最终导致系统难以维护。</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：服务定位器模式能够降低代码的耦合度，以便获得可测试、可维护和可扩展的代码。
-DI 模式和服务定位器模式是 IOC 模式的一种实现。
-用法：使用 ServiceLocator ，你可以为给定的 interface 注册一个服务。
-通过使用这个 interface，你不需要知道该服务的实现细节，就可以获取并在你应用中使用该服务。
-你可以在引导程序中配置和注入服务定位器对象。
-例子：Zend Framework2 使用服务定位器创建和共享框架中使用的服务
-（EventManager，ModuleManager，以及由模块提供的用户自定义服务等）。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：服务定位器模式能够降低代码的耦合度，以便获得可测试、可维护和可扩展的代码。
+</span></span><span class="line"><span class="cl">DI 模式和服务定位器模式是 IOC 模式的一种实现。
+</span></span><span class="line"><span class="cl">用法：使用 ServiceLocator ，你可以为给定的 interface 注册一个服务。
+</span></span><span class="line"><span class="cl">通过使用这个 interface，你不需要知道该服务的实现细节，就可以获取并在你应用中使用该服务。
+</span></span><span class="line"><span class="cl">你可以在引导程序中配置和注入服务定位器对象。
+</span></span><span class="line"><span class="cl">例子：Zend Framework2 使用服务定位器创建和共享框架中使用的服务
+</span></span><span class="line"><span class="cl">（EventManager，ModuleManager，以及由模块提供的用户自定义服务等）。
+</span></span></code></pre></div><ul>
 <li>资源库模式（Repository）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：该模式通过提供集合风格的接口来访问领域对象，从而协调领域和数据映射层。 
-资料库模式封装了一组存储在数据存储器里的对象和操作它们的方面，这样子为数据持久化层提供了更加面向对象的视角。
-资料库模式同时也达到了领域层与数据映射层之间清晰分离，单向依赖的目的。
-例子：
-Doctrine 2 ORM: 通过资料库协调实体和 DBAL，它包含检索对象的方法；
-Laravel 框架。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：该模式通过提供集合风格的接口来访问领域对象，从而协调领域和数据映射层。 
+</span></span><span class="line"><span class="cl">资料库模式封装了一组存储在数据存储器里的对象和操作它们的方面，这样子为数据持久化层提供了更加面向对象的视角。
+</span></span><span class="line"><span class="cl">资料库模式同时也达到了领域层与数据映射层之间清晰分离，单向依赖的目的。
+</span></span><span class="line"><span class="cl">例子：
+</span></span><span class="line"><span class="cl">Doctrine 2 ORM: 通过资料库协调实体和 DBAL，它包含检索对象的方法；
+</span></span><span class="line"><span class="cl">Laravel 框架。
+</span></span></code></pre></div><ul>
 <li>实体属性值模式（EAV 模式）</li>
 </ul>
 <blockquote>
 <p>实体属性值（Entity&ndash;attribute&ndash;value EAV）模式，可以方便 PHP 实现 EAV 模型。</p>
 </blockquote>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">目的：实体属性值模型（Entity-attribute-value EAV）是一种用数据模型描述实体的属性（属性，参数），
-可以用来形容他们潜在巨大，但实际上将适用于给定的实体的数量是相对较少。 
-在数学中，这种模式被称为一个稀疏矩阵 。 EAV也被称为对象的属性值的模式，垂直的数据库模型和开放式架构。
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">目的：实体属性值模型（Entity-attribute-value EAV）是一种用数据模型描述实体的属性（属性，参数），
+</span></span><span class="line"><span class="cl">可以用来形容他们潜在巨大，但实际上将适用于给定的实体的数量是相对较少。 
+</span></span><span class="line"><span class="cl">在数学中，这种模式被称为一个稀疏矩阵 。 EAV也被称为对象的属性值的模式，垂直的数据库模型和开放式架构。
+</span></span></code></pre></div><ul>
 <li>反面模式（Anti-pattern）</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">说明
-在软件工程中，一个反面模式（Anti-pattern 或 Antipattern）指的是在实践中明显出现但又低效或是有待优化的设计模式，
-是用来解决问题的带有共同性的不良方法。它们已经经过研究并分类，以防止日后重蹈覆辙，
-并能在研发尚未投产的系统时辨认出来。
-
-Andrew Koenig 在 1995 年造了 Anti-pattern 这个词，灵感来自于 GoF 的《设计模式》一书。
-而这本书则在软件领域引入了“设计模式”（Design Pattern）的概念。
-三年后 Antipattern 因《AntiPatterns》这本书而获得普及，而它的使用也从软件设计领域扩展到了日常的社会互动中。
-按《AntiPatterns》作者的说法，可以用至少两个关键因素来把反面模式和不良习惯、错误的实践或糟糕的想法区分开来：
-
-行动、过程和结构中的一些重复出现的乍一看是有益的，但最终得不偿失的模式
-在实践中证明且可重复的清晰记录的重构方案
-很多反面模式只相当于是错误、咆哮、不可解的问题、或是可能可以避免的糟糕的实践，
-它们的名字通常都是一些用反话构成的词语。
-有些时候陷阱（Pitfalls）或黑色模式（Dark Patterns）这些不正式的说法会被用来指代各类反复出现的糟糕的解决方法。
-因此，一些有争议的候选的反面模式不会被正式承认。
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">说明
+</span></span><span class="line"><span class="cl">在软件工程中，一个反面模式（Anti-pattern 或 Antipattern）指的是在实践中明显出现但又低效或是有待优化的设计模式，
+</span></span><span class="line"><span class="cl">是用来解决问题的带有共同性的不良方法。它们已经经过研究并分类，以防止日后重蹈覆辙，
+</span></span><span class="line"><span class="cl">并能在研发尚未投产的系统时辨认出来。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Andrew Koenig 在 1995 年造了 Anti-pattern 这个词，灵感来自于 GoF 的《设计模式》一书。
+</span></span><span class="line"><span class="cl">而这本书则在软件领域引入了“设计模式”（Design Pattern）的概念。
+</span></span><span class="line"><span class="cl">三年后 Antipattern 因《AntiPatterns》这本书而获得普及，而它的使用也从软件设计领域扩展到了日常的社会互动中。
+</span></span><span class="line"><span class="cl">按《AntiPatterns》作者的说法，可以用至少两个关键因素来把反面模式和不良习惯、错误的实践或糟糕的想法区分开来：
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">行动、过程和结构中的一些重复出现的乍一看是有益的，但最终得不偿失的模式
+</span></span><span class="line"><span class="cl">在实践中证明且可重复的清晰记录的重构方案
+</span></span><span class="line"><span class="cl">很多反面模式只相当于是错误、咆哮、不可解的问题、或是可能可以避免的糟糕的实践，
+</span></span><span class="line"><span class="cl">它们的名字通常都是一些用反话构成的词语。
+</span></span><span class="line"><span class="cl">有些时候陷阱（Pitfalls）或黑色模式（Dark Patterns）这些不正式的说法会被用来指代各类反复出现的糟糕的解决方法。
+</span></span><span class="line"><span class="cl">因此，一些有争议的候选的反面模式不会被正式承认。
+</span></span></code></pre></div><blockquote>
 <p>—— 以上摘自 wikipedia</p>
 </blockquote>
 
@@ -519,7 +519,7 @@ Andrew Koenig 在 1995 年造了 Anti-pattern 这个词，灵感来自于 GoF �
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -527,7 +527,7 @@ Andrew Koenig 在 1995 年造了 Anti-pattern 这个词，灵感来自于 GoF �
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

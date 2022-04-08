@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-hans">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta itemprop="name" content="Laravel 使用 Sanctum API 授权">
+<meta itemprop="description" content="介绍  Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
+ 相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272
+安装   安装 Laravel Sanctum
+composer require laravel/sanctum   Artisan 命令发布 Sanctum 的配置和迁移文件
+php artisan vendor:publish --provider=&#34;Laravel\Sanctum\SanctumServiceProvider&#34;   Sanctum 将创建一个数据库表来存储 API 令牌
+php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Kernel.php 文件中的 api 中间件组中
+&#39;api&#39; =&gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &#39;throttle:api&#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ],   配置   重写默认模型
+执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。"><meta itemprop="datePublished" content="2022-02-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2022-02-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="377"><meta itemprop="image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+<meta itemprop="keywords" content="Laravel,API," /><meta property="og:title" content="Laravel 使用 Sanctum API 授权" />
+<meta property="og:description" content="介绍  Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
+ 相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272
+安装   安装 Laravel Sanctum
+composer require laravel/sanctum   Artisan 命令发布 Sanctum 的配置和迁移文件
+php artisan vendor:publish --provider=&#34;Laravel\Sanctum\SanctumServiceProvider&#34;   Sanctum 将创建一个数据库表来存储 API 令牌
+php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Kernel.php 文件中的 api 中间件组中
+&#39;api&#39; =&gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &#39;throttle:api&#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ],   配置   重写默认模型
+执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://hugo.zkilm.cn/posts/2022/20220218-api-sanctum/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-02-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-02-18T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/>
+
+<meta name="twitter:title" content="Laravel 使用 Sanctum API 授权"/>
+<meta name="twitter:description" content="介绍  Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
+ 相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272
+安装   安装 Laravel Sanctum
+composer require laravel/sanctum   Artisan 命令发布 Sanctum 的配置和迁移文件
+php artisan vendor:publish --provider=&#34;Laravel\Sanctum\SanctumServiceProvider&#34;   Sanctum 将创建一个数据库表来存储 API 令牌
+php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Kernel.php 文件中的 api 中间件组中
+&#39;api&#39; =&gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &#39;throttle:api&#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ],   配置   重写默认模型
+执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。"/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+	<link rel="manifest" href="/site.webmanifest">
+	<link rel="mask-icon" href="/safari-pinned-tab.svg" color="">
+	<link rel="shortcut icon" href="/favicon.ico">
+
+	<title>Laravel 使用 Sanctum API 授权</title>
+	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	
+	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="https://hugo.zkilm.cn">Promise</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="https://hugo.zkilm.cn/posts/">文章</a>
+				<a href="https://hugo.zkilm.cn/tags/">标签</a>
+				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
+				<a href="https://hugo.zkilm.cn/about/">关于</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<button id="toc-btn" class="hdr-btn desktop-only-ib" title="Table of Contents"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3" y2="6"></line><line x1="3" y1="12" x2="3" y2="12"></line><line x1="3" y1="18" x2="3" y2="18"></line></svg></button><span class="hdr-social hide-in-mobile"><a href="https://github.com/zhukangs" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta">
+					<span>Feb 18, 18026&nbsp;
+					<span id="busuanzi_container_page_pv" style="display: none;font-size: 8px;">
+						<i class="fa fa-eye"></i> <span id="busuanzi_value_page_pv"></span>
+					</span>
+				</div>
+				<h1>Laravel 使用 Sanctum API 授权</h1>
+			</header>
+			<div class="content">
+				<p><img src="https://qiniu.zkilm.cn/blog/posts/laravel_sanctum.jpg" alt="简单生活，热爱一切！"></p>
+<h3 id="介绍">介绍<a href="#介绍" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<blockquote>
+<p><a href="https://github.com/laravel/sanctum">Laravel Sanctum</a> 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。</p>
+</blockquote>
+<p>相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272</p>
+<h3 id="安装">安装<a href="#安装" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>安装 Laravel Sanctum</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">composer</span> <span class="k">require</span> <span class="nx">laravel</span><span class="o">/</span><span class="nx">sanctum</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Artisan 命令发布 Sanctum 的配置和迁移文件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">vendor</span><span class="o">:</span><span class="nx">publish</span> <span class="o">--</span><span class="nx">provider</span><span class="o">=</span><span class="s2">&#34;Laravel\Sanctum\SanctumServiceProvider&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p>Sanctum 将创建一个数据库表来存储 API 令牌</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">migrate</span>
+</span></span></code></pre></div></li>
+<li>
+<p>将 Sanctum 的中间件添加到您应用的 <code>app/Http/Kernel.php</code> 文件中的 <code>api</code> 中间件组中</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;api&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;throttle:api&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">\Illuminate\Routing\Middleware\SubstituteBindings</span><span class="o">::</span><span class="na">class</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">],</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="配置">配置<a href="#配置" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>重写默认模型</p>
+<p>执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 <code>PersonalAccessToken</code> 模型。由于生成的表名叫 <code>personal_access_tokens</code>，开发中我们习惯用户表名叫 <code>users</code>，所以我们可以将表名修改为 <code>user_tokens</code> 。</p>
+<p>创建 UserToken 模型文件：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">make</span><span class="o">:</span><span class="nx">model</span> <span class="nx">UserToken</span>
+</span></span></code></pre></div><p>模型文件 <code>UserToken.php</code> 内容如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Laravel\Sanctum\PersonalAccessToken</span> <span class="k">as</span> <span class="nx">SanctumPersonalAccessToken</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">DateTimeInterface</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">UserToken</span> <span class="k">extends</span> <span class="nx">SanctumPersonalAccessToken</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 转换时间格式
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">protected</span> <span class="k">function</span> <span class="nf">serializeDate</span><span class="p">(</span><span class="nx">DateTimeInterface</span> <span class="nv">$dateTime</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$dateTime</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>然后在<code>app/Providers/AuthServiceProvider.php</code> 文件中设置模型名称，您可以通过 Sanctum 提供的 <code>usePersonalAccessTokenModel</code> 方法设置 Sanctum 使用您的访问令牌模型名称。 通常，您应该在应用程序的服务提供器的 <code>boot</code> 方法中调用此方法：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Models\UserToken</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Laravel\Sanctum\Sanctum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * 引导应用程序服务。
+</span></span></span><span class="line"><span class="cl"><span class="sd"> *
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * @return void
+</span></span></span><span class="line"><span class="cl"><span class="sd"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">boot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPolicies</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 设置访问令牌模型名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Sanctum</span><span class="o">::</span><span class="na">usePersonalAccessTokenModel</span><span class="p">(</span><span class="nx">UserToken</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>这样重写默认模型就完成了。</p>
+</li>
+<li>
+<p>要开始为用户颁发令牌，你的 User 模型应使用 <code>Laravel\Sanctum\HasApiTokens</code> trait：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Laravel\Sanctum\HasApiTokens</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">HasApiTokens</span><span class="p">,</span> <span class="nx">HasFactory</span><span class="p">,</span> <span class="nx">Notifiable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>创建令牌</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;/tokens/create&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$token</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">createToken</span><span class="p">(</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">token_name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;token&#39;</span> <span class="o">=&gt;</span> <span class="nv">$token</span><span class="o">-&gt;</span><span class="na">plainTextToken</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="自定义验证">自定义验证<a href="#自定义验证" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<p>我们在实际开发中，验证规则可能会需要做一些自定义的操作，所以我们可以通过回调函数来进行自定义验证，里面的就可以写一些我们自定义的逻辑内容。</p>
+<ul>
+<li>
+<p>指定验证访问令牌的回调</p>
+<p>在 <code>app/Providers/AuthServiceProvider.php</code> 文件中，调用 <code>authenticateAccessTokensUsing</code> 方法指定验证访问令牌的回调。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Models\UserToken</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Laravel\Sanctum\Sanctum</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="sd">/**
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * 引导应用程序服务。
+</span></span></span><span class="line"><span class="cl"><span class="sd"> *
+</span></span></span><span class="line"><span class="cl"><span class="sd"> * @return void
+</span></span></span><span class="line"><span class="cl"><span class="sd"> */</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">boot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPolicies</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 验证访问令牌的回调
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">Sanctum</span><span class="o">::</span><span class="na">authenticateAccessTokensUsing</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="nx">PersonalAccessToken</span> <span class="nv">$accessToken</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$isValid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 你的自定义逻辑
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<p><code>$accessToken</code> 为 token 信息，tokenable 包含了用户基本信息，token 过期时 tokenable 字段就不会再返回</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">#attributes: array:9 [
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="s2">&#34;id&#34;</span> <span class="o">=&gt;</span> <span class="mi">5</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;tokenable_type&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;App\Models\User&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;tokenable_id&#34;</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;name&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;1&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;token&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;23c8f6b3ad9dc564f626caf36fa435679353c47b15ffb071e5fcacdccb5ee705&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;abilities&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;[&#34;</span><span class="o">*</span><span class="s2">&#34;]&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;last_used_at&#34;</span> <span class="o">=&gt;</span> <span class="k">null</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;created_at&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;2022-04-08 16:07:59&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;updated_at&#34;</span> <span class="o">=&gt;</span> <span class="s2">&#34;2022-04-08 16:07:59&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">]</span>
+</span></span></code></pre></div><p><code>$isValid</code> 为 token 有效状态，当 token 未过期时返回 true，否则就返回 false</p>
+</blockquote>
+</li>
+<li>
+<p>自定义令牌有效期</p>
+<p>Sanctum 可以在 <code>config/sanctum.php</code> 配置文件中通过 <code>expiration</code> 来设置过期时间，单位为分钟，但无法灵活地设置过期时间。</p>
+<p>设置短期令牌：</p>
+<p>1.创建令牌时，对令牌设置令牌能力 <code>server:limited</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">createToken</span><span class="p">(</span><span class="s1">&#39;token-name&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;server:limited&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">plainTextToken</span><span class="p">;</span>
+</span></span></code></pre></div><p>2.在 <code>app/Providers/AuthServiceProvider.php</code> 文件中根据令牌能力设置过期时间</p>
+<p><code>如果令牌有效，就将 token 过期时间设置为自定义的过期时间，下面 now ()-&gt;subMinutes (5) 表示有效期为 5 分钟</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"> <span class="k">public</span> <span class="k">function</span> <span class="nf">boot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPolicies</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">// 验证访问令牌的回调
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="nx">Sanctum</span><span class="o">::</span><span class="na">authenticateAccessTokensUsing</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">         <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="nx">PersonalAccessToken</span> <span class="nv">$accessToken</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$isValid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$accessToken</span><span class="o">-&gt;</span><span class="na">can</span><span class="p">(</span><span class="s1">&#39;server:limited&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nv">$isValid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">             <span class="p">}</span>
+</span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="nv">$isValid</span> <span class="o">&amp;&amp;</span> <span class="nv">$accessToken</span><span class="o">-&gt;</span><span class="na">created_at</span><span class="o">-&gt;</span><span class="na">gt</span><span class="p">(</span><span class="nx">now</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">subMinutes</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">         <span class="p">}</span>
+</span></span><span class="line"><span class="cl">     <span class="p">);</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span></code></pre></div></li>
+<li>
+<p>设置一次性访问令牌</p>
+<p>1.创建令牌时，对令牌设置令牌能力 <code>server:once</code></p>
+<pre tabindex="0"><code>$user-&gt;createToken(&#39;token-name&#39;, [&#39;server:once&#39;])-&gt;plainTextToken;
+</code></pre><p>2.在 <code>app/Providers/AuthServiceProvider.php</code> 文件中根据令牌能力设置过期时间</p>
+<p><code>如果令牌有效，并且未登陆过，就将 token 设置为失效，即可实现一次性令牌效果</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"> <span class="k">public</span> <span class="k">function</span> <span class="nf">boot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">registerPolicies</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">// 验证访问令牌的回调
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="nx">Sanctum</span><span class="o">::</span><span class="na">authenticateAccessTokensUsing</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">         <span class="k">static</span> <span class="k">function</span> <span class="p">(</span><span class="nx">PersonalAccessToken</span> <span class="nv">$accessToken</span><span class="p">,</span> <span class="nx">bool</span> <span class="nv">$isValid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$accessToken</span><span class="o">-&gt;</span><span class="na">can</span><span class="p">(</span><span class="s1">&#39;server:once&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">return</span> <span class="nv">$isValid</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">             <span class="p">}</span>
+</span></span><span class="line"><span class="cl">             <span class="k">return</span> <span class="nv">$isValid</span> <span class="o">&amp;&amp;</span> <span class="nv">$accessToken</span><span class="o">-&gt;</span><span class="na">last_used_at</span> <span class="o">===</span>  <span class="k">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">         <span class="p">}</span>
+</span></span><span class="line"><span class="cl">     <span class="p">);</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="用法">用法<a href="#用法" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>为需要token验证的路由加上中间件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">Route</span><span class="o">::</span><span class="na">middleware</span><span class="p">([</span><span class="s1">&#39;auth:sanctum&#39;</span><span class="p">])</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">(</span><span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/user/info&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">UserController</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="问题">问题<a href="#问题" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<ul>
+<li>
+<p>未授权跳登录路由问题(<code>app/Exception/Handler.php</code>)</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">render</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nx">Throwable</span> <span class="nv">$exception</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">...</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 未授权异常抛出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nv">$exception</span> <span class="nx">instanceof</span> <span class="nx">AuthenticationException</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">throwBusinessException</span><span class="p">(</span><span class="nx">ResponseEnum</span><span class="o">::</span><span class="na">CLIENT_HTTP_UNAUTHORIZED</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="o">...</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">parent</span><span class="o">::</span><span class="na">render</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="nv">$exception</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div></li>
+</ul>
+
+			</div>
+
+<div class="related-posts thin">
+	<h2>See Also</h2>
+	<ul>
+	
+	<li><a href="/posts/2022/20220115-api-init/">Laravel 开发 API 初始搭建</a></li>
+	
+	<li><a href="/posts/2021/20211119-laravel-formrequest/">Laravel 表单验证封装💪</a></li>
+	
+	<li><a href="/posts/2021/20210823-laravel-es/">Elasticsearch 在 Laravel 中的使用👍</a></li>
+	
+	<li><a href="/posts/2021/20210121-laravel-rabbitmq/">Homestead(ubuntu)&#43;Laravel 使用 RabbitMQ</a></li>
+	
+	<li><a href="/posts/2019/20191216-multiple-mp/">多公众号管理🚥‍</a></li>
+	
+	</ul>
+</div>
+
+			<hr class="post-end">
+			<footer class="post-info">
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/laravel">Laravel</a></span><span class="tag"><a href="https://hugo.zkilm.cn/tags/api">API</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>377 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>18026-02-18 00:00 &#43;0000</p>
+			</footer>
+		</article>
+		<aside id="toc" class="show-toc">
+			<div class="toc-title">Table of Contents</div>
+			<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#介绍">介绍</a></li>
+        <li><a href="#安装">安装</a></li>
+        <li><a href="#配置">配置</a></li>
+        <li><a href="#自定义验证">自定义验证</a></li>
+        <li><a href="#用法">用法</a></li>
+        <li><a href="#问题">问题</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+		</aside>
+		<div class="post-nav thin">
+			<a class="next-post" href="https://hugo.zkilm.cn/posts/2022/20220305-api-jwt/">
+				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Laravel 使用JWT API 授权🚀</span>
+			</a>
+			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2022/20220115-api-init/">
+				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Laravel 开发 API 初始搭建</span>
+			</a>
+		</div>
+		<div id="comments" class="thin"><script src="https://utteranc.es/client.js"
+		repo="zhukangs/zhukangs.github.io"
+		issue-term="pathname"
+		theme="photon-dark"
+		crossorigin="anonymous"
+		async>
+</script></div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p class="credits theme-by text-muted">
+				<span id="busuanzi_container_site_pv" style="display:none">
+					<i class="fa fa-eye"></i> <span id="busuanzi_value_site_pv"></span>
+				</span>&nbsp;
+			<span id="busuanzi_container_site_uv" style="display:none">
+					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
+				</span>
+		</p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+		</p>
+	</footer>
+
+
+
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	
+
+
+	
+	
+	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	
+	<script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+	
+	<script>
+		$(document).ready(function() {
+			var int = setInterval(fixCount, 100);
+			var busuanziSiteOffset =  0 
+			function fixCount() {
+				if ($("#busuanzi_container_site_pv").css("display") != "none") {
+					clearInterval(int);
+					$("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+				}
+			}
+		});
+	</script>
+	
+</body>
+
+</html>

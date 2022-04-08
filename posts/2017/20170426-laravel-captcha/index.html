@@ -83,56 +83,56 @@ Which provider or tag&#39;s files would you like to publish?: [0 ] Publish files
 			</header>
 			<div class="content">
 				<h3 id="将包装上">将包装上<a href="#将包装上" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require mews/captcha
-</code></pre></div><h3 id="生成验证码的配置文件">生成验证码的配置文件<a href="#生成验证码的配置文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan vendor:publish
-</code></pre></div><p>屏幕提示：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">Which provider or tag<span class="err">&#39;</span>s files would you like to publish?:
-  <span class="o">[</span><span class="m">0</span> <span class="o">]</span> Publish files from all providers and tags listed below
-  <span class="o">[</span><span class="m">1</span> <span class="o">]</span> Provider: Fideloper<span class="se">\P</span>roxy<span class="se">\T</span>rustedProxyServiceProvider
-  <span class="o">[</span><span class="m">2</span> <span class="o">]</span> Provider: Illuminate<span class="se">\M</span>ail<span class="se">\M</span>ailServiceProvider
-  <span class="o">[</span><span class="m">3</span> <span class="o">]</span> Provider: Illuminate<span class="se">\N</span>otifications<span class="se">\N</span>otificationServiceProvider
-  <span class="o">[</span><span class="m">4</span> <span class="o">]</span> Provider: Illuminate<span class="se">\P</span>agination<span class="se">\P</span>aginationServiceProvider
-  <span class="o">[</span><span class="m">5</span> <span class="o">]</span> Provider: Intervention<span class="se">\I</span>mage<span class="se">\I</span>mageServiceProviderLaravel5
-  <span class="o">[</span><span class="m">6</span> <span class="o">]</span> Provider: Mews<span class="se">\C</span>aptcha<span class="se">\C</span>aptchaServiceProvider
-  <span class="o">[</span><span class="m">7</span> <span class="o">]</span> Tag: config
-  <span class="o">[</span><span class="m">8</span> <span class="o">]</span> Tag: laravel-mail
-  <span class="o">[</span><span class="m">9</span> <span class="o">]</span> Tag: laravel-notifications
-  <span class="o">[</span>10<span class="o">]</span> Tag: laravel-pagination
-</code></pre></div><p>这里选择 6，也就是Captcha这个包。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require mews/captcha
+</span></span></code></pre></div><h3 id="生成验证码的配置文件">生成验证码的配置文件<a href="#生成验证码的配置文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan vendor:publish
+</span></span></code></pre></div><p>屏幕提示：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Which provider or tag<span class="err">&#39;</span>s files would you like to publish?:
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">0</span> <span class="o">]</span> Publish files from all providers and tags listed below
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">1</span> <span class="o">]</span> Provider: Fideloper<span class="se">\P</span>roxy<span class="se">\T</span>rustedProxyServiceProvider
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">2</span> <span class="o">]</span> Provider: Illuminate<span class="se">\M</span>ail<span class="se">\M</span>ailServiceProvider
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">3</span> <span class="o">]</span> Provider: Illuminate<span class="se">\N</span>otifications<span class="se">\N</span>otificationServiceProvider
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">4</span> <span class="o">]</span> Provider: Illuminate<span class="se">\P</span>agination<span class="se">\P</span>aginationServiceProvider
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">5</span> <span class="o">]</span> Provider: Intervention<span class="se">\I</span>mage<span class="se">\I</span>mageServiceProviderLaravel5
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">6</span> <span class="o">]</span> Provider: Mews<span class="se">\C</span>aptcha<span class="se">\C</span>aptchaServiceProvider
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">7</span> <span class="o">]</span> Tag: config
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">8</span> <span class="o">]</span> Tag: laravel-mail
+</span></span><span class="line"><span class="cl">  <span class="o">[</span><span class="m">9</span> <span class="o">]</span> Tag: laravel-notifications
+</span></span><span class="line"><span class="cl">  <span class="o">[</span>10<span class="o">]</span> Tag: laravel-pagination
+</span></span></code></pre></div><p>这里选择 6，也就是Captcha这个包。</p>
 <p>这样在config中，就会出现一个叫做captcha.php的配置文件。这里存放的都是跟验证码相关的配置了。这里有一个</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;length&#39;</span>    <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
-</code></pre></div><h3 id="修改html找到登录页面的验证码部分">修改html，找到登录页面的验证码部分<a href="#修改html找到登录页面的验证码部分" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{captcha_src()}}&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;cursor: pointer;&#34;</span><span class="p">&gt;</span>
-</code></pre></div><p>点击刷新验证码</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{captcha_src()}}&#34;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;cursor: pointer;&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;this.src=&#39;{{captcha_src()}}&#39;+ Math.random();&#34;</span><span class="p">&gt;</span>
-</code></pre></div><h3 id="添加验证logincontroller">添加验证LoginController<a href="#添加验证logincontroller" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
-    
-<span class="k">class</span> <span class="nc">LoginController</span> <span class="k">extends</span> <span class="nx">Controller</span>
-<span class="p">{</span>
-    <span class="c1">//...
-</span><span class="c1"></span>
-    <span class="k">protected</span> <span class="k">function</span> <span class="nf">validateLogin</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[</span>
-            <span class="s1">&#39;captcha&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|captcha&#39;</span><span class="p">,</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string&#39;</span><span class="p">,</span>
-        <span class="p">]);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="验证码信息提示汉化vendorcaouecslaravel-langsrczh-cn">验证码信息提示汉化vendor/caouecs/laravel-lang/src/zh-CN<a href="#验证码信息提示汉化vendorcaouecslaravel-langsrczh-cn" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">return</span> <span class="p">[</span>
-    <span class="s1">&#39;captcha&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;:attribute 填写错误。&#39;</span><span class="p">,</span>
-    <span class="c1">//...
-</span><span class="c1"></span>
-    <span class="s1">&#39;attributes&#39;</span>           <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="s1">&#39;captcha&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;验证码&#39;</span><span class="p">,</span>
-         <span class="c1">//...
-</span><span class="c1"></span>     <span class="p">];</span>
-<span class="p">];</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;length&#39;</span>    <span class="o">=&gt;</span> <span class="mi">4</span><span class="p">,</span>
+</span></span></code></pre></div><h3 id="修改html找到登录页面的验证码部分">修改html，找到登录页面的验证码部分<a href="#修改html找到登录页面的验证码部分" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{captcha_src()}}&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;cursor: pointer;&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>点击刷新验证码</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">&#34;{{captcha_src()}}&#34;</span> <span class="na">alt</span><span class="o">=</span><span class="s">&#34;&#34;</span> <span class="na">style</span><span class="o">=</span><span class="s">&#34;cursor: pointer;&#34;</span> <span class="na">onclick</span><span class="o">=</span><span class="s">&#34;this.src=&#39;{{captcha_src()}}&#39;+ Math.random();&#34;</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h3 id="添加验证logincontroller">添加验证LoginController<a href="#添加验证logincontroller" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">LoginController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="k">function</span> <span class="nf">validateLogin</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">(</span><span class="nv">$request</span><span class="p">,</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;captcha&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|captcha&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">()</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="验证码信息提示汉化vendorcaouecslaravel-langsrczh-cn">验证码信息提示汉化vendor/caouecs/laravel-lang/src/zh-CN<a href="#验证码信息提示汉化vendorcaouecslaravel-langsrczh-cn" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;captcha&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;:attribute 填写错误。&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;attributes&#39;</span>           <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;captcha&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;验证码&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">         <span class="c1">//...
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>     <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span></code></pre></div>
 			</div>
 
 			<hr class="post-end">
@@ -187,7 +187,7 @@ Which provider or tag&#39;s files would you like to publish?: [0 ] Publish files
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -195,7 +195,7 @@ Which provider or tag&#39;s files would you like to publish?: [0 ] Publish files
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

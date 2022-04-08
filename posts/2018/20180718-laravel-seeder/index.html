@@ -86,8 +86,8 @@
 <p>Laravel 包含一个填充类可以为你的数据库填充测试数据。所有的填充类都放在 database/seeds 目录下. 你可以随意为填充类命名， 但是更建议您遵守类似 UsersTableSeeder 的命名规范。通常， Laravel 默认定义了一个DatabaseSeeder 类。通过这个类，你可以用 call 方法来运行其它的 seed 类从而控制数据填充的顺序。</p>
 </blockquote>
 <h3 id="命令创建">命令创建<a href="#命令创建" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:model Models/Product -mf
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan make:model Models/Product -mf
+</span></span></code></pre></div><ul>
 <li>-fm 参数代表同时生成 factory 工厂文件和 migration 数据库迁移文件</li>
 <li>生成product模型文件：app/Models/Product.php</li>
 <li>-m生成product的迁移文件：database/migrations/&lt; your_date &gt;_create_products_table.php</li>
@@ -97,71 +97,71 @@
 <ul>
 <li>重命名工厂文件之后需要执行 <code>composer dumpautoload</code>，否则会找不到对应的工厂文件。</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">将工厂文件重命名：
-&gt; mv database/factories/ModelsProductFactory.php database/factories/ProductFactory.php
-&gt; composer dumpautoload
-</code></pre></div><h3 id="介绍工厂文件">介绍工厂文件<a href="#介绍工厂文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">将工厂文件重命名：
+</span></span><span class="line"><span class="cl">&gt; mv database/factories/ModelsProductFactory.php database/factories/ProductFactory.php
+</span></span><span class="line"><span class="cl">&gt; composer dumpautoload
+</span></span></code></pre></div><h3 id="介绍工厂文件">介绍工厂文件<a href="#介绍工厂文件" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>模型文件和迁移文件写法就不介绍了，介绍下工厂文件的例子：
 factory 工厂文件会使用 faker 来自动生成字段的内容，默认情况下是英文，可以修改成中文：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//config/app.php     
-</span><span class="c1"></span><span class="s1">&#39;faker_locale&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;zh_CN&#39;</span><span class="p">,</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//config/app.php     
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s1">&#39;faker_locale&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;zh_CN&#39;</span><span class="p">,</span>
+</span></span></code></pre></div><ul>
 <li>代码</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="k">use</span> <span class="nx">Faker\Generator</span> <span class="k">as</span> <span class="nx">Faker</span><span class="p">;</span>
-<span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">define</span><span class="p">(</span><span class="nx">App\Models\Product</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Faker</span> <span class="nv">$faker</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$image</span> <span class="o">=</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">randomElement</span><span class="p">([</span>
-        <span class="s2">&#34;https://lccdn.phphub.org/uploads/images/201806/01/5320/7kG1HekGK6.jpg&#34;</span><span class="p">,</span>
-        <span class="s2">&#34;https://lccdn.phphub.org/uploads/images/201806/01/5320/1B3n0ATKrn.jpg&#34;</span><span class="p">,</span>
-        <span class="s2">&#34;https://lccdn.phphub.org/uploads/images/201806/01/5320/r3BNRe4zXG.jpg&#34;</span><span class="p">,</span>
-    <span class="p">]);</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="s1">&#39;title&#39;</span>        <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">word</span><span class="p">,</span>
-        <span class="s1">&#39;description&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">sentence</span><span class="p">,</span>
-        <span class="s1">&#39;image&#39;</span>        <span class="o">=&gt;</span> <span class="nv">$image</span><span class="p">,</span>
-        <span class="s1">&#39;on_sale&#39;</span>      <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
-        <span class="s1">&#39;rating&#39;</span>       <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">numberBetween</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
-        <span class="s1">&#39;sold_count&#39;</span>   <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">&#39;review_count&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-        <span class="s1">&#39;price&#39;</span>        <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="p">];</span>
-<span class="p">});</span>
-</code></pre></div><h3 id="创建seeder">创建Seeder<a href="#创建seeder" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Faker\Generator</span> <span class="k">as</span> <span class="nx">Faker</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$factory</span><span class="o">-&gt;</span><span class="na">define</span><span class="p">(</span><span class="nx">App\Models\Product</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Faker</span> <span class="nv">$faker</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$image</span> <span class="o">=</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">randomElement</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;https://lccdn.phphub.org/uploads/images/201806/01/5320/7kG1HekGK6.jpg&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;https://lccdn.phphub.org/uploads/images/201806/01/5320/1B3n0ATKrn.jpg&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s2">&#34;https://lccdn.phphub.org/uploads/images/201806/01/5320/r3BNRe4zXG.jpg&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;title&#39;</span>        <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">word</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;description&#39;</span>  <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">sentence</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;image&#39;</span>        <span class="o">=&gt;</span> <span class="nv">$image</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;on_sale&#39;</span>      <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;rating&#39;</span>       <span class="o">=&gt;</span> <span class="nv">$faker</span><span class="o">-&gt;</span><span class="na">numberBetween</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;sold_count&#39;</span>   <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;review_count&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;price&#39;</span>        <span class="o">=&gt;</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h3 id="创建seeder">创建Seeder<a href="#创建seeder" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>然后创建一个 Seeder 文件用来批量创建商品：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:seeder ProductsSeeder
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan make:seeder ProductsSeeder
+</span></span></code></pre></div><ul>
 <li><code>database/seeds/ProductsSeeder.php</code>,写法例子：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="c1">// 创建 30 个商品
-</span><span class="c1"></span>    <span class="nv">$products</span> <span class="o">=</span> <span class="nx">factory</span><span class="p">(</span><span class="nx">\App\Models\Product</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="最后执行这个seeder">最后执行这个Seeder<a href="#最后执行这个seeder" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan db:seed --class<span class="o">=</span>ProductsSeeder
-</code></pre></div><h3 id="seeder文件注册">Seeder文件注册<a href="#seeder文件注册" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 创建 30 个商品
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$products</span> <span class="o">=</span> <span class="nx">factory</span><span class="p">(</span><span class="nx">\App\Models\Product</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">create</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="最后执行这个seeder">最后执行这个Seeder<a href="#最后执行这个seeder" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan db:seed --class<span class="o">=</span>ProductsSeeder
+</span></span></code></pre></div><h3 id="seeder文件注册">Seeder文件注册<a href="#seeder文件注册" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>或者可以把 Seeder 文件(<code>database/seeds/DatabaseSeeder.php</code>)注册到 DatabaseSeeder 中：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="k">use</span> <span class="nx">Illuminate\Database\Seeder</span><span class="p">;</span>
-<span class="k">class</span> <span class="nc">DatabaseSeeder</span> <span class="k">extends</span> <span class="nx">Seeder</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="nx">UsersSeeder</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="nx">ProductsSeeder</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>  
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="运行所有seeder">运行所有Seeder<a href="#运行所有seeder" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">//这个命令会执行你写在DatabaseSeeder.php里面所有的类的run函数
-php artisan db:seed
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Database\Seeder</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">DatabaseSeeder</span> <span class="k">extends</span> <span class="nx">Seeder</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="nx">UsersSeeder</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">call</span><span class="p">(</span><span class="nx">ProductsSeeder</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>  
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="运行所有seeder">运行所有Seeder<a href="#运行所有seeder" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">//这个命令会执行你写在DatabaseSeeder.php里面所有的类的run函数
+</span></span><span class="line"><span class="cl">php artisan db:seed
+</span></span></code></pre></div>
 			</div>
 
 <div class="related-posts thin">
@@ -235,7 +235,7 @@ php artisan db:seed
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -243,7 +243,7 @@ php artisan db:seed
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

@@ -118,22 +118,22 @@ public function __construct($items, $total, $perPage, $currentPage = null, array
 				<h3 id="laravel分页功能">laravel分页功能<a href="#laravel分页功能" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>有几种方法可以对数据进行分页。最简单的是在 [查询语句构造器] 或 [Eloquent 查询] 中使用 paginate 或 simplePaginate 方法。</p>
 <p>paginate用法如下：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//控制器中
-</span><span class="c1"></span><span class="nv">$users</span> <span class="o">=</span> <span class="nx">DB</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
-<span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;user.index&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="nv">$users</span><span class="p">]);</span>
-
-<span class="c1">//视图中
-</span><span class="c1"></span><span class="p">{{</span> <span class="nv">$users</span><span class="o">-&gt;</span><span class="na">links</span><span class="p">()</span> <span class="p">}}</span>
-</code></pre></div><p>效果如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//控制器中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$users</span> <span class="o">=</span> <span class="nx">DB</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;user.index&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;users&#39;</span> <span class="o">=&gt;</span> <span class="nv">$users</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//视图中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{{</span> <span class="nv">$users</span><span class="o">-&gt;</span><span class="na">links</span><span class="p">()</span> <span class="p">}}</span>
+</span></span></code></pre></div><p>效果如下：</p>
 <p>「上一页」 「1」「2」「3」 「下一页」</p>
 <p>simplePaginate用法如下：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//控制器中
-</span><span class="c1"></span><span class="nv">$users</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;votes&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">simplePaginate</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
-<span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;user.index&#39;</span><span class="p">,</span> <span class="nx">compact</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">));</span>
-
-<span class="c1">//视图中
-</span><span class="c1"></span><span class="p">{{</span> <span class="nv">$users</span><span class="o">-&gt;</span><span class="na">links</span><span class="p">()</span> <span class="p">}}</span>
-</code></pre></div><p>效果如下：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//控制器中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$users</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;votes&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">simplePaginate</span><span class="p">(</span><span class="mi">15</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;user.index&#39;</span><span class="p">,</span> <span class="nx">compact</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//视图中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{{</span> <span class="nv">$users</span><span class="o">-&gt;</span><span class="na">links</span><span class="p">()</span> <span class="p">}}</span>
+</span></span></code></pre></div><p>效果如下：</p>
 <p>「上一页」 「下一页」</p>
 <p>注意：</p>
 <ol>
@@ -147,43 +147,43 @@ public function __construct($items, $total, $perPage, $currentPage = null, array
 <h3 id="手动创建分页">手动创建分页<a href="#手动创建分页" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>如果你想手动创建分页实例并且最终得到一个数组类型的结果，可以根据需求来创建 IlluminatePaginationPaginator 或者 IlluminatePaginationLengthAwarePaginator 实例来实现。</p>
 <p>具体可以看IlluminatePaginationLengthAwarePaginator中的这段代码：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$items</span><span class="p">,</span> <span class="nv">$total</span><span class="p">,</span> <span class="nv">$perPage</span><span class="p">,</span> <span class="nv">$currentPage</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
-<span class="p">{</span>
-    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$options</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="p">{</span><span class="nv">$key</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">total</span> <span class="o">=</span> <span class="nv">$total</span><span class="p">;</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">perPage</span> <span class="o">=</span> <span class="nv">$perPage</span><span class="p">;</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lastPage</span> <span class="o">=</span> <span class="nx">max</span><span class="p">((</span><span class="nx">int</span><span class="p">)</span> <span class="nx">ceil</span><span class="p">(</span><span class="nv">$total</span> <span class="o">/</span> <span class="nv">$perPage</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span> <span class="o">!==</span> <span class="s1">&#39;/&#39;</span> <span class="o">?</span> <span class="nx">rtrim</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span><span class="p">;</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">currentPage</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setCurrentPage</span><span class="p">(</span><span class="nv">$currentPage</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pageName</span><span class="p">);</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">items</span> <span class="o">=</span> <span class="nv">$items</span> <span class="nx">instanceof</span> <span class="nx">Collection</span> <span class="o">?</span> <span class="nv">$items</span> <span class="o">:</span> <span class="nx">Collection</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$items</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="具体实现代码">具体实现代码<a href="#具体实现代码" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//控制器中
-</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">LiveService</span> <span class="nv">$liveService</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="c1">//数据A
-</span><span class="c1"></span>    <span class="nv">$dataA</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
-    <span class="c1">//数据B
-</span><span class="c1"></span>    <span class="nv">$dataB</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
-    <span class="nv">$data</span> <span class="o">=</span> <span class="nx">array_merge</span><span class="p">(</span><span class="nv">$dataA</span><span class="p">,</span> <span class="nv">$dataB</span><span class="p">);</span>
-    <span class="c1">//当前页数 默认1
-</span><span class="c1"></span>    <span class="nv">$page</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">page</span> <span class="o">?:</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="c1">//每页的条数
-</span><span class="c1"></span>    <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-    <span class="c1">//计算每页分页的初始位置
-</span><span class="c1"></span>    <span class="nv">$offset</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$page</span> <span class="o">*</span> <span class="nv">$perPage</span><span class="p">)</span> <span class="o">-</span> <span class="nv">$perPage</span><span class="p">;</span>
-      <span class="c1">//实例化LengthAwarePaginator类，并传入对应的参数
-</span><span class="c1"></span>    <span class="nv">$data</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LengthAwarePaginator</span><span class="p">(</span><span class="nx">array_slice</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$offset</span><span class="p">,</span> <span class="nv">$perPage</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="nx">count</span><span class="p">(</span><span class="nv">$data</span><span class="p">),</span> <span class="nv">$perPage</span><span class="p">,</span>
-        <span class="nv">$page</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(),</span> <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">()]);</span>
-    <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;admin.users.index&#39;</span><span class="p">,</span> <span class="nx">compact</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">));</span>
-<span class="p">}</span>
-
-<span class="c1">//视图中
-</span><span class="c1"></span><span class="p">{{</span> <span class="nv">$data</span><span class="o">-&gt;</span><span class="na">links</span><span class="p">()</span> <span class="p">}}</span>
-</code></pre></div><p>以上基本就完成了数组分页，大致流程就是控制器获取到当前页数，实例化LengthAwarePaginator类并传入必要的参数，根据每页的条数利用array_slice()方法获取每页要显示的数据。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nv">$items</span><span class="p">,</span> <span class="nv">$total</span><span class="p">,</span> <span class="nv">$perPage</span><span class="p">,</span> <span class="nv">$currentPage</span> <span class="o">=</span> <span class="k">null</span><span class="p">,</span> <span class="k">array</span> <span class="nv">$options</span> <span class="o">=</span> <span class="p">[])</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$options</span> <span class="k">as</span> <span class="nv">$key</span> <span class="o">=&gt;</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="p">{</span><span class="nv">$key</span><span class="p">}</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">total</span> <span class="o">=</span> <span class="nv">$total</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">perPage</span> <span class="o">=</span> <span class="nv">$perPage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">lastPage</span> <span class="o">=</span> <span class="nx">max</span><span class="p">((</span><span class="nx">int</span><span class="p">)</span> <span class="nx">ceil</span><span class="p">(</span><span class="nv">$total</span> <span class="o">/</span> <span class="nv">$perPage</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span> <span class="o">!==</span> <span class="s1">&#39;/&#39;</span> <span class="o">?</span> <span class="nx">rtrim</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">)</span> <span class="o">:</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">path</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">currentPage</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">setCurrentPage</span><span class="p">(</span><span class="nv">$currentPage</span><span class="p">,</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">pageName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">items</span> <span class="o">=</span> <span class="nv">$items</span> <span class="nx">instanceof</span> <span class="nx">Collection</span> <span class="o">?</span> <span class="nv">$items</span> <span class="o">:</span> <span class="nx">Collection</span><span class="o">::</span><span class="na">make</span><span class="p">(</span><span class="nv">$items</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="具体实现代码">具体实现代码<a href="#具体实现代码" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//控制器中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">index</span><span class="p">(</span><span class="nx">LiveService</span> <span class="nv">$liveService</span><span class="p">,</span> <span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//数据A
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$dataA</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//数据B
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$dataB</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">toArray</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$data</span> <span class="o">=</span> <span class="nx">array_merge</span><span class="p">(</span><span class="nv">$dataA</span><span class="p">,</span> <span class="nv">$dataB</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//当前页数 默认1
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$page</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">page</span> <span class="o">?:</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//每页的条数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$perPage</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//计算每页分页的初始位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$offset</span> <span class="o">=</span> <span class="p">(</span><span class="nv">$page</span> <span class="o">*</span> <span class="nv">$perPage</span><span class="p">)</span> <span class="o">-</span> <span class="nv">$perPage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">//实例化LengthAwarePaginator类，并传入对应的参数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$data</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">LengthAwarePaginator</span><span class="p">(</span><span class="nx">array_slice</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="nv">$offset</span><span class="p">,</span> <span class="nv">$perPage</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="nx">count</span><span class="p">(</span><span class="nv">$data</span><span class="p">),</span> <span class="nv">$perPage</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$page</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;path&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">url</span><span class="p">(),</span> <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">query</span><span class="p">()]);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;admin.users.index&#39;</span><span class="p">,</span> <span class="nx">compact</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//视图中
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">{{</span> <span class="nv">$data</span><span class="o">-&gt;</span><span class="na">links</span><span class="p">()</span> <span class="p">}}</span>
+</span></span></code></pre></div><p>以上基本就完成了数组分页，大致流程就是控制器获取到当前页数，实例化LengthAwarePaginator类并传入必要的参数，根据每页的条数利用array_slice()方法获取每页要显示的数据。</p>
 <p><a href="https://segmentfault.com/a/1190000015138587">另一参考地址</a></p>
 
 			</div>
@@ -255,7 +255,7 @@ public function __construct($items, $total, $perPage, $currentPage = null, array
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -263,7 +263,7 @@ public function __construct($items, $total, $perPage, $currentPage = null, array
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

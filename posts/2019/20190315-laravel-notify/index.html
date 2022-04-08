@@ -128,170 +128,170 @@
 <ul>
 <li>通知数据库,存储所有通知信息</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">1.php artisan notifications:table
-2.php artisan migrate
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1.php artisan notifications:table
+</span></span><span class="line"><span class="cl">2.php artisan migrate
+</span></span></code></pre></div><ul>
 <li>跟踪用户有多少未读通知(给<code>user</code>表加字段)</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="mf">1.</span><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">make</span><span class="o">:</span><span class="nx">migration</span> <span class="nx">add_notification_count_to_users_table</span> <span class="o">--</span><span class="nx">table</span><span class="o">=</span><span class="nx">users</span>
-    
-<span class="mf">2.</span><span class="c1">//database/migrations/{$timestamp}_add_notification_count_to_users_table.php
-</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="nx">Schema</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;notification_count&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">default</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-    <span class="p">});</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="nx">Schema</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">dropColumn</span><span class="p">(</span><span class="s1">&#39;notification_count&#39;</span><span class="p">);</span>
-    <span class="p">});</span>
-<span class="p">}</span>
-
-<span class="mf">3.</span><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">migrate</span>
-</code></pre></div><h4 id="生成通知类">生成通知类<a href="#生成通知类" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:notification MessageRecived
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="mf">1.</span><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">make</span><span class="o">:</span><span class="nx">migration</span> <span class="nx">add_notification_count_to_users_table</span> <span class="o">--</span><span class="nx">table</span><span class="o">=</span><span class="nx">users</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="mf">2.</span><span class="c1">//database/migrations/{$timestamp}_add_notification_count_to_users_table.php
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">up</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Schema</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">integer</span><span class="p">(</span><span class="s1">&#39;notification_count&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">unsigned</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">default</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">down</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Schema</span><span class="o">::</span><span class="na">table</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nx">Blueprint</span> <span class="nv">$table</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$table</span><span class="o">-&gt;</span><span class="na">dropColumn</span><span class="p">(</span><span class="s1">&#39;notification_count&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mf">3.</span><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">migrate</span>
+</span></span></code></pre></div><h4 id="生成通知类">生成通知类<a href="#生成通知类" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan make:notification MessageRecived
+</span></span></code></pre></div><ul>
 <li>修改文件为以下：<code>app/Notifications/TopicReplied.php</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-    
-<span class="k">namespace</span> <span class="nx">App\Notifications</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">App\Models\NotifyTest</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">App\User</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Bus\Queueable</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Notifications\Notification</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Contracts\Queue\ShouldQueue</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Notifications\Messages\MailMessage</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">MessageRecived</span> <span class="k">extends</span> <span class="nx">Notification</span>
-<span class="p">{</span>
-    <span class="k">use</span> <span class="nx">Queueable</span><span class="p">;</span>
-    <span class="k">public</span> <span class="nv">$notifyTest</span><span class="p">;</span>
-    
-    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">NotifyTest</span> <span class="nv">$notifyTest</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">=</span><span class="nv">$notifyTest</span><span class="p">;</span>
-    <span class="p">}</span>
-    
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">via</span><span class="p">(</span><span class="nv">$notifiable</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;database&#39;</span><span class="p">];</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">toDatabase</span><span class="p">(</span><span class="nv">$notifiable</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">// 存入数据库里的数据
-</span><span class="c1"></span>        <span class="nv">$send_name</span><span class="o">=</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">send_id</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
-        <span class="nv">$rev_name</span><span class="o">=</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">rev_id</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="s1">&#39;msg&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">msg</span><span class="p">,</span>
-            <span class="s1">&#39;send_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">send_id</span><span class="p">,</span>
-            <span class="s1">&#39;send_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$send_name</span><span class="p">,</span>
-            <span class="s1">&#39;rev_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">rev_id</span><span class="p">,</span>
-            <span class="s1">&#39;rev_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$rev_name</span><span class="p">,</span>
-        <span class="p">];</span>
-    <span class="p">}</span>
-    
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">toMail</span><span class="p">(</span><span class="nv">$notifiable</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">MailMessage</span><span class="p">)</span>
-                    <span class="o">-&gt;</span><span class="na">line</span><span class="p">(</span><span class="s1">&#39;The introduction to the notification.&#39;</span><span class="p">)</span>
-                    <span class="o">-&gt;</span><span class="na">action</span><span class="p">(</span><span class="s1">&#39;Notification Action&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
-                    <span class="o">-&gt;</span><span class="na">line</span><span class="p">(</span><span class="s1">&#39;Thank you for using our application!&#39;</span><span class="p">);</span>
-    <span class="p">}</span>
-    
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">toArray</span><span class="p">(</span><span class="nv">$notifiable</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[</span>
-            <span class="c1">//
-</span><span class="c1"></span>        <span class="p">];</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h4 id="触发通知">触发通知<a href="#触发通知" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Notifications</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Models\NotifyTest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\User</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Bus\Queueable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Notifications\Notification</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Contracts\Queue\ShouldQueue</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Notifications\Messages\MailMessage</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">MessageRecived</span> <span class="k">extends</span> <span class="nx">Notification</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">Queueable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="nv">$notifyTest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">(</span><span class="nx">NotifyTest</span> <span class="nv">$notifyTest</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">=</span><span class="nv">$notifyTest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">via</span><span class="p">(</span><span class="nv">$notifiable</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;database&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">toDatabase</span><span class="p">(</span><span class="nv">$notifiable</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 存入数据库里的数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$send_name</span><span class="o">=</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">send_id</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$rev_name</span><span class="o">=</span><span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">rev_id</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;msg&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">msg</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;send_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">send_id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;send_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$send_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;rev_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notifyTest</span><span class="o">-&gt;</span><span class="na">rev_id</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;rev_name&#39;</span> <span class="o">=&gt;</span> <span class="nv">$rev_name</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">toMail</span><span class="p">(</span><span class="nv">$notifiable</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">(</span><span class="k">new</span> <span class="nx">MailMessage</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">-&gt;</span><span class="na">line</span><span class="p">(</span><span class="s1">&#39;The introduction to the notification.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">-&gt;</span><span class="na">action</span><span class="p">(</span><span class="s1">&#39;Notification Action&#39;</span><span class="p">,</span> <span class="nx">url</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                    <span class="o">-&gt;</span><span class="na">line</span><span class="p">(</span><span class="s1">&#39;Thank you for using our application!&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">toArray</span><span class="p">(</span><span class="nv">$notifiable</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="触发通知">触发通知<a href="#触发通知" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <ul>
 <li>当用户给另外一个用户发送消息后，通知到接收用户。故触发通知的时机是：『消息发送成功后』，在模型监控器里（<code>app/Observers/NotifyTestObserver.php</code>），我们可以在 <code>created</code> 方法里实现此部分代码。</li>
 </ul>
 <p>1.创建新的观察者类</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan make:observer NotifyTestObserver --model<span class="o">=</span>NotifyTest
-</code></pre></div><p>2.<code>app/Observers/NotifyTestObserver.php</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="k">namespace</span> <span class="nx">App\Observers</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">App\Notifications\MessageRecived</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">App\Models\NotifyTest</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">App\User</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">NotifyTestObserver</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">created</span><span class="p">(</span><span class="nx">NotifyTest</span> <span class="nv">$notifyTest</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">// 通知该用户有新的消息
-</span><span class="c1"></span>        <span class="c1">// User 模型中使用了 trait —— Notifiable，它包含着一个可以用来发通知的方法 notify()
-</span><span class="c1"></span>        <span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$notifyTest</span><span class="o">-&gt;</span><span class="na">rev_id</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">notify</span><span class="p">(</span><span class="k">new</span> <span class="nx">MessageRecived</span><span class="p">(</span><span class="nv">$notifyTest</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-<span class="p">}</span>
-</code></pre></div><p>3.<code>app/User.php</code></p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">use</span> <span class="nx">Auth</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span>
-<span class="p">{</span>
-    <span class="k">use</span> <span class="nx">Notifiable</span> <span class="p">{</span>
-        <span class="nx">notify</span> <span class="k">as</span> <span class="k">protected</span> <span class="nx">laravelNotify</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">notify</span><span class="p">(</span><span class="nv">$instance</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="c1">// 如果要通知的人是当前用户，就不必通知了！
-</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">==</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">id</span><span class="p">())</span> <span class="p">{</span>
-            <span class="k">return</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="c1">// 只有数据库类型通知才需提醒，直接发送 Email 或者其他的都 Pass
-</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">method_exists</span><span class="p">(</span><span class="nv">$instance</span><span class="p">,</span> <span class="s1">&#39;toDatabase&#39;</span><span class="p">))</span> <span class="p">{</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">increment</span><span class="p">(</span><span class="s1">&#39;notification_count&#39;</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">laravelNotify</span><span class="p">(</span><span class="nv">$instance</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-<span class="p">}</span>
-</code></pre></div><h4 id="消息列表">消息列表<a href="#消息列表" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan make:observer NotifyTestObserver --model<span class="o">=</span>NotifyTest
+</span></span></code></pre></div><p>2.<code>app/Observers/NotifyTestObserver.php</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Observers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Notifications\MessageRecived</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Models\NotifyTest</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\User</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">NotifyTestObserver</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">created</span><span class="p">(</span><span class="nx">NotifyTest</span> <span class="nv">$notifyTest</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 通知该用户有新的消息
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// User 模型中使用了 trait —— Notifiable，它包含着一个可以用来发通知的方法 notify()
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">(</span><span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$notifyTest</span><span class="o">-&gt;</span><span class="na">rev_id</span><span class="p">))</span><span class="o">-&gt;</span><span class="na">notify</span><span class="p">(</span><span class="k">new</span> <span class="nx">MessageRecived</span><span class="p">(</span><span class="nv">$notifyTest</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>3.<code>app/User.php</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Auth</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">Notifiable</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">notify</span> <span class="k">as</span> <span class="k">protected</span> <span class="nx">laravelNotify</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">notify</span><span class="p">(</span><span class="nv">$instance</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 如果要通知的人是当前用户，就不必通知了！
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">id</span> <span class="o">==</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">id</span><span class="p">())</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 只有数据库类型通知才需提醒，直接发送 Email 或者其他的都 Pass
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="nx">method_exists</span><span class="p">(</span><span class="nv">$instance</span><span class="p">,</span> <span class="s1">&#39;toDatabase&#39;</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">increment</span><span class="p">(</span><span class="s1">&#39;notification_count&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">laravelNotify</span><span class="p">(</span><span class="nv">$instance</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="消息列表">消息列表<a href="#消息列表" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <ul>
 <li>清除未读消息标示，在 <code>User</code> 模型中新增 <code>markAsRead()</code> 方法</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="k">public</span> <span class="k">function</span> <span class="nf">markAsRead</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
-    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unreadNotifications</span><span class="o">-&gt;</span><span class="na">markAsRead</span><span class="p">();</span>
-<span class="p">}</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">markAsRead</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">notification_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">unreadNotifications</span><span class="o">-&gt;</span><span class="na">markAsRead</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
 <li>清空未读提醒的状态，app\Http\Controllers\TestController</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">//未读消息列表
-</span><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">msgList</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="nv">$msgLists</span><span class="o">=</span><span class="nx">\Auth</span><span class="o">::</span><span class="na">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">notifications</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
-    <span class="c1">// 标记为已读，未读数量清零
-</span><span class="c1"></span>    <span class="nx">\Auth</span><span class="o">::</span><span class="na">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">markAsRead</span><span class="p">();</span>
-    <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;msg_list&#39;</span><span class="p">,</span><span class="nx">compact</span><span class="p">(</span><span class="s1">&#39;msgLists&#39;</span><span class="p">));</span>
-<span class="p">}</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">//未读消息列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span> <span class="k">function</span> <span class="nf">msgList</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$msgLists</span><span class="o">=</span><span class="nx">\Auth</span><span class="o">::</span><span class="na">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">notifications</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">paginate</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 标记为已读，未读数量清零
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">\Auth</span><span class="o">::</span><span class="na">user</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">markAsRead</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">view</span><span class="p">(</span><span class="s1">&#39;msg_list&#39;</span><span class="p">,</span><span class="nx">compact</span><span class="p">(</span><span class="s1">&#39;msgLists&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><ul>
 <li>消息标识html代码：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;nav-item notification-badge&#34;</span><span class="p">&gt;</span>
-    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;nav-link mr-3 badge badge-pill badge-{{ Auth::user()-&gt;notification_count &gt; 0 ? &#39;hint&#39; : &#39;secondary&#39; }} text-white&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{route(&#39;msgList&#39;)}}&#34;</span><span class="p">&gt;</span>
-        {{auth(&#39;web&#39;)-&gt;user()-&gt;notification_count}}
-    <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
-<span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
-</code></pre></div><h3 id="结束语">结束语<a href="#结束语" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">li</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;nav-item notification-badge&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;nav-link mr-3 badge badge-pill badge-{{ Auth::user()-&gt;notification_count &gt; 0 ? &#39;hint&#39; : &#39;secondary&#39; }} text-white&#34;</span> <span class="na">href</span><span class="o">=</span><span class="s">&#34;{{route(&#39;msgList&#39;)}}&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">        {{auth(&#39;web&#39;)-&gt;user()-&gt;notification_count}}
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+</span></span></code></pre></div><h3 id="结束语">结束语<a href="#结束语" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>项目开发中遇到了类似的功能，所以也花时间做了个<code>DEMO</code>，记录一下。</p>
 <blockquote>
 <p>今天是你余生中最年轻的一天。💪</p>
@@ -366,7 +366,7 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -374,7 +374,7 @@
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

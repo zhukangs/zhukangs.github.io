@@ -97,47 +97,47 @@
 <p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/word_template.jpg" alt="原始模板"></p>
 <h3 id="开始">开始<a href="#开始" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <h4 id="安装">安装<a href="#安装" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require phpoffice/phpword
-</code></pre></div><h4 id="使用">使用<a href="#使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require phpoffice/phpword
+</span></span></code></pre></div><h4 id="使用">使用<a href="#使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <ul>
 <li>拿到原始的模板还需要做一些简单的修改：</li>
 </ul>
 <p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/modfile.jpg" alt="修改后"></p>
 <h4 id="代码">代码<a href="#代码" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-    
-<span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">PhpOffice\PhpWord\PhpWord</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">PhpOffice\PhpWord\TemplateProcessor</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">TestController</span> <span class="k">extends</span> <span class="nx">Controller</span>
-<span class="p">{</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="c1">//Word
-</span><span class="c1"></span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">wordExport</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="nv">$template</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TemplateProcessor</span><span class="p">(</span><span class="nx">public_path</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/phpoffice/word_temp.docx&#39;</span><span class="p">);</span>
-        <span class="c1">//设置替换值 （只能替换纯文本）
-</span><span class="c1"></span>        <span class="nv">$template</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span>
-            <span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span><span class="s1">&#39;Address&#39;</span><span class="p">,</span><span class="s1">&#39;Organizer&#39;</span><span class="p">,</span><span class="s1">&#39;Activity&#39;</span><span class="p">],</span>
-            <span class="p">[</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">start_time</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">address</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">organizer</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">activity</span><span class="p">]</span>
-        <span class="p">);</span>
-        <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">,</span> <span class="nx">time</span><span class="p">())</span><span class="o">.</span><span class="nx">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span><span class="o">.</span> <span class="s2">&#34;.docx&#34;</span><span class="p">;</span>
-        <span class="c1">//保存到项目
-</span><span class="c1"></span>        <span class="nv">$template</span><span class="o">-&gt;</span><span class="na">saveAs</span><span class="p">(</span><span class="nx">public_path</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/phpoffice/&#39;</span><span class="o">.</span><span class="nv">$filename</span><span class="p">);</span>
-
-        <span class="c1">//建议：将数据[&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;]写一份到数据库
-</span><span class="c1"></span>        <span class="c1">//TODO
-</span><span class="c1"></span>        
-        <span class="k">return</span> <span class="nx">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">([</span><span class="s1">&#39;success&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;导出成功&#39;</span><span class="p">,</span><span class="s1">&#39;filename&#39;</span><span class="o">=&gt;</span><span class="nv">$filename</span><span class="p">]);</span>
-    <span class="p">}</span>
-    
-<span class="p">}</span>
-</code></pre></div><h4 id="效果">效果<a href="#效果" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Http\Controllers</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">PhpOffice\PhpWord\PhpWord</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">PhpOffice\PhpWord\TemplateProcessor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">TestController</span> <span class="k">extends</span> <span class="nx">Controller</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Word
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">wordExport</span><span class="p">(</span><span class="nx">Request</span> <span class="nv">$request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$template</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TemplateProcessor</span><span class="p">(</span><span class="nx">public_path</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/phpoffice/word_temp.docx&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//设置替换值 （只能替换纯文本）
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$template</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="p">[</span><span class="s1">&#39;Name&#39;</span><span class="p">,</span><span class="s1">&#39;Date&#39;</span><span class="p">,</span><span class="s1">&#39;Address&#39;</span><span class="p">,</span><span class="s1">&#39;Organizer&#39;</span><span class="p">,</span><span class="s1">&#39;Activity&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">            <span class="p">[</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">start_time</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">address</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">organizer</span><span class="p">,</span><span class="nv">$request</span><span class="o">-&gt;</span><span class="na">activity</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$filename</span> <span class="o">=</span> <span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Y-m-d&#39;</span><span class="p">,</span> <span class="nx">time</span><span class="p">())</span><span class="o">.</span><span class="nx">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">9999</span><span class="p">)</span><span class="o">.</span> <span class="s2">&#34;.docx&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//保存到项目
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$template</span><span class="o">-&gt;</span><span class="na">saveAs</span><span class="p">(</span><span class="nx">public_path</span><span class="p">()</span><span class="o">.</span><span class="s1">&#39;/phpoffice/&#39;</span><span class="o">.</span><span class="nv">$filename</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">//建议：将数据[&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;]写一份到数据库
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">//TODO
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">back</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">with</span><span class="p">([</span><span class="s1">&#39;success&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;导出成功&#39;</span><span class="p">,</span><span class="s1">&#39;filename&#39;</span><span class="o">=&gt;</span><span class="nv">$filename</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="效果">效果<a href="#效果" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 <p><img src="https://test1-1256003521.cos.ap-guangzhou.myqcloud.com/promise/post/res_word.jpg" alt="完成效果图">{.figure}</p>
 <h3 id="结束语">结束语<a href="#结束语" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>目前是将文件保存在了项目，想要安全点可以丢到<code>Storage</code>文件夹下或者上传至<code>cos</code>，<code>oos</code>，<code>七牛</code>等。直接输出到浏览器暂时还没找到对应的方法。</p>
@@ -206,7 +206,7 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -214,7 +214,7 @@
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

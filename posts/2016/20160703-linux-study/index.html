@@ -80,249 +80,249 @@
 			</header>
 			<div class="content">
 				<h3 id="系统中常用shell指令">系统中常用Shell指令<a href="#系统中常用shell指令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">①指令单独存在  ② 指令带选项 ③ 指令带选项带参数
-    
-ls指令：显示当前目录的所有文件
-相关选项：
--l ：list缩写，代表以列表形式显示所有文件
--a ：all缩写，代表显示所有文件（包括隐藏文件）
-① ls指令
-② ls指令 -l，这个指令还可以进一步简写为ll
-③ ls指令 -a
-④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件）
-Ls –l /var/www *.php
-列出当前目录下，以.php结尾的文件  ls  –al *.php
-pwd指令：显示当前工作目录
-cd指令：跳转到指定目录
-① cd + 路径：跳转到指定的目录
-② cd .. ：跳转到上一级目录
-③ cd + ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root
-clear ：清屏指令
-logout ：退出指令
-普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。
-Ctrl + Alt + F1 ：切换到图形界面
-Ctrl + Alt + F2~F6 ：切换到字符界面
-shutdown ：关机指令
-相关选项：
-① shutdown  -h  分钟数：多少分钟后关机（真实关机）
-② shutdown  -r  分钟数：多少分钟后重启
-③ shutdown  -k  分钟数：多少分钟后关机（只发出警告，不关机）
-④ shutdown  -c ：取消关机，也可以使用快捷键Ctrl + C
-但是特别注意：shutdown指令只能是超级管理员使用，使用su  root切换超级管理员
-halt指令：立即关机
-reboot指令：立即重启
-</code></pre></div><h3 id="vi编辑器的基本操作">VI编辑器的基本操作<a href="#vi编辑器的基本操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件
-② vi + filename ：打开文件并将光标置于最后一行
-③ vi +n filename ：打开文件并将光标置于第n行
-④ vi +/string filename  ：打开文件并高亮显示string关键词
-提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。
-⑤ vi filename1 filename2 ：同时打开多个文件
-提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。
-
-普及小知识：Linux自动补全（非常重要）
-当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母+Tab按键就可以实现自动补全。
-</code></pre></div><h3 id="vi编辑器的命令模式与末行模式">VI编辑器的命令模式与末行模式<a href="#vi编辑器的命令模式与末行模式" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">命令模式：
-① yy ：复制当前行
-   nyy ：从当前行开始复制n行，例如：复制3行内容，3yy
-② p ：粘贴
-③ dd ：删除当前行
-   ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。
-④ u ：撤销，相当于Windows中的Ctrl + Z
-⑤ d$：删除光标所在位置到行末的所有内容。
-⑥ $：把光标移动到行末。
-⑦ ^：把光标移动到行首。
-
-末行模式：
-:set nu ：显示行号
-:set nonu ：取消行号
-/关键词：高亮显示所有关键词
-:noh ：取消所有关键词高亮
-num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面
-:w ：保存文件
-:q ：退出
-:wq ：保存并退出
-
-特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。
-:w! ：强制保存
-:q! ：强制退出
-:wq! ：强制保存并退出
-:n : 将光标放到指定的行
-</code></pre></div><h3 id="linux系统软件的安装与卸载">Linux系统软件的安装与卸载<a href="#linux系统软件的安装与卸载" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.查询已安装的Linux软件：
-    1、rpm -qa
-    2、选项说明：
-    3、-q ：query缩写，代表查询
-    4、-a ：all缩写，代表查询所有已安装的软件
-    
-2、管道命令
-基本语法：
-rpm  -qa | grep  vim
-管道命令操作符是：”|”。
-作用：将“|”左边命令的结果信息作为下一个命令的输入信息
-文本搜索命令：grep
-
-3、卸载已安装的软件
-基本语法：
-rpm  -e  软件名称
-如：rpm –e vim-common
-
-4、安装Linux软件（rpm包）
-①装载系统镜像1（DVD1）
-②选择已连接，启动光驱
-③到/media目录下寻找DVD光驱中的内容
-④安装rpm软件包，要用到的知识点：
-rpm  -ivh  软件名称：安装软件
--i ：install缩写，安装
--vh ：显示安装进度
-
-5、返回上级目录后，单击小b重启计算机
-
-6、更改超级管理员root密码
-基本语法：
-passwd  用户名名称 ：重置密码
-
-7、设置密码后，重启操作系统
-</code></pre></div><h3 id="与组相关的shell指令">与组相关的Shell指令<a href="#与组相关的shell指令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① groupadd 组名：添加组
-相关选项：
--g ：添加组时，指定组id
-② groupmod 组名
-相关选项：
--n ：修改组名称
--g ：修改组id
-
-③ groupdel 组名
-VIM使用小技巧：在末行模式下
-使用:0代表跳转到第1行
-使用:$代表调整到最后1行
-tail指令：在不打开文件的前提下，查看文件的内容
-tail -n 显示最后几行（纯数字） 文件名称
-
-④添加或删除组成员（针对附属组）
-gpasswd  [选项]  组名
-相关选项：
--a user_name ：添加用户到附属组中
--d user_name ：从附属组中删除用户
-</code></pre></div><h3 id="与用户的相关的shell指令">与用户的相关的Shell指令<a href="#与用户的相关的shell指令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① useradd指令：添加用户
-相关选项：
--g group_name ：代表添加用户时指定用户的所属组
--d  home_dir  -m：添加用户时指定用户的家，如果不指定默认/home/用户名
-
-② usermod 指令：修改用户信息
-相关选项：
--c comment ：修改用户的备注信息
--l login_name ：修改用户的名称
--d home_dir ：修改用户的家
--g group_name ：修改用户的所属组
-
-③ userdel 指令：删除用户
-相关选项：
--r ：删除用户时同时删除用户的家
-
-④设置用户口令（密码）
-基本语法：passwd [选项] 用户
-相关选项：
--S ：Status缩写，查看用户口令状态
-特别说明：如果一个用户没有密码，也会显示密码已被锁定。
--l ：lock缩写，代表锁定用户，不能登录操作系统
--u ：unlock缩写，代表解锁用户
--d ：del缩写，代表删除用户密码
-
-⑤用户的相关指令
- su指令：切换用户
-特别说明：如果从普通用户切换到超级管理员，需要密码
-如果从超级管理员切换到普通用户，不需要密码
- newgrp：切换所属组
- whoami：我是谁
-
-⑥查看用户信息
-id ：查看的内容比较多，查看用户信息
-groups ：查看的内容比较少，只能查看用户的所属组
-
-⑦设置与查看用户资料信息
- chfn [用户名称] ：更改用户的资料信息
- finger [用户名称] ：查看用户的资料信息
-安装finger需要依赖的软件
-
-⑧批量添加用户
- 1.编辑用户文件
-vim user.txt
-2. 编辑用户密码（明文）
-vim pass.txt
-3. 使用newusers指令到user.txt中的用户信息到/etc/passwd文件中
-4. 使用pwunconv指令把/etc/shadow文件中的密码都倒回到/etc/passwd文件中
-5. 使用chpasswd指令把pass.txt文件中的密码导入/etc/passwd文件中
-6. 使用pwconv指令把加密后的密码存储在/etc/shadow文件中
-</code></pre></div><h3 id="目录管理">目录管理<a href="#目录管理" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① mkdir ：创建目录
-相关选项：
--p ：递归创建
--m ：创建目录时指定目录权限
-
-② rmdir ：删除目录
-相关参数：
--p ：递归删除
-</code></pre></div><h3 id="文件相关">文件相关<a href="#文件相关" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">① touch指令：创建文件
-ouch指令与vim指令创建文件有何区别呢？
-vim指令打开文件，但是如果文件不存在，则自动创建该文件
-touch指令只能创建文件而没有打开功能
-
-② rm指令删除文件
-相关选项：
--r ：递归删除（主要用于删除文件夹）
--f ：关闭删除确认
-
-④文件统计
-基本语法：
-wc  [选项]  &lt;文件列表&gt;
-相关选项：
--c ：统计文件的字节数
--l ：lines缩写，统计文件的行数
--w ：word缩写，统计文件的单词数
-
-⑤grep搜索匹配行
-基本语法：
-grep  [选项]  &lt;字符串&gt;  &lt;源文件&gt;
-相关选项：
--n ：显示匹配的行号
--c ：统计一共有多少行
--i ：ignore缩写，代表匹配时忽略大小写
-
-⑥显示文件内容
-1. cat指令：正序显示文件内容
-2. tac指令：倒序显示文件内容
-
-⑦更改文件的权限
-1. 更改文件的权限
-chmod  -R（递归修改） 777
-2. 更改文件的拥有者
-chown  -R（递归修改） root
-3. 更改文件的所属组
-chgrp  -R（递归修改） itcast
-
-⑧创建链接文件
-软链接创建步骤：
-ln  [-s]  &lt;源文件或目录&gt;  &lt;链接文件或目录&gt;
-
-⑨复制与移动文件或文件夹
-1. cp  [选项]   &lt;源文件路径&gt;   &lt;目标文件路径&gt;
-相关选项：
--v : 显示进度条
--R : 递归复制
--p : 复制时保持文件的原有属性
--vRp ：递归复制，保存文件的原有属性，显示进度条
-还可以复制文件时更改文件名称
-2. mv指令：剪切或移动
-相关指令：
--v ：移动时显示进度条
-3. mv指令：文件或文件夹重命名
-基本语法：
-mv  旧文件名 新文件名
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">①指令单独存在  ② 指令带选项 ③ 指令带选项带参数
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">ls指令：显示当前目录的所有文件
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-l ：list缩写，代表以列表形式显示所有文件
+</span></span><span class="line"><span class="cl">-a ：all缩写，代表显示所有文件（包括隐藏文件）
+</span></span><span class="line"><span class="cl">① ls指令
+</span></span><span class="line"><span class="cl">② ls指令 -l，这个指令还可以进一步简写为ll
+</span></span><span class="line"><span class="cl">③ ls指令 -a
+</span></span><span class="line"><span class="cl">④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件）
+</span></span><span class="line"><span class="cl">Ls –l /var/www *.php
+</span></span><span class="line"><span class="cl">列出当前目录下，以.php结尾的文件  ls  –al *.php
+</span></span><span class="line"><span class="cl">pwd指令：显示当前工作目录
+</span></span><span class="line"><span class="cl">cd指令：跳转到指定目录
+</span></span><span class="line"><span class="cl">① cd + 路径：跳转到指定的目录
+</span></span><span class="line"><span class="cl">② cd .. ：跳转到上一级目录
+</span></span><span class="line"><span class="cl">③ cd + ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root
+</span></span><span class="line"><span class="cl">clear ：清屏指令
+</span></span><span class="line"><span class="cl">logout ：退出指令
+</span></span><span class="line"><span class="cl">普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。
+</span></span><span class="line"><span class="cl">Ctrl + Alt + F1 ：切换到图形界面
+</span></span><span class="line"><span class="cl">Ctrl + Alt + F2~F6 ：切换到字符界面
+</span></span><span class="line"><span class="cl">shutdown ：关机指令
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">① shutdown  -h  分钟数：多少分钟后关机（真实关机）
+</span></span><span class="line"><span class="cl">② shutdown  -r  分钟数：多少分钟后重启
+</span></span><span class="line"><span class="cl">③ shutdown  -k  分钟数：多少分钟后关机（只发出警告，不关机）
+</span></span><span class="line"><span class="cl">④ shutdown  -c ：取消关机，也可以使用快捷键Ctrl + C
+</span></span><span class="line"><span class="cl">但是特别注意：shutdown指令只能是超级管理员使用，使用su  root切换超级管理员
+</span></span><span class="line"><span class="cl">halt指令：立即关机
+</span></span><span class="line"><span class="cl">reboot指令：立即重启
+</span></span></code></pre></div><h3 id="vi编辑器的基本操作">VI编辑器的基本操作<a href="#vi编辑器的基本操作" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件
+</span></span><span class="line"><span class="cl">② vi + filename ：打开文件并将光标置于最后一行
+</span></span><span class="line"><span class="cl">③ vi +n filename ：打开文件并将光标置于第n行
+</span></span><span class="line"><span class="cl">④ vi +/string filename  ：打开文件并高亮显示string关键词
+</span></span><span class="line"><span class="cl">提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。
+</span></span><span class="line"><span class="cl">⑤ vi filename1 filename2 ：同时打开多个文件
+</span></span><span class="line"><span class="cl">提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">普及小知识：Linux自动补全（非常重要）
+</span></span><span class="line"><span class="cl">当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母+Tab按键就可以实现自动补全。
+</span></span></code></pre></div><h3 id="vi编辑器的命令模式与末行模式">VI编辑器的命令模式与末行模式<a href="#vi编辑器的命令模式与末行模式" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">命令模式：
+</span></span><span class="line"><span class="cl">① yy ：复制当前行
+</span></span><span class="line"><span class="cl">   nyy ：从当前行开始复制n行，例如：复制3行内容，3yy
+</span></span><span class="line"><span class="cl">② p ：粘贴
+</span></span><span class="line"><span class="cl">③ dd ：删除当前行
+</span></span><span class="line"><span class="cl">   ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。
+</span></span><span class="line"><span class="cl">④ u ：撤销，相当于Windows中的Ctrl + Z
+</span></span><span class="line"><span class="cl">⑤ d$：删除光标所在位置到行末的所有内容。
+</span></span><span class="line"><span class="cl">⑥ $：把光标移动到行末。
+</span></span><span class="line"><span class="cl">⑦ ^：把光标移动到行首。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">末行模式：
+</span></span><span class="line"><span class="cl">:set nu ：显示行号
+</span></span><span class="line"><span class="cl">:set nonu ：取消行号
+</span></span><span class="line"><span class="cl">/关键词：高亮显示所有关键词
+</span></span><span class="line"><span class="cl">:noh ：取消所有关键词高亮
+</span></span><span class="line"><span class="cl">num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面
+</span></span><span class="line"><span class="cl">:w ：保存文件
+</span></span><span class="line"><span class="cl">:q ：退出
+</span></span><span class="line"><span class="cl">:wq ：保存并退出
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。
+</span></span><span class="line"><span class="cl">:w! ：强制保存
+</span></span><span class="line"><span class="cl">:q! ：强制退出
+</span></span><span class="line"><span class="cl">:wq! ：强制保存并退出
+</span></span><span class="line"><span class="cl">:n : 将光标放到指定的行
+</span></span></code></pre></div><h3 id="linux系统软件的安装与卸载">Linux系统软件的安装与卸载<a href="#linux系统软件的安装与卸载" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1.查询已安装的Linux软件：
+</span></span><span class="line"><span class="cl">    1、rpm -qa
+</span></span><span class="line"><span class="cl">    2、选项说明：
+</span></span><span class="line"><span class="cl">    3、-q ：query缩写，代表查询
+</span></span><span class="line"><span class="cl">    4、-a ：all缩写，代表查询所有已安装的软件
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">2、管道命令
+</span></span><span class="line"><span class="cl">基本语法：
+</span></span><span class="line"><span class="cl">rpm  -qa | grep  vim
+</span></span><span class="line"><span class="cl">管道命令操作符是：”|”。
+</span></span><span class="line"><span class="cl">作用：将“|”左边命令的结果信息作为下一个命令的输入信息
+</span></span><span class="line"><span class="cl">文本搜索命令：grep
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3、卸载已安装的软件
+</span></span><span class="line"><span class="cl">基本语法：
+</span></span><span class="line"><span class="cl">rpm  -e  软件名称
+</span></span><span class="line"><span class="cl">如：rpm –e vim-common
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4、安装Linux软件（rpm包）
+</span></span><span class="line"><span class="cl">①装载系统镜像1（DVD1）
+</span></span><span class="line"><span class="cl">②选择已连接，启动光驱
+</span></span><span class="line"><span class="cl">③到/media目录下寻找DVD光驱中的内容
+</span></span><span class="line"><span class="cl">④安装rpm软件包，要用到的知识点：
+</span></span><span class="line"><span class="cl">rpm  -ivh  软件名称：安装软件
+</span></span><span class="line"><span class="cl">-i ：install缩写，安装
+</span></span><span class="line"><span class="cl">-vh ：显示安装进度
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">5、返回上级目录后，单击小b重启计算机
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">6、更改超级管理员root密码
+</span></span><span class="line"><span class="cl">基本语法：
+</span></span><span class="line"><span class="cl">passwd  用户名名称 ：重置密码
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">7、设置密码后，重启操作系统
+</span></span></code></pre></div><h3 id="与组相关的shell指令">与组相关的Shell指令<a href="#与组相关的shell指令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">① groupadd 组名：添加组
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-g ：添加组时，指定组id
+</span></span><span class="line"><span class="cl">② groupmod 组名
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-n ：修改组名称
+</span></span><span class="line"><span class="cl">-g ：修改组id
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">③ groupdel 组名
+</span></span><span class="line"><span class="cl">VIM使用小技巧：在末行模式下
+</span></span><span class="line"><span class="cl">使用:0代表跳转到第1行
+</span></span><span class="line"><span class="cl">使用:$代表调整到最后1行
+</span></span><span class="line"><span class="cl">tail指令：在不打开文件的前提下，查看文件的内容
+</span></span><span class="line"><span class="cl">tail -n 显示最后几行（纯数字） 文件名称
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">④添加或删除组成员（针对附属组）
+</span></span><span class="line"><span class="cl">gpasswd  [选项]  组名
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-a user_name ：添加用户到附属组中
+</span></span><span class="line"><span class="cl">-d user_name ：从附属组中删除用户
+</span></span></code></pre></div><h3 id="与用户的相关的shell指令">与用户的相关的Shell指令<a href="#与用户的相关的shell指令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">① useradd指令：添加用户
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-g group_name ：代表添加用户时指定用户的所属组
+</span></span><span class="line"><span class="cl">-d  home_dir  -m：添加用户时指定用户的家，如果不指定默认/home/用户名
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">② usermod 指令：修改用户信息
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-c comment ：修改用户的备注信息
+</span></span><span class="line"><span class="cl">-l login_name ：修改用户的名称
+</span></span><span class="line"><span class="cl">-d home_dir ：修改用户的家
+</span></span><span class="line"><span class="cl">-g group_name ：修改用户的所属组
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">③ userdel 指令：删除用户
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-r ：删除用户时同时删除用户的家
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">④设置用户口令（密码）
+</span></span><span class="line"><span class="cl">基本语法：passwd [选项] 用户
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-S ：Status缩写，查看用户口令状态
+</span></span><span class="line"><span class="cl">特别说明：如果一个用户没有密码，也会显示密码已被锁定。
+</span></span><span class="line"><span class="cl">-l ：lock缩写，代表锁定用户，不能登录操作系统
+</span></span><span class="line"><span class="cl">-u ：unlock缩写，代表解锁用户
+</span></span><span class="line"><span class="cl">-d ：del缩写，代表删除用户密码
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑤用户的相关指令
+</span></span><span class="line"><span class="cl"> su指令：切换用户
+</span></span><span class="line"><span class="cl">特别说明：如果从普通用户切换到超级管理员，需要密码
+</span></span><span class="line"><span class="cl">如果从超级管理员切换到普通用户，不需要密码
+</span></span><span class="line"><span class="cl"> newgrp：切换所属组
+</span></span><span class="line"><span class="cl"> whoami：我是谁
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑥查看用户信息
+</span></span><span class="line"><span class="cl">id ：查看的内容比较多，查看用户信息
+</span></span><span class="line"><span class="cl">groups ：查看的内容比较少，只能查看用户的所属组
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑦设置与查看用户资料信息
+</span></span><span class="line"><span class="cl"> chfn [用户名称] ：更改用户的资料信息
+</span></span><span class="line"><span class="cl"> finger [用户名称] ：查看用户的资料信息
+</span></span><span class="line"><span class="cl">安装finger需要依赖的软件
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑧批量添加用户
+</span></span><span class="line"><span class="cl"> 1.编辑用户文件
+</span></span><span class="line"><span class="cl">vim user.txt
+</span></span><span class="line"><span class="cl">2. 编辑用户密码（明文）
+</span></span><span class="line"><span class="cl">vim pass.txt
+</span></span><span class="line"><span class="cl">3. 使用newusers指令到user.txt中的用户信息到/etc/passwd文件中
+</span></span><span class="line"><span class="cl">4. 使用pwunconv指令把/etc/shadow文件中的密码都倒回到/etc/passwd文件中
+</span></span><span class="line"><span class="cl">5. 使用chpasswd指令把pass.txt文件中的密码导入/etc/passwd文件中
+</span></span><span class="line"><span class="cl">6. 使用pwconv指令把加密后的密码存储在/etc/shadow文件中
+</span></span></code></pre></div><h3 id="目录管理">目录管理<a href="#目录管理" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">① mkdir ：创建目录
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-p ：递归创建
+</span></span><span class="line"><span class="cl">-m ：创建目录时指定目录权限
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">② rmdir ：删除目录
+</span></span><span class="line"><span class="cl">相关参数：
+</span></span><span class="line"><span class="cl">-p ：递归删除
+</span></span></code></pre></div><h3 id="文件相关">文件相关<a href="#文件相关" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">① touch指令：创建文件
+</span></span><span class="line"><span class="cl">ouch指令与vim指令创建文件有何区别呢？
+</span></span><span class="line"><span class="cl">vim指令打开文件，但是如果文件不存在，则自动创建该文件
+</span></span><span class="line"><span class="cl">touch指令只能创建文件而没有打开功能
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">② rm指令删除文件
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-r ：递归删除（主要用于删除文件夹）
+</span></span><span class="line"><span class="cl">-f ：关闭删除确认
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">④文件统计
+</span></span><span class="line"><span class="cl">基本语法：
+</span></span><span class="line"><span class="cl">wc  [选项]  &lt;文件列表&gt;
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-c ：统计文件的字节数
+</span></span><span class="line"><span class="cl">-l ：lines缩写，统计文件的行数
+</span></span><span class="line"><span class="cl">-w ：word缩写，统计文件的单词数
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑤grep搜索匹配行
+</span></span><span class="line"><span class="cl">基本语法：
+</span></span><span class="line"><span class="cl">grep  [选项]  &lt;字符串&gt;  &lt;源文件&gt;
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-n ：显示匹配的行号
+</span></span><span class="line"><span class="cl">-c ：统计一共有多少行
+</span></span><span class="line"><span class="cl">-i ：ignore缩写，代表匹配时忽略大小写
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑥显示文件内容
+</span></span><span class="line"><span class="cl">1. cat指令：正序显示文件内容
+</span></span><span class="line"><span class="cl">2. tac指令：倒序显示文件内容
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑦更改文件的权限
+</span></span><span class="line"><span class="cl">1. 更改文件的权限
+</span></span><span class="line"><span class="cl">chmod  -R（递归修改） 777
+</span></span><span class="line"><span class="cl">2. 更改文件的拥有者
+</span></span><span class="line"><span class="cl">chown  -R（递归修改） root
+</span></span><span class="line"><span class="cl">3. 更改文件的所属组
+</span></span><span class="line"><span class="cl">chgrp  -R（递归修改） itcast
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑧创建链接文件
+</span></span><span class="line"><span class="cl">软链接创建步骤：
+</span></span><span class="line"><span class="cl">ln  [-s]  &lt;源文件或目录&gt;  &lt;链接文件或目录&gt;
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">⑨复制与移动文件或文件夹
+</span></span><span class="line"><span class="cl">1. cp  [选项]   &lt;源文件路径&gt;   &lt;目标文件路径&gt;
+</span></span><span class="line"><span class="cl">相关选项：
+</span></span><span class="line"><span class="cl">-v : 显示进度条
+</span></span><span class="line"><span class="cl">-R : 递归复制
+</span></span><span class="line"><span class="cl">-p : 复制时保持文件的原有属性
+</span></span><span class="line"><span class="cl">-vRp ：递归复制，保存文件的原有属性，显示进度条
+</span></span><span class="line"><span class="cl">还可以复制文件时更改文件名称
+</span></span><span class="line"><span class="cl">2. mv指令：剪切或移动
+</span></span><span class="line"><span class="cl">相关指令：
+</span></span><span class="line"><span class="cl">-v ：移动时显示进度条
+</span></span><span class="line"><span class="cl">3. mv指令：文件或文件夹重命名
+</span></span><span class="line"><span class="cl">基本语法：
+</span></span><span class="line"><span class="cl">mv  旧文件名 新文件名
+</span></span></code></pre></div>
 			</div>
 
 			<hr class="post-end">
@@ -380,7 +380,7 @@ mv  旧文件名 新文件名
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -388,7 +388,7 @@ mv  旧文件名 新文件名
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

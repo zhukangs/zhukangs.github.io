@@ -80,43 +80,43 @@
 			</header>
 			<div class="content">
 				<h3 id="路由问题">路由问题<a href="#路由问题" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 资源路由
-</span><span class="c1"></span> <span class="nx">Route</span><span class="o">::</span><span class="na">resource</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;UserController&#39;</span><span class="p">);</span>
- <span class="c1">// 分组路由
-</span><span class="c1"></span> <span class="nx">Route</span><span class="o">::</span><span class="na">group</span><span class="p">([</span><span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="k">function</span><span class="p">(){</span>
-     <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;showByName&#39;</span><span class="p">,</span> <span class="s1">&#39;UserController@showByName&#39;</span><span class="p">);</span>
- <span class="p">});</span>
- <span class="c1">// 正确的写法： 把所有路由写在资源路由前面
-</span><span class="c1"></span> <span class="c1">// 分组路由
-</span><span class="c1"></span> <span class="nx">Route</span><span class="o">::</span><span class="na">group</span><span class="p">([</span><span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="k">function</span><span class="p">(){</span>
-     <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;showByName&#39;</span><span class="p">,</span> <span class="s1">&#39;UserController@showByName&#39;</span><span class="p">);</span>
- <span class="p">});</span>
- <span class="c1">// 资源路由
-</span><span class="c1"></span> <span class="nx">Route</span><span class="o">::</span><span class="na">resource</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;UserController&#39;</span><span class="p">);</span>
- 
-<span class="sb">`asset()`</span><span class="nx">会去找相对于</span><span class="sb">`index.php`</span><span class="nx">目录下的文件</span><span class="p">,</span> <span class="nx">默认是</span>   <span class="sb">`laravel/public`</span><span class="nx">的绝对路径</span>
-<span class="sb">`url()`</span>  <span class="nx">参数是路由名字</span>
-<span class="sb">`route()`</span><span class="nx">参数是路由的别名</span>
-<span class="sb">`return redirect(&#39;&#39;)`</span><span class="nx">参数是路由或者完整url</span><span class="p">,</span> 
-<span class="sb">`return redirect()-&gt;route(&#39;&#39;)`</span><span class="nx">参数是路由别名</span>
-</code></pre></div><h3 id="model">Model<a href="#model" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">Model</span><span class="o">::</span><span class="na">all</span><span class="p">()</span> <span class="c1">//取得所有记录
-</span><span class="c1"></span><span class="nx">Model</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span> <span class="c1">//取得符合条件的所有记录
-</span><span class="c1"></span><span class="nx">Model</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">()</span> <span class="c1">//取得符合条件的第一条记录
-</span><span class="c1"></span><span class="nx">Model</span><span class="o">::</span><span class="na">save</span> <span class="c1">//不生效，如果你数据库的主键是`Id`改成`id`即可
-</span></code></pre></div><h3 id="php-artisan">php artisan<a href="#php-artisan" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="sb">`</span>php artisan make:controller Controller --resource<span class="sb">`</span> 加上<span class="sb">`</span>--resource<span class="sb">`</span> 可以自动创建资源控制器默认的方法
-<span class="sb">`</span>php artisan route:list<span class="sb">`</span> 查看所有路由
-<span class="sb">`</span>php artisan make:auto<span class="sb">`</span> 生成一个登录注册
-<span class="sb">`</span>php artisan serve --port<span class="o">=</span>80<span class="sb">`</span> 用80端口开启服务环境
- 
-<span class="sb">`</span>php artisan make:Postcontroller --model<span class="o">=</span>Post<span class="sb">`</span> 生成模型控制器
-<span class="sb">`</span>php artisan make:model User -a<span class="sb">`</span> 会生成<span class="sb">`</span>Resource Controller<span class="sb">`</span>,<span class="sb">`</span>Migration<span class="sb">`</span>,<span class="sb">`</span>Factory<span class="sb">`</span>,<span class="sb">`</span>Model<span class="sb">`</span>
- php artisan make:model User -a 会生成Resource Controller,Migration,Factory,Model
-</code></pre></div><h3 id="表单提交后保留旧数据">表单提交后保留旧数据<a href="#表单提交后保留旧数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html">控制器：return back()-&gt;withInput();
-视图层：<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;{{ old(&#39;username&#39;) }}&#34;</span> <span class="p">/&gt;</span>
-</code></pre></div><p>登陆后跳转到登录前的页面?</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">// 资源路由
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">Route</span><span class="o">::</span><span class="na">resource</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;UserController&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 分组路由
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">Route</span><span class="o">::</span><span class="na">group</span><span class="p">([</span><span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="k">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">     <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;showByName&#39;</span><span class="p">,</span> <span class="s1">&#39;UserController@showByName&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 正确的写法： 把所有路由写在资源路由前面
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="c1">// 分组路由
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">Route</span><span class="o">::</span><span class="na">group</span><span class="p">([</span><span class="s1">&#39;prefix&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user&#39;</span><span class="p">],</span> <span class="k">function</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">     <span class="nx">Route</span><span class="o">::</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;showByName&#39;</span><span class="p">,</span> <span class="s1">&#39;UserController@showByName&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 资源路由
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">Route</span><span class="o">::</span><span class="na">resource</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="s1">&#39;UserController&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="sb">`asset()`</span><span class="nx">会去找相对于</span><span class="sb">`index.php`</span><span class="nx">目录下的文件</span><span class="p">,</span> <span class="nx">默认是</span>   <span class="sb">`laravel/public`</span><span class="nx">的绝对路径</span>
+</span></span><span class="line"><span class="cl"><span class="sb">`url()`</span>  <span class="nx">参数是路由名字</span>
+</span></span><span class="line"><span class="cl"><span class="sb">`route()`</span><span class="nx">参数是路由的别名</span>
+</span></span><span class="line"><span class="cl"><span class="sb">`return redirect(&#39;&#39;)`</span><span class="nx">参数是路由或者完整url</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl"><span class="sb">`return redirect()-&gt;route(&#39;&#39;)`</span><span class="nx">参数是路由别名</span>
+</span></span></code></pre></div><h3 id="model">Model<a href="#model" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">Model</span><span class="o">::</span><span class="na">all</span><span class="p">()</span> <span class="c1">//取得所有记录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Model</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">()</span> <span class="c1">//取得符合条件的所有记录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Model</span><span class="o">::</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;&gt;&#39;</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">first</span><span class="p">()</span> <span class="c1">//取得符合条件的第一条记录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">Model</span><span class="o">::</span><span class="na">save</span> <span class="c1">//不生效，如果你数据库的主键是`Id`改成`id`即可
+</span></span></span></code></pre></div><h3 id="php-artisan">php artisan<a href="#php-artisan" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="sb">`</span>php artisan make:controller Controller --resource<span class="sb">`</span> 加上<span class="sb">`</span>--resource<span class="sb">`</span> 可以自动创建资源控制器默认的方法
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>php artisan route:list<span class="sb">`</span> 查看所有路由
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>php artisan make:auto<span class="sb">`</span> 生成一个登录注册
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>php artisan serve --port<span class="o">=</span>80<span class="sb">`</span> 用80端口开启服务环境
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>php artisan make:Postcontroller --model<span class="o">=</span>Post<span class="sb">`</span> 生成模型控制器
+</span></span><span class="line"><span class="cl"><span class="sb">`</span>php artisan make:model User -a<span class="sb">`</span> 会生成<span class="sb">`</span>Resource Controller<span class="sb">`</span>,<span class="sb">`</span>Migration<span class="sb">`</span>,<span class="sb">`</span>Factory<span class="sb">`</span>,<span class="sb">`</span>Model<span class="sb">`</span>
+</span></span><span class="line"><span class="cl"> php artisan make:model User -a 会生成Resource Controller,Migration,Factory,Model
+</span></span></code></pre></div><h3 id="表单提交后保留旧数据">表单提交后保留旧数据<a href="#表单提交后保留旧数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl">控制器：return back()-&gt;withInput();
+</span></span><span class="line"><span class="cl">视图层：<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;text&#34;</span> <span class="na">name</span><span class="o">=</span><span class="s">&#34;username&#34;</span> <span class="na">value</span><span class="o">=</span><span class="s">&#34;{{ old(&#39;username&#39;) }}&#34;</span> <span class="p">/&gt;</span>
+</span></span></code></pre></div><p>登陆后跳转到登录前的页面?</p>
 <ul>
 <li>跳转之前，获取当前URL，拼接到GET参数，跳转到登录页面时就变成 <code>http://domain.com/login.php?url=detail.php</code>, 到登录页面时， 判断有没有GET参数， 如果有， 登录成功后就跳转到之前的页面</li>
 </ul>
@@ -189,7 +189,7 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -197,7 +197,7 @@
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

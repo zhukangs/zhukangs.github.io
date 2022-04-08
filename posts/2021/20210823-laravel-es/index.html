@@ -87,72 +87,72 @@
 <li>简单查询。</li>
 </ul>
 <h3 id="安装-composer-包">安装 <code>composer</code> 包<a href="#安装-composer-包" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require elasticsearch/elasticsearch <span class="s1">&#39;~7.0&#39;</span>
-</code></pre></div><h3 id="配置-configdatabasephp">配置 <code>config/database.php</code><a href="#配置-configdatabasephp" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1"># Elasticsearch Config Info
-</span><span class="c1"></span><span class="s1">&#39;elasticsearch&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="c1">// Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组
-</span><span class="c1"></span>    <span class="s1">&#39;hosts&#39;</span> <span class="o">=&gt;</span> <span class="nx">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;ES_HOSTS&#39;</span><span class="p">)),</span>
-    <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;ES_USERNAME&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;ES_PASSWORD&#39;</span><span class="p">),</span>
-<span class="p">],</span>
-</code></pre></div><h3 id="初始化-elasticsearch-对象">初始化 <code>Elasticsearch</code> 对象<a href="#初始化-elasticsearch-对象" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="c1">// 注册一个名为 es 的单例
-</span><span class="c1"></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// 从配置文件读取 Elasticsearch 服务器列表
-</span><span class="c1"></span>    <span class="nv">$builder</span> <span class="o">=</span> <span class="nx">ESClientBuilder</span><span class="o">::</span><span class="na">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setHosts</span><span class="p">(</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.hosts&#39;</span><span class="p">))</span>
-        <span class="o">-&gt;</span><span class="na">setBasicAuthentication</span><span class="p">(</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.username&#39;</span><span class="p">),</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.password&#39;</span><span class="p">));</span>
-    <span class="c1">// 如果是开发环境
-</span><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">environment</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;local&#39;</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试
-</span><span class="c1"></span>        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">setLogger</span><span class="p">(</span><span class="nx">app</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">driver</span><span class="p">());</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
-<span class="p">});</span>
-</code></pre></div><h3 id="创建索引">创建索引<a href="#创建索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require elasticsearch/elasticsearch <span class="s1">&#39;~7.0&#39;</span>
+</span></span></code></pre></div><h3 id="配置-configdatabasephp">配置 <code>config/database.php</code><a href="#配置-configdatabasephp" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1"># Elasticsearch Config Info
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="s1">&#39;elasticsearch&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="s1">&#39;hosts&#39;</span> <span class="o">=&gt;</span> <span class="nx">explode</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;ES_HOSTS&#39;</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;ES_USERNAME&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;ES_PASSWORD&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"><span class="p">],</span>
+</span></span></code></pre></div><h3 id="初始化-elasticsearch-对象">初始化 <code>Elasticsearch</code> 对象<a href="#初始化-elasticsearch-对象" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1">// 注册一个名为 es 的单例
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">app</span><span class="o">-&gt;</span><span class="na">singleton</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">,</span> <span class="k">function</span> <span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 从配置文件读取 Elasticsearch 服务器列表
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nv">$builder</span> <span class="o">=</span> <span class="nx">ESClientBuilder</span><span class="o">::</span><span class="na">create</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">setHosts</span><span class="p">(</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.hosts&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="o">-&gt;</span><span class="na">setBasicAuthentication</span><span class="p">(</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.username&#39;</span><span class="p">),</span><span class="nx">config</span><span class="p">(</span><span class="s1">&#39;database.elasticsearch.password&#39;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果是开发环境
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="k">if</span> <span class="p">(</span><span class="nx">app</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">environment</span><span class="p">()</span> <span class="o">===</span> <span class="s1">&#39;local&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">setLogger</span><span class="p">(</span><span class="nx">app</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">driver</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$builder</span><span class="o">-&gt;</span><span class="na">build</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><h3 id="创建索引">创建索引<a href="#创建索引" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <pre tabindex="0"><code>curl -XPUT -u name:pwd http://ip:9200/user_behavior?pretty
 </code></pre><h3 id="创建索引结构">创建索引结构<a href="#创建索引结构" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<pre tabindex="0"><code>curl -H'Content-Type: application/json'  -XPUT -u name:pwd http://ip:9200/user_behavior/_mapping/?pretty -d'{
-  &quot;properties&quot;: {
-    &quot;open_id&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;store&quot;:true }, 
-    &quot;imp_date&quot;: { &quot;type&quot;: &quot;text&quot;, &quot;store&quot;:true }, 
-    &quot;first_login&quot;: { &quot;type&quot;: &quot;text&quot;,&quot;store&quot;:true }
+<pre tabindex="0"><code>curl -H&#39;Content-Type: application/json&#39;  -XPUT -u name:pwd http://ip:9200/user_behavior/_mapping/?pretty -d&#39;{
+  &#34;properties&#34;: {
+    &#34;open_id&#34;: { &#34;type&#34;: &#34;text&#34;, &#34;store&#34;:true }, 
+    &#34;imp_date&#34;: { &#34;type&#34;: &#34;text&#34;, &#34;store&#34;:true }, 
+    &#34;first_login&#34;: { &#34;type&#34;: &#34;text&#34;,&#34;store&#34;:true }
     }
   }
-}'
+}&#39;
 </code></pre><h3 id="测试写入数据">测试写入数据<a href="#测试写入数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">app</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">index</span><span class="p">([</span><span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_behavior&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;open_id&#39;</span><span class="o">=&gt;</span><span class="nx">md5</span><span class="p">(</span><span class="nx">time</span><span class="p">()),</span><span class="s1">&#39;imp_date&#39;</span><span class="o">=&gt;</span><span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Ymd&#39;</span><span class="p">),</span><span class="s1">&#39;first_login&#39;</span><span class="o">=&gt;</span><span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Ymd&#39;</span><span class="p">)]])</span>
-</code></pre></div><h3 id="查询数据">查询数据<a href="#查询数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$params</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_behavior&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;_source&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;imp_date&#39;</span><span class="p">],</span>
-    <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-            <span class="s1">&#39;bool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                    <span class="s1">&#39;range&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-                        <span class="s1">&#39;imp_date&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;gte&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;20210120&#39;</span><span class="p">,</span> <span class="s1">&#39;lte&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;20210430&#39;</span><span class="p">]</span>
-                    <span class="p">]</span>
-                <span class="p">]</span>
-            <span class="p">]</span>
-        <span class="p">],</span>
-        <span class="s1">&#39;size&#39;</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span>
-        <span class="c1">//&#39;collapse&#39; =&gt; [&#39;field&#39; =&gt; &#39;open_id&#39;],
-</span><span class="c1"></span>        <span class="s1">&#39;aggs&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
-            <span class="cm">/*&#39;my_count&#39;=&gt;[
-</span><span class="cm">                &#39;value_count&#39;=&gt;[&#39;field&#39; =&gt; &#39;open_id&#39;]
-</span><span class="cm">            ],*/</span>
-            <span class="s1">&#39;distinct_open_id&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
-                <span class="s1">&#39;cardinality&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;open_id&#39;</span><span class="p">]</span>
-            <span class="p">]</span>
-        <span class="p">]</span>
-    <span class="p">],</span>
-<span class="p">];</span>
-
-<span class="nv">$results</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
-<span class="nv">$results</span><span class="p">[</span><span class="s1">&#39;aggregations&#39;</span><span class="p">][</span><span class="s1">&#39;distinct_open_id&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">];</span>
-</code></pre></div><p>另外可参考文章：<a href="https://blog.junphp.com/details/325.jsp">https://blog.junphp.com/details/325.jsp</a></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">app</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">index</span><span class="p">([</span><span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_behavior&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;open_id&#39;</span><span class="o">=&gt;</span><span class="nx">md5</span><span class="p">(</span><span class="nx">time</span><span class="p">()),</span><span class="s1">&#39;imp_date&#39;</span><span class="o">=&gt;</span><span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Ymd&#39;</span><span class="p">),</span><span class="s1">&#39;first_login&#39;</span><span class="o">=&gt;</span><span class="p">(</span><span class="nx">int</span><span class="p">)</span><span class="nx">date</span><span class="p">(</span><span class="s1">&#39;Ymd&#39;</span><span class="p">)]])</span>
+</span></span></code></pre></div><h3 id="查询数据">查询数据<a href="#查询数据" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$params</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;index&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;user_behavior&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;_source&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;imp_date&#39;</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;body&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;query&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;bool&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;filter&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                    <span class="s1">&#39;range&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">                        <span class="s1">&#39;imp_date&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span><span class="s1">&#39;gte&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;20210120&#39;</span><span class="p">,</span> <span class="s1">&#39;lte&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;20210430&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">],</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;size&#39;</span><span class="o">=&gt;</span><span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//&#39;collapse&#39; =&gt; [&#39;field&#39; =&gt; &#39;open_id&#39;],
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;aggs&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">            <span class="cm">/*&#39;my_count&#39;=&gt;[
+</span></span></span><span class="line"><span class="cl"><span class="cm">                &#39;value_count&#39;=&gt;[&#39;field&#39; =&gt; &#39;open_id&#39;]
+</span></span></span><span class="line"><span class="cl"><span class="cm">            ],*/</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;distinct_open_id&#39;</span><span class="o">=&gt;</span><span class="p">[</span>
+</span></span><span class="line"><span class="cl">                <span class="s1">&#39;cardinality&#39;</span><span class="o">=&gt;</span><span class="p">[</span><span class="s1">&#39;field&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;open_id&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;es&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">search</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$results</span><span class="p">[</span><span class="s1">&#39;aggregations&#39;</span><span class="p">][</span><span class="s1">&#39;distinct_open_id&#39;</span><span class="p">][</span><span class="s1">&#39;value&#39;</span><span class="p">];</span>
+</span></span></code></pre></div><p>另外可参考文章：<a href="https://blog.junphp.com/details/325.jsp">https://blog.junphp.com/details/325.jsp</a></p>
 
 			</div>
 
@@ -228,7 +228,7 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -236,7 +236,7 @@
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

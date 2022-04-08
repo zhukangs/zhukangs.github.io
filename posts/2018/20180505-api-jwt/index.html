@@ -91,42 +91,42 @@ composer create-project --prefer-dist laravel/laravel blog &#34;5.5.*&#34; 安�
 				<p><strong>写接口好写，但麻烦的是起步，需要做一些安全的措施，下面就记录一下Laravel的初始API搭建步骤！！！</strong></p>
 <h3 id="安装laravel55">安装laravel（5.5）<a href="#安装laravel55" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>对于 LTS 版本，例如 Laravel 5.1，提供两年的错误修复和三年的安全修复。这些版本提供最长时间的支持和维护。对于一般版本，则只是提供六个月的错误修复和为期一年的安全修复。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer create-project --prefer-dist laravel/laravel blog <span class="s2">&#34;5.5.*&#34;</span>
-</code></pre></div><h3 id="安装dingoapi参考文档">安装DingoAPI（参考文档）<a href="#安装dingoapi参考文档" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer create-project --prefer-dist laravel/laravel blog <span class="s2">&#34;5.5.*&#34;</span>
+</span></span></code></pre></div><h3 id="安装dingoapi参考文档">安装DingoAPI（参考文档）<a href="#安装dingoapi参考文档" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <blockquote>
 <p>dingo/api 是一个 Lumen 和 Laravel 都可用的 RestFul 工具包，帮助我们快速的开始构建 RestFul Api。更多的功能，还需要仔细阅读 DingoApi 的 文档 来深入的学习和理解。</p>
 </blockquote>
 <ul>
 <li>Laravel 5.5 的适配版本为dingo/api:v2.0.0-alpha2，所以我们需要安装这个 tag</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require dingo/api:2.0.0-alpha2
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require dingo/api:2.0.0-alpha2
+</span></span></code></pre></div><ul>
 <li>会报错：You requirements could not be resolved to an installable set of packages</li>
 <li>原因：dingo 的文档中有说明，现在这个包还处在开发阶段，没有一个稳定的 release 版本，
 dingo/api 依赖的 dingo/blueprint 与 phpunit 都依赖了 phpdocumentor/reflection-docblock 但是依赖的版本不同，
 导致出现了冲突。但是我们发现 dingo/blueprint 的开发版本 dev-master 解决了冲突，可以正常安装；</li>
 <li>解决：修改一下 composer.json</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s2">&#34;config&#34;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&#34;preferred-install&#34;</span><span class="o">:</span> <span class="s2">&#34;dist&#34;</span><span class="p">,</span>
-    <span class="s2">&#34;sort-packages&#34;</span><span class="o">:</span> <span class="k">true</span><span class="p">,</span>
-    <span class="s2">&#34;optimize-autoloader&#34;</span><span class="o">:</span> <span class="k">true</span>
-<span class="p">},</span>
-<span class="s2">&#34;minimum-stability&#34;</span> <span class="o">:</span> <span class="s2">&#34;dev&#34;</span><span class="p">,</span>
-<span class="s2">&#34;prefer-stable&#34;</span> <span class="o">:</span> <span class="k">true</span><span class="p">,</span>
-<span class="nx">minimum</span><span class="o">-</span><span class="nx">stability</span><span class="s2">&#34; : &#34;</span><span class="nx">dev</span><span class="s2">&#34; #设定的最低稳定性的版本为 dev 也就是可以依赖开发版本的扩展包；
-</span><span class="s2">&#34;</span><span class="nx">prefer</span><span class="o">-</span><span class="nx">stable</span><span class="s2">&#34; : true —— Composer 优先使用更稳定的包版本。
-</span></code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s2">&#34;config&#34;</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;preferred-install&#34;</span><span class="o">:</span> <span class="s2">&#34;dist&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;sort-packages&#34;</span><span class="o">:</span> <span class="k">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="s2">&#34;optimize-autoloader&#34;</span><span class="o">:</span> <span class="k">true</span>
+</span></span><span class="line"><span class="cl"><span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;minimum-stability&#34;</span> <span class="o">:</span> <span class="s2">&#34;dev&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="s2">&#34;prefer-stable&#34;</span> <span class="o">:</span> <span class="k">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="nx">minimum</span><span class="o">-</span><span class="nx">stability</span><span class="s2">&#34; : &#34;</span><span class="nx">dev</span><span class="s2">&#34; #设定的最低稳定性的版本为 dev 也就是可以依赖开发版本的扩展包；
+</span></span></span><span class="line"><span class="cl"><span class="s2">&#34;</span><span class="nx">prefer</span><span class="o">-</span><span class="nx">stable</span><span class="s2">&#34; : true —— Composer 优先使用更稳定的包版本。
+</span></span></span></code></pre></div><ul>
 <li>dingo 的配置文件 publish 出来：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan vendor:publish
-</code></pre></div><p>4、在.env中增加如下代码：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="l">API_STANDARDS_TREE=prs</span><span class="w">
-</span><span class="w"></span><span class="l">API_SUBTYPE=laraapi</span><span class="w">
-</span><span class="w"></span><span class="l">API_PREFIX=api</span><span class="w">
-</span><span class="w"></span><span class="l">API_VERSION=v1</span><span class="w">
-</span><span class="w"></span><span class="l">API_DEBUG=true</span><span class="w">
-</span></code></pre></div><p>注释：
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan vendor:publish
+</span></span></code></pre></div><p>4、在.env中增加如下代码：</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yaml" data-lang="yaml"><span class="line"><span class="cl"><span class="l">API_STANDARDS_TREE=prs</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">API_SUBTYPE=laraapi</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">API_PREFIX=api</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">API_VERSION=v1</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="l">API_DEBUG=true</span><span class="w">
+</span></span></span></code></pre></div><p>注释：
 prs：未对外发布的，提供给公司 app，单页应用，桌面应用等（x,vnd）
 API_SUBTYPE 一般情况下是我们项目的简称，我们的项目叫laraapi
 Accept: application/&lt;API_STANDARDS_TREE&gt;.&lt;API_SUBTYPE&gt;.v1+json（使用 Accept 头来指定我们需要访问的 API 版）</p>
@@ -134,17 +134,16 @@ Accept: application/&lt;API_STANDARDS_TREE&gt;.&lt;API_SUBTYPE&gt;.v1+json（使
 <ul>
 <li>路由文件（api.php）：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
-<span class="nv">$api</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;Dingo\Api\Routing\Router&#39;</span><span class="p">);</span>
-
-<span class="nv">$api</span><span class="o">-&gt;</span><span class="na">version</span><span class="p">(</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$api</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nv">$api</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nx">response</span><span class="p">(</span><span class="s1">&#39;this is version v1&#39;</span><span class="p">);</span>
-    <span class="p">});</span>
-<span class="p">});</span>
-
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nv">$api</span> <span class="o">=</span> <span class="nx">app</span><span class="p">(</span><span class="s1">&#39;Dingo\Api\Routing\Router&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">version</span><span class="p">(</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nv">$api</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$api</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;version&#39;</span><span class="p">,</span> <span class="k">function</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">response</span><span class="p">(</span><span class="s1">&#39;this is version v1&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><ul>
 <li>在postman中请求会返回this is version v1（默认v1）
 <a href="http://jwt.test/api/version">http://jwt.test/api/version</a></li>
 </ul>
@@ -152,227 +151,227 @@ Accept: application/&lt;API_STANDARDS_TREE&gt;.&lt;API_SUBTYPE&gt;.v1+json（使
 <ul>
 <li><code>routes/api.php</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">version</span><span class="p">(</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span> <span class="p">[</span>
-    <span class="s1">&#39;namespace&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;App\Http\Controllers\Api&#39;</span><span class="p">,</span>
-<span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="nv">$api</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="nv">$api</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">([</span>
-        <span class="s1">&#39;middleware&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;api.throttle&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="nx">config</span><span class="p">(</span><span class="s1">&#39;api.rate_limits.sign.limit&#39;</span><span class="p">),</span><span class="c1">//总分钟下总多少次
-</span><span class="c1"></span>        <span class="s1">&#39;expires&#39;</span> <span class="o">=&gt;</span> <span class="nx">config</span><span class="p">(</span><span class="s1">&#39;api.rate_limits.sign.expires&#39;</span><span class="p">),</span><span class="c1">//总分钟数
-</span><span class="c1"></span>    <span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="nv">$api</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// 用户注册
-</span><span class="c1"></span>        <span class="nv">$api</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;UsersController@store&#39;</span><span class="p">)</span>
-            <span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;api.users.store&#39;</span><span class="p">);</span>
-    <span class="p">});</span>
-<span class="p">});</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">version</span><span class="p">(</span><span class="s1">&#39;v1&#39;</span><span class="p">,</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;namespace&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;App\Http\Controllers\Api&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="nv">$api</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nv">$api</span><span class="o">-&gt;</span><span class="na">group</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;middleware&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;api.throttle&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;limit&#39;</span> <span class="o">=&gt;</span> <span class="nx">config</span><span class="p">(</span><span class="s1">&#39;api.rate_limits.sign.limit&#39;</span><span class="p">),</span><span class="c1">//总分钟下总多少次
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;expires&#39;</span> <span class="o">=&gt;</span> <span class="nx">config</span><span class="p">(</span><span class="s1">&#39;api.rate_limits.sign.expires&#39;</span><span class="p">),</span><span class="c1">//总分钟数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">],</span> <span class="k">function</span><span class="p">(</span><span class="nv">$api</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 用户注册
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$api</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;users&#39;</span><span class="p">,</span> <span class="s1">&#39;UsersController@store&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;api.users.store&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></div><ul>
 <li>写成配置，可以更方便的控制调用频率（config/api.php）：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="cm">/*
-</span><span class="cm"> * 接口频率限制
-</span><span class="cm"> */</span>
-<span class="s1">&#39;rate_limits&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="c1">// 访问频率限制，次数/分钟
-</span><span class="c1"></span>    <span class="s1">&#39;access&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;expires&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RATE_LIMITS_EXPIRES&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-        <span class="s1">&#39;limit&#39;</span>  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RATE_LIMITS&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
-    <span class="p">],</span>
-    <span class="c1">// 登录相关，次数/分钟
-</span><span class="c1"></span>    <span class="s1">&#39;sign&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;expires&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;SIGN_RATE_LIMITS_EXPIRES&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
-        <span class="s1">&#39;limit&#39;</span>  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;SIGN_RATE_LIMITS&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
-    <span class="p">],</span>
-<span class="p">],</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="cm">/*
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 接口频率限制
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="s1">&#39;rate_limits&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 访问频率限制，次数/分钟
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="s1">&#39;access&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;expires&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RATE_LIMITS_EXPIRES&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;limit&#39;</span>  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RATE_LIMITS&#39;</span><span class="p">,</span> <span class="mi">60</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 登录相关，次数/分钟
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="s1">&#39;sign&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;expires&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;SIGN_RATE_LIMITS_EXPIRES&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;limit&#39;</span>  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;SIGN_RATE_LIMITS&#39;</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">],</span>
+</span></span></code></pre></div><ul>
 <li>增加了两种限制，一种登录相关的，一分钟可以调用10次，一种是访问相关的，一分钟调用60次。</li>
 </ul>
 <h3 id="登录api获取jwt令牌">登录API获取JWT令牌<a href="#登录api获取jwt令牌" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>参考文档</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"> JWT 是 JSON Web Token 的缩写，是一个非常轻巧的规范，
- 这个规范允许我们使用 JWT 在用户和服务器之间传递安全可靠的信息。
- JWT 由头部（header）、载荷（payload）与签名（signature）组成。
- 
- JWT 最后是通过 Base64 编码的，也就是说，它可以被翻译回原来的样子来的。所以不要在 JWT 中存放一些敏感信息。
- 
- Token 验证
- 有了 token 之后该如何验证 token 的有效性，并得到 token 对应的用户呢？
- 其实原理很简单，DingoApi 为我们准备好了 api.auth 这个中间件
- 
- - 获取客户端提交的 token
- - 检测 token 中的签名 signature 是否正确
- - 判断 payload 数据中的 exp，是否已经过期
- - 根据 payload 数据中的 sub，取数据库中验证用户是否存在
- - 上述检测不正确，则抛出相应异常
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl"> JWT 是 JSON Web Token 的缩写，是一个非常轻巧的规范，
+</span></span><span class="line"><span class="cl"> 这个规范允许我们使用 JWT 在用户和服务器之间传递安全可靠的信息。
+</span></span><span class="line"><span class="cl"> JWT 由头部（header）、载荷（payload）与签名（signature）组成。
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> JWT 最后是通过 Base64 编码的，也就是说，它可以被翻译回原来的样子来的。所以不要在 JWT 中存放一些敏感信息。
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> Token 验证
+</span></span><span class="line"><span class="cl"> 有了 token 之后该如何验证 token 的有效性，并得到 token 对应的用户呢？
+</span></span><span class="line"><span class="cl"> 其实原理很简单，DingoApi 为我们准备好了 api.auth 这个中间件
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> - 获取客户端提交的 token
+</span></span><span class="line"><span class="cl"> - 检测 token 中的签名 signature 是否正确
+</span></span><span class="line"><span class="cl"> - 判断 payload 数据中的 exp，是否已经过期
+</span></span><span class="line"><span class="cl"> - 根据 payload 数据中的 sub，取数据库中验证用户是否存在
+</span></span><span class="line"><span class="cl"> - 上述检测不正确，则抛出相应异常
+</span></span></code></pre></div><ul>
 <li>安装</li>
 </ul>
 <p>1、安装 jwt-auth</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">composer</span> <span class="k">require</span> <span class="nx">tymon</span><span class="o">/</span><span class="nx">jwt</span><span class="o">-</span><span class="nx">auth</span><span class="o">:</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="nx">rc</span><span class="o">.</span><span class="mi">2</span>
-</code></pre></div><p>2、需要设置一下 JWT 的 secret，这个 secret 很重要，用于最后的签名，更换这个secret 会导致之前生成的所有 token 无效。
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">composer</span> <span class="k">require</span> <span class="nx">tymon</span><span class="o">/</span><span class="nx">jwt</span><span class="o">-</span><span class="nx">auth</span><span class="o">:</span><span class="mf">1.0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="nx">rc</span><span class="o">.</span><span class="mi">2</span>
+</span></span></code></pre></div><p>2、需要设置一下 JWT 的 secret，这个 secret 很重要，用于最后的签名，更换这个secret 会导致之前生成的所有 token 无效。
 <code>php artisan jwt:secret</code> （可以看到在 .env 文件中，增加了一行 JWT_SECRET）</p>
 <p>3、修改 <code>config/auth.php</code>，将 api guard 的 driver 改为 jwt</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;guards&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="s1">&#39;web&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;session&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
-    <span class="p">],</span>
-
-    <span class="s1">&#39;api&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;jwt&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
-    <span class="p">],</span>
-<span class="p">],</span>
-</code></pre></div><p>4、修改 <code>config/api.php</code>，auth 中增加 JWT 相关的配置</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;auth&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="s1">&#39;jwt&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Dingo\Api\Auth\Provider\JWT&#39;</span><span class="p">,</span>
-<span class="p">],</span>
-</code></pre></div><p>5、<code>user(app\Models\User.php)</code> 模型需要继承 <code>Tymon\JWTAuth\Contracts\JWTSubject</code> 接口，并实现接口的两个方法 <code>getJWTIdentifier()</code> 和 <code>getJWTCustomClaims()</code>。</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Tymon\JWTAuth\Contracts\JWTSubject</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Notifications\Notifiable</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Foundation\Auth\User</span> <span class="k">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Auth</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span> <span class="k">implements</span> <span class="nx">JWTSubject</span>
-<span class="o">.</span>
-<span class="o">.</span>
-<span class="o">.</span>
-    <span class="c1">// Rest omitted for brevity
-</span><span class="c1"></span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">getJWTIdentifier</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getKey</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">getJWTCustomClaims</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="p">[];</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div><h3 id="测试-1">测试<a href="#测试-1" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;guards&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;web&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;session&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;api&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;driver&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;jwt&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;provider&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;users&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl"><span class="p">],</span>
+</span></span></code></pre></div><p>4、修改 <code>config/api.php</code>，auth 中增加 JWT 相关的配置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;auth&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;jwt&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Dingo\Api\Auth\Provider\JWT&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">],</span>
+</span></span></code></pre></div><p>5、<code>user(app\Models\User.php)</code> 模型需要继承 <code>Tymon\JWTAuth\Contracts\JWTSubject</code> 接口，并实现接口的两个方法 <code>getJWTIdentifier()</code> 和 <code>getJWTCustomClaims()</code>。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Models</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Tymon\JWTAuth\Contracts\JWTSubject</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Notifications\Notifiable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Foundation\Auth\User</span> <span class="k">as</span> <span class="nx">Authenticatable</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Auth</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">User</span> <span class="k">extends</span> <span class="nx">Authenticatable</span> <span class="k">implements</span> <span class="nx">JWTSubject</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span>
+</span></span><span class="line"><span class="cl"><span class="o">.</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// Rest omitted for brevity
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">getJWTIdentifier</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">getKey</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">getJWTCustomClaims</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="p">[];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h3 id="测试-1">测试<a href="#测试-1" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p><code>php artisan tinker</code> 做如下测试：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nv">$user</span> <span class="o">=</span> <span class="nx">App\Models\User</span><span class="o">::</span><span class="na">first</span><span class="p">();</span>
-<span class="nx">Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fromUser</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
-</code></pre></div><h3 id="用户登录测试">用户登录测试<a href="#用户登录测试" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="mi">1</span><span class="nx">、增加路由</span>
-<span class="c1">// 登录
-</span><span class="c1"></span><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;authorizations&#39;</span><span class="p">,</span> <span class="s1">&#39;AuthorizationsController@store&#39;</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;api.authorizations.store&#39;</span><span class="p">);</span>
-    
-<span class="mi">2</span><span class="nx">、创建登录的</span> <span class="nx">request</span>
-<span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">make</span><span class="o">:</span><span class="nx">request</span> <span class="nx">Api</span><span class="o">/</span><span class="nx">AuthorizationRequest</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="p">[</span>
-        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string|min:6&#39;</span><span class="p">,</span>
-    <span class="p">];</span>
-<span class="p">}</span>
-
-<span class="mi">3</span><span class="nx">、app</span><span class="o">/</span><span class="nx">Http</span><span class="o">/</span><span class="nx">Controllers</span><span class="o">/</span><span class="nx">Api</span><span class="o">/</span><span class="nx">AuthorizationsController</span><span class="o">.</span><span class="nx">php</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">store</span><span class="p">(</span><span class="nx">AuthorizationRequest</span> <span class="nv">$request</span><span class="p">)</span>
-<span class="p">{</span>
-    <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">;</span>
-    <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">;</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$token</span> <span class="o">=</span> <span class="nx">\Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">attempt</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">))</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">errorUnauthorized</span><span class="p">(</span><span class="s1">&#39;用户名或密码错误&#39;</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">array</span><span class="p">([</span>
-        <span class="s1">&#39;access_token&#39;</span> <span class="o">=&gt;</span> <span class="nv">$token</span><span class="p">,</span>
-        <span class="s1">&#39;token_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer&#39;</span><span class="p">,</span>
-        <span class="s1">&#39;expires_in&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">factory</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getTTL</span><span class="p">()</span> <span class="o">*</span> <span class="mi">60</span>
-    <span class="p">])</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">201</span><span class="p">);</span>
-<span class="p">}</span>
-    
- <span class="mi">4</span><span class="nx">、创建app\Http\Controllers\Api\Controller</span><span class="o">.</span><span class="nx">php</span>
- <span class="o">&lt;?</span><span class="nx">php</span>
-<span class="k">namespace</span> <span class="nx">App\Http\Controllers\Api</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Dingo\Api\Routing\Helpers</span><span class="p">;</span><span class="c1">//重点
-</span><span class="c1"></span><span class="k">use</span> <span class="nx">App\Http\Controllers\Controller</span> <span class="k">as</span> <span class="nx">BaseController</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Controller</span> <span class="k">extends</span> <span class="nx">BaseController</span>
-<span class="p">{</span>
-    <span class="k">use</span> <span class="nx">Helpers</span><span class="p">;</span><span class="c1">//重点目的
-</span><span class="c1"></span><span class="p">}</span>
-</code></pre></div><h3 id="刷新删除-token">刷新/删除 token<a href="#刷新删除-token" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="mi">1</span><span class="nx">、首先增加路由routes</span><span class="o">/</span><span class="nx">api</span><span class="o">.</span><span class="nx">php</span>
-<span class="c1">// 刷新token
-</span><span class="c1"></span><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;authorizations/current&#39;</span><span class="p">,</span> <span class="s1">&#39;AuthorizationsController@update&#39;</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;api.authorizations.update&#39;</span><span class="p">);</span>
-<span class="c1">// 删除token
-</span><span class="c1"></span><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;authorizations/current&#39;</span><span class="p">,</span> <span class="s1">&#39;AuthorizationsController@destroy&#39;</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;api.authorizations.destroy&#39;</span><span class="p">);</span>
-    
-<span class="mi">2</span><span class="nx">、app</span><span class="o">/</span><span class="nx">Http</span><span class="o">/</span><span class="nx">Controllers</span><span class="o">/</span><span class="nx">Api</span><span class="o">/</span><span class="nx">AuthorizationsController</span><span class="o">.</span><span class="nx">php</span>
-<span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="nv">$token</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">refresh</span><span class="p">();</span>
-    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">respondWithToken</span><span class="p">(</span><span class="nv">$token</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">()</span>
-<span class="p">{</span>
-    <span class="nx">Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">();</span>
-    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">noContent</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="k">protected</span> <span class="k">function</span> <span class="nf">respondWithToken</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">array</span><span class="p">([</span>
-            <span class="s1">&#39;access_token&#39;</span> <span class="o">=&gt;</span> <span class="nv">$token</span><span class="p">,</span>
-            <span class="s1">&#39;token_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;expires_in&#39;</span> <span class="o">=&gt;</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">factory</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getTTL</span><span class="p">()</span> <span class="o">*</span> <span class="mi">60</span>
-        <span class="p">]);</span>
-    <span class="p">}</span>
-</code></pre></div><h3 id="其他">其他<a href="#其他" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nv">$user</span> <span class="o">=</span> <span class="nx">App\Models\User</span><span class="o">::</span><span class="na">first</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fromUser</span><span class="p">(</span><span class="nv">$user</span><span class="p">);</span>
+</span></span></code></pre></div><h3 id="用户登录测试">用户登录测试<a href="#用户登录测试" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="mi">1</span><span class="nx">、增加路由</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 登录
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">post</span><span class="p">(</span><span class="s1">&#39;authorizations&#39;</span><span class="p">,</span> <span class="s1">&#39;AuthorizationsController@store&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;api.authorizations.store&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="nx">、创建登录的</span> <span class="nx">request</span>
+</span></span><span class="line"><span class="cl"><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">make</span><span class="o">:</span><span class="nx">request</span> <span class="nx">Api</span><span class="o">/</span><span class="nx">AuthorizationRequest</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">rules</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;password&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;required|string|min:6&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">3</span><span class="nx">、app</span><span class="o">/</span><span class="nx">Http</span><span class="o">/</span><span class="nx">Controllers</span><span class="o">/</span><span class="nx">Api</span><span class="o">/</span><span class="nx">AuthorizationsController</span><span class="o">.</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">store</span><span class="p">(</span><span class="nx">AuthorizationRequest</span> <span class="nv">$request</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;username&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">username</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$credentials</span><span class="p">[</span><span class="s1">&#39;password&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nv">$request</span><span class="o">-&gt;</span><span class="na">password</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$token</span> <span class="o">=</span> <span class="nx">\Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">attempt</span><span class="p">(</span><span class="nv">$credentials</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">errorUnauthorized</span><span class="p">(</span><span class="s1">&#39;用户名或密码错误&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">array</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;access_token&#39;</span> <span class="o">=&gt;</span> <span class="nv">$token</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;token_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;expires_in&#39;</span> <span class="o">=&gt;</span> <span class="nx">\Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">factory</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getTTL</span><span class="p">()</span> <span class="o">*</span> <span class="mi">60</span>
+</span></span><span class="line"><span class="cl">    <span class="p">])</span><span class="o">-&gt;</span><span class="na">setStatusCode</span><span class="p">(</span><span class="mi">201</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"> <span class="mi">4</span><span class="nx">、创建app\Http\Controllers\Api\Controller</span><span class="o">.</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"> <span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Http\Controllers\Api</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Http\Request</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Dingo\Api\Routing\Helpers</span><span class="p">;</span><span class="c1">//重点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">use</span> <span class="nx">App\Http\Controllers\Controller</span> <span class="k">as</span> <span class="nx">BaseController</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Controller</span> <span class="k">extends</span> <span class="nx">BaseController</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">use</span> <span class="nx">Helpers</span><span class="p">;</span><span class="c1">//重点目的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></div><h3 id="刷新删除-token">刷新/删除 token<a href="#刷新删除-token" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="mi">1</span><span class="nx">、首先增加路由routes</span><span class="o">/</span><span class="nx">api</span><span class="o">.</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 刷新token
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">put</span><span class="p">(</span><span class="s1">&#39;authorizations/current&#39;</span><span class="p">,</span> <span class="s1">&#39;AuthorizationsController@update&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;api.authorizations.update&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 删除token
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nv">$api</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="s1">&#39;authorizations/current&#39;</span><span class="p">,</span> <span class="s1">&#39;AuthorizationsController@destroy&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;api.authorizations.destroy&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="nx">、app</span><span class="o">/</span><span class="nx">Http</span><span class="o">/</span><span class="nx">Controllers</span><span class="o">/</span><span class="nx">Api</span><span class="o">/</span><span class="nx">AuthorizationsController</span><span class="o">.</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">update</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nv">$token</span> <span class="o">=</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">refresh</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">respondWithToken</span><span class="p">(</span><span class="nv">$token</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span> <span class="k">function</span> <span class="nf">destroy</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">logout</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">noContent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">protected</span> <span class="k">function</span> <span class="nf">respondWithToken</span><span class="p">(</span><span class="nv">$token</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">response</span><span class="o">-&gt;</span><span class="na">array</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;access_token&#39;</span> <span class="o">=&gt;</span> <span class="nv">$token</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;token_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Bearer&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="s1">&#39;expires_in&#39;</span> <span class="o">=&gt;</span> <span class="nx">Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">factory</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getTTL</span><span class="p">()</span> <span class="o">*</span> <span class="mi">60</span>
+</span></span><span class="line"><span class="cl">        <span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span></code></pre></div><h3 id="其他">其他<a href="#其他" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>artisan 获取 token</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="mi">1</span><span class="nx">、增加一个Artisan</span> <span class="nx">命令</span>
-<span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">make</span><span class="o">:</span><span class="nx">command</span> <span class="nx">GenerateToken</span>
-
-<span class="mi">2</span><span class="nx">、修改文件app</span><span class="o">/</span><span class="nx">Console</span><span class="o">/</span><span class="nx">Commands</span><span class="o">/</span><span class="nx">GenerateToken</span><span class="o">.</span><span class="nx">php</span>
-<span class="o">&lt;?</span><span class="nx">php</span>
-
-<span class="k">namespace</span> <span class="nx">App\Console\Commands</span><span class="p">;</span>
-
-<span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Illuminate\Console\Command</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">GenerateToken</span> <span class="k">extends</span> <span class="nx">Command</span>
-<span class="p">{</span>
-    <span class="k">protected</span> <span class="nv">$signature</span> <span class="o">=</span> <span class="s1">&#39;laraapi:generate-token&#39;</span><span class="p">;</span>
-
-    <span class="k">protected</span> <span class="nv">$description</span> <span class="o">=</span> <span class="s1">&#39;快速为用户生成 token&#39;</span><span class="p">;</span>
-
-    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
-    <span class="p">}</span>
-
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">()</span>
-    <span class="p">{</span>
-        <span class="nv">$userId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ask</span><span class="p">(</span><span class="s1">&#39;输入用户 id&#39;</span><span class="p">);</span>
-        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$userId</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;用户不存在&#39;</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="c1">// 一年以后过期
-</span><span class="c1"></span>        <span class="nv">$ttl</span> <span class="o">=</span> <span class="mi">365</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="p">;</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="nx">\Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setTTL</span><span class="p">(</span><span class="nv">$ttl</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fromUser</span><span class="p">(</span><span class="nv">$user</span><span class="p">));</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="mi">1</span><span class="nx">、增加一个Artisan</span> <span class="nx">命令</span>
+</span></span><span class="line"><span class="cl"><span class="nx">php</span> <span class="nx">artisan</span> <span class="nx">make</span><span class="o">:</span><span class="nx">command</span> <span class="nx">GenerateToken</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="nx">、修改文件app</span><span class="o">/</span><span class="nx">Console</span><span class="o">/</span><span class="nx">Commands</span><span class="o">/</span><span class="nx">GenerateToken</span><span class="o">.</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl"><span class="o">&lt;?</span><span class="nx">php</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nx">App\Console\Commands</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">App\Models\User</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">use</span> <span class="nx">Illuminate\Console\Command</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">GenerateToken</span> <span class="k">extends</span> <span class="nx">Command</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$signature</span> <span class="o">=</span> <span class="s1">&#39;laraapi:generate-token&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">protected</span> <span class="nv">$description</span> <span class="o">=</span> <span class="s1">&#39;快速为用户生成 token&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="fm">__construct</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">parent</span><span class="o">::</span><span class="na">__construct</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">public</span> <span class="k">function</span> <span class="nf">handle</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$userId</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">ask</span><span class="p">(</span><span class="s1">&#39;输入用户 id&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$user</span> <span class="o">=</span> <span class="nx">User</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$userId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nv">$user</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="s1">&#39;用户不存在&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 一年以后过期
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nv">$ttl</span> <span class="o">=</span> <span class="mi">365</span><span class="o">*</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="nx">\Auth</span><span class="o">::</span><span class="na">guard</span><span class="p">(</span><span class="s1">&#39;api&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">setTTL</span><span class="p">(</span><span class="nv">$ttl</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">fromUser</span><span class="p">(</span><span class="nv">$user</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div>
 			</div>
 
 <div class="related-posts thin">
@@ -448,7 +447,7 @@ Accept: application/&lt;API_STANDARDS_TREE&gt;.&lt;API_SUBTYPE&gt;.v1+json（使
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -456,7 +455,7 @@ Accept: application/&lt;API_STANDARDS_TREE&gt;.&lt;API_SUBTYPE&gt;.v1+json（使
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

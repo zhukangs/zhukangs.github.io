@@ -173,126 +173,126 @@
 <ul>
 <li>安装（CentOS 安装 Docker CE）：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.卸载旧版本
-旧版本的 Docker 称为 docker 或者 docker-engine，使用以下命令卸载旧版本：
-$ sudo yum remove docker \
-                  docker-client \
-                  docker-client-latest \
-                  docker-common \
-                  docker-latest \
-                  docker-latest-logrotate \
-                  docker-logrotate \
-                  docker-selinux \
-                  docker-engine-selinux \
-                  docker-engine
-                  
-2.使用 yum 安装
-执行以下命令安装依赖包：
-$ sudo yum install -y yum-utils \
-           device-mapper-persistent-data \
-           lvm2
-鉴于国内网络问题，强烈建议使用国内源，官方源请在注释中查看。
-执行下面的命令添加 yum 软件源：    
-$ sudo yum-config-manager \
-    --add-repo \
-    https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
-# 官方源
-# $ sudo yum-config-manager \
-#     --add-repo \
-#     https://download.docker.com/linux/centos/docker-ce.repo
-
-3.安装 Docker CE
-更新 yum 软件源缓存，并安装 docker-ce。
-$ sudo yum makecache fast
-$ sudo yum install docker-ce
-
-4.启动 Docker CE
-$ sudo systemctl enable docker
-$ sudo systemctl start docker
-
-5.建立 docker 用户组
-建立 docker 组：$ sudo groupadd docker
-将当前用户加入 docker 组：$ sudo usermod -aG docker $USER
-退出当前终端并重新登录，进行如下测试。
-
-6.测试 Docker 是否安装正确
-$ docker run hello-world
-若能正常输出以上信息，则说明安装成功。
-
-7.镜像加速器
-请在 /etc/docker/daemon.json 中写入如下内容:
-{
-  &#34;registry-mirrors&#34;: [
-    &#34;https://dockerhub.azk8s.cn&#34;,
-    &#34;https://hub-mirror.c.163.com&#34;
-  ]
-}或
-{
-  &#34;registry-mirrors&#34;: [
-       &#34;https://registry.docker-cn.com&#34;
-  ]
-}
-之后重新启动服务。
-$ sudo systemctl daemon-reload
-$ sudo systemctl restart docker
-检查加速器是否生效
-执行 $ docker info，如果从结果中看到了如下内容，说明配置成功。
-Registry Mirrors:
- https://dockerhub.azk8s.cn/
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1.卸载旧版本
+</span></span><span class="line"><span class="cl">旧版本的 Docker 称为 docker 或者 docker-engine，使用以下命令卸载旧版本：
+</span></span><span class="line"><span class="cl">$ sudo yum remove docker \
+</span></span><span class="line"><span class="cl">                  docker-client \
+</span></span><span class="line"><span class="cl">                  docker-client-latest \
+</span></span><span class="line"><span class="cl">                  docker-common \
+</span></span><span class="line"><span class="cl">                  docker-latest \
+</span></span><span class="line"><span class="cl">                  docker-latest-logrotate \
+</span></span><span class="line"><span class="cl">                  docker-logrotate \
+</span></span><span class="line"><span class="cl">                  docker-selinux \
+</span></span><span class="line"><span class="cl">                  docker-engine-selinux \
+</span></span><span class="line"><span class="cl">                  docker-engine
+</span></span><span class="line"><span class="cl">                  
+</span></span><span class="line"><span class="cl">2.使用 yum 安装
+</span></span><span class="line"><span class="cl">执行以下命令安装依赖包：
+</span></span><span class="line"><span class="cl">$ sudo yum install -y yum-utils \
+</span></span><span class="line"><span class="cl">           device-mapper-persistent-data \
+</span></span><span class="line"><span class="cl">           lvm2
+</span></span><span class="line"><span class="cl">鉴于国内网络问题，强烈建议使用国内源，官方源请在注释中查看。
+</span></span><span class="line"><span class="cl">执行下面的命令添加 yum 软件源：    
+</span></span><span class="line"><span class="cl">$ sudo yum-config-manager \
+</span></span><span class="line"><span class="cl">    --add-repo \
+</span></span><span class="line"><span class="cl">    https://mirrors.ustc.edu.cn/docker-ce/linux/centos/docker-ce.repo
+</span></span><span class="line"><span class="cl"># 官方源
+</span></span><span class="line"><span class="cl"># $ sudo yum-config-manager \
+</span></span><span class="line"><span class="cl">#     --add-repo \
+</span></span><span class="line"><span class="cl">#     https://download.docker.com/linux/centos/docker-ce.repo
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3.安装 Docker CE
+</span></span><span class="line"><span class="cl">更新 yum 软件源缓存，并安装 docker-ce。
+</span></span><span class="line"><span class="cl">$ sudo yum makecache fast
+</span></span><span class="line"><span class="cl">$ sudo yum install docker-ce
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4.启动 Docker CE
+</span></span><span class="line"><span class="cl">$ sudo systemctl enable docker
+</span></span><span class="line"><span class="cl">$ sudo systemctl start docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">5.建立 docker 用户组
+</span></span><span class="line"><span class="cl">建立 docker 组：$ sudo groupadd docker
+</span></span><span class="line"><span class="cl">将当前用户加入 docker 组：$ sudo usermod -aG docker $USER
+</span></span><span class="line"><span class="cl">退出当前终端并重新登录，进行如下测试。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">6.测试 Docker 是否安装正确
+</span></span><span class="line"><span class="cl">$ docker run hello-world
+</span></span><span class="line"><span class="cl">若能正常输出以上信息，则说明安装成功。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">7.镜像加速器
+</span></span><span class="line"><span class="cl">请在 /etc/docker/daemon.json 中写入如下内容:
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;registry-mirrors&#34;: [
+</span></span><span class="line"><span class="cl">    &#34;https://dockerhub.azk8s.cn&#34;,
+</span></span><span class="line"><span class="cl">    &#34;https://hub-mirror.c.163.com&#34;
+</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">}或
+</span></span><span class="line"><span class="cl">{
+</span></span><span class="line"><span class="cl">  &#34;registry-mirrors&#34;: [
+</span></span><span class="line"><span class="cl">       &#34;https://registry.docker-cn.com&#34;
+</span></span><span class="line"><span class="cl">  ]
+</span></span><span class="line"><span class="cl">}
+</span></span><span class="line"><span class="cl">之后重新启动服务。
+</span></span><span class="line"><span class="cl">$ sudo systemctl daemon-reload
+</span></span><span class="line"><span class="cl">$ sudo systemctl restart docker
+</span></span><span class="line"><span class="cl">检查加速器是否生效
+</span></span><span class="line"><span class="cl">执行 $ docker info，如果从结果中看到了如下内容，说明配置成功。
+</span></span><span class="line"><span class="cl">Registry Mirrors:
+</span></span><span class="line"><span class="cl"> https://dockerhub.azk8s.cn/
+</span></span></code></pre></div><ul>
 <li>安装Laradock：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">1.将 repository 克隆到你机器的任意位置:
-git clone https://github.com/laradock/laradock.git
-文件夹结构如下
-+laradock
-+zkproject
-
-2.进入 laradock 文件夹并复制 env-example to .env
-cp env-example .env
-
-3. 在顶部，修改 APP_CODE_PATH_HOST 变量为你的项目路径.
-APP_CODE_PATH_HOST=../zkproject
-
-4.运行 docker-compose 来构建环境
-docker-compose up -d nginx php-fpm mysql workspace
-
-5.进入 Workspace 容器，执行比如 (Artisan, Composer, PHPUnit, Gulp, ...) 等命令
-docker-compose exec workspace bash
-可以看到 /var/www 目录就是 test 映射来的。再去找 nginx 配置文件，在 laradock/nginx/sites 里可以看到有几个样本文件，一个 default.conf 文件，default 文件的 root 默认是 /var/www/public。所以，可以看出想配置多个项目的话，修改 nginx 配置文件及对应的文件结构即可。
-+laradock
-+zkproject
-++project_one
-++project_two
-这是我的目录结构，配置好后记得把本机 hosts 修改下。然后重启 docker 即可。
-
-6.navicat连接mysql
-docker-compose exec mysql bash
-mysql -uroot -proot
-ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;123456&#39;;
-ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;123456&#39;;
-FLUSH PRIVILEGES;
-打开Laravel项目中的.env 文件并设置：
-DB_HOST=mysql (用 127.0.0.1 访问的是 php 容器，php 容器里没有 mysql )
-REDIS_HOST=redis
-</code></pre></div><h3 id="常用的部分命令">常用的部分命令<a href="#常用的部分命令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">systemctl start docker
-systemctl stop docker
-
-docker images
-docker rmi ID
-docker ps -a
-docker container ls -a
-docker rm -f ID
- 
-docker rm -f `docker ps -a -q`
-docker rmi `docker images -q`
-
-docker-compose up -d nginx php-fpm mysql workspace
-docker-compose exec workspace bash
-docker-compose exec mysql bash
-mysql -uroot -proot
-</code></pre></div><p>最后送给自己 💪</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">1.将 repository 克隆到你机器的任意位置:
+</span></span><span class="line"><span class="cl">git clone https://github.com/laradock/laradock.git
+</span></span><span class="line"><span class="cl">文件夹结构如下
+</span></span><span class="line"><span class="cl">+laradock
+</span></span><span class="line"><span class="cl">+zkproject
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2.进入 laradock 文件夹并复制 env-example to .env
+</span></span><span class="line"><span class="cl">cp env-example .env
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3. 在顶部，修改 APP_CODE_PATH_HOST 变量为你的项目路径.
+</span></span><span class="line"><span class="cl">APP_CODE_PATH_HOST=../zkproject
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">4.运行 docker-compose 来构建环境
+</span></span><span class="line"><span class="cl">docker-compose up -d nginx php-fpm mysql workspace
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">5.进入 Workspace 容器，执行比如 (Artisan, Composer, PHPUnit, Gulp, ...) 等命令
+</span></span><span class="line"><span class="cl">docker-compose exec workspace bash
+</span></span><span class="line"><span class="cl">可以看到 /var/www 目录就是 test 映射来的。再去找 nginx 配置文件，在 laradock/nginx/sites 里可以看到有几个样本文件，一个 default.conf 文件，default 文件的 root 默认是 /var/www/public。所以，可以看出想配置多个项目的话，修改 nginx 配置文件及对应的文件结构即可。
+</span></span><span class="line"><span class="cl">+laradock
+</span></span><span class="line"><span class="cl">+zkproject
+</span></span><span class="line"><span class="cl">++project_one
+</span></span><span class="line"><span class="cl">++project_two
+</span></span><span class="line"><span class="cl">这是我的目录结构，配置好后记得把本机 hosts 修改下。然后重启 docker 即可。
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">6.navicat连接mysql
+</span></span><span class="line"><span class="cl">docker-compose exec mysql bash
+</span></span><span class="line"><span class="cl">mysql -uroot -proot
+</span></span><span class="line"><span class="cl">ALTER USER &#39;root&#39;@&#39;%&#39; IDENTIFIED WITH mysql_native_password BY &#39;123456&#39;;
+</span></span><span class="line"><span class="cl">ALTER USER &#39;root&#39;@&#39;localhost&#39; IDENTIFIED WITH mysql_native_password BY &#39;123456&#39;;
+</span></span><span class="line"><span class="cl">FLUSH PRIVILEGES;
+</span></span><span class="line"><span class="cl">打开Laravel项目中的.env 文件并设置：
+</span></span><span class="line"><span class="cl">DB_HOST=mysql (用 127.0.0.1 访问的是 php 容器，php 容器里没有 mysql )
+</span></span><span class="line"><span class="cl">REDIS_HOST=redis
+</span></span></code></pre></div><h3 id="常用的部分命令">常用的部分命令<a href="#常用的部分命令" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">systemctl start docker
+</span></span><span class="line"><span class="cl">systemctl stop docker
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker images
+</span></span><span class="line"><span class="cl">docker rmi ID
+</span></span><span class="line"><span class="cl">docker ps -a
+</span></span><span class="line"><span class="cl">docker container ls -a
+</span></span><span class="line"><span class="cl">docker rm -f ID
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">docker rm -f `docker ps -a -q`
+</span></span><span class="line"><span class="cl">docker rmi `docker images -q`
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">docker-compose up -d nginx php-fpm mysql workspace
+</span></span><span class="line"><span class="cl">docker-compose exec workspace bash
+</span></span><span class="line"><span class="cl">docker-compose exec mysql bash
+</span></span><span class="line"><span class="cl">mysql -uroot -proot
+</span></span></code></pre></div><p>最后送给自己 💪</p>
 <blockquote>
 <p>失去的不再来，不能放弃</p>
 <p>那便继续向着未来前进</p>
@@ -350,7 +350,7 @@ mysql -uroot -proot
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -358,7 +358,7 @@ mysql -uroot -proot
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

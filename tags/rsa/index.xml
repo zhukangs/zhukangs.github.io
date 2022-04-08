@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>RSA on Promise</title>
+    <link>https://hugo.zkilm.cn/tags/rsa/</link>
+    <description>Recent content in RSA on Promise</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-hans</language>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Wed, 15 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/rsa/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>RSA加解密🔒</title>
+      <link>https://hugo.zkilm.cn/posts/2021/20211215-rsa/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://hugo.zkilm.cn/posts/2021/20211215-rsa/</guid>
+      <description>生成RSA公私钥  代码  class RsaHandler { /** * 过期时间 * @var int|mixed */ protected $expire; /** * 密钥密码 * @var string */ protected $pass_phrase; /** * 密钥保存路径 * @var string */ protected $path; /** * 私钥 * @var string */ protected $private_key; /** * 时间戳 * @var integer */ protected $time; /** * 基础配置 * @var string[] */ public $dn = [ &amp;#34;countryName&amp;#34; =&amp;gt; &amp;#34;CN&amp;#34;, &amp;#34;stateOrProvinceName&amp;#34; =&amp;gt; &amp;#34;ChongQing&amp;#34;, &amp;#34;localityName&amp;#34; =&amp;gt; &amp;#34;China&amp;#34;, &amp;#34;organizationName&amp;#34; =&amp;gt; &amp;#34;The Brain Room Limited&amp;#34;, &amp;#34;organizationalUnitName&amp;#34; =&amp;gt; &amp;#34;PHP Documentation Team&amp;#34;, &amp;#34;commonName&amp;#34; =&amp;gt; &amp;#34;Rancy Bruce&amp;#34;, &amp;#34;emailAddress&amp;#34; =&amp;gt; &amp;#34;rancy@rancy.</description>
+    </item>
+    
+  </channel>
+</rss>

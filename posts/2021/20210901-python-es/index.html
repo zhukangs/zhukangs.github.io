@@ -120,103 +120,103 @@ import csv from collections import defaultdict, OrderedDict import json import t
 <p>参考地址：<a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html">https://www.elastic.co/guide/en/elasticsearch/reference/current/docs-bulk.html</a></p>
 <p>但是 <code>Bulk API</code> 对上传的JSON文件大小也会有限制，限制为50M，所以我们会对JSON文件进行拆分，保证每个单JSON文件不超过50M。</p>
 <p>整体包括两个步骤：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text">步骤一：对总CSV文件进行json格式化，格式化为指定的json格式，需要符合Bulk API的上传要求
-步骤二：对json文件进行拆分存储，保证单json文件大小不超过50M
-</code></pre></div><h3 id="py脚本">Py脚本<a href="#py脚本" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">步骤一：对总CSV文件进行json格式化，格式化为指定的json格式，需要符合Bulk API的上传要求
+</span></span><span class="line"><span class="cl">步骤二：对json文件进行拆分存储，保证单json文件大小不超过50M
+</span></span></code></pre></div><h3 id="py脚本">Py脚本<a href="#py脚本" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p><code>Python</code> 代码如下(test.py)：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="nx">import</span> <span class="nx">csv</span>
-<span class="nx">from</span> <span class="nx">collections</span> <span class="nx">import</span> <span class="nx">defaultdict</span><span class="p">,</span> <span class="nx">OrderedDict</span>
-<span class="nx">import</span> <span class="nx">json</span>
-<span class="nx">import</span> <span class="nx">time</span>
-<span class="nx">import</span> <span class="nx">argparse</span>
-<span class="nx">import</span> <span class="nx">os</span>
-
-<span class="nx">parser</span> <span class="o">=</span> <span class="nx">argparse</span><span class="o">.</span><span class="nx">ArgumentParser</span><span class="p">(</span><span class="nx">description</span><span class="o">=</span><span class="s1">&#39;自定义CLI传参&#39;</span><span class="p">)</span>
-<span class="nx">parser</span><span class="o">.</span><span class="nx">add_argument</span><span class="p">(</span><span class="s1">&#39;--csv_filename&#39;</span><span class="p">,</span> <span class="s1">&#39;-cf&#39;</span><span class="p">,</span> <span class="nx">help</span><span class="o">=</span><span class="s1">&#39;csv_filename 选取指定CSV文件名，必要参数&#39;</span><span class="p">,</span> <span class="nx">required</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-<span class="nx">parser</span><span class="o">.</span><span class="nx">add_argument</span><span class="p">(</span><span class="s1">&#39;--json_dirname&#39;</span><span class="p">,</span> <span class="s1">&#39;-jd&#39;</span><span class="p">,</span> <span class="nx">help</span><span class="o">=</span><span class="s1">&#39;json_dirname 将作为JSON文件目录名，必要参数&#39;</span><span class="p">,</span> <span class="nx">required</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
-<span class="nx">args</span> <span class="o">=</span> <span class="nx">parser</span><span class="o">.</span><span class="nx">parse_args</span><span class="p">()</span>
-
-<span class="nx">start_time</span><span class="o">=</span><span class="nx">time</span><span class="o">.</span><span class="nx">time</span><span class="p">()</span>
-<span class="nx">csv_filename</span><span class="o">=</span><span class="nx">args</span><span class="o">.</span><span class="nx">csv_filename</span>
-<span class="nx">csv_filename</span><span class="o">=</span><span class="nx">csv_filename</span><span class="o">.</span><span class="nx">strip</span><span class="p">()</span>
-<span class="nx">json_dirname</span><span class="o">=</span><span class="nx">args</span><span class="o">.</span><span class="nx">json_dirname</span>
-<span class="nx">json_dirname</span><span class="o">=</span><span class="nx">json_dirname</span><span class="o">.</span><span class="nx">strip</span><span class="p">()</span>
-
-<span class="nx">i</span><span class="o">=</span><span class="mi">0</span>
-<span class="nx">with</span> <span class="nx">open</span><span class="p">(</span><span class="nx">csv_filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="nx">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nx">csvfile</span><span class="o">:</span>
-    <span class="nx">reader</span> <span class="o">=</span> <span class="nx">csv</span><span class="o">.</span><span class="nx">DictReader</span><span class="p">(</span><span class="nx">csvfile</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;CSV转JSON中...&#39;</span><span class="p">)</span>
-    <span class="k">for</span> <span class="nx">row</span> <span class="nx">in</span> <span class="nx">reader</span><span class="o">:</span>
-        <span class="nx">i</span><span class="o">=</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span>
-        <span class="nx">str1</span><span class="o">=</span><span class="s1">&#39;{&#34;index&#34;: {&#34;_index&#34;: &#34;index_test&#34;, &#34;_type&#34;: &#34;_doc&#34;}}&#39;</span>
-        <span class="nx">json_str</span> <span class="o">=</span> <span class="nx">json</span><span class="o">.</span><span class="nx">dumps</span><span class="p">(</span><span class="nx">row</span><span class="p">)</span>
-        <span class="nx">json_name</span><span class="o">=</span><span class="nx">str</span><span class="p">(</span><span class="nx">int</span><span class="p">(</span><span class="nx">i</span><span class="o">/</span><span class="mi">100000</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;.json&#39;</span>
-        <span class="nx">with</span> <span class="nx">open</span><span class="p">(</span><span class="nx">os</span><span class="o">.</span><span class="nx">path</span><span class="o">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">json_dirname</span><span class="p">,</span><span class="nx">json_name</span><span class="p">),</span> <span class="s1">&#39;a+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nx">json_file</span><span class="o">:</span>
-            <span class="nx">json_file</span><span class="o">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">str1</span><span class="o">+</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span>
-            <span class="nx">json_file</span><span class="o">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">json_str</span><span class="o">+</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;CSV转JSON已完成&#39;</span><span class="p">)</span>
-
-<span class="nx">filePath</span> <span class="o">=</span> <span class="s1">&#39;/yourpath/test/&#39;</span><span class="o">+</span><span class="nx">json_dirname</span>
-<span class="nx">file_arr</span><span class="o">=</span><span class="nx">os</span><span class="o">.</span><span class="nx">listdir</span><span class="p">(</span><span class="nx">filePath</span><span class="p">)</span>
-<span class="nx">new_file_arr</span><span class="o">=</span><span class="p">{}</span>
-<span class="k">for</span> <span class="nx">file</span> <span class="nx">in</span> <span class="nx">file_arr</span><span class="o">:</span>
-    <span class="nx">file_key</span><span class="o">=</span><span class="nx">file</span><span class="o">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
-    <span class="nx">file_key</span><span class="o">=</span><span class="nx">file_key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="nx">new_file_arr</span><span class="p">[</span><span class="nx">int</span><span class="p">(</span><span class="nx">file_key</span><span class="p">)]</span><span class="o">=</span><span class="nx">file</span>
-
-<span class="nx">new_file_arr</span><span class="o">=</span><span class="nx">sorted</span><span class="p">(</span><span class="nx">new_file_arr</span><span class="o">.</span><span class="nx">keys</span><span class="p">())</span>
-
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;============================执行Elasticsearch===============================&#39;</span><span class="p">)</span>
-<span class="k">for</span> <span class="nx">json_num</span> <span class="nx">in</span> <span class="nx">new_file_arr</span><span class="o">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;[&#39;</span><span class="o">+</span><span class="nx">str</span><span class="p">(</span><span class="nx">json_num</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.json]处理中...&#39;</span><span class="p">)</span>
-    <span class="nx">curl_cmd</span><span class="o">=</span><span class="s2">&#34;curl -X POST -u name:pwd &#39;http://localhost:9200/_bulk?filter_path=items.*.error?pretty&#39; -H &#39;Content-Type: application/json&#39; --data-binary @/yourpath/test/&#34;</span><span class="o">+</span><span class="nx">json_dirname</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nx">str</span><span class="p">(</span><span class="nx">json_num</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.json&#39;</span>
-    <span class="nx">tmpres</span> <span class="o">=</span> <span class="nx">os</span><span class="o">.</span><span class="nx">popen</span><span class="p">(</span><span class="nx">curl_cmd</span><span class="p">)</span><span class="o">.</span><span class="nx">readlines</span><span class="p">()</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;===========================================================================&#39;</span><span class="p">)</span>
-
-<span class="nx">end_time</span><span class="o">=</span><span class="nx">time</span><span class="o">.</span><span class="nx">time</span><span class="p">()</span>
-<span class="nx">diff_time</span><span class="o">=</span><span class="nx">end_time</span> <span class="o">-</span> <span class="nx">start_time</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;信息:一共处理[&#39;</span><span class="o">+</span> <span class="nx">str</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;]条记录.&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;耗时:&#39;</span><span class="o">+</span><span class="nx">str</span><span class="p">(</span><span class="nx">round</span><span class="p">(</span><span class="nx">diff_time</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;秒.&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Successful！&#39;</span><span class="p">)</span>
-</code></pre></div><h3 id="sh脚本">Sh脚本<a href="#sh脚本" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="nx">import</span> <span class="nx">csv</span>
+</span></span><span class="line"><span class="cl"><span class="nx">from</span> <span class="nx">collections</span> <span class="nx">import</span> <span class="nx">defaultdict</span><span class="p">,</span> <span class="nx">OrderedDict</span>
+</span></span><span class="line"><span class="cl"><span class="nx">import</span> <span class="nx">json</span>
+</span></span><span class="line"><span class="cl"><span class="nx">import</span> <span class="nx">time</span>
+</span></span><span class="line"><span class="cl"><span class="nx">import</span> <span class="nx">argparse</span>
+</span></span><span class="line"><span class="cl"><span class="nx">import</span> <span class="nx">os</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">parser</span> <span class="o">=</span> <span class="nx">argparse</span><span class="o">.</span><span class="nx">ArgumentParser</span><span class="p">(</span><span class="nx">description</span><span class="o">=</span><span class="s1">&#39;自定义CLI传参&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">parser</span><span class="o">.</span><span class="nx">add_argument</span><span class="p">(</span><span class="s1">&#39;--csv_filename&#39;</span><span class="p">,</span> <span class="s1">&#39;-cf&#39;</span><span class="p">,</span> <span class="nx">help</span><span class="o">=</span><span class="s1">&#39;csv_filename 选取指定CSV文件名，必要参数&#39;</span><span class="p">,</span> <span class="nx">required</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">parser</span><span class="o">.</span><span class="nx">add_argument</span><span class="p">(</span><span class="s1">&#39;--json_dirname&#39;</span><span class="p">,</span> <span class="s1">&#39;-jd&#39;</span><span class="p">,</span> <span class="nx">help</span><span class="o">=</span><span class="s1">&#39;json_dirname 将作为JSON文件目录名，必要参数&#39;</span><span class="p">,</span> <span class="nx">required</span><span class="o">=</span><span class="k">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">args</span> <span class="o">=</span> <span class="nx">parser</span><span class="o">.</span><span class="nx">parse_args</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">start_time</span><span class="o">=</span><span class="nx">time</span><span class="o">.</span><span class="nx">time</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">csv_filename</span><span class="o">=</span><span class="nx">args</span><span class="o">.</span><span class="nx">csv_filename</span>
+</span></span><span class="line"><span class="cl"><span class="nx">csv_filename</span><span class="o">=</span><span class="nx">csv_filename</span><span class="o">.</span><span class="nx">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">json_dirname</span><span class="o">=</span><span class="nx">args</span><span class="o">.</span><span class="nx">json_dirname</span>
+</span></span><span class="line"><span class="cl"><span class="nx">json_dirname</span><span class="o">=</span><span class="nx">json_dirname</span><span class="o">.</span><span class="nx">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">i</span><span class="o">=</span><span class="mi">0</span>
+</span></span><span class="line"><span class="cl"><span class="nx">with</span> <span class="nx">open</span><span class="p">(</span><span class="nx">csv_filename</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="nx">encoding</span><span class="o">=</span><span class="s1">&#39;UTF-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nx">csvfile</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">reader</span> <span class="o">=</span> <span class="nx">csv</span><span class="o">.</span><span class="nx">DictReader</span><span class="p">(</span><span class="nx">csvfile</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;CSV转JSON中...&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="nx">row</span> <span class="nx">in</span> <span class="nx">reader</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">i</span><span class="o">=</span><span class="nx">i</span><span class="o">+</span><span class="mi">1</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">str1</span><span class="o">=</span><span class="s1">&#39;{&#34;index&#34;: {&#34;_index&#34;: &#34;index_test&#34;, &#34;_type&#34;: &#34;_doc&#34;}}&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">json_str</span> <span class="o">=</span> <span class="nx">json</span><span class="o">.</span><span class="nx">dumps</span><span class="p">(</span><span class="nx">row</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">json_name</span><span class="o">=</span><span class="nx">str</span><span class="p">(</span><span class="nx">int</span><span class="p">(</span><span class="nx">i</span><span class="o">/</span><span class="mi">100000</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;.json&#39;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">with</span> <span class="nx">open</span><span class="p">(</span><span class="nx">os</span><span class="o">.</span><span class="nx">path</span><span class="o">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">json_dirname</span><span class="p">,</span><span class="nx">json_name</span><span class="p">),</span> <span class="s1">&#39;a+&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="nx">json_file</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">json_file</span><span class="o">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">str1</span><span class="o">+</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">json_file</span><span class="o">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">json_str</span><span class="o">+</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;CSV转JSON已完成&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">filePath</span> <span class="o">=</span> <span class="s1">&#39;/yourpath/test/&#39;</span><span class="o">+</span><span class="nx">json_dirname</span>
+</span></span><span class="line"><span class="cl"><span class="nx">file_arr</span><span class="o">=</span><span class="nx">os</span><span class="o">.</span><span class="nx">listdir</span><span class="p">(</span><span class="nx">filePath</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nx">new_file_arr</span><span class="o">=</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="nx">file</span> <span class="nx">in</span> <span class="nx">file_arr</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">file_key</span><span class="o">=</span><span class="nx">file</span><span class="o">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">file_key</span><span class="o">=</span><span class="nx">file_key</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">new_file_arr</span><span class="p">[</span><span class="nx">int</span><span class="p">(</span><span class="nx">file_key</span><span class="p">)]</span><span class="o">=</span><span class="nx">file</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">new_file_arr</span><span class="o">=</span><span class="nx">sorted</span><span class="p">(</span><span class="nx">new_file_arr</span><span class="o">.</span><span class="nx">keys</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;============================执行Elasticsearch===============================&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="nx">json_num</span> <span class="nx">in</span> <span class="nx">new_file_arr</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;[&#39;</span><span class="o">+</span><span class="nx">str</span><span class="p">(</span><span class="nx">json_num</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.json]处理中...&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">curl_cmd</span><span class="o">=</span><span class="s2">&#34;curl -X POST -u name:pwd &#39;http://localhost:9200/_bulk?filter_path=items.*.error?pretty&#39; -H &#39;Content-Type: application/json&#39; --data-binary @/yourpath/test/&#34;</span><span class="o">+</span><span class="nx">json_dirname</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nx">str</span><span class="p">(</span><span class="nx">json_num</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.json&#39;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">tmpres</span> <span class="o">=</span> <span class="nx">os</span><span class="o">.</span><span class="nx">popen</span><span class="p">(</span><span class="nx">curl_cmd</span><span class="p">)</span><span class="o">.</span><span class="nx">readlines</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;===========================================================================&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">end_time</span><span class="o">=</span><span class="nx">time</span><span class="o">.</span><span class="nx">time</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nx">diff_time</span><span class="o">=</span><span class="nx">end_time</span> <span class="o">-</span> <span class="nx">start_time</span>
+</span></span><span class="line"><span class="cl"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;信息:一共处理[&#39;</span><span class="o">+</span> <span class="nx">str</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="o">+</span><span class="s1">&#39;]条记录.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;耗时:&#39;</span><span class="o">+</span><span class="nx">str</span><span class="p">(</span><span class="nx">round</span><span class="p">(</span><span class="nx">diff_time</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;秒.&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Successful！&#39;</span><span class="p">)</span>
+</span></span></code></pre></div><h3 id="sh脚本">Sh脚本<a href="#sh脚本" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>配置一个shell脚本运行(test_job.sh)：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="cp">#!/bin/sh
-</span><span class="cp"></span><span class="nv">csv_filename</span><span class="o">=</span><span class="nv">$1</span>
-<span class="nv">json_dirname</span><span class="o">=</span><span class="s2">&#34;test_json_&#34;</span><span class="k">$(</span>date <span class="s2">&#34;+%Y%m%d&#34;</span><span class="k">)</span>
-<span class="k">if</span> <span class="o">[</span> ! -d <span class="nv">$json_dirname</span>  <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-  mkdir <span class="nv">$json_dirname</span>
-<span class="k">fi</span>
-python3 /yourpath/test/test.py -cf <span class="nv">$csv_filename</span> -jd <span class="nv">$json_dirname</span>
-</code></pre></div><h3 id="功能测试">功能测试<a href="#功能测试" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="cp">#!/bin/sh
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="nv">csv_filename</span><span class="o">=</span><span class="nv">$1</span>
+</span></span><span class="line"><span class="cl"><span class="nv">json_dirname</span><span class="o">=</span><span class="s2">&#34;test_json_&#34;</span><span class="k">$(</span>date <span class="s2">&#34;+%Y%m%d&#34;</span><span class="k">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="o">[</span> ! -d <span class="nv">$json_dirname</span>  <span class="o">]</span><span class="p">;</span><span class="k">then</span>
+</span></span><span class="line"><span class="cl">  mkdir <span class="nv">$json_dirname</span>
+</span></span><span class="line"><span class="cl"><span class="k">fi</span>
+</span></span><span class="line"><span class="cl">python3 /yourpath/test/test.py -cf <span class="nv">$csv_filename</span> -jd <span class="nv">$json_dirname</span>
+</span></span></code></pre></div><h3 id="功能测试">功能测试<a href="#功能测试" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <p>测试如下：</p>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">&gt;bash test_job.sh test.csv
-
-CSV转JSON中...
-<span class="nv">CSV转JSON已完成</span>
-<span class="o">============================</span><span class="nv">执行Elasticsearch</span><span class="o">===============================</span>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="o">[</span>0.json<span class="o">]</span>处理中...
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-<span class="m">100</span> 30.5M    <span class="m">0</span>     <span class="m">2</span>  <span class="m">100</span> 30.5M      <span class="m">0</span>  3000k  0:00:10  0:00:10 --:--:--     <span class="m">0</span>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="o">[</span>1.json<span class="o">]</span>处理中...
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-<span class="m">100</span> 30.5M    <span class="m">0</span>     <span class="m">2</span>  <span class="m">100</span> 30.5M      <span class="m">0</span>  3399k  0:00:09  0:00:09 --:--:--     <span class="m">0</span>
-.
-.
-.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="o">[</span>10.json<span class="o">]</span>处理中...
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-<span class="m">100</span>   <span class="m">322</span>  <span class="m">100</span>     <span class="m">2</span>  <span class="m">100</span>   <span class="m">320</span>    <span class="m">340</span>  <span class="m">54468</span> --:--:-- --:--:-- --:--:-- <span class="nv">64000</span>
-<span class="o">===========================================================================</span>
-信息:一共处理<span class="o">[</span>1000000<span class="o">]</span>条记录.
-耗时:132.14秒.
-
-
-Successful！
-</code></pre></div><blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">&gt;bash test_job.sh test.csv
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">CSV转JSON中...
+</span></span><span class="line"><span class="cl"><span class="nv">CSV转JSON已完成</span>
+</span></span><span class="line"><span class="cl"><span class="o">============================</span><span class="nv">执行Elasticsearch</span><span class="o">===============================</span>
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="o">[</span>0.json<span class="o">]</span>处理中...
+</span></span><span class="line"><span class="cl">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span></span><span class="line"><span class="cl">                                 Dload  Upload   Total   Spent    Left  Speed
+</span></span><span class="line"><span class="cl"><span class="m">100</span> 30.5M    <span class="m">0</span>     <span class="m">2</span>  <span class="m">100</span> 30.5M      <span class="m">0</span>  3000k  0:00:10  0:00:10 --:--:--     <span class="m">0</span>
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="o">[</span>1.json<span class="o">]</span>处理中...
+</span></span><span class="line"><span class="cl">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span></span><span class="line"><span class="cl">                                 Dload  Upload   Total   Spent    Left  Speed
+</span></span><span class="line"><span class="cl"><span class="m">100</span> 30.5M    <span class="m">0</span>     <span class="m">2</span>  <span class="m">100</span> 30.5M      <span class="m">0</span>  3399k  0:00:09  0:00:09 --:--:--     <span class="m">0</span>
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">.
+</span></span><span class="line"><span class="cl">&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="o">[</span>10.json<span class="o">]</span>处理中...
+</span></span><span class="line"><span class="cl">  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+</span></span><span class="line"><span class="cl">                                 Dload  Upload   Total   Spent    Left  Speed
+</span></span><span class="line"><span class="cl"><span class="m">100</span>   <span class="m">322</span>  <span class="m">100</span>     <span class="m">2</span>  <span class="m">100</span>   <span class="m">320</span>    <span class="m">340</span>  <span class="m">54468</span> --:--:-- --:--:-- --:--:-- <span class="nv">64000</span>
+</span></span><span class="line"><span class="cl"><span class="o">===========================================================================</span>
+</span></span><span class="line"><span class="cl">信息:一共处理<span class="o">[</span>1000000<span class="o">]</span>条记录.
+</span></span><span class="line"><span class="cl">耗时:132.14秒.
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Successful！
+</span></span></code></pre></div><blockquote>
 <p>注意：这里中文可能出现编码不对，所以加了 <code>UTF-8</code>，<code>Python</code> 版本最好升级到v3以上，避免踩坑。</p>
 </blockquote>
 <p>其他参考：</p>
@@ -287,7 +287,7 @@ Successful！
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -295,7 +295,7 @@ Successful！
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

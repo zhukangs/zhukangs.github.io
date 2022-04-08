@@ -83,94 +83,94 @@
 <ul>
 <li><code>erlang</code> 是 <code>RabbitMQ</code> 的依赖。首先执行</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get update
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get update
+</span></span></code></pre></div><ul>
 <li>然后执行</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get install erlang
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get install erlang
+</span></span></code></pre></div><ul>
 <li>安装完毕后，输入 <code>erl</code> 查看 <code>erlang</code> 版本，出现如下提示则表示安装成功：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">Erlang/OTP <span class="m">20</span> <span class="o">[</span>erts-9.2<span class="o">]</span> <span class="o">[</span>source<span class="o">]</span> <span class="o">[</span>64-bit<span class="o">]</span> <span class="o">[</span>smp:1:1<span class="o">]</span> <span class="o">[</span>ds:1:1:10<span class="o">]</span> <span class="o">[</span>async-threads:10<span class="o">]</span> <span class="o">[</span>kernel-poll:false<span class="o">]</span>
-    
-Eshell V9.2  <span class="o">(</span>abort with ^G<span class="o">)</span>
-1&gt;
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">Erlang/OTP <span class="m">20</span> <span class="o">[</span>erts-9.2<span class="o">]</span> <span class="o">[</span>source<span class="o">]</span> <span class="o">[</span>64-bit<span class="o">]</span> <span class="o">[</span>smp:1:1<span class="o">]</span> <span class="o">[</span>ds:1:1:10<span class="o">]</span> <span class="o">[</span>async-threads:10<span class="o">]</span> <span class="o">[</span>kernel-poll:false<span class="o">]</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">Eshell V9.2  <span class="o">(</span>abort with ^G<span class="o">)</span>
+</span></span><span class="line"><span class="cl">1&gt;
+</span></span></code></pre></div><ul>
 <li>然后退出 <code>erlang</code> 命令行：按下 ctrl+c，然后输入 a 即可。</li>
 </ul>
 <h3 id="安装-rabbitmq">安装 RabbitMq<a href="#安装-rabbitmq" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get install rabbitmq-server
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get install rabbitmq-server
+</span></span></code></pre></div><ul>
 <li>安装完毕后，查看 RabbitMQ 状态：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmqctl status
-    
-<span class="c1"># 附：</span>
-<span class="c1"># 启动RabbitMQ： service rabbitmq-server start</span>
-<span class="c1"># 停止RabbitMQ： service rabbitmq-server stop </span>
-<span class="c1"># 重启RabbitMQ： service rabbitmq-server restart </span>
-</code></pre></div><h3 id="配置-rabbitmq">配置 RabbitMQ<a href="#配置-rabbitmq" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rabbitmqctl status
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl"><span class="c1"># 附：</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 启动RabbitMQ： service rabbitmq-server start</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 停止RabbitMQ： service rabbitmq-server stop </span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 重启RabbitMQ： service rabbitmq-server restart </span>
+</span></span></code></pre></div><h3 id="配置-rabbitmq">配置 RabbitMQ<a href="#配置-rabbitmq" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>执行命令，启动 <code>RabbitMQ</code> 插件</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmq-plugins <span class="nb">enable</span> rabbitmq_management
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rabbitmq-plugins <span class="nb">enable</span> rabbitmq_management
+</span></span></code></pre></div><ul>
 <li>添加用户 <code>RabbitMQ</code>，格式：rabbitmqctl add_user 用户名 密码</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">rabbitmqctl add_user admin admin
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">rabbitmqctl add_user admin admin
+</span></span></code></pre></div><ul>
 <li>给予用户管理员权限</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmqctl set_user_tags admin administrator
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rabbitmqctl set_user_tags admin administrator
+</span></span></code></pre></div><ul>
 <li>为用户设置读写权限</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo rabbitmqctl set_permissions -p / admin <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo rabbitmqctl set_permissions -p / admin <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span> <span class="s2">&#34;.*&#34;</span>
+</span></span></code></pre></div><ul>
 <li>打开 <code>RabbitMQ</code> 后台</li>
 </ul>
 <pre tabindex="0"><code>浏览器中输入：http:// 服务器 ip+:15672, 例如我的是：192.168.10.10:15672/
 </code></pre><ul>
 <li>15672 端口默认是关闭的，因此需要打开</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">1. sudo apt-get install iptables
-2. sudo iptables -I INPUT -p tcp --dport <span class="m">15672</span> -j ACCEPT
-</code></pre></div><h3 id="运行环境ubuntu安装-amqp-扩展">运行环境（ubuntu）安装 amqp 扩展<a href="#运行环境ubuntu安装-amqp-扩展" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1. sudo apt-get install iptables
+</span></span><span class="line"><span class="cl">2. sudo iptables -I INPUT -p tcp --dport <span class="m">15672</span> -j ACCEPT
+</span></span></code></pre></div><h3 id="运行环境ubuntu安装-amqp-扩展">运行环境（ubuntu）安装 amqp 扩展<a href="#运行环境ubuntu安装-amqp-扩展" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 <ul>
 <li>这些扩展是运行必须，可以类比为 mongodb,redis 扩展。分别执行以下指令</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get -y install gcc make autoconf libc-dev pkg-config
-sudo apt-get -y install libssl-dev
-sudo apt-get -y install librabbitmq-dev
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get -y install gcc make autoconf libc-dev pkg-config
+</span></span><span class="line"><span class="cl">sudo apt-get -y install libssl-dev
+</span></span><span class="line"><span class="cl">sudo apt-get -y install librabbitmq-dev
+</span></span></code></pre></div><ul>
 <li>在这里安装可能会遇到一些小问题，遇事不决就执行：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo apt-get update
-//时间可能会需要很久，我执行等它运行的时候大概花了一个小时
-sudo apt-get upgrade
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo apt-get update
+</span></span><span class="line"><span class="cl">//时间可能会需要很久，我执行等它运行的时候大概花了一个小时
+</span></span><span class="line"><span class="cl">sudo apt-get upgrade
+</span></span></code></pre></div><ul>
 <li>以上的扩展安装完成后执行指令安装 <code>amqp</code> 扩展：</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo pecl install amqp
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo pecl install amqp
+</span></span></code></pre></div><ul>
 <li>安装过程中会提示</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="m">28</span> <span class="nb">source</span> files, building
-running: phpize
-Configuring <span class="k">for</span>:
-PHP Api Version:         <span class="m">20170718</span>
-Zend Module Api No:      <span class="m">20170718</span>
-Zend Extension Api No:   <span class="m">320170718</span>
-Set the path to librabbitmq install prefix <span class="o">[</span>autodetect<span class="o">]</span> :
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="m">28</span> <span class="nb">source</span> files, building
+</span></span><span class="line"><span class="cl">running: phpize
+</span></span><span class="line"><span class="cl">Configuring <span class="k">for</span>:
+</span></span><span class="line"><span class="cl">PHP Api Version:         <span class="m">20170718</span>
+</span></span><span class="line"><span class="cl">Zend Module Api No:      <span class="m">20170718</span>
+</span></span><span class="line"><span class="cl">Zend Extension Api No:   <span class="m">320170718</span>
+</span></span><span class="line"><span class="cl">Set the path to librabbitmq install prefix <span class="o">[</span>autodetect<span class="o">]</span> :
+</span></span></code></pre></div><ul>
 <li>回车即可，等待安装完成：
 <code>You should add &quot;extension=amqp.so&quot; to php.ini</code></li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">sudo -s
-<span class="nb">echo</span> <span class="nv">extension</span><span class="o">=</span>amqp.so &gt;&gt; /etc/php/7.2/cli/php.ini
-<span class="nb">echo</span> <span class="nv">extension</span><span class="o">=</span>amqp.so &gt;&gt; /etc/php/7.2/fpm/php.ini
-sudo service php7.2-fpm restart
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">sudo -s
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">extension</span><span class="o">=</span>amqp.so &gt;&gt; /etc/php/7.2/cli/php.ini
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="nv">extension</span><span class="o">=</span>amqp.so &gt;&gt; /etc/php/7.2/fpm/php.ini
+</span></span><span class="line"><span class="cl">sudo service php7.2-fpm restart
+</span></span></code></pre></div><ul>
 <li>然后执行 <code>php -m</code> 查看扩展是否安装完成</li>
 </ul>
 <h3 id="laravel-项目中使用">Laravel 项目中使用<a href="#laravel-项目中使用" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
@@ -213,42 +213,42 @@ sudo service php7.2-fpm restart
 </tr>
 </tbody>
 </table>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">composer require vladimir-yuldashev/laravel-queue-rabbitmq ^7.1
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">composer require vladimir-yuldashev/laravel-queue-rabbitmq ^7.1
+</span></span></code></pre></div><ul>
 <li>在 <code>app/config/queue.php</code> 文件中，<code>connections</code> 数组中添加</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="s1">&#39;rabbitmq&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-    <span class="s1">&#39;driver&#39;</span>                <span class="o">=&gt;</span> <span class="s1">&#39;rabbitmq&#39;</span><span class="p">,</span>
- 
-    <span class="s1">&#39;host&#39;</span>                  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_HOST&#39;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;port&#39;</span>                  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_PORT&#39;</span><span class="p">,</span> <span class="mi">5672</span><span class="p">),</span>
- 
-    <span class="s1">&#39;vhost&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_VHOST&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;login&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_LOGIN&#39;</span><span class="p">,</span> <span class="s1">&#39;guest&#39;</span><span class="p">),</span>
-    <span class="s1">&#39;password&#39;</span>              <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_PASSWORD&#39;</span><span class="p">,</span> <span class="s1">&#39;guest&#39;</span><span class="p">),</span>
- 
-    <span class="s1">&#39;queue&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE&#39;</span><span class="p">),</span> <span class="c1">// name of the default queue,
-</span><span class="c1"></span> 
-    <span class="s1">&#39;exchange_declare&#39;</span>      <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_DECLARE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// create the exchange if not exists
-</span><span class="c1"></span>    <span class="s1">&#39;queue_declare_bind&#39;</span>    <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_DECLARE_BIND&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// create the queue if not exists and bind to the exchange
-</span><span class="c1"></span> 
-    <span class="s1">&#39;queue_params&#39;</span>          <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;passive&#39;</span>           <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_PASSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
-        <span class="s1">&#39;durable&#39;</span>           <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_DURABLE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span>
-        <span class="s1">&#39;exclusive&#39;</span>         <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_EXCLUSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
-        <span class="s1">&#39;auto_delete&#39;</span>       <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_AUTODELETE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
-    <span class="p">],</span>
- 
-    <span class="s1">&#39;exchange_params&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
-        <span class="s1">&#39;name&#39;</span>        <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_NAME&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">),</span>
-        <span class="s1">&#39;type&#39;</span>        <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;direct&#39;</span><span class="p">),</span> <span class="c1">// more info at http://www.rabbitmq.com/tutorials/amqp-concepts.html
-</span><span class="c1"></span>        <span class="s1">&#39;passive&#39;</span>     <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_PASSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
-        <span class="s1">&#39;durable&#39;</span>     <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_DURABLE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// the exchange will survive server restarts
-</span><span class="c1"></span>        <span class="s1">&#39;auto_delete&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_AUTODELETE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
-    <span class="p">],</span>
- 
-<span class="p">],</span>
-</code></pre></div><ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="s1">&#39;rabbitmq&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;driver&#39;</span>                <span class="o">=&gt;</span> <span class="s1">&#39;rabbitmq&#39;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;host&#39;</span>                  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_HOST&#39;</span><span class="p">,</span> <span class="s1">&#39;127.0.0.1&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;port&#39;</span>                  <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_PORT&#39;</span><span class="p">,</span> <span class="mi">5672</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;vhost&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_VHOST&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;login&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_LOGIN&#39;</span><span class="p">,</span> <span class="s1">&#39;guest&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;password&#39;</span>              <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_PASSWORD&#39;</span><span class="p">,</span> <span class="s1">&#39;guest&#39;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;queue&#39;</span>                 <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE&#39;</span><span class="p">),</span> <span class="c1">// name of the default queue,
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> 
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;exchange_declare&#39;</span>      <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_DECLARE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// create the exchange if not exists
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="s1">&#39;queue_declare_bind&#39;</span>    <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_DECLARE_BIND&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// create the queue if not exists and bind to the exchange
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> 
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;queue_params&#39;</span>          <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;passive&#39;</span>           <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_PASSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;durable&#39;</span>           <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_DURABLE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;exclusive&#39;</span>         <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_EXCLUSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;auto_delete&#39;</span>       <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_QUEUE_AUTODELETE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl">    <span class="s1">&#39;exchange_params&#39;</span> <span class="o">=&gt;</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;name&#39;</span>        <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_NAME&#39;</span><span class="p">,</span> <span class="k">null</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;type&#39;</span>        <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_TYPE&#39;</span><span class="p">,</span> <span class="s1">&#39;direct&#39;</span><span class="p">),</span> <span class="c1">// more info at http://www.rabbitmq.com/tutorials/amqp-concepts.html
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;passive&#39;</span>     <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_PASSIVE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="s1">&#39;durable&#39;</span>     <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_DURABLE&#39;</span><span class="p">,</span> <span class="k">true</span><span class="p">),</span> <span class="c1">// the exchange will survive server restarts
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="s1">&#39;auto_delete&#39;</span> <span class="o">=&gt;</span> <span class="nx">env</span><span class="p">(</span><span class="s1">&#39;RABBITMQ_EXCHANGE_AUTODELETE&#39;</span><span class="p">,</span> <span class="k">false</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">],</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"><span class="p">],</span>
+</span></span></code></pre></div><ul>
 <li>在 <code>.env</code> 中添加</li>
 </ul>
 <pre tabindex="0"><code class="language-dotenv" data-lang="dotenv">QUEUE_CONNECTION=rabbitmq #修改一下
@@ -261,9 +261,9 @@ RABBITMQ_QUEUE = test  #mq连接得测试名
 </code></pre><ul>
 <li>其他和正常跑队列区别不大</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell">php artisan queue:restart
-php artisan queue:work
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">php artisan queue:restart
+</span></span><span class="line"><span class="cl">php artisan queue:work
+</span></span></code></pre></div>
 			</div>
 
 <div class="related-posts thin">
@@ -335,7 +335,7 @@ php artisan queue:work
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2021 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
 			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
@@ -343,7 +343,7 @@ php artisan queue:work
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.7d8545daa55d62427355498dd8da13f98ff79a7938ce7d2a5e2ae1ec0de3beb8.js" integrity="sha256-fYVF2qVdYkJzVUmN2NoT+Y/3mnk4zn0qXirh7A3jvrg=" crossorigin="anonymous"></script>
+	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 
