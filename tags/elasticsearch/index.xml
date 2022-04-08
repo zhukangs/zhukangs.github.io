@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ElasticSearch on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/elasticsearch/</link>
+    <link>https://blog.zkilm.cn/tags/elasticsearch/</link>
     <description>Recent content in ElasticSearch on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 01 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/elasticsearch/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/elasticsearch/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>百万级数据导入 Elasticsearch 😌</title>
-      <link>https://hugo.zkilm.cn/posts/2021/20210901-python-es/</link>
+      <link>https://blog.zkilm.cn/posts/2021/20210901-python-es/</link>
       <pubDate>Wed, 01 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2021/20210901-python-es/</guid>
+      <guid>https://blog.zkilm.cn/posts/2021/20210901-python-es/</guid>
       <description>涉及知识点  Python 读取CSV文件 Elasticsearch 导入json文件  本文目标  完成超过100M的SCV文件上传到ES  导语 如何将100w条记录同步到Es？
 Kibana 有个 Data Visualizer 可以直接上传 CSV 文件，但是有个限制是文件不能大于100M。
 那么对于大于100M的 CSV 文件我们该如何进行上传到ES呢？
@@ -27,19 +27,19 @@ import csv from collections import defaultdict, OrderedDict import json import t
     
     <item>
       <title>Elasticsearch 在 Laravel 中的使用👍</title>
-      <link>https://hugo.zkilm.cn/posts/2021/20210823-laravel-es/</link>
+      <link>https://blog.zkilm.cn/posts/2021/20210823-laravel-es/</link>
       <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2021/20210823-laravel-es/</guid>
+      <guid>https://blog.zkilm.cn/posts/2021/20210823-laravel-es/</guid>
       <description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &amp;#39;elasticsearch&amp;#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组  &amp;#39;hosts&amp;#39; =&amp;gt; explode(&amp;#39;,&amp;#39;, env(&amp;#39;ES_HOSTS&amp;#39;)), &amp;#39;username&amp;#39; =&amp;gt; env(&amp;#39;ES_USERNAME&amp;#39;), &amp;#39;password&amp;#39; =&amp;gt; env(&amp;#39;ES_PASSWORD&amp;#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
     </item>
     
     <item>
       <title>使用Elasticsearch做引擎，Scout全文搜索🔍</title>
-      <link>https://hugo.zkilm.cn/posts/2019/20190308-laravel-elasticsearch/</link>
+      <link>https://blog.zkilm.cn/posts/2019/20190308-laravel-elasticsearch/</link>
       <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2019/20190308-laravel-elasticsearch/</guid>
+      <guid>https://blog.zkilm.cn/posts/2019/20190308-laravel-elasticsearch/</guid>
       <description>ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便
  准备 1、安装测试Laravel5.5用于测试
 composer create-project --prefer-dist laravel/laravel test &amp;#34;5.5.*&amp;#34; 2、安装运行es 链接地址，点开链接，根据自己的系统下载安装包，里面关于怎么样安装运行都说的比较清楚。下载后解压。由于我用的是Homestead环境，自带了es。

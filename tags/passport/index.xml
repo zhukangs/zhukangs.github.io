@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Passport on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/passport/</link>
+    <link>https://blog.zkilm.cn/tags/passport/</link>
     <description>Recent content in Passport on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/passport/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/passport/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel的API初始搭建之Passport😄</title>
-      <link>https://hugo.zkilm.cn/posts/2019/20190125-laravel-passport/</link>
+      <link>https://blog.zkilm.cn/posts/2019/20190125-laravel-passport/</link>
       <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2019/20190125-laravel-passport/</guid>
+      <guid>https://blog.zkilm.cn/posts/2019/20190125-laravel-passport/</guid>
       <description>介绍 在 Laravel中，实现基于传统表单的登陆和授权已经非常简单，但是如何满足 API 场景下的授权需求呢？在 API场景里通常通过令牌来实现用户授权，而非维护请求之间的 Session 状态。在 Laravel 项目中使用 Passport 可以轻而易举地实现 API 授权认证，Passport 可以在几分钟之内为你的应用程序提供完整的 OAuth2 服务端实现。Passport 是基于由 Alex Bilbie 维护的 League OAuth2 server 建立的。❤🐷😘
 安装 1、安装一个全新 laravel 项目
 composer create-project --prefer-dist laravel/laravel passport 2、安装 Laravel Passport 包

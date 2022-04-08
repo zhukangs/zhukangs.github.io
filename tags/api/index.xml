@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>API on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/api/</link>
+    <link>https://blog.zkilm.cn/tags/api/</link>
     <description>Recent content in API on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 05 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/api/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/api/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel 使用JWT API 授权🚀</title>
-      <link>https://hugo.zkilm.cn/posts/2022/20220305-api-jwt/</link>
+      <link>https://blog.zkilm.cn/posts/2022/20220305-api-jwt/</link>
       <pubDate>Sat, 05 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2022/20220305-api-jwt/</guid>
+      <guid>https://blog.zkilm.cn/posts/2022/20220305-api-jwt/</guid>
       <description>什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。作者：Dearmadman链接：https://www.jianshu.com/p/576dbf44b2ae来源：简书著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
  关于JWT讲解与分析：https://learnku.com/articles/17883
 安装 composer 安装 lcobucci/jwt ，我这里默认安装的是最新版 4.1 。
@@ -23,10 +23,10 @@ composer require lcobucci/jwt 封装 在 app\Helpers 目录下新建 Jwt.php 文
     
     <item>
       <title>Laravel 使用 Sanctum API 授权</title>
-      <link>https://hugo.zkilm.cn/posts/2022/20220218-api-sanctum/</link>
+      <link>https://blog.zkilm.cn/posts/2022/20220218-api-sanctum/</link>
       <pubDate>Fri, 18 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2022/20220218-api-sanctum/</guid>
+      <guid>https://blog.zkilm.cn/posts/2022/20220218-api-sanctum/</guid>
       <description>介绍  Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
  相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272
 安装   安装 Laravel Sanctum
@@ -39,10 +39,10 @@ php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Ker
     
     <item>
       <title>Laravel 开发 API 初始搭建</title>
-      <link>https://hugo.zkilm.cn/posts/2022/20220115-api-init/</link>
+      <link>https://blog.zkilm.cn/posts/2022/20220115-api-init/</link>
       <pubDate>Sat, 15 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2022/20220115-api-init/</guid>
+      <guid>https://blog.zkilm.cn/posts/2022/20220115-api-init/</guid>
       <description>前言 使用 Laravel 开发过不少项目，大部分还是前后端分离的，所以今天就总结归纳下在开发API项目时，Laravel 的前期框架搭建过程！
 环境  PHP 8.0.5 (cli) MySQL 8.0.25-0ubuntu0.20.04.1 (Ubuntu) Nginx nginx/1.18.0 (Ubuntu) IDE PhpStorm2020.2  搭建   安装
 //默认安装最新版本 composer create-project laravel/laravel newapi //指定版本 composer create-project --prefer-dist laravel/laravel newapi &amp;#34;6.0.*&amp;#34;   配置

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Guzzle on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/guzzle/</link>
+    <link>https://blog.zkilm.cn/tags/guzzle/</link>
     <description>Recent content in Guzzle on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 02 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/guzzle/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 02 Jul 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/guzzle/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Guzzle基本使用</title>
-      <link>https://hugo.zkilm.cn/posts/2017/20170702-guzzle-basic/</link>
+      <link>https://blog.zkilm.cn/posts/2017/20170702-guzzle-basic/</link>
       <pubDate>Sun, 02 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2017/20170702-guzzle-basic/</guid>
+      <guid>https://blog.zkilm.cn/posts/2017/20170702-guzzle-basic/</guid>
       <description>Guzzle是一个PHP的HTTP客户端，用来轻而易举地发送请求，并集成到我们的WEB服务上。 类似于curl发送http请求的类。
  Guzzle官方文档
 安装Guzzle 使用composer安装

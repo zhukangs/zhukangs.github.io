@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>EasyWechat on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/easywechat/</link>
+    <link>https://blog.zkilm.cn/tags/easywechat/</link>
     <description>Recent content in EasyWechat on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 16 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/easywechat/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Dec 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/easywechat/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>多公众号管理🚥‍</title>
-      <link>https://hugo.zkilm.cn/posts/2019/20191216-multiple-mp/</link>
+      <link>https://blog.zkilm.cn/posts/2019/20191216-multiple-mp/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2019/20191216-multiple-mp/</guid>
+      <guid>https://blog.zkilm.cn/posts/2019/20191216-multiple-mp/</guid>
       <description>使用 EasyWechat 扩展包进行多公众号管理，具体步骤分为以下几步：
  新建公众号数据表 创建辅助函数 创建微信控制器 配置路由 设置路由忽略 开始使用  公众号数据表  创建模型  php artisan make:model Models/WechatMp -m //wechat_mps  在生成的 wechat_mps 的 migration 文件里写入微信相关数据字段：  public function up() { Schema::create(&amp;#39;wechats&amp;#39;, function (Blueprint $table) { $table-&amp;gt;increments(&amp;#39;id&amp;#39;); //微信公众号基本参数  $table-&amp;gt;string(&amp;#39;user_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;name&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;type&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;status&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;logo&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;is_use&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;is_connect&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数  $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数  $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数  $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数  $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); }); } 创建辅助函数  接下来在 App\Handlers 创建一个辅助函数 WechatConfigHandler.</description>
     </item>

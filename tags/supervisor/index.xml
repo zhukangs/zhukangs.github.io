@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Supervisor on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/supervisor/</link>
+    <link>https://blog.zkilm.cn/tags/supervisor/</link>
     <description>Recent content in Supervisor on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 09 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/supervisor/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/supervisor/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>监控服务器异常与重启</title>
-      <link>https://hugo.zkilm.cn/posts/2021/20210909-restart-lnmp/</link>
+      <link>https://blog.zkilm.cn/posts/2021/20210909-restart-lnmp/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2021/20210909-restart-lnmp/</guid>
+      <guid>https://blog.zkilm.cn/posts/2021/20210909-restart-lnmp/</guid>
       <description>在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。
 PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判断服务器是否正常运行，脚本 service-restart.sh 如下：
 # ! /bin/sh ###查看fpm服务是否运行 phpfpm_procnum=`ps -ef|grep &amp;#34;php-fpm&amp;#34;|grep -v grep|wc -l` if [ $phpfpm_procnum -eq 0 ] then echo &amp;#34;restart php-fpm...&amp;#34; systemctl restart php-fpm &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi ###查看nginx服务是否运行 nginx_procnum=`ps -ef|grep &amp;#34;nginx&amp;#34;|grep -v grep|wc -l` if [ $nginx_procnum -eq 0 ] then echo &amp;#34;restart nginx...&amp;#34; systemctl restart nginx &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi 查看服务器响应 通过 curl 服务器地址，根据响应信息判断是否出现异常，脚本 nginx404.php 如下：
@@ -22,10 +22,10 @@ PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判�
     
     <item>
       <title>Supervisor配置,每次都会踩好多坑</title>
-      <link>https://hugo.zkilm.cn/posts/2018/20180326-install-supervisor/</link>
+      <link>https://blog.zkilm.cn/posts/2018/20180326-install-supervisor/</link>
       <pubDate>Mon, 26 Mar 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2018/20180326-install-supervisor/</guid>
+      <guid>https://blog.zkilm.cn/posts/2018/20180326-install-supervisor/</guid>
       <description>基本每次都会花好多的时间去踩不同的坑，索性今天就花点时间记录下踩的坑吧！
  Supervisor（http://supervisord.org/）是用Python开发的一个client/server服务，是Linux/Unix系统下的一个进程管理工具，不支持Windows系统。它可以很方便的监听、启动、停止、重启一个或多个进程。用Supervisor管理的进程，当一个进程意外被杀死，supervisort监听到进程死后，会自动将它重新拉起，很方便的做到进程自动恢复的功能，不再需要自己写shell脚本来控制。
  既然是用Python开发的一个client/server服务，所以我选择间接的通过python来安装supervisor

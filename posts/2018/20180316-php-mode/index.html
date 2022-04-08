@@ -24,7 +24,7 @@
 创建型  抽象工厂模式（Abstract Factory）  目的：在不指定具体类的情况下创建一系列相关或依赖对象。 通常创建的类都实现相同的接口。 抽象工厂的客户并不关心这些对象是如何创建的，它只是知道它们是如何一起运行的。  建造者模式（Builder）  目的：建造者是创建一个复杂对象的一部分接口。 有时候，如果建造者对他所创建的东西拥有较好的知识储备，这个接口就可能成为一个有默认方法的抽象类（又称为适配器）。 如果对象有复杂的继承树，那么对于建造者来说，有一个复杂继承树也是符合逻辑的。 注意：建造者通常有一个「流式接口」，例如 PHPUnit 模拟生成器。  工厂方法模式（Factory Method）  目的：对比简单工厂模式的优点是，您可以将其子类用不同的方法来创建一个对象。 举一个简单的例子，这个抽象类可能只是一个接口。 这种模式是「真正」的设计模式， 因为他实现了S.O.L.I.D原则中「D」的 「依赖倒置」。 这意味着工厂方法模式取决于抽象类，而不是具体的类。 这是与简单工厂模式和静态工厂模式相比的优势。  SOLID原则  单一职责原则SRP:一个类应该有且只有一个去改变它的理由，这意味着一个类应该只有一项工作; 开放封闭原则OCP:对象或实体应该对扩展开放，对修改封闭; 替换原则LSP:在对象x为类型T时q(x)成立,那么当S是T的子类时,对象y为类型S时q(y)也应成立(即对父类的调用同样适用于子类); 接口分离原则ISP:不应强迫客户端实现一个它用不上的接口，或是说客户端不应该被迫依赖它们不使用的方法; 依赖倒置原则DIP:实体必须依靠抽象而不是具体实现。它表示高层次的模块不应该依赖于低层次的模块，它们都应该依赖于抽象;  除SOLID原则外还有很多其它的面向对象原则。如：  &#34;组合替代继承&#34;:这是说相对于继承，要更倾向于使用组合； &#34;笛米特法则&#34;：这是说&#34;你的类对其它类知道的越少越好&#34;； &#34;共同封闭原则&#34;：这是说&#34;相关类应该打包在一起&#34;； &#34;稳定抽象原则&#34;：这是说&#34;类越稳定，越应该由抽象类组成&#34;;  多例模式（Multiton）   多例模式被公认为是 反面模式，为了获得更好的可测试性和可维护性，请使用『依赖注入模式』。
  目的：多例模式是指存在一个类有多个相同实例，而且该实例都是该类本身。这个类叫做多例类。 多例模式的特点是： 多例类可以有多个实例。 多例类必须自己创建、管理自己的实例，并向外界提供自己的实例。 多例模式实际上就是单例模式的推广 举例： 1." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://hugo.zkilm.cn/posts/2018/20180316-php-mode/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180316-php-mode/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-03-16T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-03-16T00:00:00+00:00" />
 
@@ -48,7 +48,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>PHP设计模式</title>
-	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://blog.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -59,14 +59,14 @@
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
-					<a href="https://hugo.zkilm.cn">Promise</a>
+					<a href="https://blog.zkilm.cn">Promise</a>
 				</div>
 				<nav class="site-nav hide-in-mobile">
 					
-				<a href="https://hugo.zkilm.cn/posts/">文章</a>
-				<a href="https://hugo.zkilm.cn/tags/">标签</a>
-				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
-				<a href="https://hugo.zkilm.cn/about/">关于</a>
+				<a href="https://blog.zkilm.cn/posts/">文章</a>
+				<a href="https://blog.zkilm.cn/tags/">标签</a>
+				<a href="https://blog.zkilm.cn/reading/">阅读</a>
+				<a href="https://blog.zkilm.cn/about/">关于</a>
 
 				</nav>
 			</div>
@@ -77,10 +77,10 @@
 	</header>
 	<div id="mobile-menu" class="animated fast">
 		<ul>
-			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
-			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
-			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
-			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+			<li><a href="https://blog.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://blog.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://blog.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://blog.zkilm.cn/about/">关于</a></li>
 		</ul>
 	</div>
 
@@ -473,7 +473,7 @@
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/php">PHP</a></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/php">PHP</a></span>
 				</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>540 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>16036-03-16 00:00 &#43;0000</p>
@@ -494,10 +494,10 @@
 </nav>
 		</aside>
 		<div class="post-nav thin">
-			<a class="next-post" href="https://hugo.zkilm.cn/posts/2018/20180320-install-homestead/">
+			<a class="next-post" href="https://blog.zkilm.cn/posts/2018/20180320-install-homestead/">
 				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>本地Homestead安装😴</span>
 			</a>
-			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2018/20180110-laravel-paginate/">
+			<a class="prev-post" href="https://blog.zkilm.cn/posts/2018/20180110-laravel-paginate/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Laravel手动创建数组分页😏</span>
 			</a>
 		</div>
@@ -519,15 +519,15 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://blog.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
 	</footer>
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	<script src="https://blog.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Crontab on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/crontab/</link>
+    <link>https://blog.zkilm.cn/tags/crontab/</link>
     <description>Recent content in Crontab on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/crontab/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/crontab/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel服务之任务调度⏰</title>
-      <link>https://hugo.zkilm.cn/posts/2019/20190304-laravel-crontab/</link>
+      <link>https://blog.zkilm.cn/posts/2019/20190304-laravel-crontab/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2019/20190304-laravel-crontab/</guid>
+      <guid>https://blog.zkilm.cn/posts/2019/20190304-laravel-crontab/</guid>
       <description>基础篇
 Laravel 的命令调度程序允许你在 Laravel 中对命令调度进行清晰流畅的定义。并且在使用调度程序时，只需要在服务器上增加一条 Cron 项目即可。调度是在 app/Console/Kernel.php 文件的 schedule 方法中定义的。为了方便你开始，该方法已经包含了一个简单的例子。
 定义调度 1、在App\Console\Kernel类的schedule方法中定义所有调度任务(Closure)：

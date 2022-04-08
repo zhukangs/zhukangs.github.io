@@ -12,7 +12,7 @@
 <meta itemprop="keywords" content="Linux," /><meta property="og:title" content="Linux学习归纳哈哈🚀" />
 <meta property="og:description" content="系统中常用Shell指令 ①指令单独存在 ② 指令带选项 ③ 指令带选项带参数 ls指令：显示当前目录的所有文件 相关选项： -l ：list缩写，代表以列表形式显示所有文件 -a ：all缩写，代表显示所有文件（包括隐藏文件） ① ls指令 ② ls指令 -l，这个指令还可以进一步简写为ll ③ ls指令 -a ④ ls指令 -al ：以列表形式显示所有文件（包括隐藏文件） Ls –l /var/www *.php 列出当前目录下，以.php结尾的文件 ls –al *.php pwd指令：显示当前工作目录 cd指令：跳转到指定目录 ① cd &#43; 路径：跳转到指定的目录 ② cd .. ：跳转到上一级目录 ③ cd &#43; ~ ：跳转到自己的家中，普通用户就跳转到/home/用户名目录下，超级管理员/root clear ：清屏指令 logout ：退出指令 普及小知识：Linux操作系统中，存在两种界面，一个是图形界面，一个字符界面。 Ctrl &#43; Alt &#43; F1 ：切换到图形界面 Ctrl &#43; Alt &#43; F2~F6 ：切换到字符界面 shutdown ：关机指令 相关选项： ① shutdown -h 分钟数：多少分钟后关机（真实关机） ② shutdown -r 分钟数：多少分钟后重启 ③ shutdown -k 分钟数：多少分钟后关机（只发出警告，不关机） ④ shutdown -c ：取消关机，也可以使用快捷键Ctrl &#43; C 但是特别注意：shutdown指令只能是超级管理员使用，使用su root切换超级管理员 halt指令：立即关机 reboot指令：立即重启 VI编辑器的基本操作 ① vi filename ：打开指定的文件，如果文件不存在会自动创建该文件 ② vi &#43; filename ：打开文件并将光标置于最后一行 ③ vi &#43;n filename ：打开文件并将光标置于第n行 ④ vi &#43;/string filename ：打开文件并高亮显示string关键词 提示：可以使用快捷键小n会切换到下一个关键词，输入 # 或者大 N 会切换到上一个关键词。 ⑤ vi filename1 filename2 ：同时打开多个文件 提示：在末行模式下使用:next或:n切换下一个文件，使用:prev切换到上一个文件。 普及小知识：Linux自动补全（非常重要） 当输入某个指令或某个文件名称时，如果指令或名称过长，我们只需要输入前几个字母&#43;Tab按键就可以实现自动补全。 VI编辑器的命令模式与末行模式 命令模式： ① yy ：复制当前行 nyy ：从当前行开始复制n行，例如：复制3行内容，3yy ② p ：粘贴 ③ dd ：删除当前行 ndd ：从当前行开始删除n行，例如：删除3行内容，3dd。 ④ u ：撤销，相当于Windows中的Ctrl &#43; Z ⑤ d$：删除光标所在位置到行末的所有内容。 ⑥ $：把光标移动到行末。 ⑦ ^：把光标移动到行首。 末行模式： :set nu ：显示行号 :set nonu ：取消行号 /关键词：高亮显示所有关键词 :noh ：取消所有关键词高亮 num1,num2 co num3 ：把从num1行到num2行的代码插入到num3行的后面 :w ：保存文件 :q ：退出 :wq ：保存并退出 特别注意：有些情况下，有些系统文件不允许保存，这个时候可以使用强制保存或强制退出指令。 :w!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://hugo.zkilm.cn/posts/2016/20160703-linux-study/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2016/20160703-linux-study/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2016-07-03T00:00:00+00:00" />
 <meta property="article:modified_time" content="2016-07-03T00:00:00+00:00" />
 
@@ -30,7 +30,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>Linux学习归纳哈哈🚀</title>
-	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://blog.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -41,14 +41,14 @@
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
-					<a href="https://hugo.zkilm.cn">Promise</a>
+					<a href="https://blog.zkilm.cn">Promise</a>
 				</div>
 				<nav class="site-nav hide-in-mobile">
 					
-				<a href="https://hugo.zkilm.cn/posts/">文章</a>
-				<a href="https://hugo.zkilm.cn/tags/">标签</a>
-				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
-				<a href="https://hugo.zkilm.cn/about/">关于</a>
+				<a href="https://blog.zkilm.cn/posts/">文章</a>
+				<a href="https://blog.zkilm.cn/tags/">标签</a>
+				<a href="https://blog.zkilm.cn/reading/">阅读</a>
+				<a href="https://blog.zkilm.cn/about/">关于</a>
 
 				</nav>
 			</div>
@@ -59,10 +59,10 @@
 	</header>
 	<div id="mobile-menu" class="animated fast">
 		<ul>
-			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
-			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
-			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
-			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+			<li><a href="https://blog.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://blog.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://blog.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://blog.zkilm.cn/about/">关于</a></li>
 		</ul>
 	</div>
 
@@ -329,7 +329,7 @@
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/linux">Linux</a></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/linux">Linux</a></span>
 				</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>452 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>3076-07-03 00:00 &#43;0000</p>
@@ -355,10 +355,10 @@
 </nav>
 		</aside>
 		<div class="post-nav thin">
-			<a class="next-post" href="https://hugo.zkilm.cn/posts/2017/20170106-mysql-advanced/">
+			<a class="next-post" href="https://blog.zkilm.cn/posts/2017/20170106-mysql-advanced/">
 				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>MySQL高级操作🥗</span>
 			</a>
-			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2016/20160511-mysql-basic/">
+			<a class="prev-post" href="https://blog.zkilm.cn/posts/2016/20160511-mysql-basic/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>MySQL基础操作🍕</span>
 			</a>
 		</div>
@@ -380,15 +380,15 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://blog.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
 	</footer>
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	<script src="https://blog.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

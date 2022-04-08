@@ -12,7 +12,7 @@
 <meta itemprop="keywords" content="MySQL," /><meta property="og:title" content="MySQL高级操作🥗" />
 <meta property="og:description" content="增加内容（基础命令） 1.表后增加主键altertable表名addprimarykey(字段);在所有字段之后增加primarykey选项：primarykey(字段信息)直接在需要当做主键的字段之后，增加primarykey属性来确定主键2.删除主键altertable表名dropprimarykey;3.自动增长在字段之后增加一个属性auto_increment4.修改自动增长altertable表名auto_increment=值;5.删除自动增长如：altertable表名modifyidint6.查看自增长初始变量showvariableslike&#39;auto_increment%&#39;;7.添加唯一键（与主键基本一样）altertable表名adduniquekey(字段列表);8.删除唯一键altertable表名dropuniquekey;--错误的唯一键可以有多个altertable表名dropindex唯一键名字;高级数据操作 1.多数据插入insertinto表名[(字段列表)]values(值列表),(值列表)…;2.主键冲突更新insertinto表名[(字段列表)]values(值列表)onduplicatekeyupdate字段=新值;3.主键冲突替换replaceinto[(字段列表)]values(值列表);干掉原来的数据，重新插入进去与insert有点像比insert效率低4.蠕虫复制insertinto表名[(字段列表)]select*/字段列表from表;测试表的压力5.更新数据update表名set字段名=新值[where判断条件]limit数量;（没有where是全表更新）6.删除数据deletefrom表名[where条件][limit数量];7.重置自增长truncate表名;---&gt;相当于drop---&gt;再create8.查询数据select[select的选项]字段列表from数据源where条件groupby分组having条件orderby排序limit限制;Select选项：默认all字段列表：字段名[as]别名from数据源：from(select字段列表from表)as别名;聚合函数：group_concat()为了将分组中指定的字段进行合并（字符串拼接）9.分组排序groupby字段[asc|desc]，字段[asc|desc]10.回溯统计groupby字段[asc|desc]withrollup;11.联合查询select语句默认：distinctunion[union选项]规则1:在联合查询中，如果要使用orderby，那么对应的select语句必须使用括号括起来规则2:orderby在联合查询中若要生效，必须配合使用limit：而limit后面必须跟对应的限制数量（通常可以使用一个较大的值：大于对应表的记录数的值）12.连接查询crossjoin:表1crossjoin表2;innerjoin:表1[inner]join表2on匹配条件;不带条件就是交叉查询（避免）outerjoin：主表leftjoin从表on连接条件;-- 外连接必须有on条件 外连接的特点：1、外连接中主表数据记录一定会保存：连接之后不会出现记录数少于主表的情况（但内连接可能少）2、左连接和右连接其实可以互相转换，但是数据对应的位置（表顺序）会改变。13." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://hugo.zkilm.cn/posts/2017/20170106-mysql-advanced/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2017/20170106-mysql-advanced/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-01-06T00:00:00+00:00" />
 <meta property="article:modified_time" content="2017-01-06T00:00:00+00:00" />
 
@@ -30,7 +30,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>MySQL高级操作🥗</title>
-	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://blog.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -41,14 +41,14 @@
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
-					<a href="https://hugo.zkilm.cn">Promise</a>
+					<a href="https://blog.zkilm.cn">Promise</a>
 				</div>
 				<nav class="site-nav hide-in-mobile">
 					
-				<a href="https://hugo.zkilm.cn/posts/">文章</a>
-				<a href="https://hugo.zkilm.cn/tags/">标签</a>
-				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
-				<a href="https://hugo.zkilm.cn/about/">关于</a>
+				<a href="https://blog.zkilm.cn/posts/">文章</a>
+				<a href="https://blog.zkilm.cn/tags/">标签</a>
+				<a href="https://blog.zkilm.cn/reading/">阅读</a>
+				<a href="https://blog.zkilm.cn/about/">关于</a>
 
 				</nav>
 			</div>
@@ -59,10 +59,10 @@
 	</header>
 	<div id="mobile-menu" class="animated fast">
 		<ul>
-			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
-			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
-			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
-			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+			<li><a href="https://blog.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://blog.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://blog.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://blog.zkilm.cn/about/">关于</a></li>
 		</ul>
 	</div>
 
@@ -134,7 +134,7 @@
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/mysql">MySQL</a></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/mysql">MySQL</a></span>
 				</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>5 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>6016-01-06 00:00 &#43;0000</p>
@@ -154,10 +154,10 @@
 </nav>
 		</aside>
 		<div class="post-nav thin">
-			<a class="next-post" href="https://hugo.zkilm.cn/posts/2017/20170321-mysqldump/">
+			<a class="next-post" href="https://blog.zkilm.cn/posts/2017/20170321-mysqldump/">
 				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>mysqldump导出数据库各参数说明</span>
 			</a>
-			<a class="prev-post" href="https://hugo.zkilm.cn/posts/2016/20160703-linux-study/">
+			<a class="prev-post" href="https://blog.zkilm.cn/posts/2016/20160703-linux-study/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Linux学习归纳哈哈🚀</span>
 			</a>
 		</div>
@@ -179,15 +179,15 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://blog.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
 	</footer>
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	<script src="https://blog.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

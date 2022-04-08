@@ -12,7 +12,7 @@
 <meta itemprop="keywords" content="PHP," /><meta property="og:title" content="PHP基础函数🧁" />
 <meta property="og:description" content="有关输出的函数 print() //类似于echo输出提供的内容，返回1 print_r() //一般用于打印数组,不打印类型 var_dump() //打印数据的值,还有类型 有关时间的函数 date() //显示日期时间 举例：date(“Y-m-dH:i:s”) time() //时间戳（秒数） microtime() //返回时间戳和微秒数 strtotime() //将日期时间的字符串解析成时间戳 数学相关函数 max($v1,$v2,$v3…) //求最大值 min($v1,$v2,$v3…) //求最小值 rand() //随机数 mt_rand() //生成更好的随机数 round(变量 [,N]) //保留n位小 ceil() //向上取整 floor() //向下取整 pow(x,y) //求xY abs() //绝对值 sqrt() //求平方根 有关函数的函数 function_exists(函数名) //判断函数是否存在 func_get_arg(下标) //获取指定下标对应的参数 func_get_args() //在自定义函数中获取所有的参数（返回值是一个数组） func_num_args() //获取当前自定义函数的参数数量 字符串相关的函数 strlen() //得到字符串的长度 mb_strlen($字符串变量名 ，字符编码) implode(连接方式,数组) //连接成一个字符串 explode(分割字符,目标字符串) //变成数组 str_split(字符串,字符长度) //按照指定长度拆分字符串得到数组 trim(字符串[,指定字符]) //默认是用来去除字符串两边的空格 ltrim() //去除左边的 rtrim() //去除右边的 substr(字符串,起始位置从0开始[,长度]) strstr(字符串,匹配字符) //从指定位置开始，截取到最后（可以用来去文件后缀名） strtolower() //全部小写 strtoupper() //全部大写 ucfirst() //首字母大写 strpos(字符串，匹配字符) //判断字符在目标字符串中出现的位置（首次） strrpos(字符串，匹配字符) str_replace(匹配目标,替换的内容,字符串本身) printf/sprintf(输出字符串有占位符,顺序占位内容." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://hugo.zkilm.cn/posts/2016/20160305-php-basic/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.zkilm.cn/posts/2016/20160305-php-basic/" /><meta property="og:image" content="https://qiniu.zkilm.cn/image/aJXCpPH5dKc4Grq0Jg2d3pJjL23P4BnUcPRvTQGm.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2016-03-05T00:00:00+00:00" />
 <meta property="article:modified_time" content="2016-03-05T00:00:00+00:00" />
 
@@ -30,7 +30,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>PHP基础函数🧁</title>
-	<link rel="stylesheet" href="https://hugo.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://blog.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -41,14 +41,14 @@
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
-					<a href="https://hugo.zkilm.cn">Promise</a>
+					<a href="https://blog.zkilm.cn">Promise</a>
 				</div>
 				<nav class="site-nav hide-in-mobile">
 					
-				<a href="https://hugo.zkilm.cn/posts/">文章</a>
-				<a href="https://hugo.zkilm.cn/tags/">标签</a>
-				<a href="https://hugo.zkilm.cn/reading/">阅读</a>
-				<a href="https://hugo.zkilm.cn/about/">关于</a>
+				<a href="https://blog.zkilm.cn/posts/">文章</a>
+				<a href="https://blog.zkilm.cn/tags/">标签</a>
+				<a href="https://blog.zkilm.cn/reading/">阅读</a>
+				<a href="https://blog.zkilm.cn/about/">关于</a>
 
 				</nav>
 			</div>
@@ -59,10 +59,10 @@
 	</header>
 	<div id="mobile-menu" class="animated fast">
 		<ul>
-			<li><a href="https://hugo.zkilm.cn/posts/">文章</a></li>
-			<li><a href="https://hugo.zkilm.cn/tags/">标签</a></li>
-			<li><a href="https://hugo.zkilm.cn/reading/">阅读</a></li>
-			<li><a href="https://hugo.zkilm.cn/about/">关于</a></li>
+			<li><a href="https://blog.zkilm.cn/posts/">文章</a></li>
+			<li><a href="https://blog.zkilm.cn/tags/">标签</a></li>
+			<li><a href="https://blog.zkilm.cn/reading/">阅读</a></li>
+			<li><a href="https://blog.zkilm.cn/about/">关于</a></li>
 		</ul>
 	</div>
 
@@ -186,7 +186,7 @@
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://hugo.zkilm.cn/tags/php">PHP</a></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/php">PHP</a></span>
 				</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>206 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>5036-03-05 00:00 &#43;0000</p>
@@ -211,7 +211,7 @@
 </nav>
 		</aside>
 		<div class="post-nav thin">
-			<a class="next-post" href="https://hugo.zkilm.cn/posts/2016/20160511-mysql-basic/">
+			<a class="next-post" href="https://blog.zkilm.cn/posts/2016/20160511-mysql-basic/">
 				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>MySQL基础操作🍕</span>
 			</a>
 		</div>
@@ -233,15 +233,15 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2022 <a href="https://hugo.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2022 <a href="https://blog.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://hugo.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
 	</footer>
 
 
 
-	<script src="https://hugo.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	<script src="https://blog.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
 	
 
 

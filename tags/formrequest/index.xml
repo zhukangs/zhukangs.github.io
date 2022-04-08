@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>FormRequest on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/formrequest/</link>
+    <link>https://blog.zkilm.cn/tags/formrequest/</link>
     <description>Recent content in FormRequest on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 19 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/formrequest/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 19 Nov 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/formrequest/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel 表单验证封装💪</title>
-      <link>https://hugo.zkilm.cn/posts/2021/20211119-laravel-formrequest/</link>
+      <link>https://blog.zkilm.cn/posts/2021/20211119-laravel-formrequest/</link>
       <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2021/20211119-laravel-formrequest/</guid>
+      <guid>https://blog.zkilm.cn/posts/2021/20211119-laravel-formrequest/</guid>
       <description>新建「表单验证基类」  新建「表单验证基类」 app/Http/Requests/FormRequest.php  &amp;lt;?php namespace App\Http\Requests; use Illuminate\Foundation\Http\FormRequest as BaseFormRequest; class FormRequest extends BaseFormRequest { use SceneValidator; /** * Determine if the user is authorized to make this request. * * @return bool */ public function authorize() { return true; } } 新建场景验证类  新建 app/Http/Requests/SceneValidator.php  &amp;lt;?php namespace App\Http\Requests; use Illuminate\Contracts\Validation\{Factory, Validator}; trait SceneValidator { protected $scene = null; protected $onlyRule = []; protected $autoValidate = true; /** * Validate.</description>
     </item>
     

@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Cos on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/cos/</link>
+    <link>https://blog.zkilm.cn/tags/cos/</link>
     <description>Recent content in Cos on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 06 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/cos/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 06 Aug 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/cos/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>腾讯云存储的简单使用🚗</title>
-      <link>https://hugo.zkilm.cn/posts/2018/20180806-tencent-cos/</link>
+      <link>https://blog.zkilm.cn/posts/2018/20180806-tencent-cos/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2018/20180806-tencent-cos/</guid>
+      <guid>https://blog.zkilm.cn/posts/2018/20180806-tencent-cos/</guid>
       <description>导语 将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。
 对象存储 COS 简介
  对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。

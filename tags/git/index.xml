@@ -2,27 +2,27 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/git/</link>
+    <link>https://blog.zkilm.cn/tags/git/</link>
     <description>Recent content in Git on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 10 Jul 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Git基础操作👣</title>
-      <link>https://hugo.zkilm.cn/posts/2018/20180710-git-study/</link>
+      <link>https://blog.zkilm.cn/posts/2018/20180710-git-study/</link>
       <pubDate>Tue, 10 Jul 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2018/20180710-git-study/</guid>
+      <guid>https://blog.zkilm.cn/posts/2018/20180710-git-study/</guid>
       <description>Git基础命令🧐  查看本地分支  git branch  查看本地分支与远程分支  git branch -a  创建分支  git branch [分支名]  创建分支并切换到这个分支下  git checkout -b [分支名]  从远程分支上创建某个分支并切换到这个分支下  // 示例: git checkout -b test origin/test git checkout -b 分支名/[远程分支名]  删除一个已被终止的分支  git branch -d &amp;lt;branch_name&amp;gt;  删除一个正打开的分支  git branch -D &amp;lt;branch_name&amp;gt;  /恢复被删除的分支  git branch &amp;lt;branch_name&amp;gt; &amp;lt;hash_val&amp;gt;  合并某分支到当前分支  git merge [分支名]  推送本地某个分支到远程某个分支  // 示例: git push 远程主机名:[远程分支名] git push origin master:master  拉取远程某个分支到本地某个分支  // 示例: git pull 远程主机名:[本地分支名] git pull origin master:master  储藏当前工作状态（可多次）新建的文件须先add再stash  git stash //简写 git stash save &amp;#34;message&amp;#34; //备注  查看当前储藏  git stash list  恢复某一储藏版本  // 示例: git stash apply stash@{0} git stash apply [stash@{0}]  删除某一储藏版本  // 示例: git stash drop stash@{0} git stash drop [stash@{0}]  恢复最新的储藏，并把最新的储藏删掉  git stash pop 待续 .</description>
     </item>
     
     <item>
       <title>Gogs</title>
-      <link>https://hugo.zkilm.cn/posts/2018/20180410-gogs/</link>
+      <link>https://blog.zkilm.cn/posts/2018/20180410-gogs/</link>
       <pubDate>Tue, 10 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2018/20180410-gogs/</guid>
+      <guid>https://blog.zkilm.cn/posts/2018/20180410-gogs/</guid>
       <description>成果体验地址
 centos7安装部署gogs  前提是mysql、git都已经安装好了，可以直接往下走：  1.下载gogo压缩包 https://dl.gogs.io/ 选择对应的版本下载 我这里下载的是gogs_v0.9.141_linux_amd64.tar.gz 2.上传到服务器对应的目录 并解压 我这里上传的是在/home下 然后tar -zxvf gogs_v0.9.141_linux_amd64.tar.gz 3.开启服务./gogo web 后台运行 nohup ./gogs web &amp;amp; 4.开放放行3000端口 或关闭防火墙 然后运行http://服务器公网ip:3000/install进行安装 windows下安装部署gogs -前提是mysql、git都已经安装好了，可以直接往下走：
 1.下载对应的版本，我下的是windows amd64 https://gogs.io/docs/installation/install_from_binary 2.开始安装 a.解压下载到的gogs，将gogs文件夹移动到一个磁盘，如E盘 b.在gogs文件夹内进行添加文件夹和文件 在gogs 目录下新建 custom 和 log 目录 在custom 目录下再新建conf 目录 在conf 目录下新建 app.ini 文件 在app.ini文件里加入如下内容 [repository] ROOT = D:/GitProject [database] PATH = 127.0.0.1:3306 在log 目录下新建gogs.log 文件 要注意 log 目录要给与当前系统的登录用户添加、编辑权限 c.在mysql中新建gogs数据库 3.cmd中进入到gogs文件夹 执行gogs.exe web开启服务 在浏览器中http://127.0.0.1:3000/install开始配置安装 此时关闭cmd服务就会停止，要想添加为windows服务，需要下载nssm，并添加环境变量 相关的访问url及其他的一些配置信息都在 custom/conf/app.ini 里面</description>

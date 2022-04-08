@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vagrant on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/vagrant/</link>
+    <link>https://blog.zkilm.cn/tags/vagrant/</link>
     <description>Recent content in Vagrant on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 25 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/vagrant/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 25 Apr 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/vagrant/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Vagrant安装之旅😈</title>
-      <link>https://hugo.zkilm.cn/posts/2018/20180425-install-vagrant/</link>
+      <link>https://blog.zkilm.cn/posts/2018/20180425-install-vagrant/</link>
       <pubDate>Wed, 25 Apr 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2018/20180425-install-vagrant/</guid>
+      <guid>https://blog.zkilm.cn/posts/2018/20180425-install-vagrant/</guid>
       <description>记vagrant安装之旅
 思考 首先，vagrant是什么？
  Vagrant目前是国内互联网公司应用最多的内部开发环境工具。Vagrant是我们开发者的福音，使我们完全摆脱了重复配置环境的处境。Vagrant简单的配置，丰富的自动化脚本资源以及分享的便捷性都是我们应该学习的思想，节省开发人员的大量准备工作时间,使开发人员更专注公司业务开发。

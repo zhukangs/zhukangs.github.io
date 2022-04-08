@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ajax on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/ajax/</link>
+    <link>https://blog.zkilm.cn/tags/ajax/</link>
     <description>Recent content in Ajax on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Wed, 08 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/ajax/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 08 Nov 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/ajax/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel中发送Ajax请求🏃‍♂️</title>
-      <link>https://hugo.zkilm.cn/posts/2017/20171108-laravel-ajax/</link>
+      <link>https://blog.zkilm.cn/posts/2017/20171108-laravel-ajax/</link>
       <pubDate>Wed, 08 Nov 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2017/20171108-laravel-ajax/</guid>
+      <guid>https://blog.zkilm.cn/posts/2017/20171108-laravel-ajax/</guid>
       <description>ajax请求验证,添加数据 $(&amp;#34;#submit2&amp;#34;).click(function () { var _error = 0; if ($(&amp;#34;.addtit&amp;#34;).val() == &amp;#34;&amp;#34;) { _error = 1 } if (_error == 1) { layer.msg(&amp;#39;所有信息必须填写&amp;#39;, {icon: 5, time: 980}); return false; } $.ajax({ type:&amp;#39;post&amp;#39;, url:&amp;#39;{{route(&amp;#39;messages.sysstore&amp;#39;)}}&amp;#39;, data:{ &amp;#39;_token&amp;#39;:{{csrf_filed()}}, &amp;#39;type&amp;#39;:1, &amp;#39;title&amp;#39;:$(&amp;#39;#title_2&amp;#39;).val(), &amp;#39;timing&amp;#39;:$(&amp;#34;#timing_input2&amp;#34;).val(), &amp;#39;images&amp;#39;: JSON.stringify( images_arr ) }, success:function(msg){ if(msg.code == 0){ layer.msg(&amp;#39;ok！&amp;#39;,{icon:6,time:1500},function(){ location.href = &amp;#34;{{route(&amp;#39;messages.index&amp;#39;)}}&amp;#34;; }); }else{ layer.msg(msg.error,{icon:5,time:1500}); } } }); return false; }) ajax请求修改数据 $.ajax({ url: &amp;#39;/registerAgreement/&amp;#39; + _id, type: &amp;#39;PATCH&amp;#39;, success: function (data) { console.</description>
     </item>
     

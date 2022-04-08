@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jwt on Promise</title>
-    <link>https://hugo.zkilm.cn/tags/jwt/</link>
+    <link>https://blog.zkilm.cn/tags/jwt/</link>
     <description>Recent content in Jwt on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 05 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://hugo.zkilm.cn/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel的API初始搭建之JWT</title>
-      <link>https://hugo.zkilm.cn/posts/2018/20180505-api-jwt/</link>
+      <link>https://blog.zkilm.cn/posts/2018/20180505-api-jwt/</link>
       <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://hugo.zkilm.cn/posts/2018/20180505-api-jwt/</guid>
+      <guid>https://blog.zkilm.cn/posts/2018/20180505-api-jwt/</guid>
       <description>写接口好写，但麻烦的是起步，需要做一些安全的措施，下面就记录一下Laravel的初始API搭建步骤！！！
 安装laravel（5.5） 对于 LTS 版本，例如 Laravel 5.1，提供两年的错误修复和三年的安全修复。这些版本提供最长时间的支持和维护。对于一般版本，则只是提供六个月的错误修复和为期一年的安全修复。
 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.5.*&amp;#34; 安装DingoAPI（参考文档）  dingo/api 是一个 Lumen 和 Laravel 都可用的 RestFul 工具包，帮助我们快速的开始构建 RestFul Api。更多的功能，还需要仔细阅读 DingoApi 的 文档 来深入的学习和理解。
