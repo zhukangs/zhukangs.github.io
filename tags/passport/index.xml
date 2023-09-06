@@ -2,23 +2,24 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Passport on Promise</title>
-    <link>https://blog.zkilm.cn/tags/passport/</link>
+    <link>https://blog.gookm.cn/tags/passport/</link>
     <description>Recent content in Passport on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/passport/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 25 Jan 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/tags/passport/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel的API初始搭建之Passport😄</title>
-      <link>https://blog.zkilm.cn/posts/2019/20190125-laravel-passport/</link>
+      <link>https://blog.gookm.cn/posts/2019/20190125-laravel-passport/</link>
       <pubDate>Fri, 25 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2019/20190125-laravel-passport/</guid>
+      <guid>https://blog.gookm.cn/posts/2019/20190125-laravel-passport/</guid>
       <description>介绍 在 Laravel中，实现基于传统表单的登陆和授权已经非常简单，但是如何满足 API 场景下的授权需求呢？在 API场景里通常通过令牌来实现用户授权，而非维护请求之间的 Session 状态。在 Laravel 项目中使用 Passport 可以轻而易举地实现 API 授权认证，Passport 可以在几分钟之内为你的应用程序提供完整的 OAuth2 服务端实现。Passport 是基于由 Alex Bilbie 维护的 League OAuth2 server 建立的。❤🐷😘
 安装 1、安装一个全新 laravel 项目
 composer create-project --prefer-dist laravel/laravel passport 2、安装 Laravel Passport 包
- Laravel Passport 可以在几分钟内为你的应用实现一个完整的 OAuth2服务器  composer require laravel/passport 3、创建存储客户端和令牌的数据表
- Passport 服务提供器使用框架注册自己的数据库迁移目录，因此在注册提供器后，就应该运行 Passport 的迁移命令来自动创建存储客户端和令牌的数据表  php artisan migrate  如果你不打算使用 Passport 的默认迁移，你应该在 AppServiceProvider 的 register 方法中调用 Passport::ignoreMigrations 方法。 你可以用这个命令 php artisan vendor:publish --tag=passport-migrations 导出默认迁移。  4、Passport配置</description>
+Laravel Passport 可以在几分钟内为你的应用实现一个完整的 OAuth2服务器 composer require laravel/passport 3、创建存储客户端和令牌的数据表
+Passport 服务提供器使用框架注册自己的数据库迁移目录，因此在注册提供器后，就应该运行 Passport 的迁移命令来自动创建存储客户端和令牌的数据表 php artisan migrate 如果你不打算使用 Passport 的默认迁移，你应该在 AppServiceProvider 的 register 方法中调用 Passport::ignoreMigrations 方法。 你可以用这个命令 php artisan vendor:publish --tag=passport-migrations 导出默认迁移。 4、Passport配置
+运行 passport:install 命令来创建生成安全访问令牌时所需的加密密钥，同时，这条命令也会创建用于生成访问令牌的「个人访问」客户端和「密码授权」客户端： php artisan passport:install 上面命令执行后，请将 Laravel\Passport\HasApiTokens Trait 添加到 App\User 模型中，这个 Trait 会给你的模型提供一些辅助函数，用于检查已认证用户的令牌和使用范围： &amp;lt;?</description>
     </item>
     
   </channel>

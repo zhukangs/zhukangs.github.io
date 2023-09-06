@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jwt on Promise</title>
-    <link>https://blog.zkilm.cn/tags/jwt/</link>
+    <link>https://blog.gookm.cn/tags/jwt/</link>
     <description>Recent content in Jwt on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 05 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 May 2018 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/tags/jwt/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel的API初始搭建之JWT</title>
-      <link>https://blog.zkilm.cn/posts/2018/20180505-api-jwt/</link>
+      <link>https://blog.gookm.cn/posts/2018/20180505-api-jwt/</link>
       <pubDate>Sat, 05 May 2018 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2018/20180505-api-jwt/</guid>
+      <guid>https://blog.gookm.cn/posts/2018/20180505-api-jwt/</guid>
       <description>写接口好写，但麻烦的是起步，需要做一些安全的措施，下面就记录一下Laravel的初始API搭建步骤！！！
 安装laravel（5.5） 对于 LTS 版本，例如 Laravel 5.1，提供两年的错误修复和三年的安全修复。这些版本提供最长时间的支持和维护。对于一般版本，则只是提供六个月的错误修复和为期一年的安全修复。
-composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.5.*&amp;#34; 安装DingoAPI（参考文档）  dingo/api 是一个 Lumen 和 Laravel 都可用的 RestFul 工具包，帮助我们快速的开始构建 RestFul Api。更多的功能，还需要仔细阅读 DingoApi 的 文档 来深入的学习和理解。
-  Laravel 5.5 的适配版本为dingo/api:v2.0.0-alpha2，所以我们需要安装这个 tag  composer require dingo/api:2.0.0-alpha2  会报错：You requirements could not be resolved to an installable set of packages 原因：dingo 的文档中有说明，现在这个包还处在开发阶段，没有一个稳定的 release 版本， dingo/api 依赖的 dingo/blueprint 与 phpunit 都依赖了 phpdocumentor/reflection-docblock 但是依赖的版本不同， 导致出现了冲突。但是我们发现 dingo/blueprint 的开发版本 dev-master 解决了冲突，可以正常安装； 解决：修改一下 composer.</description>
+composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.5.*&amp;#34; 安装DingoAPI（参考文档） dingo/api 是一个 Lumen 和 Laravel 都可用的 RestFul 工具包，帮助我们快速的开始构建 RestFul Api。更多的功能，还需要仔细阅读 DingoApi 的 文档 来深入的学习和理解。
+Laravel 5.5 的适配版本为dingo/api:v2.0.0-alpha2，所以我们需要安装这个 tag composer require dingo/api:2.0.0-alpha2 会报错：You requirements could not be resolved to an installable set of packages 原因：dingo 的文档中有说明，现在这个包还处在开发阶段，没有一个稳定的 release 版本， dingo/api 依赖的 dingo/blueprint 与 phpunit 都依赖了 phpdocumentor/reflection-docblock 但是依赖的版本不同， 导致出现了冲突。但是我们发现 dingo/blueprint 的开发版本 dev-master 解决了冲突，可以正常安装； 解决：修改一下 composer.json &amp;#34;config&amp;#34;: { &amp;#34;preferred-install&amp;#34;: &amp;#34;dist&amp;#34;, &amp;#34;sort-packages&amp;#34;: true, &amp;#34;optimize-autoloader&amp;#34;: true }, &amp;#34;minimum-stability&amp;#34; : &amp;#34;dev&amp;#34;, &amp;#34;prefer-stable&amp;#34; : true, minimum-stability&amp;#34; : &amp;#34;dev&amp;#34; #设定的最低稳定性的版本为 dev 也就是可以依赖开发版本的扩展包； &amp;#34;prefer-stable&amp;#34; : true —— Composer 优先使用更稳定的包版本。 dingo 的配置文件 publish 出来： php artisan vendor:publish 4、在.</description>
     </item>
     
   </channel>

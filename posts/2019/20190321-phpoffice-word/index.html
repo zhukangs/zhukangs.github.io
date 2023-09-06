@@ -7,18 +7,20 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta itemprop="name" content="PHPOffice之Word🍭‍">
 <meta itemprop="description" content="导语 在做完根据Excel模板导出数据后，就对Word模板导出产生了兴趣。其实原理差不多。所以还是选择的PHPOffice 套餐。
- PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。
- PHPWord文档传送门
-开始 安装 composer require phpoffice/phpword 使用  拿到原始的模板还需要做一些简单的修改：  代码 &lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word  public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&#39;/phpoffice/word_temp.docx&#39;); //设置替换值 （只能替换纯文本）  $template-&gt;setValue( [&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;], [$request-&gt;name,$request-&gt;start_time,$request-&gt;address,$request-&gt;organizer,$request-&gt;activity] ); $filename = date(&#39;Y-m-d&#39;, time()).rand(1000, 9999). &#34;.docx&#34;; //保存到项目  $template-&gt;saveAs(public_path().&#39;/phpoffice/&#39;.$filename); //建议：将数据[&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;]写一份到数据库  //TODO  return back()-&gt;with([&#39;success&#39;=&gt;&#39;导出成功&#39;,&#39;filename&#39;=&gt;$filename]); } } 效果 结束语 目前是将文件保存在了项目，想要安全点可以丢到Storage文件夹下或者上传至cos，oos，七牛等。直接输出到浏览器暂时还没找到对应的方法。"><meta itemprop="datePublished" content="2019-03-21T00:00:00+00:00" />
+PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。
+PHPWord文档传送门
+开始 安装 composer require phpoffice/phpword 使用 拿到原始的模板还需要做一些简单的修改： 代码 &lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&#39;/phpoffice/word_temp.docx&#39;); //设置替换值 （只能替换纯文本） $template-&gt;setValue( [&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;], [$request-&gt;name,$request-&gt;start_time,$request-&gt;address,$request-&gt;organizer,$request-&gt;activity] ); $filename = date(&#39;Y-m-d&#39;, time()).rand(1000, 9999). &#34;.docx&#34;; //保存到项目 $template-&gt;saveAs(public_path().&#39;/phpoffice/&#39;.$filename); //建议：将数据[&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;]写一份到数据库 //TODO return back()-&gt;with([&#39;success&#39;=&gt;&#39;导出成功&#39;,&#39;filename&#39;=&gt;$filename]); } } 效果 结束语 目前是将文件保存在了项目，想要安全点可以丢到Storage文件夹下或者上传至cos，oos，七牛等。直接输出到浏览器暂时还没找到对应的方法。
+不努力，你背井离乡干嘛！？加油！💪"><meta itemprop="datePublished" content="2019-03-21T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-03-21T00:00:00+00:00" />
 <meta itemprop="wordCount" content="69"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="PhpOffice," /><meta property="og:title" content="PHPOffice之Word🍭‍" />
 <meta property="og:description" content="导语 在做完根据Excel模板导出数据后，就对Word模板导出产生了兴趣。其实原理差不多。所以还是选择的PHPOffice 套餐。
- PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。
- PHPWord文档传送门
-开始 安装 composer require phpoffice/phpword 使用  拿到原始的模板还需要做一些简单的修改：  代码 &lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word  public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&#39;/phpoffice/word_temp.docx&#39;); //设置替换值 （只能替换纯文本）  $template-&gt;setValue( [&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;], [$request-&gt;name,$request-&gt;start_time,$request-&gt;address,$request-&gt;organizer,$request-&gt;activity] ); $filename = date(&#39;Y-m-d&#39;, time()).rand(1000, 9999). &#34;.docx&#34;; //保存到项目  $template-&gt;saveAs(public_path().&#39;/phpoffice/&#39;.$filename); //建议：将数据[&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;]写一份到数据库  //TODO  return back()-&gt;with([&#39;success&#39;=&gt;&#39;导出成功&#39;,&#39;filename&#39;=&gt;$filename]); } } 效果 结束语 目前是将文件保存在了项目，想要安全点可以丢到Storage文件夹下或者上传至cos，oos，七牛等。直接输出到浏览器暂时还没找到对应的方法。" />
+PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。
+PHPWord文档传送门
+开始 安装 composer require phpoffice/phpword 使用 拿到原始的模板还需要做一些简单的修改： 代码 &lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&#39;/phpoffice/word_temp.docx&#39;); //设置替换值 （只能替换纯文本） $template-&gt;setValue( [&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;], [$request-&gt;name,$request-&gt;start_time,$request-&gt;address,$request-&gt;organizer,$request-&gt;activity] ); $filename = date(&#39;Y-m-d&#39;, time()).rand(1000, 9999). &#34;.docx&#34;; //保存到项目 $template-&gt;saveAs(public_path().&#39;/phpoffice/&#39;.$filename); //建议：将数据[&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;]写一份到数据库 //TODO return back()-&gt;with([&#39;success&#39;=&gt;&#39;导出成功&#39;,&#39;filename&#39;=&gt;$filename]); } } 效果 结束语 目前是将文件保存在了项目，想要安全点可以丢到Storage文件夹下或者上传至cos，oos，七牛等。直接输出到浏览器暂时还没找到对应的方法。
+不努力，你背井离乡干嘛！？加油！💪" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190321-phpoffice-word/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.gookm.cn/posts/2019/20190321-phpoffice-word/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-03-21T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-03-21T00:00:00+00:00" />
 
@@ -27,9 +29,10 @@
 
 <meta name="twitter:title" content="PHPOffice之Word🍭‍"/>
 <meta name="twitter:description" content="导语 在做完根据Excel模板导出数据后，就对Word模板导出产生了兴趣。其实原理差不多。所以还是选择的PHPOffice 套餐。
- PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。
- PHPWord文档传送门
-开始 安装 composer require phpoffice/phpword 使用  拿到原始的模板还需要做一些简单的修改：  代码 &lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word  public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&#39;/phpoffice/word_temp.docx&#39;); //设置替换值 （只能替换纯文本）  $template-&gt;setValue( [&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;], [$request-&gt;name,$request-&gt;start_time,$request-&gt;address,$request-&gt;organizer,$request-&gt;activity] ); $filename = date(&#39;Y-m-d&#39;, time()).rand(1000, 9999). &#34;.docx&#34;; //保存到项目  $template-&gt;saveAs(public_path().&#39;/phpoffice/&#39;.$filename); //建议：将数据[&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;]写一份到数据库  //TODO  return back()-&gt;with([&#39;success&#39;=&gt;&#39;导出成功&#39;,&#39;filename&#39;=&gt;$filename]); } } 效果 结束语 目前是将文件保存在了项目，想要安全点可以丢到Storage文件夹下或者上传至cos，oos，七牛等。直接输出到浏览器暂时还没找到对应的方法。"/>
+PHPWord是一个用纯PHP编写的库，它提供了一组用于写入和读取不同文档文件格式的类。当前版本的PHPWord支持Microsoft Office Open XML（OOXML或OpenXML），Office应用程序的OASIS Open Document Format（OpenDocument或ODF）和RTF格式（RTF）。
+PHPWord文档传送门
+开始 安装 composer require phpoffice/phpword 使用 拿到原始的模板还需要做一些简单的修改： 代码 &lt;?php namespace App\Http\Controllers; use Illuminate\Http\Request; use PhpOffice\PhpWord\PhpWord; use PhpOffice\PhpWord\TemplateProcessor; class TestController extends Controller { . . //Word public function wordExport(Request $request) { $template = new TemplateProcessor(public_path().&#39;/phpoffice/word_temp.docx&#39;); //设置替换值 （只能替换纯文本） $template-&gt;setValue( [&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;], [$request-&gt;name,$request-&gt;start_time,$request-&gt;address,$request-&gt;organizer,$request-&gt;activity] ); $filename = date(&#39;Y-m-d&#39;, time()).rand(1000, 9999). &#34;.docx&#34;; //保存到项目 $template-&gt;saveAs(public_path().&#39;/phpoffice/&#39;.$filename); //建议：将数据[&#39;Name&#39;,&#39;Date&#39;,&#39;Address&#39;,&#39;Organizer&#39;,&#39;Activity&#39;]写一份到数据库 //TODO return back()-&gt;with([&#39;success&#39;=&gt;&#39;导出成功&#39;,&#39;filename&#39;=&gt;$filename]); } } 效果 结束语 目前是将文件保存在了项目，想要安全点可以丢到Storage文件夹下或者上传至cos，oos，七牛等。直接输出到浏览器暂时还没找到对应的方法。
+不努力，你背井离乡干嘛！？加油！💪"/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -39,7 +42,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>PHPOffice之Word🍭‍</title>
-	<link rel="stylesheet" href="https://blog.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://blog.gookm.cn/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -50,14 +53,14 @@
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
-					<a href="https://blog.zkilm.cn">Promise</a>
+					<a href="https://blog.gookm.cn">Promise</a>
 				</div>
 				<nav class="site-nav hide-in-mobile">
 					
-				<a href="https://blog.zkilm.cn/posts/">文章</a>
-				<a href="https://blog.zkilm.cn/tags/">标签</a>
-				<a href="https://blog.zkilm.cn/reading/">阅读</a>
-				<a href="https://blog.zkilm.cn/about/">关于</a>
+				<a href="https://blog.gookm.cn/posts/">文章</a>
+				<a href="https://blog.gookm.cn/tags/">标签</a>
+				<a href="https://blog.gookm.cn/reading/">阅读</a>
+				<a href="https://blog.gookm.cn/about/">关于</a>
 
 				</nav>
 			</div>
@@ -68,10 +71,10 @@
 	</header>
 	<div id="mobile-menu" class="animated fast">
 		<ul>
-			<li><a href="https://blog.zkilm.cn/posts/">文章</a></li>
-			<li><a href="https://blog.zkilm.cn/tags/">标签</a></li>
-			<li><a href="https://blog.zkilm.cn/reading/">阅读</a></li>
-			<li><a href="https://blog.zkilm.cn/about/">关于</a></li>
+			<li><a href="https://blog.gookm.cn/posts/">文章</a></li>
+			<li><a href="https://blog.gookm.cn/tags/">标签</a></li>
+			<li><a href="https://blog.gookm.cn/reading/">阅读</a></li>
+			<li><a href="https://blog.gookm.cn/about/">关于</a></li>
 		</ul>
 	</div>
 
@@ -160,10 +163,10 @@
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/phpoffice">PhpOffice</a></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.gookm.cn/tags/phpoffice">PhpOffice</a></span>
 				</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>69 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>21036-03-21 00:00 &#43;0000</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>21036-03-21 08:00 &#43;0800</p>
 			</footer>
 		</article>
 		<aside id="toc" class="show-toc">
@@ -181,10 +184,10 @@
 </nav>
 		</aside>
 		<div class="post-nav thin">
-			<a class="next-post" href="https://blog.zkilm.cn/posts/2019/20190610-wechat-h5/">
+			<a class="next-post" href="https://blog.gookm.cn/posts/2019/20190610-wechat-h5/">
 				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>微信的H5分享（基于 Laravel-Wechat）😶</span>
 			</a>
-			<a class="prev-post" href="https://blog.zkilm.cn/posts/2019/20190320-phpoffice-excel/">
+			<a class="prev-post" href="https://blog.gookm.cn/posts/2019/20190320-phpoffice-excel/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>PHPOffice之Excel🍜</span>
 			</a>
 		</div>
@@ -206,15 +209,15 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2022 <a href="https://blog.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2023 <a href="https://blog.gookm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.gookm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
 	</footer>
 
 
 
-	<script src="https://blog.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	<script src="https://blog.gookm.cn/js/bundle.min.f60b118ee29d83a3d708c5d850372b3e465ce787986ca854d5e40a42a50c6d44.js" integrity="sha256-9gsRjuKdg6PXCMXYUDcrPkZc54eYbKhU1eQKQqUMbUQ=" crossorigin="anonymous"></script>
 	
 
 

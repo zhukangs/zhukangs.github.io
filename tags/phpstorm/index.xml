@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>PHPStorm on Promise</title>
-    <link>https://blog.zkilm.cn/tags/phpstorm/</link>
+    <link>https://blog.gookm.cn/tags/phpstorm/</link>
     <description>Recent content in PHPStorm on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sun, 11 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/phpstorm/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jun 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/tags/phpstorm/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>PHPStorm中使用FTP功能步骤🍔</title>
-      <link>https://blog.zkilm.cn/posts/2017/20170611-phpstorm-ftp/</link>
+      <link>https://blog.gookm.cn/posts/2017/20170611-phpstorm-ftp/</link>
       <pubDate>Sun, 11 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2017/20170611-phpstorm-ftp/</guid>
+      <guid>https://blog.gookm.cn/posts/2017/20170611-phpstorm-ftp/</guid>
       <description>phpStorm中使用FTP功能步骤
 PHPStorm拥有FTP功能，因此无需下载其他FTP软件
- FTP 是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。用于Internet上的控制文件的双向传输。同时，它也是一个应用程序（Application）。基于不同的操作系统有不同的FTP应用程序，而所有这些应用程序都遵守同一种协议以传输文件。在FTP的使用当中，用户经常遇到两个概念：&amp;ldquo;下载&amp;rdquo;（Download）和&amp;quot;上传&amp;quot;（Upload）。&amp;ldquo;下载&amp;quot;文件就是从远程主机拷贝文件至自己的计算机上；&amp;ldquo;上传&amp;quot;文件就是将文件从自己的计算机中拷贝至远程主机上。用通俗语言来说，用户可通过客户机程序向远程主机上传文件或者从远程主机下载文件。
- 第一步  找到头部的工具栏，点击 Tool（工具），选择 Deployment下的 Configuration...  第二步  点击左上角的 + 号，添加一个 web server，在弹窗中填写相关信息  第三步  填写 Host、Port、User Name、Password 等信息，与服务器链接  第四步  切换到 Mappings，选择根路径  </description>
+FTP 是File Transfer Protocol（文件传输协议）的英文简称，而中文简称为“文传协议”。用于Internet上的控制文件的双向传输。同时，它也是一个应用程序（Application）。基于不同的操作系统有不同的FTP应用程序，而所有这些应用程序都遵守同一种协议以传输文件。在FTP的使用当中，用户经常遇到两个概念：&amp;ldquo;下载&amp;rdquo;（Download）和&amp;quot;上传&amp;quot;（Upload）。&amp;ldquo;下载&amp;quot;文件就是从远程主机拷贝文件至自己的计算机上；&amp;ldquo;上传&amp;quot;文件就是将文件从自己的计算机中拷贝至远程主机上。用通俗语言来说，用户可通过客户机程序向远程主机上传文件或者从远程主机下载文件。
+第一步 找到头部的工具栏，点击 Tool（工具），选择 Deployment下的 Configuration... 第二步 点击左上角的 + 号，添加一个 web server，在弹窗中填写相关信息 第三步 填写 Host、Port、User Name、Password 等信息，与服务器链接 第四步 切换到 Mappings，选择根路径 </description>
     </item>
     
   </channel>

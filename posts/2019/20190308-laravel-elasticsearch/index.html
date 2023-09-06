@@ -7,24 +7,30 @@
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta itemprop="name" content="使用Elasticsearch做引擎，Scout全文搜索🔍">
 <meta itemprop="description" content="ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便
- 准备 1、安装测试Laravel5.5用于测试
+准备 1、安装测试Laravel5.5用于测试
 composer create-project --prefer-dist laravel/laravel test &#34;5.5.*&#34; 2、安装运行es 链接地址，点开链接，根据自己的系统下载安装包，里面关于怎么样安装运行都说的比较清楚。下载后解压。由于我用的是Homestead环境，自带了es。
-cd elasticsearch-6.4.2 //进入到解压目录 ./bin/elasticsearch //本地运行es  Homestead环境  sudo systemctl restart elasticsearch.service //启动 curl http://127.0.0.1:9200/ //检测是否启动成功 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list //查看elasticsearch-analysis-ik 中文分词插件 sudo systemctl disable elasticsearch.service //关闭 Elasticsearch 开机启动 开始 1、进入项目目录
+cd elasticsearch-6.4.2 //进入到解压目录 ./bin/elasticsearch //本地运行es Homestead环境 sudo systemctl restart elasticsearch.service //启动 curl http://127.0.0.1:9200/ //检测是否启动成功 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list //查看elasticsearch-analysis-ik 中文分词插件 sudo systemctl disable elasticsearch.service //关闭 Elasticsearch 开机启动 开始 1、进入项目目录
 cd test 2、安装Laravel scout 全文搜索包
 composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改：
- /vendor/laravel/scout/src/Searchable.php 有一个getScoutModelsByIds()方法的这段代码注释掉就可以了。  if ($builder-&gt;queryCallback) { call_user_func($builder-&gt;queryCallback, $query); }   将laravel/scout 5.0.0版本换成 laravel/scout 5.0.3即可解决Undefined property: Laravel\Scout\Builder::$queryCallback报错问题。不用手动修改源码。"><meta itemprop="datePublished" content="2019-03-08T00:00:00+00:00" />
+/vendor/laravel/scout/src/Searchable.php 有一个getScoutModelsByIds()方法的这段代码注释掉就可以了。 if ($builder-&gt;queryCallback) { call_user_func($builder-&gt;queryCallback, $query); } 将laravel/scout 5.0.0版本换成 laravel/scout 5.0.3即可解决Undefined property: Laravel\Scout\Builder::$queryCallback报错问题。不用手动修改源码。
+5.0.3版本的Laravel\Scout\Builder类在5.0.0基础上增加了$queryCallback属性并做了其他修改。
+3、注册服务提供器
+&#39;providers&#39; =&gt; [ ... Laravel\Scout\ScoutServiceProvider::class, ], 4、生成配置文件"><meta itemprop="datePublished" content="2019-03-08T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-03-08T00:00:00+00:00" />
-<meta itemprop="wordCount" content="283"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
+<meta itemprop="wordCount" content="289"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel,ElasticSearch," /><meta property="og:title" content="使用Elasticsearch做引擎，Scout全文搜索🔍" />
 <meta property="og:description" content="ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便
- 准备 1、安装测试Laravel5.5用于测试
+准备 1、安装测试Laravel5.5用于测试
 composer create-project --prefer-dist laravel/laravel test &#34;5.5.*&#34; 2、安装运行es 链接地址，点开链接，根据自己的系统下载安装包，里面关于怎么样安装运行都说的比较清楚。下载后解压。由于我用的是Homestead环境，自带了es。
-cd elasticsearch-6.4.2 //进入到解压目录 ./bin/elasticsearch //本地运行es  Homestead环境  sudo systemctl restart elasticsearch.service //启动 curl http://127.0.0.1:9200/ //检测是否启动成功 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list //查看elasticsearch-analysis-ik 中文分词插件 sudo systemctl disable elasticsearch.service //关闭 Elasticsearch 开机启动 开始 1、进入项目目录
+cd elasticsearch-6.4.2 //进入到解压目录 ./bin/elasticsearch //本地运行es Homestead环境 sudo systemctl restart elasticsearch.service //启动 curl http://127.0.0.1:9200/ //检测是否启动成功 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list //查看elasticsearch-analysis-ik 中文分词插件 sudo systemctl disable elasticsearch.service //关闭 Elasticsearch 开机启动 开始 1、进入项目目录
 cd test 2、安装Laravel scout 全文搜索包
 composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改：
- /vendor/laravel/scout/src/Searchable.php 有一个getScoutModelsByIds()方法的这段代码注释掉就可以了。  if ($builder-&gt;queryCallback) { call_user_func($builder-&gt;queryCallback, $query); }   将laravel/scout 5.0.0版本换成 laravel/scout 5.0.3即可解决Undefined property: Laravel\Scout\Builder::$queryCallback报错问题。不用手动修改源码。" />
+/vendor/laravel/scout/src/Searchable.php 有一个getScoutModelsByIds()方法的这段代码注释掉就可以了。 if ($builder-&gt;queryCallback) { call_user_func($builder-&gt;queryCallback, $query); } 将laravel/scout 5.0.0版本换成 laravel/scout 5.0.3即可解决Undefined property: Laravel\Scout\Builder::$queryCallback报错问题。不用手动修改源码。
+5.0.3版本的Laravel\Scout\Builder类在5.0.0基础上增加了$queryCallback属性并做了其他修改。
+3、注册服务提供器
+&#39;providers&#39; =&gt; [ ... Laravel\Scout\ScoutServiceProvider::class, ], 4、生成配置文件" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190308-laravel-elasticsearch/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.gookm.cn/posts/2019/20190308-laravel-elasticsearch/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-03-08T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-03-08T00:00:00+00:00" />
 
@@ -33,12 +39,15 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 
 <meta name="twitter:title" content="使用Elasticsearch做引擎，Scout全文搜索🔍"/>
 <meta name="twitter:description" content="ElasticSearch是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。Elasticsearch是用Java开发的，并作为Apache许可条款下的开放源码发布，是当前流行的企业级搜索引擎。设计用于云计算中，能够达到实时搜索，稳定，可靠，快速，安装使用方便
- 准备 1、安装测试Laravel5.5用于测试
+准备 1、安装测试Laravel5.5用于测试
 composer create-project --prefer-dist laravel/laravel test &#34;5.5.*&#34; 2、安装运行es 链接地址，点开链接，根据自己的系统下载安装包，里面关于怎么样安装运行都说的比较清楚。下载后解压。由于我用的是Homestead环境，自带了es。
-cd elasticsearch-6.4.2 //进入到解压目录 ./bin/elasticsearch //本地运行es  Homestead环境  sudo systemctl restart elasticsearch.service //启动 curl http://127.0.0.1:9200/ //检测是否启动成功 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list //查看elasticsearch-analysis-ik 中文分词插件 sudo systemctl disable elasticsearch.service //关闭 Elasticsearch 开机启动 开始 1、进入项目目录
+cd elasticsearch-6.4.2 //进入到解压目录 ./bin/elasticsearch //本地运行es Homestead环境 sudo systemctl restart elasticsearch.service //启动 curl http://127.0.0.1:9200/ //检测是否启动成功 sudo /usr/share/elasticsearch/bin/elasticsearch-plugin list //查看elasticsearch-analysis-ik 中文分词插件 sudo systemctl disable elasticsearch.service //关闭 Elasticsearch 开机启动 开始 1、进入项目目录
 cd test 2、安装Laravel scout 全文搜索包
 composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改：
- /vendor/laravel/scout/src/Searchable.php 有一个getScoutModelsByIds()方法的这段代码注释掉就可以了。  if ($builder-&gt;queryCallback) { call_user_func($builder-&gt;queryCallback, $query); }   将laravel/scout 5.0.0版本换成 laravel/scout 5.0.3即可解决Undefined property: Laravel\Scout\Builder::$queryCallback报错问题。不用手动修改源码。"/>
+/vendor/laravel/scout/src/Searchable.php 有一个getScoutModelsByIds()方法的这段代码注释掉就可以了。 if ($builder-&gt;queryCallback) { call_user_func($builder-&gt;queryCallback, $query); } 将laravel/scout 5.0.0版本换成 laravel/scout 5.0.3即可解决Undefined property: Laravel\Scout\Builder::$queryCallback报错问题。不用手动修改源码。
+5.0.3版本的Laravel\Scout\Builder类在5.0.0基础上增加了$queryCallback属性并做了其他修改。
+3、注册服务提供器
+&#39;providers&#39; =&gt; [ ... Laravel\Scout\ScoutServiceProvider::class, ], 4、生成配置文件"/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -48,7 +57,7 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>使用Elasticsearch做引擎，Scout全文搜索🔍</title>
-	<link rel="stylesheet" href="https://blog.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://blog.gookm.cn/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -59,14 +68,14 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
-					<a href="https://blog.zkilm.cn">Promise</a>
+					<a href="https://blog.gookm.cn">Promise</a>
 				</div>
 				<nav class="site-nav hide-in-mobile">
 					
-				<a href="https://blog.zkilm.cn/posts/">文章</a>
-				<a href="https://blog.zkilm.cn/tags/">标签</a>
-				<a href="https://blog.zkilm.cn/reading/">阅读</a>
-				<a href="https://blog.zkilm.cn/about/">关于</a>
+				<a href="https://blog.gookm.cn/posts/">文章</a>
+				<a href="https://blog.gookm.cn/tags/">标签</a>
+				<a href="https://blog.gookm.cn/reading/">阅读</a>
+				<a href="https://blog.gookm.cn/about/">关于</a>
 
 				</nav>
 			</div>
@@ -77,10 +86,10 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 	</header>
 	<div id="mobile-menu" class="animated fast">
 		<ul>
-			<li><a href="https://blog.zkilm.cn/posts/">文章</a></li>
-			<li><a href="https://blog.zkilm.cn/tags/">标签</a></li>
-			<li><a href="https://blog.zkilm.cn/reading/">阅读</a></li>
-			<li><a href="https://blog.zkilm.cn/about/">关于</a></li>
+			<li><a href="https://blog.gookm.cn/posts/">文章</a></li>
+			<li><a href="https://blog.gookm.cn/tags/">标签</a></li>
+			<li><a href="https://blog.gookm.cn/reading/">阅读</a></li>
+			<li><a href="https://blog.gookm.cn/about/">关于</a></li>
 		</ul>
 	</div>
 
@@ -300,10 +309,10 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/laravel">Laravel</a></span><span class="tag"><a href="https://blog.zkilm.cn/tags/elasticsearch">ElasticSearch</a></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.gookm.cn/tags/laravel">Laravel</a></span><span class="tag"><a href="https://blog.gookm.cn/tags/elasticsearch">ElasticSearch</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>283 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>8036-03-08 00:00 &#43;0000</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>289 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>8036-03-08 08:00 &#43;0800</p>
 			</footer>
 		</article>
 		<aside id="toc" class="show-toc">
@@ -323,10 +332,10 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 </nav>
 		</aside>
 		<div class="post-nav thin">
-			<a class="next-post" href="https://blog.zkilm.cn/posts/2019/20190309-mysql-opt/">
+			<a class="next-post" href="https://blog.gookm.cn/posts/2019/20190309-mysql-opt/">
 				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>性能优化之MySQL优化🚴‍</span>
 			</a>
-			<a class="prev-post" href="https://blog.zkilm.cn/posts/2019/20190304-laravel-crontab/">
+			<a class="prev-post" href="https://blog.gookm.cn/posts/2019/20190304-laravel-crontab/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>Laravel服务之任务调度⏰</span>
 			</a>
 		</div>
@@ -348,15 +357,15 @@ composer require laravel/scout=5.0 注意：安装5.0版本需要做如下修改
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2022 <a href="https://blog.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2023 <a href="https://blog.gookm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.gookm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
 	</footer>
 
 
 
-	<script src="https://blog.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	<script src="https://blog.gookm.cn/js/bundle.min.f60b118ee29d83a3d708c5d850372b3e465ce787986ca854d5e40a42a50c6d44.js" integrity="sha256-9gsRjuKdg6PXCMXYUDcrPkZc54eYbKhU1eQKQqUMbUQ=" crossorigin="anonymous"></script>
 	
 
 

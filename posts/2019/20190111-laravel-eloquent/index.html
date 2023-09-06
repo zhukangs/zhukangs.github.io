@@ -6,13 +6,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta itemprop="name" content="Laravel模型常用属性">
-<meta itemprop="description" content="模型常用属性  指定自定义数据表  protected $table = &#39;users&#39;;  主键  protected $primaryKey = &#39;id&#39;;  非递增或者非数值的主键  public $incrementing = false;  主键不是一个整数  protected $keyType = &#39;string&#39;;  不想让 Eloquent 自动管理created_at 和 updated_at  public $timestamps = false;  自定义时间戳的格式  protected $dateFormat = &#39;U&#39;;  自定义存储时间戳的字段名  const CREATED_AT = &#39;creation_date&#39;; const UPDATED_AT = &#39;last_update&#39;;  为模型指定一个不同的连接  protected $connection = &#39;connection-name&#39;;  定义哪些模型属性是可以被批量赋值的(白名单)  protected $fillable = [&#39;name&#39;];  不允许被批量赋值(黑名单)  protected $guarded = [&#39;price&#39;];  需要转换成日期的属性  protected $dates = [&#39;deleted_at&#39;];  此模型的事件映射  protected $dispatchesEvents = [ &#39;saved&#39; =&gt; UserSaved::class, &#39;deleted&#39; =&gt; UserDeleted::class, ];  模型转换为数组时应当隐藏的字段  protected $hidden = [&#39;password&#39;, &#39;remember_token&#39;,];  数组中的属性会被展示  protected $visible = [&#39;username&#39;, &#39;email&#39;];  加载模型关联数据  protected $with = [&#39;comments&#39;];  加载模型关联数据数量  protected $withCount = [&#39;comments&#39;];  给定字段默认值  protected $attributes = [&#39;status&#39; =&gt; self::STATUS_CREATED,];  字段转换为对应的类型  protected $casts = [ &#39;id&#39; =&gt; &#39;integer&#39;, &#39;info&#39; =&gt; &#39;array&#39;, &#39;is_online&#39; =&gt; &#39;boolean&#39;, ];  模型转换为数组时应当追加的虚拟字段 例如访问器  protected $appends = [&#39;tag&#39;];  指示模型当前是否强制删除  protected $forceDeleting = false;  默认分页数量  protected $perPage = 20;  模型更新时应当一并更新的关联关系  protected $touches = [&#39;post&#39;]; "><meta itemprop="datePublished" content="2019-01-11T00:00:00+00:00" />
+<meta itemprop="description" content="模型常用属性 指定自定义数据表 protected $table = &#39;users&#39;; 主键 protected $primaryKey = &#39;id&#39;; 非递增或者非数值的主键 public $incrementing = false; 主键不是一个整数 protected $keyType = &#39;string&#39;; 不想让 Eloquent 自动管理created_at 和 updated_at public $timestamps = false; 自定义时间戳的格式 protected $dateFormat = &#39;U&#39;; 自定义存储时间戳的字段名 const CREATED_AT = &#39;creation_date&#39;; const UPDATED_AT = &#39;last_update&#39;; 为模型指定一个不同的连接 protected $connection = &#39;connection-name&#39;; 定义哪些模型属性是可以被批量赋值的(白名单) protected $fillable = [&#39;name&#39;]; 不允许被批量赋值(黑名单) protected $guarded = [&#39;price&#39;]; 需要转换成日期的属性 protected $dates = [&#39;deleted_at&#39;]; 此模型的事件映射 protected $dispatchesEvents = [ &#39;saved&#39; =&gt; UserSaved::class, &#39;deleted&#39; =&gt; UserDeleted::class, ]; 模型转换为数组时应当隐藏的字段 protected $hidden = [&#39;password&#39;, &#39;remember_token&#39;,]; 数组中的属性会被展示 protected $visible = [&#39;username&#39;, &#39;email&#39;]; 加载模型关联数据 protected $with = [&#39;comments&#39;]; 加载模型关联数据数量 protected $withCount = [&#39;comments&#39;]; 给定字段默认值 protected $attributes = [&#39;status&#39; =&gt; self::STATUS_CREATED,]; 字段转换为对应的类型 protected $casts = [ &#39;id&#39; =&gt; &#39;integer&#39;, &#39;info&#39; =&gt; &#39;array&#39;, &#39;is_online&#39; =&gt; &#39;boolean&#39;, ]; 模型转换为数组时应当追加的虚拟字段 例如访问器 protected $appends = [&#39;tag&#39;]; 指示模型当前是否强制删除 protected $forceDeleting = false; 默认分页数量 protected $perPage = 20; 模型更新时应当一并更新的关联关系 protected $touches = [&#39;post&#39;]; "><meta itemprop="datePublished" content="2019-01-11T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2019-01-11T00:00:00+00:00" />
 <meta itemprop="wordCount" content="141"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Laravel," /><meta property="og:title" content="Laravel模型常用属性" />
-<meta property="og:description" content="模型常用属性  指定自定义数据表  protected $table = &#39;users&#39;;  主键  protected $primaryKey = &#39;id&#39;;  非递增或者非数值的主键  public $incrementing = false;  主键不是一个整数  protected $keyType = &#39;string&#39;;  不想让 Eloquent 自动管理created_at 和 updated_at  public $timestamps = false;  自定义时间戳的格式  protected $dateFormat = &#39;U&#39;;  自定义存储时间戳的字段名  const CREATED_AT = &#39;creation_date&#39;; const UPDATED_AT = &#39;last_update&#39;;  为模型指定一个不同的连接  protected $connection = &#39;connection-name&#39;;  定义哪些模型属性是可以被批量赋值的(白名单)  protected $fillable = [&#39;name&#39;];  不允许被批量赋值(黑名单)  protected $guarded = [&#39;price&#39;];  需要转换成日期的属性  protected $dates = [&#39;deleted_at&#39;];  此模型的事件映射  protected $dispatchesEvents = [ &#39;saved&#39; =&gt; UserSaved::class, &#39;deleted&#39; =&gt; UserDeleted::class, ];  模型转换为数组时应当隐藏的字段  protected $hidden = [&#39;password&#39;, &#39;remember_token&#39;,];  数组中的属性会被展示  protected $visible = [&#39;username&#39;, &#39;email&#39;];  加载模型关联数据  protected $with = [&#39;comments&#39;];  加载模型关联数据数量  protected $withCount = [&#39;comments&#39;];  给定字段默认值  protected $attributes = [&#39;status&#39; =&gt; self::STATUS_CREATED,];  字段转换为对应的类型  protected $casts = [ &#39;id&#39; =&gt; &#39;integer&#39;, &#39;info&#39; =&gt; &#39;array&#39;, &#39;is_online&#39; =&gt; &#39;boolean&#39;, ];  模型转换为数组时应当追加的虚拟字段 例如访问器  protected $appends = [&#39;tag&#39;];  指示模型当前是否强制删除  protected $forceDeleting = false;  默认分页数量  protected $perPage = 20;  模型更新时应当一并更新的关联关系  protected $touches = [&#39;post&#39;]; " />
+<meta property="og:description" content="模型常用属性 指定自定义数据表 protected $table = &#39;users&#39;; 主键 protected $primaryKey = &#39;id&#39;; 非递增或者非数值的主键 public $incrementing = false; 主键不是一个整数 protected $keyType = &#39;string&#39;; 不想让 Eloquent 自动管理created_at 和 updated_at public $timestamps = false; 自定义时间戳的格式 protected $dateFormat = &#39;U&#39;; 自定义存储时间戳的字段名 const CREATED_AT = &#39;creation_date&#39;; const UPDATED_AT = &#39;last_update&#39;; 为模型指定一个不同的连接 protected $connection = &#39;connection-name&#39;; 定义哪些模型属性是可以被批量赋值的(白名单) protected $fillable = [&#39;name&#39;]; 不允许被批量赋值(黑名单) protected $guarded = [&#39;price&#39;]; 需要转换成日期的属性 protected $dates = [&#39;deleted_at&#39;]; 此模型的事件映射 protected $dispatchesEvents = [ &#39;saved&#39; =&gt; UserSaved::class, &#39;deleted&#39; =&gt; UserDeleted::class, ]; 模型转换为数组时应当隐藏的字段 protected $hidden = [&#39;password&#39;, &#39;remember_token&#39;,]; 数组中的属性会被展示 protected $visible = [&#39;username&#39;, &#39;email&#39;]; 加载模型关联数据 protected $with = [&#39;comments&#39;]; 加载模型关联数据数量 protected $withCount = [&#39;comments&#39;]; 给定字段默认值 protected $attributes = [&#39;status&#39; =&gt; self::STATUS_CREATED,]; 字段转换为对应的类型 protected $casts = [ &#39;id&#39; =&gt; &#39;integer&#39;, &#39;info&#39; =&gt; &#39;array&#39;, &#39;is_online&#39; =&gt; &#39;boolean&#39;, ]; 模型转换为数组时应当追加的虚拟字段 例如访问器 protected $appends = [&#39;tag&#39;]; 指示模型当前是否强制删除 protected $forceDeleting = false; 默认分页数量 protected $perPage = 20; 模型更新时应当一并更新的关联关系 protected $touches = [&#39;post&#39;]; " />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2019/20190111-laravel-eloquent/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.gookm.cn/posts/2019/20190111-laravel-eloquent/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-01-11T00:00:00+00:00" />
 <meta property="article:modified_time" content="2019-01-11T00:00:00+00:00" />
 
@@ -20,7 +20,7 @@
 <meta name="twitter:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 
 <meta name="twitter:title" content="Laravel模型常用属性"/>
-<meta name="twitter:description" content="模型常用属性  指定自定义数据表  protected $table = &#39;users&#39;;  主键  protected $primaryKey = &#39;id&#39;;  非递增或者非数值的主键  public $incrementing = false;  主键不是一个整数  protected $keyType = &#39;string&#39;;  不想让 Eloquent 自动管理created_at 和 updated_at  public $timestamps = false;  自定义时间戳的格式  protected $dateFormat = &#39;U&#39;;  自定义存储时间戳的字段名  const CREATED_AT = &#39;creation_date&#39;; const UPDATED_AT = &#39;last_update&#39;;  为模型指定一个不同的连接  protected $connection = &#39;connection-name&#39;;  定义哪些模型属性是可以被批量赋值的(白名单)  protected $fillable = [&#39;name&#39;];  不允许被批量赋值(黑名单)  protected $guarded = [&#39;price&#39;];  需要转换成日期的属性  protected $dates = [&#39;deleted_at&#39;];  此模型的事件映射  protected $dispatchesEvents = [ &#39;saved&#39; =&gt; UserSaved::class, &#39;deleted&#39; =&gt; UserDeleted::class, ];  模型转换为数组时应当隐藏的字段  protected $hidden = [&#39;password&#39;, &#39;remember_token&#39;,];  数组中的属性会被展示  protected $visible = [&#39;username&#39;, &#39;email&#39;];  加载模型关联数据  protected $with = [&#39;comments&#39;];  加载模型关联数据数量  protected $withCount = [&#39;comments&#39;];  给定字段默认值  protected $attributes = [&#39;status&#39; =&gt; self::STATUS_CREATED,];  字段转换为对应的类型  protected $casts = [ &#39;id&#39; =&gt; &#39;integer&#39;, &#39;info&#39; =&gt; &#39;array&#39;, &#39;is_online&#39; =&gt; &#39;boolean&#39;, ];  模型转换为数组时应当追加的虚拟字段 例如访问器  protected $appends = [&#39;tag&#39;];  指示模型当前是否强制删除  protected $forceDeleting = false;  默认分页数量  protected $perPage = 20;  模型更新时应当一并更新的关联关系  protected $touches = [&#39;post&#39;]; "/>
+<meta name="twitter:description" content="模型常用属性 指定自定义数据表 protected $table = &#39;users&#39;; 主键 protected $primaryKey = &#39;id&#39;; 非递增或者非数值的主键 public $incrementing = false; 主键不是一个整数 protected $keyType = &#39;string&#39;; 不想让 Eloquent 自动管理created_at 和 updated_at public $timestamps = false; 自定义时间戳的格式 protected $dateFormat = &#39;U&#39;; 自定义存储时间戳的字段名 const CREATED_AT = &#39;creation_date&#39;; const UPDATED_AT = &#39;last_update&#39;; 为模型指定一个不同的连接 protected $connection = &#39;connection-name&#39;; 定义哪些模型属性是可以被批量赋值的(白名单) protected $fillable = [&#39;name&#39;]; 不允许被批量赋值(黑名单) protected $guarded = [&#39;price&#39;]; 需要转换成日期的属性 protected $dates = [&#39;deleted_at&#39;]; 此模型的事件映射 protected $dispatchesEvents = [ &#39;saved&#39; =&gt; UserSaved::class, &#39;deleted&#39; =&gt; UserDeleted::class, ]; 模型转换为数组时应当隐藏的字段 protected $hidden = [&#39;password&#39;, &#39;remember_token&#39;,]; 数组中的属性会被展示 protected $visible = [&#39;username&#39;, &#39;email&#39;]; 加载模型关联数据 protected $with = [&#39;comments&#39;]; 加载模型关联数据数量 protected $withCount = [&#39;comments&#39;]; 给定字段默认值 protected $attributes = [&#39;status&#39; =&gt; self::STATUS_CREATED,]; 字段转换为对应的类型 protected $casts = [ &#39;id&#39; =&gt; &#39;integer&#39;, &#39;info&#39; =&gt; &#39;array&#39;, &#39;is_online&#39; =&gt; &#39;boolean&#39;, ]; 模型转换为数组时应当追加的虚拟字段 例如访问器 protected $appends = [&#39;tag&#39;]; 指示模型当前是否强制删除 protected $forceDeleting = false; 默认分页数量 protected $perPage = 20; 模型更新时应当一并更新的关联关系 protected $touches = [&#39;post&#39;]; "/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -30,7 +30,7 @@
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>Laravel模型常用属性</title>
-	<link rel="stylesheet" href="https://blog.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://blog.gookm.cn/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -41,14 +41,14 @@
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
-					<a href="https://blog.zkilm.cn">Promise</a>
+					<a href="https://blog.gookm.cn">Promise</a>
 				</div>
 				<nav class="site-nav hide-in-mobile">
 					
-				<a href="https://blog.zkilm.cn/posts/">文章</a>
-				<a href="https://blog.zkilm.cn/tags/">标签</a>
-				<a href="https://blog.zkilm.cn/reading/">阅读</a>
-				<a href="https://blog.zkilm.cn/about/">关于</a>
+				<a href="https://blog.gookm.cn/posts/">文章</a>
+				<a href="https://blog.gookm.cn/tags/">标签</a>
+				<a href="https://blog.gookm.cn/reading/">阅读</a>
+				<a href="https://blog.gookm.cn/about/">关于</a>
 
 				</nav>
 			</div>
@@ -59,10 +59,10 @@
 	</header>
 	<div id="mobile-menu" class="animated fast">
 		<ul>
-			<li><a href="https://blog.zkilm.cn/posts/">文章</a></li>
-			<li><a href="https://blog.zkilm.cn/tags/">标签</a></li>
-			<li><a href="https://blog.zkilm.cn/reading/">阅读</a></li>
-			<li><a href="https://blog.zkilm.cn/about/">关于</a></li>
+			<li><a href="https://blog.gookm.cn/posts/">文章</a></li>
+			<li><a href="https://blog.gookm.cn/tags/">标签</a></li>
+			<li><a href="https://blog.gookm.cn/reading/">阅读</a></li>
+			<li><a href="https://blog.gookm.cn/about/">关于</a></li>
 		</ul>
 	</div>
 
@@ -200,10 +200,10 @@
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/laravel">Laravel</a></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.gookm.cn/tags/laravel">Laravel</a></span>
 				</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>141 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>11016-01-11 00:00 &#43;0000</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>11016-01-11 08:00 &#43;0800</p>
 			</footer>
 		</article>
 		<aside id="toc" class="show-toc">
@@ -219,10 +219,10 @@
 </nav>
 		</aside>
 		<div class="post-nav thin">
-			<a class="next-post" href="https://blog.zkilm.cn/posts/2019/20190125-laravel-passport/">
+			<a class="next-post" href="https://blog.gookm.cn/posts/2019/20190125-laravel-passport/">
 				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Laravel的API初始搭建之Passport😄</span>
 			</a>
-			<a class="prev-post" href="https://blog.zkilm.cn/posts/2018/20181228-laravel-swoole/">
+			<a class="prev-post" href="https://blog.gookm.cn/posts/2018/20181228-laravel-swoole/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>使用LaravelS🚀</span>
 			</a>
 		</div>
@@ -244,15 +244,15 @@
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2022 <a href="https://blog.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2023 <a href="https://blog.gookm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.gookm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
 	</footer>
 
 
 
-	<script src="https://blog.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	<script src="https://blog.gookm.cn/js/bundle.min.f60b118ee29d83a3d708c5d850372b3e465ce787986ca854d5e40a42a50c6d44.js" integrity="sha256-9gsRjuKdg6PXCMXYUDcrPkZc54eYbKhU1eQKQqUMbUQ=" crossorigin="anonymous"></script>
 	
 
 

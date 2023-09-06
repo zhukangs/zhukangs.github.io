@@ -2,22 +2,22 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>LNMP on Promise</title>
-    <link>https://blog.zkilm.cn/tags/lnmp/</link>
+    <link>https://blog.gookm.cn/tags/lnmp/</link>
     <description>Recent content in LNMP on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Thu, 09 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/lnmp/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 09 Sep 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/tags/lnmp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>监控服务器异常与重启</title>
-      <link>https://blog.zkilm.cn/posts/2021/20210909-restart-lnmp/</link>
+      <link>https://blog.gookm.cn/posts/2021/20210909-restart-lnmp/</link>
       <pubDate>Thu, 09 Sep 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2021/20210909-restart-lnmp/</guid>
+      <guid>https://blog.gookm.cn/posts/2021/20210909-restart-lnmp/</guid>
       <description>在一些特定的场景下，我们希望通过脚本去自动监控服务器的状态是否出现异常，如果出现异常，则自动进行重启，替代人手去重启。
 PHP与Nginx 查看服务进程数 通过查看服务器相关进程数，来判断服务器是否正常运行，脚本 service-restart.sh 如下：
 # ! /bin/sh ###查看fpm服务是否运行 phpfpm_procnum=`ps -ef|grep &amp;#34;php-fpm&amp;#34;|grep -v grep|wc -l` if [ $phpfpm_procnum -eq 0 ] then echo &amp;#34;restart php-fpm...&amp;#34; systemctl restart php-fpm &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi ###查看nginx服务是否运行 nginx_procnum=`ps -ef|grep &amp;#34;nginx&amp;#34;|grep -v grep|wc -l` if [ $nginx_procnum -eq 0 ] then echo &amp;#34;restart nginx...&amp;#34; systemctl restart nginx &amp;gt;&amp;gt; /var/log/listen_service_start.log 2&amp;gt;&amp;amp;1 fi 查看服务器响应 通过 curl 服务器地址，根据响应信息判断是否出现异常，脚本 nginx404.php 如下：
-&amp;lt;?php $url = &amp;#39;https://test.com&amp;#39;; $cmd = &amp;#39;systemctl restart php-fpm&amp;#39;; for ($i = 0; $i &amp;lt; 5; $i++) { $exec = &amp;#34;curl connect-timeout 3 -I $url2&amp;gt;/dev/null&amp;#34;; $res = shell_exec($exec); if (stripos($res, &amp;#39;404 Not Found&amp;#39;) !</description>
+&amp;lt;?php $url = &amp;#39;https://test.com&amp;#39;; $cmd = &amp;#39;systemctl restart php-fpm&amp;#39;; for ($i = 0; $i &amp;lt; 5; $i++) { $exec = &amp;#34;curl connect-timeout 3 -I $url 2&amp;gt;/dev/null&amp;#34;; $res = shell_exec($exec); if (stripos($res, &amp;#39;404 Not Found&amp;#39;) !</description>
     </item>
     
   </channel>

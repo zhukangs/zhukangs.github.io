@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>正则 on Promise</title>
-    <link>https://blog.zkilm.cn/tags/%E6%AD%A3%E5%88%99/</link>
+    <link>https://blog.gookm.cn/tags/%E6%AD%A3%E5%88%99/</link>
     <description>Recent content in 正则 on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Tue, 18 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/%E6%AD%A3%E5%88%99/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 18 Apr 2017 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/tags/%E6%AD%A3%E5%88%99/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>正则表达式学习归纳😪</title>
-      <link>https://blog.zkilm.cn/posts/2017/20170418-regex-study/</link>
+      <link>https://blog.gookm.cn/posts/2017/20170418-regex-study/</link>
       <pubDate>Tue, 18 Apr 2017 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2017/20170418-regex-study/</guid>
+      <guid>https://blog.gookm.cn/posts/2017/20170418-regex-study/</guid>
       <description>1、正则表达式
 正则表达式(regular expression)描述了一种字符串匹配的模式， 可以用来检查一个串是否含有某种子串、将匹配的子串做替换或者从某个串中取出符合某个条件的子串等。 模式：使用一种特殊符号来实现字符串的匹配 2、创建正则对象
 ①隐式创建 var 正则对象 = /正则表达式/匹配模式; ②直接实例化 var 正则对象 = new RegExp(‘正则表达式’, ‘匹配模式’); 两者之间的功能是完全一致的，都是为了获得正则对象。但是两者之间的区别主要在于语法的不同。 3、匹配模式

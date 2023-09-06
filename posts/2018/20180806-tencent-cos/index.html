@@ -8,29 +8,29 @@
 <meta itemprop="name" content="腾讯云存储的简单使用🚗">
 <meta itemprop="description" content="导语 将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。
 对象存储 COS 简介
- 对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。
- 文档地址：https://cloud.tencent.com/document/product/436/11365
+对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。
+文档地址：https://cloud.tencent.com/document/product/436/11365
 上传前准备 快速入门流程图：
 在注册完并创建好存储桶后，需要拿到相关配置信息，APPID，SecretId，SecretKey（密钥管理），在存储桶下创建一个test文件夹，本次测试图片全部上传到该文件夹下，当然你也可以不创建，存储桶检测到没有该文件夹，会自动创建。本次记录只是走到了上传对象 。
 测试过程 1、composer腾讯云COS对象存储 V5包
 composer require freyo/flysystem-qcloud-cos-v5 2、在config/app.php的providers下添加
 Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php中的disks里下添加
-&#39;disks&#39;=&gt;[ // ...  &#39;cosv5&#39; =&gt; [ &#39;driver&#39; =&gt; &#39;cosv5&#39;, &#39;region&#39; =&gt; env(&#39;COSV5_REGION&#39;, &#39;ap-guangzhou&#39;), &#39;credentials&#39; =&gt; [ &#39;appId&#39; =&gt; env(&#39;COSV5_APP_ID&#39;), &#39;secretId&#39; =&gt; env(&#39;COSV5_SECRET_ID&#39;), &#39;secretKey&#39; =&gt; env(&#39;COSV5_SECRET_KEY&#39;), ], &#39;timeout&#39; =&gt; env(&#39;COSV5_TIMEOUT&#39;, 60), &#39;connect_timeout&#39; =&gt; env(&#39;COSV5_CONNECT_TIMEOUT&#39;, 60), &#39;bucket&#39; =&gt; env(&#39;COSV5_BUCKET&#39;), &#39;cdn&#39; =&gt; env(&#39;COSV5_CDN&#39;), &#39;scheme&#39; =&gt; env(&#39;COSV5_SCHEME&#39;, &#39;https&#39;), ], ], 4、在."><meta itemprop="datePublished" content="2018-08-06T00:00:00+00:00" />
+&#39;disks&#39;=&gt;[ // ... &#39;cosv5&#39; =&gt; [ &#39;driver&#39; =&gt; &#39;cosv5&#39;, &#39;region&#39; =&gt; env(&#39;COSV5_REGION&#39;, &#39;ap-guangzhou&#39;), &#39;credentials&#39; =&gt; [ &#39;appId&#39; =&gt; env(&#39;COSV5_APP_ID&#39;), &#39;secretId&#39; =&gt; env(&#39;COSV5_SECRET_ID&#39;), &#39;secretKey&#39; =&gt; env(&#39;COSV5_SECRET_KEY&#39;), ], &#39;timeout&#39; =&gt; env(&#39;COSV5_TIMEOUT&#39;, 60), &#39;connect_timeout&#39; =&gt; env(&#39;COSV5_CONNECT_TIMEOUT&#39;, 60), &#39;bucket&#39; =&gt; env(&#39;COSV5_BUCKET&#39;), &#39;cdn&#39; =&gt; env(&#39;COSV5_CDN&#39;), &#39;scheme&#39; =&gt; env(&#39;COSV5_SCHEME&#39;, &#39;https&#39;), ], ], 4、在."><meta itemprop="datePublished" content="2018-08-06T00:00:00+00:00" />
 <meta itemprop="dateModified" content="2018-08-06T00:00:00+00:00" />
 <meta itemprop="wordCount" content="134"><meta itemprop="image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/>
 <meta itemprop="keywords" content="Cos," /><meta property="og:title" content="腾讯云存储的简单使用🚗" />
 <meta property="og:description" content="导语 将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。
 对象存储 COS 简介
- 对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。
- 文档地址：https://cloud.tencent.com/document/product/436/11365
+对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。
+文档地址：https://cloud.tencent.com/document/product/436/11365
 上传前准备 快速入门流程图：
 在注册完并创建好存储桶后，需要拿到相关配置信息，APPID，SecretId，SecretKey（密钥管理），在存储桶下创建一个test文件夹，本次测试图片全部上传到该文件夹下，当然你也可以不创建，存储桶检测到没有该文件夹，会自动创建。本次记录只是走到了上传对象 。
 测试过程 1、composer腾讯云COS对象存储 V5包
 composer require freyo/flysystem-qcloud-cos-v5 2、在config/app.php的providers下添加
 Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php中的disks里下添加
-&#39;disks&#39;=&gt;[ // ...  &#39;cosv5&#39; =&gt; [ &#39;driver&#39; =&gt; &#39;cosv5&#39;, &#39;region&#39; =&gt; env(&#39;COSV5_REGION&#39;, &#39;ap-guangzhou&#39;), &#39;credentials&#39; =&gt; [ &#39;appId&#39; =&gt; env(&#39;COSV5_APP_ID&#39;), &#39;secretId&#39; =&gt; env(&#39;COSV5_SECRET_ID&#39;), &#39;secretKey&#39; =&gt; env(&#39;COSV5_SECRET_KEY&#39;), ], &#39;timeout&#39; =&gt; env(&#39;COSV5_TIMEOUT&#39;, 60), &#39;connect_timeout&#39; =&gt; env(&#39;COSV5_CONNECT_TIMEOUT&#39;, 60), &#39;bucket&#39; =&gt; env(&#39;COSV5_BUCKET&#39;), &#39;cdn&#39; =&gt; env(&#39;COSV5_CDN&#39;), &#39;scheme&#39; =&gt; env(&#39;COSV5_SCHEME&#39;, &#39;https&#39;), ], ], 4、在." />
+&#39;disks&#39;=&gt;[ // ... &#39;cosv5&#39; =&gt; [ &#39;driver&#39; =&gt; &#39;cosv5&#39;, &#39;region&#39; =&gt; env(&#39;COSV5_REGION&#39;, &#39;ap-guangzhou&#39;), &#39;credentials&#39; =&gt; [ &#39;appId&#39; =&gt; env(&#39;COSV5_APP_ID&#39;), &#39;secretId&#39; =&gt; env(&#39;COSV5_SECRET_ID&#39;), &#39;secretKey&#39; =&gt; env(&#39;COSV5_SECRET_KEY&#39;), ], &#39;timeout&#39; =&gt; env(&#39;COSV5_TIMEOUT&#39;, 60), &#39;connect_timeout&#39; =&gt; env(&#39;COSV5_CONNECT_TIMEOUT&#39;, 60), &#39;bucket&#39; =&gt; env(&#39;COSV5_BUCKET&#39;), &#39;cdn&#39; =&gt; env(&#39;COSV5_CDN&#39;), &#39;scheme&#39; =&gt; env(&#39;COSV5_SCHEME&#39;, &#39;https&#39;), ], ], 4、在." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://blog.zkilm.cn/posts/2018/20180806-tencent-cos/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
+<meta property="og:url" content="https://blog.gookm.cn/posts/2018/20180806-tencent-cos/" /><meta property="og:image" content="https://qiniu.zkilm.cn/blog/cover/anime-girl.jpeg"/><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-08-06T00:00:00+00:00" />
 <meta property="article:modified_time" content="2018-08-06T00:00:00+00:00" />
 
@@ -40,14 +40,14 @@ Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php�
 <meta name="twitter:title" content="腾讯云存储的简单使用🚗"/>
 <meta name="twitter:description" content="导语 将一些图片文件存储在本地，加载慢，耗资源。可以选择将文件上传至云端，例如七牛云，阿里云，腾讯云等都可以作为选择方案，简单记录下将图片文件上传至腾讯云存储的过程。
 对象存储 COS 简介
- 对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。
- 文档地址：https://cloud.tencent.com/document/product/436/11365
+对象存储（Cloud Object Storage，简称：COS）是腾讯云提供的一种存储海量文件的分布式存储服务，用户可通过网络随时存储和查看数据。腾讯云 COS 使所有用户都能使用具备高扩展性、低成本、可靠和安全的数据存储服务。
+文档地址：https://cloud.tencent.com/document/product/436/11365
 上传前准备 快速入门流程图：
 在注册完并创建好存储桶后，需要拿到相关配置信息，APPID，SecretId，SecretKey（密钥管理），在存储桶下创建一个test文件夹，本次测试图片全部上传到该文件夹下，当然你也可以不创建，存储桶检测到没有该文件夹，会自动创建。本次记录只是走到了上传对象 。
 测试过程 1、composer腾讯云COS对象存储 V5包
 composer require freyo/flysystem-qcloud-cos-v5 2、在config/app.php的providers下添加
 Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php中的disks里下添加
-&#39;disks&#39;=&gt;[ // ...  &#39;cosv5&#39; =&gt; [ &#39;driver&#39; =&gt; &#39;cosv5&#39;, &#39;region&#39; =&gt; env(&#39;COSV5_REGION&#39;, &#39;ap-guangzhou&#39;), &#39;credentials&#39; =&gt; [ &#39;appId&#39; =&gt; env(&#39;COSV5_APP_ID&#39;), &#39;secretId&#39; =&gt; env(&#39;COSV5_SECRET_ID&#39;), &#39;secretKey&#39; =&gt; env(&#39;COSV5_SECRET_KEY&#39;), ], &#39;timeout&#39; =&gt; env(&#39;COSV5_TIMEOUT&#39;, 60), &#39;connect_timeout&#39; =&gt; env(&#39;COSV5_CONNECT_TIMEOUT&#39;, 60), &#39;bucket&#39; =&gt; env(&#39;COSV5_BUCKET&#39;), &#39;cdn&#39; =&gt; env(&#39;COSV5_CDN&#39;), &#39;scheme&#39; =&gt; env(&#39;COSV5_SCHEME&#39;, &#39;https&#39;), ], ], 4、在."/>
+&#39;disks&#39;=&gt;[ // ... &#39;cosv5&#39; =&gt; [ &#39;driver&#39; =&gt; &#39;cosv5&#39;, &#39;region&#39; =&gt; env(&#39;COSV5_REGION&#39;, &#39;ap-guangzhou&#39;), &#39;credentials&#39; =&gt; [ &#39;appId&#39; =&gt; env(&#39;COSV5_APP_ID&#39;), &#39;secretId&#39; =&gt; env(&#39;COSV5_SECRET_ID&#39;), &#39;secretKey&#39; =&gt; env(&#39;COSV5_SECRET_KEY&#39;), ], &#39;timeout&#39; =&gt; env(&#39;COSV5_TIMEOUT&#39;, 60), &#39;connect_timeout&#39; =&gt; env(&#39;COSV5_CONNECT_TIMEOUT&#39;, 60), &#39;bucket&#39; =&gt; env(&#39;COSV5_BUCKET&#39;), &#39;cdn&#39; =&gt; env(&#39;COSV5_CDN&#39;), &#39;scheme&#39; =&gt; env(&#39;COSV5_SCHEME&#39;, &#39;https&#39;), ], ], 4、在."/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -57,7 +57,7 @@ Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php�
 	<link rel="shortcut icon" href="/favicon.ico">
 
 	<title>腾讯云存储的简单使用🚗</title>
-	<link rel="stylesheet" href="https://blog.zkilm.cn/css/style.min.eac77496566fd7d5768fd650ddb0b2b181ca6a2d7c5fdd6fe6b8ba4bf47e566f.css" integrity="sha256-6sd0llZv19V2j9ZQ3bCysYHKai18X91v5ri6S/R+Vm8=" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://blog.gookm.cn/css/style.min.037b6ee8f8c1baab6a3d0a9da11c3ff18a7552471f16c59fd98538d5ce99208b.css" integrity="sha256-A3tu6PjBuqtqPQqdoRw/8Yp1UkcfFsWf2YU41c6ZIIs=" crossorigin="anonymous">
 	
 	<link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css">
 </head>
@@ -68,14 +68,14 @@ Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php�
 		<div class="hdr-wrapper section-inner">
 			<div class="hdr-left">
 				<div class="site-branding">
-					<a href="https://blog.zkilm.cn">Promise</a>
+					<a href="https://blog.gookm.cn">Promise</a>
 				</div>
 				<nav class="site-nav hide-in-mobile">
 					
-				<a href="https://blog.zkilm.cn/posts/">文章</a>
-				<a href="https://blog.zkilm.cn/tags/">标签</a>
-				<a href="https://blog.zkilm.cn/reading/">阅读</a>
-				<a href="https://blog.zkilm.cn/about/">关于</a>
+				<a href="https://blog.gookm.cn/posts/">文章</a>
+				<a href="https://blog.gookm.cn/tags/">标签</a>
+				<a href="https://blog.gookm.cn/reading/">阅读</a>
+				<a href="https://blog.gookm.cn/about/">关于</a>
 
 				</nav>
 			</div>
@@ -86,10 +86,10 @@ Freyo\Flysystem\QcloudCOSv5\ServiceProvider::class, 3、在app/filesystems.php�
 	</header>
 	<div id="mobile-menu" class="animated fast">
 		<ul>
-			<li><a href="https://blog.zkilm.cn/posts/">文章</a></li>
-			<li><a href="https://blog.zkilm.cn/tags/">标签</a></li>
-			<li><a href="https://blog.zkilm.cn/reading/">阅读</a></li>
-			<li><a href="https://blog.zkilm.cn/about/">关于</a></li>
+			<li><a href="https://blog.gookm.cn/posts/">文章</a></li>
+			<li><a href="https://blog.gookm.cn/tags/">标签</a></li>
+			<li><a href="https://blog.gookm.cn/reading/">阅读</a></li>
+			<li><a href="https://blog.gookm.cn/about/">关于</a></li>
 		</ul>
 	</div>
 
@@ -190,10 +190,10 @@ COSV5_SCHEME=https
 			<footer class="post-info">
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-feather"><path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"></path><line x1="16" y1="8" x2="2" y2="22"></line><line x1="17.5" y1="15" x2="9" y2="15"></line></svg>Promise</p>
 				<p>
-					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.zkilm.cn/tags/cos">Cos</a></span>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="https://blog.gookm.cn/tags/cos">Cos</a></span>
 				</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>134 Words</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>6086-08-06 00:00 &#43;0000</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>6086-08-06 08:00 &#43;0800</p>
 			</footer>
 		</article>
 		<aside id="toc" class="show-toc">
@@ -212,10 +212,10 @@ COSV5_SCHEME=https
 </nav>
 		</aside>
 		<div class="post-nav thin">
-			<a class="next-post" href="https://blog.zkilm.cn/posts/2018/20180906-centos-lnmp/">
+			<a class="next-post" href="https://blog.gookm.cn/posts/2018/20180906-centos-lnmp/">
 				<span class="post-nav-label"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>&nbsp;Newer</span><br><span>Linux环境搭建</span>
 			</a>
-			<a class="prev-post" href="https://blog.zkilm.cn/posts/2018/20180805-tencent-sms/">
+			<a class="prev-post" href="https://blog.gookm.cn/posts/2018/20180805-tencent-sms/">
 				<span class="post-nav-label">Older&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span><br><span>腾讯云短信的简单使用</span>
 			</a>
 		</div>
@@ -237,15 +237,15 @@ COSV5_SCHEME=https
 					<i class="fa fa-desktop"></i> <span id="busuanzi_value_site_uv"></span>
 				</span>
 		</p>
-		<p>&copy; 2022 <a href="https://blog.zkilm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
+		<p>&copy; 2023 <a href="https://blog.gookm.cn">Promise</a> &#183; <a target="_blank" href="https://beian.miit.gov.cn/#/Integrated/index">鄂ICP备2020023160号-1</a></p>
 		<p>
-			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.zkilm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a> &#183; <a href="https://blog.gookm.cn/posts/index.xml" target="_blank" title="rss"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-rss"><path d="M4 11a9 9 0 0 1 9 9"></path><path d="M4 4a16 16 0 0 1 16 16"></path><circle cx="5" cy="19" r="1"></circle></svg></a>
 		</p>
 	</footer>
 
 
 
-	<script src="https://blog.zkilm.cn/js/bundle.min.8256b8724b9578bbdf6d6f04c894255bc760e78e8a2d60ec0a91ea993acd3b77.js" integrity="sha256-gla4ckuVeLvfbW8EyJQlW8dg546KLWDsCpHqmTrNO3c=" crossorigin="anonymous"></script>
+	<script src="https://blog.gookm.cn/js/bundle.min.f60b118ee29d83a3d708c5d850372b3e465ce787986ca854d5e40a42a50c6d44.js" integrity="sha256-9gsRjuKdg6PXCMXYUDcrPkZc54eYbKhU1eQKQqUMbUQ=" crossorigin="anonymous"></script>
 	
 
 

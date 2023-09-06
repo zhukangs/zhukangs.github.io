@@ -2,20 +2,20 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>GitBook on Promise</title>
-    <link>https://blog.zkilm.cn/tags/gitbook/</link>
+    <link>https://blog.gookm.cn/tags/gitbook/</link>
     <description>Recent content in GitBook on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 26 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/gitbook/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 26 Aug 2019 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/tags/gitbook/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>GitBook初试🍺</title>
-      <link>https://blog.zkilm.cn/posts/2019/20190826-try-gitbook/</link>
+      <link>https://blog.gookm.cn/posts/2019/20190826-try-gitbook/</link>
       <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2019/20190826-try-gitbook/</guid>
+      <guid>https://blog.gookm.cn/posts/2019/20190826-try-gitbook/</guid>
       <description>完成后的成果预览地址：https://zkbook.zam9.com/
- 安装 npm install gitbook-cli -g 报错：
+安装 npm install gitbook-cli -g 报错：
 npm WARN checkPermissions Missing write access to /usr/lib/node_modules 原因：安装全局的包，没有权限
 解决办法：在安装命令前加上 sudo ,输入用户的登陆密码，提升权限进行安装。
 sudo npm install gitbook-cli -g 初始化 新建一个文件夹，如 gitbook ，cd 到 gitbook ，然后：

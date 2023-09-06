@@ -2,45 +2,44 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Wechat on Promise</title>
-    <link>https://blog.zkilm.cn/tags/wechat/</link>
+    <link>https://blog.gookm.cn/tags/wechat/</link>
     <description>Recent content in Wechat on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/wechat/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Feb 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/tags/wechat/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>微信扫码 - 关注公众号后网站自动登录</title>
-      <link>https://blog.zkilm.cn/posts/2020/20200207-wx-scan/</link>
+      <link>https://blog.gookm.cn/posts/2020/20200207-wx-scan/</link>
       <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2020/20200207-wx-scan/</guid>
+      <guid>https://blog.gookm.cn/posts/2020/20200207-wx-scan/</guid>
       <description>大概流程是：点击微信登录，网站自己弹出一个二维码、扫描二维码后弹出公众号的关注界面、只要一关注公众号网站自动登录、第二次扫描登录的时候网站直接登录。这种扫码登录的方式个人觉得非常利于推广公众号。
 大家可以体验一下 「这种登录方式」
-前期准备  服务号（或者微信测试账号） EasyWeChat 扩展包  理解 简单的解释一下扫描这个带参二维码有什么不同：
- 扫描二维码，如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值（自定义值）关注事件推送给开发者。 扫描二维码，如果用户已经关注公众号，在用户扫描后会自动进入会话，微信也会将带场景值（自定义值）扫码事件推送给开发者。  梳理 看到这里相信你已经明白了，梳理一下：
- 生成二维码的时候你自定义一个参数到二维码中，顺便把这个参数传到前端页面中。 前端页面根据这个参数轮询用户登录状态（也可使用 socket）。 用户扫码关注后会推送一个关注事件到服务端，也会把自定义参数带入到事件中。 根据 openid 创建用户后，然后在 Redis 中存储 Key 为场景值（自定义参数） Value 为用户创建后的 id。 前端轮询方法中如果在 Redis 中获取到 Id 后，Auth 登陆，页面再重载一下，流程完毕。  还有一种是用于有账号的用户，先账号密码登录，再扫码（使用过）：
- 生成带login参数的临时二维码的时候，将二维码的ticket更新到数据库该用户下，默认状态为未使用 用户扫码，微信会推送一个扫码事件，也会把自定义参数login带到事件中，改变二维码状态为已使用 前端进到扫码页面的同时就开始轮询扫描结果接口，状态为已使用则扫码登录成功 未关注的用户，会先根据openid获取用户信息并写入数据库，关注过的则数据库有数据，做相关更新操作。  最后送个自己💪
- 全世界就一个独一无二的你，请一定：真诚做人，努力做事！你想要的，岁月都会给你。
- </description>
+前期准备 服务号（或者微信测试账号） EasyWeChat 扩展包 理解 简单的解释一下扫描这个带参二维码有什么不同：
+扫描二维码，如果用户还未关注公众号，则用户可以关注公众号，关注后微信会将带场景值（自定义值）关注事件推送给开发者。 扫描二维码，如果用户已经关注公众号，在用户扫描后会自动进入会话，微信也会将带场景值（自定义值）扫码事件推送给开发者。 梳理 看到这里相信你已经明白了，梳理一下：
+生成二维码的时候你自定义一个参数到二维码中，顺便把这个参数传到前端页面中。 前端页面根据这个参数轮询用户登录状态（也可使用 socket）。 用户扫码关注后会推送一个关注事件到服务端，也会把自定义参数带入到事件中。 根据 openid 创建用户后，然后在 Redis 中存储 Key 为场景值（自定义参数） Value 为用户创建后的 id。 前端轮询方法中如果在 Redis 中获取到 Id 后，Auth 登陆，页面再重载一下，流程完毕。 还有一种是用于有账号的用户，先账号密码登录，再扫码（使用过）：
+生成带login参数的临时二维码的时候，将二维码的ticket更新到数据库该用户下，默认状态为未使用 用户扫码，微信会推送一个扫码事件，也会把自定义参数login带到事件中，改变二维码状态为已使用 前端进到扫码页面的同时就开始轮询扫描结果接口，状态为已使用则扫码登录成功 未关注的用户，会先根据openid获取用户信息并写入数据库，关注过的则数据库有数据，做相关更新操作。 最后送个自己💪
+全世界就一个独一无二的你，请一定：真诚做人，努力做事！你想要的，岁月都会给你。</description>
     </item>
     
     <item>
       <title>Laravel的微信公众号模板消息推送📨</title>
-      <link>https://blog.zkilm.cn/posts/2019/20191127-wechat-pushmsg/</link>
+      <link>https://blog.gookm.cn/posts/2019/20191127-wechat-pushmsg/</link>
       <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2019/20191127-wechat-pushmsg/</guid>
+      <guid>https://blog.gookm.cn/posts/2019/20191127-wechat-pushmsg/</guid>
       <description>安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.7.*&amp;#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
 # Laravel &amp;lt; 5.8 composer require &amp;#34;overtrue/laravel-wechat:~4.0&amp;#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
- 创建数据表  php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54.</description>
+创建数据表 php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下： &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54. */ namespace App\Handlers; use App\Models\Wechat; use EasyWeChat\Factory; class WechatConfigHandler { //[1-1]微信公众号设置 public function app_config($account) { $wechat = Wechat::where(&amp;#39;id&amp;#39;,$account)-&amp;gt;first(); if (!</description>
     </item>
     
     <item>
       <title>微信的H5分享（基于 Laravel-Wechat）😶</title>
-      <link>https://blog.zkilm.cn/posts/2019/20190610-wechat-h5/</link>
+      <link>https://blog.gookm.cn/posts/2019/20190610-wechat-h5/</link>
       <pubDate>Mon, 10 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2019/20190610-wechat-h5/</guid>
+      <guid>https://blog.gookm.cn/posts/2019/20190610-wechat-h5/</guid>
       <description>一、缘由 什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：
 但是，现在需求是，分享后为下面这样：
 没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。

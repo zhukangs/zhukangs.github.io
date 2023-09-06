@@ -2,121 +2,127 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Laravel on Promise</title>
-    <link>https://blog.zkilm.cn/tags/laravel/</link>
+    <link>https://blog.gookm.cn/tags/laravel/</link>
     <description>Recent content in Laravel on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 05 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 05 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/tags/laravel/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Laravel 使用JWT API 授权🚀</title>
-      <link>https://blog.zkilm.cn/posts/2022/20220305-api-jwt/</link>
+      <link>https://blog.gookm.cn/posts/2022/20220305-api-jwt/</link>
       <pubDate>Sat, 05 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2022/20220305-api-jwt/</guid>
-      <description>什么是JWT  Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。作者：Dearmadman链接：https://www.jianshu.com/p/576dbf44b2ae来源：简书著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
- 关于JWT讲解与分析：https://learnku.com/articles/17883
+      <guid>https://blog.gookm.cn/posts/2022/20220305-api-jwt/</guid>
+      <description>什么是JWT Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC 7519).该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。作者：Dearmadman链接：https://www.jianshu.com/p/576dbf44b2ae来源：简书著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+关于JWT讲解与分析：https://learnku.com/articles/17883
 安装 composer 安装 lcobucci/jwt ，我这里默认安装的是最新版 4.1 。
 composer require lcobucci/jwt 封装 在 app\Helpers 目录下新建 Jwt.php 文件，封装 Jwt 类。
-&amp;lt;?php /** * Created by PhpStorm. * User: zhukang * Date: 2019/8/22 * Time: 16:39 */ namespace App\Helpers; use Illuminate\Support\Facades\Redis; use Lcobucci\Clock\SystemClock; use Lcobucci\JWT\Configuration; use Lcobucci\JWT\Exception; use Lcobucci\JWT\Signer\Hmac\Sha256; use Lcobucci\JWT\Signer\Key\InMemory; use Lcobucci\JWT\Token\Plain; use Lcobucci\JWT\Validation\Constraint\IdentifiedBy; use Lcobucci\JWT\Validation\Constraint\IssuedBy; use Lcobucci\JWT\Validation\Constraint\PermittedFor; use Lcobucci\JWT\Validation\Constraint\SignedWith; use Lcobucci\JWT\Validation\Constraint\ValidAt; use Lcobucci\JWT\Validation\RequiredConstraintsViolated; trait Jwt { protected $issuedBy;//签发人  protected $permittedFor;//受众  protected $identifiedBy;//jwt编号  protected $issuedAt;//签发时间  protected $expiresAt;//过期时间  protected $jwt_secret; //秘钥  public function __construct() { //获取jwt配置信息  $jwt_configs = config(&amp;#39;jwt&amp;#39;); $this-&amp;gt;issuedBy = $jwt_configs[&amp;#39;issuedBy&amp;#39;]; $this-&amp;gt;permittedFor = $jwt_configs[&amp;#39;permittedFor&amp;#39;]; $this-&amp;gt;identifiedBy = $jwt_configs[&amp;#39;identifiedBy&amp;#39;]; $this-&amp;gt;issuedAt = $jwt_configs[&amp;#39;issuedAt&amp;#39;]; $this-&amp;gt;expiresAt = $this-&amp;gt;issuedAt-&amp;gt;modify($jwt_configs[&amp;#39;expiresAt&amp;#39;]); $this-&amp;gt;jwt_secret = $jwt_configs[&amp;#39;jwt_secret&amp;#39;]; } /** * @Description:生成jwt配置对象 * @return Configuration * @Author:zhukang * @Date:2022/4/7 16:05 */ public function createJwtObject() { return Configuration::forSymmetricSigner( new Sha256(), InMemory::base64Encoded($this-&amp;gt;jwt_secret) ); } /** * @Description:生成token * @param array $bind 需要在jwt载体(payload)中加入的数据 [&amp;#39;userid&amp;#39;=&amp;gt;1,&amp;#39;xxxx&amp;#39;=&amp;gt;xxxx] * @return string \Lcobucci\JWT\Token * @Author:zhukang * @Date:2022/4/7 16:04 */ public function getToken(array $bind = []) { $jwt_object = $this-&amp;gt;createJwtObject(); $jwt_obj = $jwt_object-&amp;gt;builder() -&amp;gt;issuedBy($this-&amp;gt;issuedBy) -&amp;gt;permittedFor($this-&amp;gt;permittedFor) -&amp;gt;identifiedBy($this-&amp;gt;identifiedBy) -&amp;gt;issuedAt($this-&amp;gt;issuedAt) -&amp;gt;canOnlyBeUsedAfter($this-&amp;gt;issuedAt) -&amp;gt;expiresAt($this-&amp;gt;expiresAt); if (is_array($bind) &amp;amp;&amp;amp; !</description>
+&amp;lt;?php /** * Created by PhpStorm. * User: zhukang * Date: 2019/8/22 * Time: 16:39 */ namespace App\Helpers; use Illuminate\Support\Facades\Redis; use Lcobucci\Clock\SystemClock; use Lcobucci\JWT\Configuration; use Lcobucci\JWT\Exception; use Lcobucci\JWT\Signer\Hmac\Sha256; use Lcobucci\JWT\Signer\Key\InMemory; use Lcobucci\JWT\Token\Plain; use Lcobucci\JWT\Validation\Constraint\IdentifiedBy; use Lcobucci\JWT\Validation\Constraint\IssuedBy; use Lcobucci\JWT\Validation\Constraint\PermittedFor; use Lcobucci\JWT\Validation\Constraint\SignedWith; use Lcobucci\JWT\Validation\Constraint\ValidAt; use Lcobucci\JWT\Validation\RequiredConstraintsViolated; trait Jwt { protected $issuedBy;//签发人 protected $permittedFor;//受众 protected $identifiedBy;//jwt编号 protected $issuedAt;//签发时间 protected $expiresAt;//过期时间 protected $jwt_secret; //秘钥 public function __construct() { //获取jwt配置信息 $jwt_configs = config(&amp;#39;jwt&amp;#39;); $this-&amp;gt;issuedBy = $jwt_configs[&amp;#39;issuedBy&amp;#39;]; $this-&amp;gt;permittedFor = $jwt_configs[&amp;#39;permittedFor&amp;#39;]; $this-&amp;gt;identifiedBy = $jwt_configs[&amp;#39;identifiedBy&amp;#39;]; $this-&amp;gt;issuedAt = $jwt_configs[&amp;#39;issuedAt&amp;#39;]; $this-&amp;gt;expiresAt = $this-&amp;gt;issuedAt-&amp;gt;modify($jwt_configs[&amp;#39;expiresAt&amp;#39;]); $this-&amp;gt;jwt_secret = $jwt_configs[&amp;#39;jwt_secret&amp;#39;]; } /** * @Description:生成jwt配置对象 * @return Configuration * @Author:zhukang * @Date:2022/4/7 16:05 */ public function createJwtObject() { return Configuration::forSymmetricSigner( new Sha256(), InMemory::base64Encoded($this-&amp;gt;jwt_secret) ); } /** * @Description:生成token * @param array $bind 需要在jwt载体(payload)中加入的数据 [&amp;#39;userid&amp;#39;=&amp;gt;1,&amp;#39;xxxx&amp;#39;=&amp;gt;xxxx] * @return string \Lcobucci\JWT\Token * @Author:zhukang * @Date:2022/4/7 16:04 */ public function getToken(array $bind = []) { $jwt_object = $this-&amp;gt;createJwtObject(); $jwt_obj = $jwt_object-&amp;gt;builder() -&amp;gt;issuedBy($this-&amp;gt;issuedBy) -&amp;gt;permittedFor($this-&amp;gt;permittedFor) -&amp;gt;identifiedBy($this-&amp;gt;identifiedBy) -&amp;gt;issuedAt($this-&amp;gt;issuedAt) -&amp;gt;canOnlyBeUsedAfter($this-&amp;gt;issuedAt) -&amp;gt;expiresAt($this-&amp;gt;expiresAt); if (is_array($bind) &amp;amp;&amp;amp; !</description>
     </item>
     
     <item>
       <title>Laravel 使用 Sanctum API 授权</title>
-      <link>https://blog.zkilm.cn/posts/2022/20220218-api-sanctum/</link>
+      <link>https://blog.gookm.cn/posts/2022/20220218-api-sanctum/</link>
       <pubDate>Fri, 18 Feb 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2022/20220218-api-sanctum/</guid>
-      <description>介绍  Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
- 相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272
-安装   安装 Laravel Sanctum
-composer require laravel/sanctum   Artisan 命令发布 Sanctum 的配置和迁移文件
-php artisan vendor:publish --provider=&amp;#34;Laravel\Sanctum\SanctumServiceProvider&amp;#34;   Sanctum 将创建一个数据库表来存储 API 令牌
-php artisan migrate   将 Sanctum 的中间件添加到您应用的 app/Http/Kernel.php 文件中的 api 中间件组中
-&amp;#39;api&amp;#39; =&amp;gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &amp;#39;throttle:api&amp;#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ],   配置   重写默认模型
-执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。</description>
+      <guid>https://blog.gookm.cn/posts/2022/20220218-api-sanctum/</guid>
+      <description>介绍 Laravel Sanctum 为 SPA（单页应用程序）、移动应用程序和基于令牌的、简单的 API 提供轻量级身份验证系统。Sanctum 允许应用程序的每个用户为他们的帐户生成多个 API 令牌。这些令牌可以被授予指定允许令牌执行哪些操作的能力 / 范围。
+相关文档：https://learnku.com/docs/laravel/9.x/sanctum/12272
+安装 安装 Laravel Sanctum
+composer require laravel/sanctum Artisan 命令发布 Sanctum 的配置和迁移文件
+php artisan vendor:publish --provider=&amp;#34;Laravel\Sanctum\SanctumServiceProvider&amp;#34; Sanctum 将创建一个数据库表来存储 API 令牌
+php artisan migrate 将 Sanctum 的中间件添加到您应用的 app/Http/Kernel.php 文件中的 api 中间件组中
+&amp;#39;api&amp;#39; =&amp;gt; [ \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class, &amp;#39;throttle:api&amp;#39;, \Illuminate\Routing\Middleware\SubstituteBindings::class, ], 配置 重写默认模型
+执行迁移命令得时候会生成app\Models\PersonalAccessToken.php文件，尽管通常不需要，但您可以自由扩展 Sanctum 内部使用的 PersonalAccessToken 模型。由于生成的表名叫 personal_access_tokens，开发中我们习惯用户表名叫 users，所以我们可以将表名修改为 user_tokens 。
+创建 UserToken 模型文件：
+php artisan make:model UserToken 模型文件 UserToken.php 内容如下：</description>
     </item>
     
     <item>
       <title>Laravel 开发 API 初始搭建</title>
-      <link>https://blog.zkilm.cn/posts/2022/20220115-api-init/</link>
+      <link>https://blog.gookm.cn/posts/2022/20220115-api-init/</link>
       <pubDate>Sat, 15 Jan 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2022/20220115-api-init/</guid>
+      <guid>https://blog.gookm.cn/posts/2022/20220115-api-init/</guid>
       <description>前言 使用 Laravel 开发过不少项目，大部分还是前后端分离的，所以今天就总结归纳下在开发API项目时，Laravel 的前期框架搭建过程！
-环境  PHP 8.0.5 (cli) MySQL 8.0.25-0ubuntu0.20.04.1 (Ubuntu) Nginx nginx/1.18.0 (Ubuntu) IDE PhpStorm2020.2  搭建   安装
-//默认安装最新版本 composer create-project laravel/laravel newapi //指定版本 composer create-project --prefer-dist laravel/laravel newapi &amp;#34;6.0.*&amp;#34;   配置
-  数据库（配置根目录下 .env 文件）
-DB_CONNECTION=mysql // host地址 DB_HOST=127.0.0.1 // 端口号 DB_PORT=3306 // 数据库名 DB_DATABASE=laravel9 // 用户名 DB_USERNAME=root // 密码 DB_PASSWORD=   时区（配置 config/app.php 文件）
-&amp;#39;timezone&amp;#39; =&amp;gt; &amp;#39;PRC&amp;#39;, // 大陆时间     安装扩展包</description>
+环境 PHP 8.0.5 (cli) MySQL 8.0.25-0ubuntu0.20.04.1 (Ubuntu) Nginx nginx/1.18.0 (Ubuntu) IDE PhpStorm2020.2 搭建 安装
+//默认安装最新版本 composer create-project laravel/laravel newapi //指定版本 composer create-project --prefer-dist laravel/laravel newapi &amp;#34;6.0.*&amp;#34; 配置
+数据库（配置根目录下 .env 文件）
+DB_CONNECTION=mysql // host地址 DB_HOST=127.0.0.1 // 端口号 DB_PORT=3306 // 数据库名 DB_DATABASE=laravel9 // 用户名 DB_USERNAME=root // 密码 DB_PASSWORD= 时区（配置 config/app.php 文件）
+&amp;#39;timezone&amp;#39; =&amp;gt; &amp;#39;PRC&amp;#39;, // 大陆时间 安装扩展包
+只列出项目必备的几个，如果有需要可以从下面链接里看一下
+下载量最高的 100 个 Laravel 扩展包推荐
+代码提示工具(https://github.com/barryvdh/laravel-ide-helper)
+//在 dev 环境安装 composer require barryvdh/laravel-ide-helper --dev 语言包(https://github.</description>
     </item>
     
     <item>
       <title>Laravel 表单验证封装💪</title>
-      <link>https://blog.zkilm.cn/posts/2021/20211119-laravel-formrequest/</link>
+      <link>https://blog.gookm.cn/posts/2021/20211119-laravel-formrequest/</link>
       <pubDate>Fri, 19 Nov 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2021/20211119-laravel-formrequest/</guid>
-      <description>新建「表单验证基类」  新建「表单验证基类」 app/Http/Requests/FormRequest.php  &amp;lt;?php namespace App\Http\Requests; use Illuminate\Foundation\Http\FormRequest as BaseFormRequest; class FormRequest extends BaseFormRequest { use SceneValidator; /** * Determine if the user is authorized to make this request. * * @return bool */ public function authorize() { return true; } } 新建场景验证类  新建 app/Http/Requests/SceneValidator.php  &amp;lt;?php namespace App\Http\Requests; use Illuminate\Contracts\Validation\{Factory, Validator}; trait SceneValidator { protected $scene = null; protected $onlyRule = []; protected $autoValidate = true; /** * Validate.</description>
+      <guid>https://blog.gookm.cn/posts/2021/20211119-laravel-formrequest/</guid>
+      <description>新建「表单验证基类」 新建「表单验证基类」 app/Http/Requests/FormRequest.php &amp;lt;?php namespace App\Http\Requests; use Illuminate\Foundation\Http\FormRequest as BaseFormRequest; class FormRequest extends BaseFormRequest { use SceneValidator; /** * Determine if the user is authorized to make this request. * * @return bool */ public function authorize() { return true; } } 新建场景验证类 新建 app/Http/Requests/SceneValidator.php &amp;lt;?php namespace App\Http\Requests; use Illuminate\Contracts\Validation\{Factory, Validator}; trait SceneValidator { protected $scene = null; protected $onlyRule = []; protected $autoValidate = true; /** * Validate. * * @param string|array $scene */ public function validate($scene = &amp;#39;&amp;#39;) { if (!</description>
     </item>
     
     <item>
       <title>Elasticsearch 在 Laravel 中的使用👍</title>
-      <link>https://blog.zkilm.cn/posts/2021/20210823-laravel-es/</link>
+      <link>https://blog.gookm.cn/posts/2021/20210823-laravel-es/</link>
       <pubDate>Mon, 23 Aug 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2021/20210823-laravel-es/</guid>
-      <description>本文目标  学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。  安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &amp;#39;elasticsearch&amp;#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组  &amp;#39;hosts&amp;#39; =&amp;gt; explode(&amp;#39;,&amp;#39;, env(&amp;#39;ES_HOSTS&amp;#39;)), &amp;#39;username&amp;#39; =&amp;gt; env(&amp;#39;ES_USERNAME&amp;#39;), &amp;#39;password&amp;#39; =&amp;gt; env(&amp;#39;ES_PASSWORD&amp;#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表  $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境  if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试  $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
+      <guid>https://blog.gookm.cn/posts/2021/20210823-laravel-es/</guid>
+      <description>本文目标 学会在 Laravel 中安装 Elasticsearch。 创建索引。 简单查询。 安装 composer 包 composer require elasticsearch/elasticsearch &amp;#39;~7.0&amp;#39; 配置 config/database.php # Elasticsearch Config Info &amp;#39;elasticsearch&amp;#39; =&amp;gt; [ // Elasticsearch 支持多台服务器负载均衡，因此这里是一个数组 &amp;#39;hosts&amp;#39; =&amp;gt; explode(&amp;#39;,&amp;#39;, env(&amp;#39;ES_HOSTS&amp;#39;)), &amp;#39;username&amp;#39; =&amp;gt; env(&amp;#39;ES_USERNAME&amp;#39;), &amp;#39;password&amp;#39; =&amp;gt; env(&amp;#39;ES_PASSWORD&amp;#39;), ], 初始化 Elasticsearch 对象 // 注册一个名为 es 的单例 $this-&amp;gt;app-&amp;gt;singleton(&amp;#39;es&amp;#39;, function () { // 从配置文件读取 Elasticsearch 服务器列表 $builder = ESClientBuilder::create()-&amp;gt;setHosts(config(&amp;#39;database.elasticsearch.hosts&amp;#39;)) -&amp;gt;setBasicAuthentication(config(&amp;#39;database.elasticsearch.username&amp;#39;),config(&amp;#39;database.elasticsearch.password&amp;#39;)); // 如果是开发环境 if (app()-&amp;gt;environment() === &amp;#39;local&amp;#39;) { // 配置日志，Elasticsearch 的请求和返回数据将打印到日志文件中，方便我们调试 $builder-&amp;gt;setLogger(app(&amp;#39;log&amp;#39;)-&amp;gt;driver()); } return $builder-&amp;gt;build(); }); 创建索引 curl -XPUT -u name:pwd http://ip:9200/user_behavior?</description>
     </item>
     
     <item>
       <title>Homestead(ubuntu)&#43;Laravel 使用 RabbitMQ</title>
-      <link>https://blog.zkilm.cn/posts/2021/20210121-laravel-rabbitmq/</link>
+      <link>https://blog.gookm.cn/posts/2021/20210121-laravel-rabbitmq/</link>
       <pubDate>Thu, 21 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2021/20210121-laravel-rabbitmq/</guid>
-      <description>安装 erlang  erlang 是 RabbitMQ 的依赖。首先执行  sudo apt-get update  然后执行  sudo apt-get install erlang  安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功：  Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt;  然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。  安装 RabbitMq sudo apt-get install rabbitmq-server  安装完毕后，查看 RabbitMQ 状态：  sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop  # 重启RabbitMQ： service rabbitmq-server restart  配置 RabbitMQ  执行命令，启动 RabbitMQ 插件  sudo rabbitmq-plugins enable rabbitmq_management  添加用户 RabbitMQ，格式：rabbitmqctl add_user 用户名 密码  rabbitmqctl add_user admin admin  给予用户管理员权限  sudo rabbitmqctl set_user_tags admin administrator  为用户设置读写权限  sudo rabbitmqctl set_permissions -p / admin &amp;#34;.</description>
+      <guid>https://blog.gookm.cn/posts/2021/20210121-laravel-rabbitmq/</guid>
+      <description>安装 erlang erlang 是 RabbitMQ 的依赖。首先执行 sudo apt-get update 然后执行 sudo apt-get install erlang 安装完毕后，输入 erl 查看 erlang 版本，出现如下提示则表示安装成功： Erlang/OTP 20 [erts-9.2] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [kernel-poll:false] Eshell V9.2 (abort with ^G) 1&amp;gt; 然后退出 erlang 命令行：按下 ctrl+c，然后输入 a 即可。 安装 RabbitMq sudo apt-get install rabbitmq-server 安装完毕后，查看 RabbitMQ 状态： sudo rabbitmqctl status # 附： # 启动RabbitMQ： service rabbitmq-server start # 停止RabbitMQ： service rabbitmq-server stop # 重启RabbitMQ： service rabbitmq-server restart 配置 RabbitMQ 执行命令，启动 RabbitMQ 插件 sudo rabbitmq-plugins enable rabbitmq_management 添加用户 RabbitMQ，格式：rabbitmqctl add_user 用户名 密码 rabbitmqctl add_user admin admin 给予用户管理员权限 sudo rabbitmqctl set_user_tags admin administrator 为用户设置读写权限 sudo rabbitmqctl set_permissions -p / admin &amp;#34;.</description>
     </item>
     
     <item>
       <title>多公众号管理🚥‍</title>
-      <link>https://blog.zkilm.cn/posts/2019/20191216-multiple-mp/</link>
+      <link>https://blog.gookm.cn/posts/2019/20191216-multiple-mp/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2019/20191216-multiple-mp/</guid>
+      <guid>https://blog.gookm.cn/posts/2019/20191216-multiple-mp/</guid>
       <description>使用 EasyWechat 扩展包进行多公众号管理，具体步骤分为以下几步：
- 新建公众号数据表 创建辅助函数 创建微信控制器 配置路由 设置路由忽略 开始使用  公众号数据表  创建模型  php artisan make:model Models/WechatMp -m //wechat_mps  在生成的 wechat_mps 的 migration 文件里写入微信相关数据字段：  public function up() { Schema::create(&amp;#39;wechats&amp;#39;, function (Blueprint $table) { $table-&amp;gt;increments(&amp;#39;id&amp;#39;); //微信公众号基本参数  $table-&amp;gt;string(&amp;#39;user_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;name&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;type&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;status&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;logo&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;is_use&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;is_connect&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数  $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数  $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数  $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数  $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); }); } 创建辅助函数  接下来在 App\Handlers 创建一个辅助函数 WechatConfigHandler.</description>
+新建公众号数据表 创建辅助函数 创建微信控制器 配置路由 设置路由忽略 开始使用 公众号数据表 创建模型 php artisan make:model Models/WechatMp -m //wechat_mps 在生成的 wechat_mps 的 migration 文件里写入微信相关数据字段： public function up() { Schema::create(&amp;#39;wechats&amp;#39;, function (Blueprint $table) { $table-&amp;gt;increments(&amp;#39;id&amp;#39;); //微信公众号基本参数 $table-&amp;gt;string(&amp;#39;user_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;name&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;type&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;status&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;logo&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;is_use&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;is_connect&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); }); } 创建辅助函数 接下来在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下： &amp;lt;?php namespace App\Handlers; use App\Models\WechatMp; use EasyWeChat\Factory; class WechatConfigHandler { //[1-1]微信公众号设置 public function app_config($account) { $wechat = WechatMp::where(&amp;#39;id&amp;#39;,$account)-&amp;gt;first(); if (!</description>
     </item>
     
     <item>
       <title>Laravel的微信公众号模板消息推送📨</title>
-      <link>https://blog.zkilm.cn/posts/2019/20191127-wechat-pushmsg/</link>
+      <link>https://blog.gookm.cn/posts/2019/20191127-wechat-pushmsg/</link>
       <pubDate>Wed, 27 Nov 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2019/20191127-wechat-pushmsg/</guid>
+      <guid>https://blog.gookm.cn/posts/2019/20191127-wechat-pushmsg/</guid>
       <description>安装一个纯净的laravel框架 composer create-project --prefer-dist laravel/laravel blog &amp;#34;5.7.*&amp;#34; 安装微信扩展包EasyWeChat 安装好用的微信扩展包EasyWeChat，这里使用 laravel-wechat
 # Laravel &amp;lt; 5.8 composer require &amp;#34;overtrue/laravel-wechat:~4.0&amp;#34; 管理多公众号 Laravel 使用 EasyWechat 管理多公众号
- 创建数据表  php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下：  &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54.</description>
+创建数据表 php artisan make:model Wechat -m $table-&amp;gt;increments(&amp;#39;id&amp;#39;); $table-&amp;gt;string(&amp;#39;aid&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_app_id&amp;#39;)-&amp;gt;nullable(); //微信公众号设置参数 $table-&amp;gt;string(&amp;#39;wechat_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;wechat_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_mch_id&amp;#39;)-&amp;gt;nullable(); //微信支付设置参数 $table-&amp;gt;string(&amp;#39;pay_api_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_cert_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;pay_key_path&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_app_id&amp;#39;)-&amp;gt;nullable(); //微信开放平台设置参数 $table-&amp;gt;string(&amp;#39;op_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_token&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;op_aes_key&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_corp_id&amp;#39;)-&amp;gt;nullable(); //微信企业号设置参数 $table-&amp;gt;string(&amp;#39;work_agent_id&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;string(&amp;#39;work_secret&amp;#39;)-&amp;gt;nullable(); $table-&amp;gt;timestamps(); 在 App\Handlers 创建一个辅助函数 WechatConfigHandler.php 文件，代码如下： &amp;lt;?php /** * Created by PhpStorm. * User: zhukang. * Date: 2019/11/9. * Time: 11:54. */ namespace App\Handlers; use App\Models\Wechat; use EasyWeChat\Factory; class WechatConfigHandler { //[1-1]微信公众号设置 public function app_config($account) { $wechat = Wechat::where(&amp;#39;id&amp;#39;,$account)-&amp;gt;first(); if (!</description>
     </item>
     
     <item>
       <title>Laravel解决跨域请求🏃‍</title>
-      <link>https://blog.zkilm.cn/posts/2019/20190725-cross-request/</link>
+      <link>https://blog.gookm.cn/posts/2019/20190725-cross-request/</link>
       <pubDate>Thu, 25 Jul 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2019/20190725-cross-request/</guid>
+      <guid>https://blog.gookm.cn/posts/2019/20190725-cross-request/</guid>
       <description>今天公司前端突然说请求跨域了，那么就解决下咯！
 创建中间件 首先创建一个中间件
 php artisan make:middleware EnableCrossRequestMiddleware 编写中间件 然后在中间件 EnableCrossRequestMiddleware.php 编写
-&amp;lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Origin&amp;#39;, &amp;#39;*&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Headers&amp;#39;, &amp;#39;Origin, Content-Type, Cookie, Accept&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Methods&amp;#39;, &amp;#39;GET, POST, PATCH, PUT, OPTIONS&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Credentials&amp;#39;, &amp;#39;true&amp;#39;); //ession共享的需求才用到  return $response; } } 注册中间件 添加到全局中间件 Kernel.</description>
+&amp;lt;?php namespace App\Http\Middleware; use Closure; class EnableCrossRequestMiddleware { /** * Handle an incoming request. * * @param \Illuminate\Http\Request $request * @param \Closure $next * @return mixed */ public function handle($request, Closure $next) { $response = $next($request); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Origin&amp;#39;, &amp;#39;*&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Headers&amp;#39;, &amp;#39;Origin, Content-Type, Cookie, Accept&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Methods&amp;#39;, &amp;#39;GET, POST, PATCH, PUT, OPTIONS&amp;#39;); $response-&amp;gt;header(&amp;#39;Access-Control-Allow-Credentials&amp;#39;, &amp;#39;true&amp;#39;); //ession共享的需求才用到 return $response; } } 注册中间件 添加到全局中间件 Kernel.php 组中</description>
     </item>
     
     <item>
       <title>微信的H5分享（基于 Laravel-Wechat）😶</title>
-      <link>https://blog.zkilm.cn/posts/2019/20190610-wechat-h5/</link>
+      <link>https://blog.gookm.cn/posts/2019/20190610-wechat-h5/</link>
       <pubDate>Mon, 10 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/posts/2019/20190610-wechat-h5/</guid>
+      <guid>https://blog.gookm.cn/posts/2019/20190610-wechat-h5/</guid>
       <description>一、缘由 什么都不做的情况下，在微信分享H5页面的时候，分享后是这样的：
 但是，现在需求是，分享后为下面这样：
 没办法，自己开发的H5要想在微信中进行传播，使用微信 JSSDK 是必不可少的环节。而 JSSDK 虽然只是个 js ，可是加密必须得在服务端进行。

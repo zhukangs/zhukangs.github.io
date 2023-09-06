@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Readings on Promise</title>
-    <link>https://blog.zkilm.cn/reading/</link>
+    <link>https://blog.gookm.cn/reading/</link>
     <description>Recent content in Readings on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
     <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Sat, 02 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.zkilm.cn/reading/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 02 Jan 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.gookm.cn/reading/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Golang</title>
-      <link>https://blog.zkilm.cn/reading/20210901-goweb-start/</link>
+      <link>https://blog.gookm.cn/reading/20210901-goweb-start/</link>
       <pubDate>Sat, 02 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/reading/20210901-goweb-start/</guid>
+      <guid>https://blog.gookm.cn/reading/20210901-goweb-start/</guid>
       <description>Golang Web入门：https://mp.weixin.qq.com/s/IIjl93QFAnyjpLu3XgjQxA
 跟煎鱼学 Go：https://eddycjy.com/go-categories/
 Go语言中文文档：http://topgoer.com/</description>
@@ -21,20 +21,20 @@ Go语言中文文档：http://topgoer.com/</description>
     
     <item>
       <title>Elasticsearch</title>
-      <link>https://blog.zkilm.cn/reading/20210901-elasticsearch-start/</link>
+      <link>https://blog.gookm.cn/reading/20210901-elasticsearch-start/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/reading/20210901-elasticsearch-start/</guid>
+      <guid>https://blog.gookm.cn/reading/20210901-elasticsearch-start/</guid>
       <description>Elasticsearch 中文文档：https://docs.es.shiyueshuyi.xyz/#/README
 PHP7下使用Elasticsearch：https://blog.junphp.com/details/325.jsp</description>
     </item>
     
     <item>
       <title>Kafka</title>
-      <link>https://blog.zkilm.cn/reading/20210901-kafka-start/</link>
+      <link>https://blog.gookm.cn/reading/20210901-kafka-start/</link>
       <pubDate>Fri, 01 Jan 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://blog.zkilm.cn/reading/20210901-kafka-start/</guid>
+      <guid>https://blog.gookm.cn/reading/20210901-kafka-start/</guid>
       <description>Kafka入门：https://mp.weixin.qq.com/s/yaYwH0XLF9jW8VcSnUOz-g
 全网最通俗易懂的Kafka入门：https://zhuanlan.zhihu.com/p/95215691</description>
     </item>
