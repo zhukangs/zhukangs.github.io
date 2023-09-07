@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Promise</title>
-    <link>http://blog.gookm.cn/</link>
+    <link>https://blog.gookm.cn/</link>
     <description>Recent content on Promise</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-hans</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="http://blog.gookm.cn/index.xml" rel="self" type="application/rss+xml" />
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><atom:link href="https://blog.gookm.cn/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
